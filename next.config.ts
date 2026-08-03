@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Image `remotePatterns` will be added here once the CMS is chosen.
 };
 
 export default nextConfig;
