@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
 
+import { CartProvider } from "@/components/cart/cart-provider";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { siteConfig } from "@/config/site";
@@ -64,11 +65,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <SiteHeader />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <SiteFooter />
+        <CartProvider>
+          <SiteHeader />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <SiteFooter />
+        </CartProvider>
       </body>
     </html>
   );
