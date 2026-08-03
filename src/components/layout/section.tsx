@@ -46,7 +46,7 @@ export function Section({
 }
 
 type SectionHeaderProps = Omit<React.ComponentProps<"div">, "title"> & {
-  eyebrow?: string;
+  eyebrow?: React.ReactNode;
   title: React.ReactNode;
   description?: React.ReactNode;
   action?: React.ReactNode;
