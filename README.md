@@ -12,6 +12,7 @@ The digital storefront for **Efamy Food Products** — authentic Ghanaian chilli
 | Components | shadcn/ui (Radix primitives)       |
 | Icons      | Lucide                             |
 | Forms      | React Hook Form + Zod              |
+| Packages   | pnpm                               |
 | Hosting    | Vercel                             |
 | CMS        | Headless CMS — not yet chosen      |
 | Payments   | Not yet integrated                 |
@@ -20,22 +21,22 @@ The digital storefront for **Efamy Food Products** — authentic Ghanaian chilli
 ## Getting started
 
 ```bash
-npm install
+pnpm install
 cp .env.example .env.local
-npm run dev
+pnpm dev
 ```
 
 ## Scripts
 
-| Script                 | Purpose                                   |
-| ---------------------- | ----------------------------------------- |
-| `npm run dev`          | Development server                        |
-| `npm run build`        | Production build                          |
-| `npm run start`        | Serve the production build                |
-| `npm run lint`         | ESLint                                    |
-| `npm run typecheck`    | Generate route types, then `tsc --noEmit` |
-| `npm run format`       | Prettier write                            |
-| `npm run format:check` | Prettier check (use in CI)                |
+| Script              | Purpose                                   |
+| ------------------- | ----------------------------------------- |
+| `pnpm dev`          | Development server                        |
+| `pnpm build`        | Production build                          |
+| `pnpm start`        | Serve the production build                |
+| `pnpm lint`         | ESLint                                    |
+| `pnpm typecheck`    | Generate route types, then `tsc --noEmit` |
+| `pnpm format`       | Prettier write                            |
+| `pnpm format:check` | Prettier check (use in CI)                |
 
 ## Folder structure
 
