@@ -15,7 +15,7 @@ export const placeholderCategories: ProductCategory[] = [
       width: 1200,
       height: 900,
     },
-    productCount: 6,
+    productCount: 3,
   },
   {
     id: "cat-oils",
@@ -29,7 +29,7 @@ export const placeholderCategories: ProductCategory[] = [
       width: 1200,
       height: 900,
     },
-    productCount: 4,
+    productCount: 3,
   },
   {
     id: "cat-seasonings",
@@ -43,7 +43,7 @@ export const placeholderCategories: ProductCategory[] = [
       width: 1200,
       height: 900,
     },
-    productCount: 5,
+    productCount: 3,
   },
 ];
 
@@ -172,4 +172,75 @@ export const placeholderProducts: Product[] = [
     category: category.seasonings,
     inStock: true,
   },
+  {
+    id: "p-kpakpo",
+    slug: "kpakpo-shito-green",
+    name: "Kpakpo Shito — Green",
+    summary: "Fresh green chilli, sharp and grassy, cooked light.",
+    description:
+      "Made with kpakpo shito peppers for a brighter, greener heat than the classic. Good with grilled fish and fried plantain.",
+    price: 800,
+    size: "250ml",
+    heatLevel: 3,
+    image: {
+      url: "/images/placeholder/sauce-3.png",
+      alt: "Jar of Efamy green kpakpo shito, a fresh chilli sauce",
+      width: 1000,
+      height: 1250,
+    },
+    category: category.sauces,
+    inStock: true,
+  },
+  {
+    id: "p-ginger-oil",
+    slug: "ginger-chilli-oil",
+    name: "Ginger Chilli Oil",
+    summary: "Warm ginger heat with a slow chilli finish.",
+    description:
+      "Fresh ginger steeped with chilli into a mellow oil. Less sharp than the scotch bonnet, and good stirred straight into noodles or soup.",
+    price: 850,
+    size: "200ml",
+    heatLevel: 2,
+    image: {
+      url: "/images/placeholder/oil-3.png",
+      alt: "Bottle of Efamy ginger chilli oil, pale amber with visible ginger",
+      width: 1000,
+      height: 1250,
+    },
+    category: category.oils,
+    inStock: true,
+  },
+  {
+    id: "p-pepper-soup",
+    slug: "pepper-soup-spice",
+    name: "Pepper Soup Spice",
+    summary: "The aromatic blend behind a proper West African pepper soup.",
+    description:
+      "Calabash nutmeg, grains of selim and chilli, ground fine. Enough for a pot of goat, fish or chicken pepper soup.",
+    price: 600,
+    size: "80g",
+    heatLevel: 4,
+    image: {
+      url: "/images/placeholder/seasoning-3.png",
+      alt: "Pouch of Efamy pepper soup spice beside the dark aromatic blend",
+      width: 1000,
+      height: 1250,
+    },
+    category: category.seasonings,
+    inStock: true,
+  },
+];
+
+export const featuredSlugs = [
+  "shito-hot",
+  "scotch-bonnet-chilli-oil",
+  "suya-spice",
+  "kpakpo-shito-green",
+];
+
+export const bestSellerSlugs = [
+  "shito-mild",
+  "jollof-seasoning",
+  "ginger-chilli-oil",
+  "pepper-soup-spice",
 ];
