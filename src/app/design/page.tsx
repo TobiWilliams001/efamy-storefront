@@ -37,7 +37,7 @@ const swatches = [
 
 export default function DesignSystemPage() {
   return (
-    <main className="flex-1">
+    <>
       <Section spacing="sm">
         <SectionHeader
           as="h1"
@@ -216,6 +216,6 @@ export default function DesignSystemPage() {
           />
         </div>
       </Section>
-    </main>
+    </>
   );
 }
