@@ -82,5 +82,5 @@ All foreground/background pairs meet WCAG AA at normal text sizes.
 1. ~~Project foundation~~ ✅
 2. ~~Design system (reusable UI components)~~ ✅ — review at `/design`
 3. ~~Site layout (header, navigation, footer, mobile nav)~~ ✅
-4. Homepage sections
+4. ~~Homepage sections~~ ✅
 5. Shop, categories, product detail, cart, checkout
