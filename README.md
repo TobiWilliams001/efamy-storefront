@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Efamy Storefront
 
-## Getting Started
+The digital storefront for **Efamy Food Products** — authentic Ghanaian chilli sauces, chilli oils and seasonings, made in the UK.
 
-First, run the development server:
+## Stack
+
+| Concern    | Choice                             |
+| ---------- | ---------------------------------- |
+| Framework  | Next.js 16 (App Router, Turbopack) |
+| Language   | TypeScript (strict)                |
+| Styling    | Tailwind CSS v4 (CSS-first config) |
+| Components | shadcn/ui (Radix primitives)       |
+| Icons      | Lucide                             |
+| Forms      | React Hook Form + Zod              |
+| Hosting    | Vercel                             |
+| CMS        | Headless CMS — not yet chosen      |
+| Payments   | Not yet integrated                 |
+| Email      | Not yet integrated                 |
+
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Script                 | Purpose                                   |
+| ---------------------- | ----------------------------------------- |
+| `npm run dev`          | Development server                        |
+| `npm run build`        | Production build                          |
+| `npm run start`        | Serve the production build                |
+| `npm run lint`         | ESLint                                    |
+| `npm run typecheck`    | Generate route types, then `tsc --noEmit` |
+| `npm run format`       | Prettier write                            |
+| `npm run format:check` | Prettier check (use in CI)                |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Folder structure
 
-## Learn More
+```
+src/
+  app/          Routes, layouts, route handlers (App Router)
+  components/
+    ui/         shadcn/ui primitives — generated, edit sparingly
+    layout/     Header, footer, navigation
+    sections/   Composed page sections (hero, featured products, …)
+  config/       Static brand/site configuration
+  lib/          Framework-agnostic helpers (env, formatting, cn)
+  hooks/        Client-side React hooks
+```
 
-To learn more about Next.js, take a look at the following resources:
+The rule of thumb: `app/` fetches and composes, `components/` renders, `lib/` computes. Data access stays out of components.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Conventions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Server Components by default.** Add `"use client"` only where interactivity genuinely requires it, and push it as far down the tree as possible.
+- **Money is stored in pence** (integer minor units) and only formatted for display via `formatPrice()`.
+- **Environment variables are validated** in `src/lib/env.ts`. Client variables must be referenced as full `process.env.NEXT_PUBLIC_*` literals so Next.js can inline them.
+- **No dark mode.** The storefront is photography-led; a single warm light theme keeps product imagery consistent.
 
-## Deploy on Vercel
+## Design tokens
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Brand colours live as CSS variables in `src/app/globals.css`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Warm off-white background with warm near-black text
+- **Chilli red** as the single accent, used for actions and emphasis
+- **Warm sand** for quiet emphasis (badges, highlighted surfaces)
+- `Fraunces` for headings, `Inter` for body text
+
+All foreground/background pairs meet WCAG AA at normal text sizes.
+
+## Roadmap
+
+1. ~~Project foundation~~ ✅
+2. Design system (reusable UI components)
+3. Site layout (header, navigation, footer, mobile nav)
+4. Homepage sections
+5. Shop, categories, product detail, cart, checkout
