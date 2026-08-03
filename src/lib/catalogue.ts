@@ -31,3 +31,28 @@ export async function getFeaturedProducts(limit = 4): Promise<Product[]> {
 export async function getBestSellers(limit = 4): Promise<Product[]> {
   return bySlugs(bestSellerSlugs, limit);
 }
+
+export async function getProductBySlug(
+  slug: string,
+): Promise<Product | undefined> {
+  return placeholderProducts.find((product) => product.slug === slug);
+}
+
+export async function getCategoryBySlug(
+  slug: string,
+): Promise<ProductCategory | undefined> {
+  return placeholderCategories.find((category) => category.slug === slug);
+}
+
+export async function getRelatedProducts(
+  product: Product,
+  limit = 4,
+): Promise<Product[]> {
+  return placeholderProducts
+    .filter(
+      (candidate) =>
+        candidate.id !== product.id &&
+        candidate.category.slug === product.category.slug,
+    )
+    .slice(0, limit);
+}
