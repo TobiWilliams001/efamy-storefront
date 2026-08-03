@@ -44,10 +44,13 @@ src/
   app/          Routes, layouts, route handlers (App Router)
   components/
     ui/         shadcn/ui primitives — generated, edit sparingly
-    layout/     Header, footer, navigation
+    layout/     Container, Section, and the site chrome (header, footer, nav)
+    commerce/   Catalogue components (product card, category card, grid)
+    common/     Generic building blocks (empty state)
     sections/   Composed page sections (hero, featured products, …)
   config/       Static brand/site configuration
-  lib/          Framework-agnostic helpers (env, formatting, cn)
+  lib/          Framework-agnostic helpers (env, formatting, routes, cn)
+  types/        Domain types (Product, ProductCategory)
   hooks/        Client-side React hooks
 ```
 
@@ -59,6 +62,8 @@ The rule of thumb: `app/` fetches and composes, `components/` renders, `lib/` co
 - **Money is stored in pence** (integer minor units) and only formatted for display via `formatPrice()`.
 - **Environment variables are validated** in `src/lib/env.ts`. Client variables must be referenced as full `process.env.NEXT_PUBLIC_*` literals so Next.js can inline them.
 - **No dark mode.** The storefront is photography-led; a single warm light theme keeps product imagery consistent.
+- **Internal URLs come from `src/lib/routes.ts`.** Paths are never hand-typed in components.
+- **Images use `loading`/`fetchPriority`, not `priority`.** The `priority` prop is deprecated in Next 16. Reserve `preload` for a single, unambiguous LCP image (the hero) — never for a grid, where the LCP element varies by viewport.
 
 ## Design tokens
 
@@ -74,7 +79,7 @@ All foreground/background pairs meet WCAG AA at normal text sizes.
 ## Roadmap
 
 1. ~~Project foundation~~ ✅
-2. Design system (reusable UI components)
+2. ~~Design system (reusable UI components)~~ ✅ — review at `/design`
 3. Site layout (header, navigation, footer, mobile nav)
 4. Homepage sections
 5. Shop, categories, product detail, cart, checkout
