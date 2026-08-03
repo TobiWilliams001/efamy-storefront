@@ -19,11 +19,6 @@ import {
 } from "@/lib/placeholder-data";
 import type { HeatLevel as HeatLevelValue } from "@/types/product";
 
-/**
- * Living reference for the design system. Not linked from the site and not
- * indexed — it exists so component changes can be reviewed in one place.
- * Safe to delete once the system settles.
- */
 export const metadata: Metadata = {
   title: "Design system",
   robots: { index: false, follow: false },

@@ -2,12 +2,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-/*
- * Dark mode is intentionally not implemented. The storefront is photography-led
- * and a single, warm light theme keeps product imagery consistent. The variant
- * stays defined so shadcn components that ship `dark:` utilities remain inert
- * rather than error.
- */
+/* No dark mode by design. Defined only so shadcn `dark:` utilities stay inert. */
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -39,11 +34,7 @@
   --radius-3xl: calc(var(--radius) * 2.2);
 }
 
-/*
- * Brand palette. Warm neutrals so product photography sits naturally on the
- * page, with a chilli red as the single accent used for action and emphasis.
- * All foreground/background pairs meet WCAG AA at normal text sizes.
- */
+/* Warm neutrals + a single chilli-red accent. All pairs meet WCAG AA. */
 :root {
   --background: oklch(0.99 0.006 85);
   --foreground: oklch(0.22 0.021 45);
@@ -53,7 +44,6 @@
   --popover: oklch(1 0 0);
   --popover-foreground: var(--foreground);
 
-  /* Chilli red — primary action colour. */
   --primary: oklch(0.52 0.19 29);
   --primary-foreground: oklch(0.99 0.008 85);
 
@@ -63,7 +53,6 @@
   --muted: oklch(0.96 0.011 80);
   --muted-foreground: oklch(0.5 0.021 60);
 
-  /* Warm sand — quiet emphasis for badges and highlighted surfaces. */
   --accent: oklch(0.93 0.045 80);
   --accent-foreground: oklch(0.28 0.045 45);
 

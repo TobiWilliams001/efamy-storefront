@@ -6,7 +6,6 @@ type EmptyStateProps = {
   icon?: LucideIcon;
   title: string;
   description?: string;
-  /** Give the customer somewhere to go — an empty state without an exit is a dead end. */
   action?: React.ReactNode;
   className?: string;
 };

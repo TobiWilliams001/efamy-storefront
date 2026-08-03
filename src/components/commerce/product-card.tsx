@@ -9,22 +9,11 @@ import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import type { ProductSummary } from "@/types/product";
 
-/**
- * Assumes the default grid below (1 / 2 / 3 / 4 columns against a 1152px
- * container). Pass `sizes` explicitly in any other layout, or the browser will
- * download images at the wrong resolution.
- */
 const DEFAULT_SIZES =
   "(min-width: 1024px) 288px, (min-width: 640px) 50vw, 100vw";
 
 type ProductCardProps = {
   product: ProductSummary;
-  /**
-   * Load the image immediately instead of lazily. Set this on the cards that
-   * are above the fold. We deliberately don't use `preload` here: in a grid,
-   * which card is the LCP element depends on the viewport, so preloading one
-   * would be a guess — `next/image` docs recommend eager loading for this case.
-   */
   eager?: boolean;
   sizes?: string;
   className?: string;
@@ -79,11 +68,6 @@ export function ProductCard({
       <div className="flex flex-1 flex-col gap-2 p-4">
         <div className="flex items-start justify-between gap-3">
           <h3 className="text-base leading-snug font-medium">
-            {/*
-             * Stretched link: the whole card is clickable, but the accessible
-             * name stays the product name rather than the image or a bare
-             * "read more". Keeps one link per card for screen readers.
-             */}
             <Link
               href={routes.product(product.slug)}
               className="after:absolute after:inset-0 after:content-[''] hover:underline focus-visible:outline-none"

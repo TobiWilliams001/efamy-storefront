@@ -1,10 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-/**
- * Mirrors `ProductCard`'s box model exactly — same aspect ratio, same padding,
- * same line count — so streaming a grid in doesn't shift the layout.
- */
 export function ProductCardSkeleton() {
   return (
     <Card className="gap-0 py-0">

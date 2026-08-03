@@ -1,10 +1,5 @@
 import { env } from "@/lib/env";
 
-/**
- * Single source of truth for brand-level information that appears across the
- * site (metadata, header, footer, structured data). Anything the client may
- * eventually want to edit without a deploy should move to the CMS instead.
- */
 export const siteConfig = {
   name: "Efamy",
   legalName: "Efamy Food Products",

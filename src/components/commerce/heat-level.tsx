@@ -15,16 +15,10 @@ const MAX_HEAT = 5;
 
 type HeatLevelProps = {
   level: HeatLevelValue;
-  /** Show the written label alongside the flames. */
   showLabel?: boolean;
   className?: string;
 };
 
-/**
- * Heat is the main thing a chilli customer wants to know at a glance. The
- * flames are decorative — the accessible name carries the actual information,
- * so this never relies on colour or icon count alone.
- */
 export function HeatLevel({
   level,
   showLabel = false,

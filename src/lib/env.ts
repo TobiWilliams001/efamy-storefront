@@ -1,13 +1,7 @@
 import { z } from "zod";
 
-/**
- * Validated environment variables.
- *
- * Client variables must be referenced as full literals (`process.env.NEXT_PUBLIC_X`)
- * so Next.js can inline them at build time — never index `process.env` dynamically.
- * Server-only variables (CMS tokens, payment keys, SMTP) get added here as those
- * integrations land, and must never be prefixed with `NEXT_PUBLIC_`.
- */
+// Client vars must be referenced as full `process.env.NEXT_PUBLIC_*` literals
+// so Next.js can inline them — never index `process.env` dynamically.
 const clientSchema = z.object({
   NEXT_PUBLIC_SITE_URL: z.url().default("http://localhost:3000"),
   NEXT_PUBLIC_GA_ID: z.string().optional(),

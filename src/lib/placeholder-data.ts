@@ -1,10 +1,6 @@
 import type { Product, ProductCategory } from "@/types/product";
 
-/**
- * TEMPORARY. Sample catalogue used to develop and review UI before the CMS and
- * real product photography exist. Delete this file once the data layer lands —
- * nothing outside the design preview and early page work should import it.
- */
+// TEMPORARY. Delete once the CMS-backed data layer lands.
 
 export const placeholderCategories: ProductCategory[] = [
   {

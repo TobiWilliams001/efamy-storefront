@@ -10,17 +10,11 @@ const DEFAULT_SIZES = "(min-width: 640px) 33vw, 100vw";
 
 type CategoryCardProps = {
   category: ProductCategory;
-  /** Load immediately rather than lazily — for cards above the fold. */
   eager?: boolean;
   sizes?: string;
   className?: string;
 };
 
-/**
- * Image-led entry point into a category. The gradient is what keeps the
- * overlaid text readable regardless of how light the photograph is — without
- * it, contrast depends on whichever image the client uploads.
- */
 export function CategoryCard({
   category,
   eager = false,

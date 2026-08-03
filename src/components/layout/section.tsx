@@ -18,15 +18,10 @@ type SectionProps = Omit<React.ComponentProps<"section">, "children"> & {
   spacing?: keyof typeof sectionSpacing;
   surface?: keyof typeof sectionSurfaces;
   width?: ContainerWidth;
-  /** Escape hatch for full-bleed content that manages its own container. */
   bleed?: boolean;
   children: React.ReactNode;
 };
 
-/**
- * A page band: full-width surface, consistent vertical rhythm, contained
- * content. Sections are the only place vertical page spacing is decided.
- */
 export function Section({
   className,
   spacing = "default",
@@ -51,16 +46,10 @@ export function Section({
 }
 
 type SectionHeaderProps = Omit<React.ComponentProps<"div">, "title"> & {
-  /** Small label above the title. Rendered as plain text, not a heading. */
   eyebrow?: string;
   title: React.ReactNode;
   description?: React.ReactNode;
-  /** A "View all" link or similar, aligned opposite the title on desktop. */
   action?: React.ReactNode;
-  /**
-   * Heading level. Defaults to `h2` — only a page's single top-level heading
-   * should be `h1`, so pass it explicitly there.
-   */
   as?: "h1" | "h2" | "h3";
   align?: "start" | "center";
 };

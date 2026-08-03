@@ -11,7 +11,6 @@ const inter = Inter({
   display: "swap",
 });
 
-/** Display face for headings — warm and editorial, reads as food-first. */
 const fraunces = Fraunces({
   variable: "--font-heading",
   subsets: ["latin"],
