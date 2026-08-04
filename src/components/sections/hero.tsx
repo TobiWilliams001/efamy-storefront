@@ -7,43 +7,64 @@ import { routes } from "@/lib/routes";
 
 export function Hero() {
   return (
-    <section className="overflow-hidden bg-background">
-      <Container className="py-16 lg:py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <section className="relative overflow-hidden">
+      {/*
+       * A large soft clay field behind the product. The cut-out has no
+       * background of its own, so without something to sit against it floats;
+       * this grounds it and gives the page depth without adding clutter.
+       */}
+      <div
+        aria-hidden="true"
+        className="absolute top-1/2 right-0 hidden aspect-square w-184 translate-x-1/4 -translate-y-1/2 rounded-full bg-clay/35 blur-[2px] lg:block"
+      />
+
+      <Container className="relative py-20 lg:py-28">
+        <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-8">
           <div className="max-w-xl">
-            <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+            <p className="flex items-center gap-3 text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+              <span
+                aria-hidden="true"
+                className="h-px w-6 shrink-0 bg-neutral-300"
+              />
               Efamy Food Products
             </p>
-            <h1 className="mt-5 text-4xl text-balance sm:text-5xl lg:text-6xl">
-              Authentic Ghanaian Flavours. Crafted in the UK.
+
+            <h1 className="mt-6 text-[2.75rem] text-balance sm:text-6xl lg:text-7xl">
+              Authentic Ghanaian Flavours.
+              <span className="block text-brand">Crafted in the UK.</span>
             </h1>
-            <p className="mt-6 max-w-lg text-lg text-pretty text-muted-foreground">
+
+            <p className="mt-7 max-w-md text-lg text-pretty text-muted-foreground">
               Chilli sauces in beans, beef, chicken, fish and pork — mild or hot
               — alongside our seasoning mixes. No artificial preservatives.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
+
+            <div className="mt-10 flex flex-wrap items-center gap-4">
               <Button asChild size="xl" variant="accent">
                 <Link href={routes.shop}>Shop Now</Link>
               </Button>
-              <Button asChild size="xl" variant="outline">
-                <Link href={routes.about}>Our story</Link>
-              </Button>
+              <Link
+                href={routes.about}
+                className="text-sm underline decoration-neutral-300 underline-offset-8 transition-colors hover:decoration-foreground"
+              >
+                Our story
+              </Link>
             </div>
           </div>
 
-          {/*
-           * Capped at the source width (558px). The cut-out is small, so
-           * letting it fill a 50vw column would upscale and soften it.
-           */}
-          <div className="mx-auto w-full max-w-136">
+          <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 -z-10 rounded-full bg-clay/35 lg:hidden"
+            />
             <Image
               src="/products/transparent/range-lineup-cutout.png"
               alt="The Efamy range: all purpose seasoning mix with chicken, beef and fish chilli sauces"
               width={558}
               height={447}
-              sizes="(min-width: 1024px) 544px, 100vw"
+              sizes="(min-width: 1024px) 620px, 90vw"
               preload
-              className="h-auto w-full"
+              className="h-auto w-full drop-shadow-[0_24px_40px_rgba(0,0,0,0.14)]"
             />
           </div>
         </div>
