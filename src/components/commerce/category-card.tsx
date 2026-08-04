@@ -24,7 +24,7 @@ export function CategoryCard({
   return (
     <article
       className={cn(
-        "group relative isolate flex aspect-4/3 overflow-hidden rounded-xl bg-muted focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
+        "group relative isolate flex aspect-4/3 overflow-hidden rounded-lg bg-neutral-100 shadow-card transition-shadow duration-200 focus-within:ring-2 focus-within:ring-ring hover:shadow-card-hover",
         className,
       )}
     >
@@ -37,26 +37,24 @@ export function CategoryCard({
         fetchPriority={eager ? "high" : undefined}
         placeholder={category.image.blurDataURL ? "blur" : undefined}
         blurDataURL={category.image.blurDataURL}
-        className="object-cover transition-transform duration-300 group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+        className="object-contain p-10 transition-transform duration-300 ease-out group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
       />
 
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-linear-to-t from-black/75 via-black/25 to-transparent"
-      />
-
-      <div className="relative mt-auto flex w-full items-end justify-between gap-4 p-5 text-white">
+      <div className="relative mt-auto flex w-full items-end justify-between gap-4 bg-linear-to-t from-neutral-100 via-neutral-100/95 to-transparent p-6 pt-10">
         <div>
-          <h3 className="font-heading text-xl leading-snug font-medium">
+          <h3 className="font-heading text-xl">
             <Link
               href={routes.category(category.slug)}
-              className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
+              className="decoration-1 underline-offset-4 group-hover:underline after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
             >
               {category.name}
             </Link>
           </h3>
           {category.productCount !== undefined ? (
-            <p className="mt-1 text-sm text-white/80">
+            <p
+              data-numeric
+              className="mt-1 text-xs tracking-wide text-muted-foreground uppercase"
+            >
               {category.productCount}{" "}
               {category.productCount === 1 ? "product" : "products"}
             </p>
@@ -64,7 +62,7 @@ export function CategoryCard({
         </div>
         <ArrowRight
           aria-hidden="true"
-          className="size-5 shrink-0 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
+          className="size-5 shrink-0 text-brand transition-transform duration-200 ease-out group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
         />
       </div>
     </article>

@@ -128,7 +128,33 @@
   h2,
   h3,
   h4 {
-    @apply font-heading font-normal tracking-tight;
+    @apply font-heading font-normal;
+  }
+
+  /*
+   * A serif display face set at browser defaults reads as an accident. Tracking
+   * tightens and leading closes up as the size grows, which is what separates
+   * typeset headings from styled text.
+   */
+  h1 {
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+  }
+
+  h2 {
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+  }
+
+  h3,
+  h4 {
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  /* Prices and quantities line up column to column rather than jittering. */
+  [data-numeric] {
+    font-variant-numeric: tabular-nums;
   }
 }
 

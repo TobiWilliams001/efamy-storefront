@@ -7,19 +7,22 @@ import { mainNav } from "@/config/navigation";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur supports-backdrop-filter:bg-background/75">
+    <header className="sticky top-0 z-40 border-b border-neutral-200/70 bg-background/85 backdrop-blur-md">
       <Container>
-        <div className="flex h-16 items-center justify-between gap-6 lg:h-20">
+        <div className="relative flex h-16 items-center justify-between gap-6 lg:h-20">
           <Logo />
 
-          <nav aria-label="Main" className="hidden md:block">
-            <ul className="flex items-center gap-8">
+          <nav
+            aria-label="Main"
+            className="absolute left-1/2 hidden -translate-x-1/2 md:block"
+          >
+            <ul className="flex items-center gap-9">
               {mainNav.map((item) => (
                 <li key={item.href}>
                   <NavLink
                     href={item.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    activeClassName="text-foreground font-medium"
+                    className="text-sm text-muted-foreground underline-offset-8 transition-colors hover:text-foreground"
+                    activeClassName="text-foreground underline decoration-brand decoration-2"
                   >
                     {item.label}
                   </NavLink>

@@ -35,7 +35,12 @@ export function ProductCard({
         className,
       )}
     >
-      <div className="relative aspect-4/5 overflow-hidden bg-muted">
+      {/*
+       * The packshots are shot on white, so `contain` with padding keeps every
+       * jar whole and at a consistent scale. `cover` crops the lids and makes
+       * the grid look uneven.
+       */}
+      <div className="relative aspect-4/5 overflow-hidden bg-neutral-100">
         <Image
           src={image.url}
           alt={image.alt}
@@ -46,8 +51,8 @@ export function ProductCard({
           placeholder={image.blurDataURL ? "blur" : undefined}
           blurDataURL={image.blurDataURL}
           className={cn(
-            "object-cover transition-transform duration-300 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
-            !inStock && "opacity-60",
+            "object-contain p-6 transition-transform duration-300 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
+            !inStock && "opacity-50",
           )}
         />
 
@@ -65,33 +70,41 @@ export function ProductCard({
         )}
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 p-4">
+      <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
-          <h3 className="text-base leading-snug font-medium">
+          <h3 className="font-heading text-lg">
             <Link
               href={routes.product(product.slug)}
-              className="after:absolute after:inset-0 after:content-[''] hover:underline focus-visible:outline-none"
+              className="decoration-1 underline-offset-4 group-hover:underline after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
             >
               {product.name}
             </Link>
           </h3>
-          {heat ? <HeatBadge heat={heat} className="mt-0.5" /> : null}
+          {heat ? <HeatBadge heat={heat} className="mt-1 shrink-0" /> : null}
         </div>
 
-        <p className="line-clamp-2 text-sm text-pretty text-muted-foreground">
+        <p className="mt-2 line-clamp-2 text-sm text-pretty text-muted-foreground">
           {product.summary}
         </p>
 
-        <div className="mt-auto flex items-baseline gap-2 pt-2">
-          <span className="font-medium">{formatPrice(price)}</span>
+        <div className="mt-5 flex items-baseline gap-2 border-t pt-4">
+          <span data-numeric className="font-medium text-brand">
+            {formatPrice(price)}
+          </span>
           {isDiscounted ? (
-            <span className="text-sm text-muted-foreground line-through">
+            <span
+              data-numeric
+              className="text-sm text-muted-foreground line-through"
+            >
               <span className="sr-only">Was </span>
               {formatPrice(compareAtPrice)}
             </span>
           ) : null}
           {product.size ? (
-            <span className="ml-auto text-sm text-muted-foreground">
+            <span
+              data-numeric
+              className="ml-auto text-xs tracking-wide text-muted-foreground uppercase"
+            >
               {product.size}
             </span>
           ) : null}

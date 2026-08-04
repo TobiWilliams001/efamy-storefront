@@ -80,21 +80,32 @@ export function SectionHeader({
     >
       <div className={cn("max-w-2xl", centred && "mx-auto")}>
         {eyebrow ? (
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p
+            className={cn(
+              "flex items-center gap-3 text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase",
+              centred && "justify-center",
+            )}
+          >
+            <span
+              aria-hidden="true"
+              className="h-px w-6 shrink-0 bg-neutral-300"
+            />
             {eyebrow}
           </p>
         ) : null}
         <Heading
           className={cn(
             "text-balance",
-            eyebrow && "mt-3",
-            Heading === "h1" ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl",
+            eyebrow && "mt-4",
+            Heading === "h1"
+              ? "text-4xl sm:text-5xl lg:text-[3.25rem]"
+              : "text-3xl sm:text-4xl lg:text-[2.75rem]",
           )}
         >
           {title}
         </Heading>
         {description ? (
-          <p className="mt-4 text-pretty text-muted-foreground sm:text-lg">
+          <p className="mt-5 text-pretty text-muted-foreground sm:text-lg">
             {description}
           </p>
         ) : null}

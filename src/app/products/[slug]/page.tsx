@@ -111,34 +111,42 @@ export default async function ProductPage({
         </nav>
 
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-          <div className="relative aspect-4/5 overflow-hidden rounded-xl bg-muted">
+          <div className="relative aspect-4/5 overflow-hidden rounded-lg bg-neutral-100">
             <Image
               src={product.image.url}
               alt={product.image.alt}
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
               preload
-              className="object-cover"
+              className="object-contain p-8 sm:p-12"
             />
           </div>
 
           <div>
-            <h1 className="text-3xl text-balance sm:text-4xl">
+            <h1 className="text-3xl text-balance sm:text-4xl lg:text-5xl">
               {product.name}
             </h1>
 
-            <div className="mt-4 flex flex-wrap items-center gap-4">
-              <p className="text-2xl font-medium">
+            <div className="mt-5 flex flex-wrap items-center gap-4">
+              <p data-numeric className="text-2xl font-medium text-brand">
                 {formatPrice(product.price)}
               </p>
               {isDiscounted ? (
-                <p className="text-lg text-muted-foreground line-through">
+                <p
+                  data-numeric
+                  className="text-lg text-muted-foreground line-through"
+                >
                   <span className="sr-only">Was </span>
                   {formatPrice(product.compareAtPrice!)}
                 </p>
               ) : null}
               {product.size ? (
-                <p className="text-sm text-muted-foreground">{product.size}</p>
+                <p
+                  data-numeric
+                  className="text-xs tracking-wide text-muted-foreground uppercase"
+                >
+                  {product.size}
+                </p>
               ) : null}
             </div>
 
