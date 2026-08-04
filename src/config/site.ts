@@ -2,6 +2,8 @@
 // Client Components without dragging zod into the browser bundle.
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
+type LogoAsset = { src: string; width: number; height: number };
+
 export type SiteConfig = {
   name: string;
   legalName: string;
@@ -10,6 +12,16 @@ export type SiteConfig = {
   url: string;
   locale: string;
   currency: string;
+  /**
+   * Real logo files. Needs a transparent SVG or PNG in two versions: dark ink
+   * for the light header, light ink for the maroon footer. The screenshot of
+   * the jar label will not work, because the white wordmark has a dark
+   * background baked into it.
+   */
+  logo: {
+    dark: LogoAsset | null;
+    light: LogoAsset | null;
+  };
   contact: {
     email: string;
     phone: string;
@@ -35,6 +47,16 @@ export const siteConfig: SiteConfig = {
   url: siteUrl,
   locale: "en_GB",
   currency: "GBP",
+  /**
+   * Real logo files. Needs a transparent SVG or PNG in two versions: dark ink
+   * for the light header, light ink for the maroon footer. The screenshot of
+   * the jar label will not work, because the white wordmark has a dark
+   * background baked into it.
+   */
+  logo: {
+    dark: null as { src: string; width: number; height: number } | null,
+    light: null as { src: string; width: number; height: number } | null,
+  },
   contact: {
     email: "hello@efamy.co.uk",
     phone: "",
