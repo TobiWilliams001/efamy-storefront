@@ -13,9 +13,13 @@ import {
   getProducts,
   getRelatedProducts,
 } from "@/lib/catalogue";
-import { absoluteUrl, formatPrice } from "@/lib/format";
+import { formatPrice } from "@/lib/format";
+import {
+  breadcrumbSchema,
+  productSchema,
+  serialiseJsonLd,
+} from "@/lib/structured-data";
 import { routes } from "@/lib/routes";
-import { siteConfig } from "@/config/site";
 
 export async function generateStaticParams() {
   const products = await getProducts();
@@ -60,31 +64,27 @@ export default async function ProductPage({
     product.compareAtPrice !== undefined &&
     product.compareAtPrice > product.price;
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: product.name,
-    description: product.description,
-    image: absoluteUrl(product.image.url),
-    sku: product.id,
-    brand: { "@type": "Brand", name: siteConfig.name },
-    offers: {
-      "@type": "Offer",
-      url: absoluteUrl(routes.product(product.slug)),
-      priceCurrency: siteConfig.currency,
-      price: (product.price / 100).toFixed(2),
-      availability: product.inStock
-        ? "https://schema.org/InStock"
-        : "https://schema.org/OutOfStock",
+  const trail = [
+    { name: "Shop", path: routes.shop },
+    {
+      name: product.category.name,
+      path: routes.category(product.category.slug),
     },
-  };
+    { name: product.name, path: routes.product(product.slug) },
+  ];
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          __html: serialiseJsonLd(productSchema(product)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serialiseJsonLd(breadcrumbSchema(trail)),
         }}
       />
 
