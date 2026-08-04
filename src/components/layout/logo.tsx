@@ -12,10 +12,13 @@ import { cn } from "@/lib/utils";
 export function Logo({
   className,
   variant = "dark",
+  imageClassName = "h-10 w-auto lg:h-11",
 }: {
   className?: string;
   /** "dark" for ink on light, "light" for the maroon footer. */
   variant?: "dark" | "light";
+  /** Height utilities; the wordmark carries whitespace so it needs headroom. */
+  imageClassName?: string;
 }) {
   const asset = siteConfig.logo[variant];
 
@@ -32,7 +35,7 @@ export function Logo({
           width={asset.width}
           height={asset.height}
           priority
-          className="h-8 w-auto lg:h-9"
+          className={imageClassName}
         />
       ) : (
         <span

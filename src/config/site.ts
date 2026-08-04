@@ -43,8 +43,7 @@ export const siteConfig: SiteConfig = {
   locale: "en_GB",
   currency: "GBP",
   logo: {
-    // No dark-ink version supplied yet, so the header keeps the type wordmark.
-    dark: null,
+    dark: { src: "/logos/efamy-logo-dark.png", width: 742, height: 336 },
     light: { src: "/logos/efamy-logo-light.png", width: 742, height: 336 },
   },
   contact: {
