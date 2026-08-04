@@ -23,7 +23,7 @@ export default function CheckoutPage() {
   return (
     <>
       <PageHeader eyebrow="Checkout" title="Checkout" />
-      <Section width="narrow">
+      <Section spacing="afterHeader" width="narrow">
         <EmptyState
           icon={CreditCard}
           title="Online payment is being set up"

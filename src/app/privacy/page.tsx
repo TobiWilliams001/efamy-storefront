@@ -17,7 +17,7 @@ export default function PrivacyPage() {
   return (
     <>
       <PageHeader eyebrow="Legal" title="Privacy Policy" />
-      <Section width="prose">
+      <Section spacing="afterHeader" width="prose">
         <DraftNotice>
           <strong>Draft, not legally reviewed.</strong> This outlines what a UK
           GDPR compliant policy must cover. It must be completed and checked by

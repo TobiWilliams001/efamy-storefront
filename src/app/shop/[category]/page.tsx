@@ -67,7 +67,7 @@ export default async function CategoryPage({
         title={category.name}
         description={category.description}
       />
-      <Section>
+      <Section spacing="afterHeader">
         <ShopFilters
           categories={categories}
           filters={filters}

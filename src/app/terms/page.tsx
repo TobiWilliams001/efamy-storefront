@@ -17,7 +17,7 @@ export default function TermsPage() {
   return (
     <>
       <PageHeader eyebrow="Legal" title="Terms &amp; Conditions" />
-      <Section width="prose">
+      <Section spacing="afterHeader" width="prose">
         <DraftNotice>
           <strong>Draft, not legally reviewed.</strong> These are the headings a
           UK consumer sales contract needs. They are not enforceable terms and

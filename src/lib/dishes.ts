@@ -10,12 +10,13 @@ export type Dish = {
  * falls back to a warm swatch until an image is set.
  */
 export const dishes: Dish[] = [
+  { name: "Spaghetti", image: "/dishes/spaghetti.jpg" },
   { name: "Kenkey & Fish" },
   { name: "Jollof Rice" },
   { name: "Grilled Chicken" },
   { name: "Waakye" },
   { name: "Yam & Plantain" },
-  { name: "Kelewele" },
+  { name: "Kelewele", image: "/dishes/kelewele.jpg" },
   { name: "Rice & Stew" },
   { name: "Fried Eggs" },
 ];

@@ -17,7 +17,7 @@ export default function CartPage() {
         title="Your basket"
         description="Everything you have chosen so far. Delivery is calculated at checkout."
       />
-      <Section>
+      <Section spacing="afterHeader">
         <CartContents />
       </Section>
     </>

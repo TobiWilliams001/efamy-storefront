@@ -30,7 +30,7 @@ export default function FaqPage() {
         description="Heat levels, ingredients, delivery and stocking Efamy in your shop."
       />
 
-      <Section width="prose">
+      <Section spacing="afterHeader" width="prose">
         <FaqList faqs={faqs} />
 
         <div className="mt-12 rounded-lg bg-clay/40 p-8">

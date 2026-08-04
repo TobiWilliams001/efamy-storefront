@@ -17,7 +17,7 @@ export default function ReturnsPage() {
   return (
     <>
       <PageHeader eyebrow="Legal" title="Returns &amp; Refunds" />
-      <Section width="prose">
+      <Section spacing="afterHeader" width="prose">
         <DraftNotice>
           <strong>Draft, not legally reviewed.</strong> Food returns are not
           straightforward: perishable and sealed food carries specific

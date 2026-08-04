@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Local agent tooling
 .claude/
+
+# Stock comps awaiting a licence. Never commit or serve these.
+unlicensed-assets/

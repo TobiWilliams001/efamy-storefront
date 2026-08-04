@@ -7,6 +7,7 @@ const sectionSpacing = {
   sm: "py-12 sm:py-16 lg:py-20",
   default: "py-18 sm:py-24 lg:py-30",
   lg: "py-24 sm:py-30 lg:py-40",
+  afterHeader: "pt-8 pb-18 sm:pt-10 sm:pb-24 lg:pt-12 lg:pb-30",
 } as const;
 
 const sectionSurfaces = {

@@ -30,7 +30,7 @@ export function PageHeader({
           : "bg-linear-to-b from-clay/35 to-background",
       )}
     >
-      <Container className="py-12 sm:py-16 lg:py-20">
+      <Container className="pt-12 pb-9 sm:pt-16 sm:pb-11 lg:pt-20 lg:pb-12">
         <div
           className={cn(
             "flex flex-col gap-8",
