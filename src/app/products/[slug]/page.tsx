@@ -8,6 +8,7 @@ import { HeatBadge } from "@/components/commerce/heat-badge";
 import { ProductDetails } from "@/components/commerce/product-details";
 import { ProductGallery } from "@/components/commerce/product-gallery";
 import { ProductShowcase } from "@/components/sections/product-showcase";
+import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -88,28 +89,44 @@ export default async function ProductPage({
         }}
       />
 
-      <Section>
-        <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-            <li>
-              <Link href={routes.shop} className="hover:text-foreground">
-                Shop
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li>
-              <Link
-                href={routes.category(product.category.slug)}
-                className="hover:text-foreground"
-              >
-                {product.category.name}
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li className="text-foreground">{product.name}</li>
-          </ol>
-        </nav>
+      <div className="border-b border-neutral-200 bg-linear-to-b from-clay/35 to-background">
+        <Container>
+          <nav aria-label="Breadcrumb" className="py-5">
+            <ol className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+              <li>
+                <Link href={routes.home} className="hover:text-foreground">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true" className="opacity-50">
+                /
+              </li>
+              <li>
+                <Link href={routes.shop} className="hover:text-foreground">
+                  Shop
+                </Link>
+              </li>
+              <li aria-hidden="true" className="opacity-50">
+                /
+              </li>
+              <li>
+                <Link
+                  href={routes.category(product.category.slug)}
+                  className="hover:text-foreground"
+                >
+                  {product.category.name}
+                </Link>
+              </li>
+              <li aria-hidden="true" className="opacity-50">
+                /
+              </li>
+              <li className="text-foreground">{product.name}</li>
+            </ol>
+          </nav>
+        </Container>
+      </div>
 
+      <Section>
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
           <ProductGallery
             image={product.image}

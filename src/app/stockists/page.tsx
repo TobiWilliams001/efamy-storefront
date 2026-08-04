@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MapPin, ShoppingBag, Store, Truck } from "lucide-react";
 
+import { PageHeader } from "@/components/layout/page-header";
 import { Section, SectionHeader } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
@@ -38,14 +39,16 @@ const wholesalePoints = [
 export default function StockistsPage() {
   return (
     <>
+      <PageHeader
+        eyebrow="Stockists & wholesale"
+        title="Where to buy Efamy"
+        description="Right now the surest way to get the full range is to order direct. We are also building our list of retail stockists."
+        breadcrumb={[
+          { name: "Home", href: routes.home },
+          { name: "Stockists" },
+        ]}
+      />
       <Section>
-        <SectionHeader
-          as="h1"
-          eyebrow="Stockists & wholesale"
-          title="Where to buy Efamy"
-          description="Right now the surest way to get the full range is to order direct. We are also building our list of retail stockists."
-        />
-
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
           <div className="flex flex-col rounded-lg bg-card p-8 shadow-card sm:p-10">
             <ShoppingBag

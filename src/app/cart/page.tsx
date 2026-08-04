@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 
 import { CartContents } from "@/components/cart/cart-contents";
-import { Section, SectionHeader } from "@/components/layout/section";
+import { PageHeader } from "@/components/layout/page-header";
+import { Section } from "@/components/layout/section";
 
 export const metadata: Metadata = {
   title: "Basket",
@@ -10,9 +11,15 @@ export const metadata: Metadata = {
 
 export default function CartPage() {
   return (
-    <Section>
-      <SectionHeader as="h1" title="Your basket" />
-      <CartContents />
-    </Section>
+    <>
+      <PageHeader
+        eyebrow="Basket"
+        title="Your basket"
+        description="Everything you have chosen so far. Delivery is calculated at checkout."
+      />
+      <Section>
+        <CartContents />
+      </Section>
+    </>
   );
 }

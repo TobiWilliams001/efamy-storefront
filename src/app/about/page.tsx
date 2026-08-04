@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { CategoryCard } from "@/components/commerce/category-card";
 import { Container } from "@/components/layout/container";
+import { PageHeader } from "@/components/layout/page-header";
 import { Section, SectionHeader } from "@/components/layout/section";
 import { CallToAction } from "@/components/sections/call-to-action";
 import { WhyEfamy } from "@/components/sections/why-efamy";
@@ -23,25 +24,15 @@ export default async function AboutPage() {
 
   return (
     <>
-      <Section spacing="lg" width="prose">
-        <p className="flex items-center gap-3 text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
-          <span
-            aria-hidden="true"
-            className="h-px w-6 shrink-0 bg-neutral-300"
-          />
-          About Efamy
-        </p>
-        <h1 className="mt-6 text-4xl text-balance sm:text-5xl lg:text-6xl">
-          A premium Ghanaian food brand, proudly made in the UK.
-        </h1>
-        <p className="mt-8 text-lg text-pretty text-muted-foreground sm:text-xl">
-          Efamy brings authentic Ghanaian flavours, trusted quality and
-          traditional recipes to modern kitchens. These are the jars that sit on
-          the table at every meal, made here in Britain.
-        </p>
-      </Section>
+      <PageHeader
+        tone="ink"
+        eyebrow="About Efamy"
+        title="A premium Ghanaian food brand, proudly made in the UK."
+        description="Efamy brings authentic Ghanaian flavours, trusted quality and traditional recipes to modern kitchens. These are the jars that sit on the table at every meal, made here in Britain."
+        breadcrumb={[{ name: "Home", href: routes.home }, { name: "About" }]}
+      />
 
-      <Container>
+      <Container className="mt-14 lg:mt-20">
         <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-white shadow-card">
           <Image
             src="/products/collections/range-lineup.jpg"

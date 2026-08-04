@@ -59,3 +59,13 @@ export const productFaqs: Faq[] = faqs.filter((faq) =>
     "Where are your products made?",
   ].includes(faq.question),
 );
+
+/** The questions people email about, answered before they have to. */
+export const contactFaqs: Faq[] = faqs.filter((faq) =>
+  [
+    "Can I stock Efamy in my shop?",
+    "Do your products contain allergens?",
+    "What is the difference between mild and hot?",
+    "How do I store a jar once it is opened?",
+  ].includes(faq.question),
+);

@@ -6,7 +6,8 @@ import { PackageOpen } from "lucide-react";
 import { ProductGrid } from "@/components/commerce/product-grid";
 import { ShopFilters } from "@/components/commerce/shop-filters";
 import { EmptyState } from "@/components/common/empty-state";
-import { Section, SectionHeader } from "@/components/layout/section";
+import { PageHeader } from "@/components/layout/page-header";
+import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { getCategories, getCategoryBySlug, getProducts } from "@/lib/catalogue";
 import { applyFilters, parseFilters } from "@/lib/product-filters";
@@ -59,44 +60,45 @@ export default async function CategoryPage({
   const visible = applyFilters(products, filters);
 
   return (
-    <Section>
-      <SectionHeader
-        as="h1"
-        eyebrow={
-          <Link href={routes.shop} className="hover:text-foreground">
-            Shop
-          </Link>
-        }
+    <>
+      <PageHeader
+        eyebrow="Shop"
         title={category.name}
         description={category.description}
+        breadcrumb={[
+          { name: "Home", href: routes.home },
+          { name: "Shop", href: routes.shop },
+          { name: category.name },
+        ]}
       />
+      <Section>
+        <ShopFilters
+          categories={categories}
+          filters={filters}
+          showCategories={false}
+        />
 
-      <ShopFilters
-        categories={categories}
-        filters={filters}
-        showCategories={false}
-      />
+        <p className="mb-6 text-sm text-muted-foreground" aria-live="polite">
+          {visible.length} {visible.length === 1 ? "product" : "products"}
+        </p>
 
-      <p className="mb-6 text-sm text-muted-foreground" aria-live="polite">
-        {visible.length} {visible.length === 1 ? "product" : "products"}
-      </p>
-
-      <ProductGrid
-        products={visible}
-        eagerCount={2}
-        empty={
-          <EmptyState
-            icon={PackageOpen}
-            title="Nothing matches those filters"
-            description="Try a different heat level, or browse the full range."
-            action={
-              <Button asChild size="lg" variant="outline">
-                <Link href={routes.shop}>Browse all products</Link>
-              </Button>
-            }
-          />
-        }
-      />
-    </Section>
+        <ProductGrid
+          products={visible}
+          eagerCount={2}
+          empty={
+            <EmptyState
+              icon={PackageOpen}
+              title="Nothing matches those filters"
+              description="Try a different heat level, or browse the full range."
+              action={
+                <Button asChild size="lg" variant="outline">
+                  <Link href={routes.shop}>Browse all products</Link>
+                </Button>
+              }
+            />
+          }
+        />
+      </Section>
+    </>
   );
 }

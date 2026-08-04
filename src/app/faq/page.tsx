@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { FaqList } from "@/components/common/faq-list";
-import { Section, SectionHeader } from "@/components/layout/section";
+import { PageHeader } from "@/components/layout/page-header";
+import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import { faqs } from "@/lib/faqs";
@@ -23,14 +24,14 @@ export default function FaqPage() {
         dangerouslySetInnerHTML={{ __html: serialiseJsonLd(faqSchema(faqs)) }}
       />
 
-      <Section width="prose">
-        <SectionHeader
-          as="h1"
-          eyebrow="Help"
-          title="Frequently asked questions"
-          description="Heat levels, ingredients, storage and stocking Efamy."
-        />
+      <PageHeader
+        eyebrow="Help"
+        title="Frequently asked questions"
+        description="Heat levels, ingredients, delivery and stocking Efamy in your shop."
+        breadcrumb={[{ name: "Home", href: routes.home }, { name: "FAQ" }]}
+      />
 
+      <Section width="prose">
         <FaqList faqs={faqs} />
 
         <div className="mt-12 rounded-lg bg-clay/40 p-8">
