@@ -69,7 +69,9 @@ export const product = defineType({
       title: 'Net weight or volume',
       type: 'string',
       group: 'details',
-      description: 'Exactly as printed on the jar, for example "250g".',
+      description:
+        'Exactly as printed on the jar, for example "250g". Shoppers ask this before they buy.',
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'category',
