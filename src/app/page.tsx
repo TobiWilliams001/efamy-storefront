@@ -2,6 +2,7 @@ import { CallToAction } from "@/components/sections/call-to-action";
 import { CategoryShowcase } from "@/components/sections/category-showcase";
 import { Hero } from "@/components/sections/hero";
 import { ProductShowcase } from "@/components/sections/product-showcase";
+import { TrustBar } from "@/components/sections/trust-bar";
 import { WhyEfamy } from "@/components/sections/why-efamy";
 import {
   getBestSellers,
@@ -20,6 +21,7 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
+      <TrustBar />
       <ProductShowcase
         eyebrow="Featured"
         title="Start here"
