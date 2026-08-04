@@ -39,6 +39,8 @@ export type Product = {
   image: ProductImage;
   images?: ProductImage[];
   category: Pick<ProductCategory, "slug" | "name">;
+  /** Populated only for multipacks and gift sets. */
+  bundleItems?: { slug: string; name: string; size: string }[];
   inStock: boolean;
   isNew?: boolean;
 };
@@ -55,6 +57,7 @@ export type ProductSummary = Pick<
   | "heat"
   | "image"
   | "category"
+  | "bundleItems"
   | "inStock"
   | "isNew"
 >;

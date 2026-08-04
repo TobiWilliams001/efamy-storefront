@@ -61,6 +61,10 @@ export function mapProduct(raw: Record<string, unknown>): Product | null {
         ?.map(mapImage)
         .filter((entry): entry is ProductImage => entry !== null) ?? undefined,
     category: { slug: category.slug, name: category.name },
+    bundleItems:
+      Array.isArray(raw.bundleItems) && raw.bundleItems.length > 0
+        ? (raw.bundleItems as { slug: string; name: string; size: string }[])
+        : undefined,
     inStock: raw.inStock === true,
     isNew: raw.isNew === true ? true : undefined,
   };

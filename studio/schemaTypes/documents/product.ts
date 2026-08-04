@@ -192,6 +192,16 @@ export const product = defineType({
     }),
 
     defineField({
+      name: 'bundleItems',
+      title: 'Included in this set',
+      type: 'array',
+      group: 'details',
+      description:
+        'Only for multipacks and gift sets. List the products inside; leave empty for a single jar.',
+      of: [defineArrayMember({type: 'reference', to: [{type: 'product'}]})],
+    }),
+
+    defineField({
       name: 'availability',
       type: 'string',
       group: 'merchandising',

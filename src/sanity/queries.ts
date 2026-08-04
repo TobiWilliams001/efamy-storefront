@@ -27,6 +27,7 @@ const PRODUCT_FIELDS = `
   image{${IMAGE_FIELDS}},
   images[]{${IMAGE_FIELDS}},
   category->{"slug": slug.current, name},
+  bundleItems[]->{"slug": slug.current, name, "size": coalesce(size, "")},
   "inStock": availability == "inStock",
   isNew,
   featured,

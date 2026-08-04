@@ -1,5 +1,8 @@
+import Link from "next/link";
+
 import { FaqList } from "@/components/common/faq-list";
 import { productFaqs } from "@/lib/faqs";
+import { routes } from "@/lib/routes";
 import type { Product } from "@/types/product";
 
 function Block({
@@ -23,6 +26,28 @@ export function ProductDetails({ product }: { product: Product }) {
 
   return (
     <div className="mt-16">
+      {product.bundleItems?.length ? (
+        <Block title="What is included">
+          <ul className="divide-y border-y">
+            {product.bundleItems.map((item) => (
+              <li key={item.slug} className="flex justify-between gap-4 py-3">
+                <Link
+                  href={routes.product(item.slug)}
+                  className="text-sm underline-offset-4 hover:underline"
+                >
+                  {item.name}
+                </Link>
+                {item.size ? (
+                  <span data-numeric className="text-sm text-muted-foreground">
+                    {item.size}
+                  </span>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </Block>
+      ) : null}
+
       {product.servingSuggestions?.length ? (
         <Block title="Best paired with">
           <ul className="flex flex-wrap gap-2">
