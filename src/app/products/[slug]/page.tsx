@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
@@ -7,6 +6,7 @@ import { Check } from "lucide-react";
 import { AddToCart } from "@/components/cart/add-to-cart";
 import { HeatBadge } from "@/components/commerce/heat-badge";
 import { ProductDetails } from "@/components/commerce/product-details";
+import { ProductGallery } from "@/components/commerce/product-gallery";
 import { ProductShowcase } from "@/components/sections/product-showcase";
 import { Section } from "@/components/layout/section";
 import { Separator } from "@/components/ui/separator";
@@ -113,16 +113,11 @@ export default async function ProductPage({
         </nav>
 
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-          <div className="relative aspect-square overflow-hidden rounded-lg bg-white shadow-card">
-            <Image
-              src={product.image.url}
-              alt={product.image.alt}
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              preload
-              className="object-contain p-8 sm:p-12"
-            />
-          </div>
+          <ProductGallery
+            image={product.image}
+            images={product.images}
+            name={product.name}
+          />
 
           <div>
             <h1 className="text-3xl text-balance sm:text-4xl lg:text-5xl">
