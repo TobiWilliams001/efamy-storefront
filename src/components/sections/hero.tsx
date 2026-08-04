@@ -17,20 +17,16 @@ export function Hero() {
         className="-z-10 object-cover object-right"
       />
 
-      {/*
-       * The photograph already has an empty, well-lit left third. The scrim
-       * only deepens it enough to hold text at narrow widths, where the jars
-       * shift under the headline.
-       */}
+      {/* Only enough scrim to hold text where the jars sit under it on narrow screens. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-linear-to-r from-background via-background/85 to-background/10 sm:via-background/70 sm:to-transparent"
+        className="absolute inset-0 -z-10 bg-linear-to-r from-background/85 via-background/40 to-transparent sm:from-background/70 sm:via-background/15 lg:from-background/55 lg:via-transparent"
       />
 
       <Container>
         <div className="flex min-h-140 items-center py-20 lg:min-h-160">
           <div className="max-w-lg">
-            <p className="flex items-center gap-3 text-xs font-medium tracking-[0.18em] text-neutral-700 uppercase">
+            <p className="flex items-center gap-3 text-xs font-medium tracking-[0.18em] text-neutral-800 uppercase">
               <span
                 aria-hidden="true"
                 className="h-px w-6 shrink-0 bg-neutral-400"
@@ -40,7 +36,7 @@ export function Hero() {
             <h1 className="mt-6 text-4xl text-balance sm:text-5xl lg:text-6xl">
               Authentic Ghanaian Flavours. Crafted in the UK.
             </h1>
-            <p className="mt-6 max-w-md text-lg text-pretty text-neutral-700">
+            <p className="mt-6 max-w-md text-lg text-pretty text-neutral-800">
               Chilli sauces in beans, beef, chicken, fish and pork, mild or hot,
               alongside our seasoning mixes. No artificial preservatives.
             </p>
