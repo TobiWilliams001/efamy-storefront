@@ -6,6 +6,7 @@ export const routes = {
   about: "/about",
   contact: "/contact",
   stockists: "/stockists",
+  faq: "/faq",
   cart: "/cart",
   checkout: "/checkout",
   privacy: "/privacy",

@@ -1,6 +1,7 @@
 import { siteConfig } from "@/config/site";
 import { absoluteUrl } from "@/lib/format";
 import { routes } from "@/lib/routes";
+import type { Faq } from "@/lib/faqs";
 import type { Product } from "@/types/product";
 
 /**
@@ -68,5 +69,17 @@ export function productSchema(product: Product) {
         : "https://schema.org/OutOfStock",
       seller: { "@type": "Organization", name: siteConfig.legalName },
     },
+  };
+}
+
+export function faqSchema(faqs: Faq[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
   };
 }
