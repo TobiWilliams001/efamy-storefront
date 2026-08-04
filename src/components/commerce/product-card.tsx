@@ -5,6 +5,7 @@ import { HeatBadge } from "@/components/commerce/heat-badge";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { formatPrice } from "@/lib/format";
+import { productAccent } from "@/lib/product-accent";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import {
@@ -36,6 +37,7 @@ export function ProductCard({
   const isDiscounted =
     cheapest?.compareAtPrice !== undefined && cheapest.compareAtPrice > price;
   const hasSizeChoice = variants.length > 1;
+  const accent = productAccent(product.slug);
 
   return (
     <Card
@@ -50,6 +52,11 @@ export function ProductCard({
        * rather than portrait so the landscape case shots do not shrink to
        * nothing beside the upright jars.
        */}
+      <span
+        aria-hidden="true"
+        style={{ backgroundColor: accent }}
+        className="absolute inset-x-0 top-0 z-10 h-1"
+      />
       <div className="relative aspect-square overflow-hidden bg-white">
         <Image
           src={image.url}
