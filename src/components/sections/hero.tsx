@@ -20,7 +20,7 @@ export function Hero() {
       {/* Only enough scrim to hold text where the jars sit under it on narrow screens. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-linear-to-r from-background/85 via-background/40 to-transparent sm:from-background/70 sm:via-background/15 lg:from-background/55 lg:via-transparent"
+        className="absolute inset-0 -z-10 bg-linear-to-r from-background/95 via-background/60 to-transparent sm:from-background/85 sm:via-background/40 lg:from-background/75 lg:via-background/25"
       />
 
       <Container>
