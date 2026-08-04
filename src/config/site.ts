@@ -12,12 +12,7 @@ export type SiteConfig = {
   url: string;
   locale: string;
   currency: string;
-  /**
-   * Real logo files. Needs a transparent SVG or PNG in two versions: dark ink
-   * for the light header, light ink for the maroon footer. The screenshot of
-   * the jar label will not work, because the white wordmark has a dark
-   * background baked into it.
-   */
+  /** Dark ink for the light header, light ink for the maroon footer. */
   logo: {
     dark: LogoAsset | null;
     light: LogoAsset | null;
@@ -47,15 +42,10 @@ export const siteConfig: SiteConfig = {
   url: siteUrl,
   locale: "en_GB",
   currency: "GBP",
-  /**
-   * Real logo files. Needs a transparent SVG or PNG in two versions: dark ink
-   * for the light header, light ink for the maroon footer. The screenshot of
-   * the jar label will not work, because the white wordmark has a dark
-   * background baked into it.
-   */
   logo: {
-    dark: null as { src: string; width: number; height: number } | null,
-    light: null as { src: string; width: number; height: number } | null,
+    // No dark-ink version supplied yet, so the header keeps the type wordmark.
+    dark: null,
+    light: { src: "/logos/efamy-logo-light.png", width: 742, height: 336 },
   },
   contact: {
     email: "hello@efamy.co.uk",
