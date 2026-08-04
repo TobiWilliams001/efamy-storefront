@@ -52,6 +52,12 @@ export function mapProduct(raw: Record<string, unknown>): Product | null {
     ingredients: list(raw.ingredients),
     allergens: list(raw.allergens),
     dietary: list(raw.dietary),
+    storage: typeof raw.storage === "string" ? raw.storage : undefined,
+    servingSuggestions: list(raw.servingSuggestions),
+    nutrition:
+      Array.isArray(raw.nutrition) && raw.nutrition.length > 0
+        ? (raw.nutrition as { label: string; value: string }[])
+        : undefined,
     image,
     images:
       (raw.images as RawImage[] | null)

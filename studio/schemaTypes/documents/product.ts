@@ -155,6 +155,41 @@ export const product = defineType({
     }),
 
     defineField({
+      name: 'storage',
+      title: 'Storage guidance',
+      type: 'text',
+      rows: 2,
+      group: 'label',
+      description:
+        'Copy from the jar, for example "Refrigerate after opening and use within 4 weeks."',
+    }),
+    defineField({
+      name: 'nutrition',
+      title: 'Nutrition (per 100g)',
+      type: 'array',
+      group: 'label',
+      description: 'Optional. Copy the values from the label exactly.',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({name: 'label', type: 'string', validation: (rule) => rule.required()}),
+            defineField({name: 'value', type: 'string', validation: (rule) => rule.required()}),
+          ],
+          preview: {select: {title: 'label', subtitle: 'value'}},
+        }),
+      ],
+    }),
+    defineField({
+      name: 'servingSuggestions',
+      title: 'Best paired with',
+      type: 'array',
+      group: 'details',
+      description: 'Dishes and ideas, one per entry. This is what helps people picture a meal.',
+      of: [defineArrayMember({type: 'string'})],
+    }),
+
+    defineField({
       name: 'availability',
       type: 'string',
       group: 'merchandising',

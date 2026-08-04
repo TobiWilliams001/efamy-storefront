@@ -13,6 +13,12 @@ import type { Product, ProductCategory } from "@/types/product";
  */
 const PLACEHOLDER_PRICE = 799;
 
+// Transcribed from the jars.
+const STORAGE_SAUCE =
+  "Store in a cool, dry place. Refrigerate after opening and use within 4 weeks.";
+const STORAGE_DRY =
+  "Store in a cool, dry place. Keep the container sealed after use.";
+
 export const categories: ProductCategory[] = [
   {
     id: "cat-chilli-sauces",
@@ -67,6 +73,8 @@ export const products: Product[] = [
       width: 1122,
       height: 1402,
     },
+    storage: STORAGE_SAUCE,
+    servingSuggestions: ["Rice and stew", "Jollof", "Grilled vegetables"],
     category: category.sauces,
     inStock: true,
   },
@@ -85,6 +93,12 @@ export const products: Product[] = [
       width: 1086,
       height: 1448,
     },
+    storage: STORAGE_SAUCE,
+    servingSuggestions: [
+      "Rice dishes",
+      "Yam or plantain",
+      "Sandwiches and wraps",
+    ],
     category: category.sauces,
     inStock: true,
   },
@@ -114,6 +128,8 @@ export const products: Product[] = [
         height: 1448,
       },
     ],
+    storage: STORAGE_SAUCE,
+    servingSuggestions: ["Jollof rice", "Grilled meat", "Eggs on toast"],
     category: category.sauces,
     inStock: true,
   },
@@ -143,6 +159,8 @@ export const products: Product[] = [
         height: 1359,
       },
     ],
+    storage: STORAGE_SAUCE,
+    servingSuggestions: ["Rice and chicken", "Wraps", "Fried plantain"],
     category: category.sauces,
     inStock: true,
   },
@@ -162,6 +180,8 @@ export const products: Product[] = [
       width: 1086,
       height: 1448,
     },
+    storage: STORAGE_SAUCE,
+    servingSuggestions: ["Boiled yam", "Rice", "Grilled fish"],
     category: category.sauces,
     inStock: true,
   },
@@ -189,6 +209,8 @@ export const products: Product[] = [
         height: 1448,
       },
     ],
+    storage: STORAGE_SAUCE,
+    servingSuggestions: ["Boiled yam", "Kenkey", "Grilled fish"],
     category: category.sauces,
     inStock: true,
   },
@@ -219,6 +241,8 @@ export const products: Product[] = [
       width: 1177,
       height: 1336,
     },
+    storage: STORAGE_SAUCE,
+    servingSuggestions: ["Rice", "Fried plantain", "Grilled pork"],
     category: category.sauces,
     inStock: true,
   },
@@ -246,6 +270,8 @@ export const products: Product[] = [
         height: 1086,
       },
     ],
+    storage: STORAGE_DRY,
+    servingSuggestions: ["Beef", "Fish", "Chicken"],
     category: category.seasonings,
     inStock: true,
   },
@@ -264,6 +290,8 @@ export const products: Product[] = [
       width: 1672,
       height: 941,
     },
+    storage: STORAGE_DRY,
+    servingSuggestions: ["Spiced fried plantain"],
     category: category.seasonings,
     inStock: true,
   },
@@ -295,6 +323,8 @@ export const products: Product[] = [
       width: 1254,
       height: 1254,
     },
+    storage: "Store in a cool, dry place. Keep the container sealed after use.",
+    servingSuggestions: ["Chicken", "Fish", "Meat", "Vegetables"],
     category: category.seasonings,
     inStock: true,
   },

@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Check } from "lucide-react";
 
 import { AddToCart } from "@/components/cart/add-to-cart";
 import { HeatBadge } from "@/components/commerce/heat-badge";
+import { ProductDetails } from "@/components/commerce/product-details";
 import { ProductShowcase } from "@/components/sections/product-showcase";
 import { Section } from "@/components/layout/section";
 import { Separator } from "@/components/ui/separator";
@@ -170,39 +172,31 @@ export default async function ProductPage({
 
             <AddToCart product={product} />
 
+            <ul className="mt-7 space-y-2 text-sm text-muted-foreground">
+              {[
+                "Authentic Ghanaian recipe",
+                "Proudly made in the UK",
+                "No artificial preservatives",
+              ].map((reason) => (
+                <li key={reason} className="flex items-center gap-2">
+                  <Check aria-hidden="true" className="size-4 text-sage-ink" />
+                  {reason}
+                </li>
+              ))}
+            </ul>
+
             <p className="mt-6 text-sm text-muted-foreground">
-              UK delivery. Questions?{" "}
+              Questions?{" "}
               <Link href={routes.contact} className="underline">
                 Get in touch
               </Link>
               .
             </p>
-
-            {product.ingredients || product.allergens ? (
-              <div className="mt-10 space-y-5 border-t pt-8 text-sm">
-                {product.ingredients ? (
-                  <div>
-                    <h2 className="font-heading font-medium">Ingredients</h2>
-                    <p className="mt-2 text-muted-foreground">
-                      {product.ingredients.join(", ")}.
-                    </p>
-                  </div>
-                ) : null}
-                {product.allergens ? (
-                  <div>
-                    <h2 className="font-heading font-medium">Allergens</h2>
-                    <p className="mt-2 text-muted-foreground">
-                      Contains {product.allergens.join(", ")}.
-                    </p>
-                  </div>
-                ) : null}
-                <p className="text-muted-foreground">
-                  Always check the label on the product you receive before
-                  eating.
-                </p>
-              </div>
-            ) : null}
           </div>
+        </div>
+
+        <div className="mx-auto max-w-3xl">
+          <ProductDetails product={product} />
         </div>
       </Section>
 

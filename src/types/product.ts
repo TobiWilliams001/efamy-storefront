@@ -36,6 +36,12 @@ export type Product = {
   allergens?: string[];
   /** Claims printed on the packaging, e.g. "Suitable for vegans". */
   dietary?: string[];
+  /** Storage guidance as printed on the jar. */
+  storage?: string;
+  /** How to use it: dishes, pairings, cooking ideas. */
+  servingSuggestions?: string[];
+  /** Per-100g values transcribed from the label. */
+  nutrition?: { label: string; value: string }[];
   image: ProductImage;
   images?: ProductImage[];
   category: Pick<ProductCategory, "slug" | "name">;

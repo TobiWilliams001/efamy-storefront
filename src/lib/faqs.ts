@@ -50,3 +50,13 @@ export const faqs: Faq[] = [
       "Yes. We supply independent retailers, grocers and food shops across the UK, with no minimum shelf space. Get in touch and we will send you trade pricing and case quantities.",
   },
 ];
+
+/** The subset worth repeating on every product page. */
+export const productFaqs: Faq[] = faqs.filter((faq) =>
+  [
+    "What is the difference between mild and hot?",
+    "How do I store a jar once it is opened?",
+    "Do your products contain allergens?",
+    "Where are your products made?",
+  ].includes(faq.question),
+);
