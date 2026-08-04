@@ -111,7 +111,7 @@ export default async function ProductPage({
         </nav>
 
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-          <div className="relative aspect-4/5 overflow-hidden rounded-lg bg-neutral-100">
+          <div className="relative aspect-square overflow-hidden rounded-lg bg-white shadow-card">
             <Image
               src={product.image.url}
               alt={product.image.alt}

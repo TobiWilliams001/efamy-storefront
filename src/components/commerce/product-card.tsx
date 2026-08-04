@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import type { ProductSummary } from "@/types/product";
 
 const DEFAULT_SIZES =
-  "(min-width: 1024px) 288px, (min-width: 640px) 50vw, 100vw";
+  "(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw";
 
 type ProductCardProps = {
   product: ProductSummary;
@@ -36,11 +36,12 @@ export function ProductCard({
       )}
     >
       {/*
-       * The packshots are shot on white, so `contain` with padding keeps every
-       * jar whole and at a consistent scale. `cover` crops the lids and makes
-       * the grid look uneven.
+       * White surface, because the packshots are JPEGs shot on white — on a
+       * tinted background the image's own white rectangle shows through. Square
+       * rather than portrait so the landscape case shots do not shrink to
+       * nothing beside the upright jars.
        */}
-      <div className="relative aspect-4/5 overflow-hidden bg-neutral-100">
+      <div className="relative aspect-square overflow-hidden bg-white">
         <Image
           src={image.url}
           alt={image.alt}
@@ -51,7 +52,7 @@ export function ProductCard({
           placeholder={image.blurDataURL ? "blur" : undefined}
           blurDataURL={image.blurDataURL}
           className={cn(
-            "object-contain p-6 transition-transform duration-300 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
+            "object-contain p-8 transition-transform duration-300 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
             !inStock && "opacity-50",
           )}
         />

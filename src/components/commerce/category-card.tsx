@@ -24,7 +24,7 @@ export function CategoryCard({
   return (
     <article
       className={cn(
-        "group relative isolate flex aspect-4/3 overflow-hidden rounded-lg bg-neutral-100 shadow-card transition-shadow duration-200 focus-within:ring-2 focus-within:ring-ring hover:shadow-card-hover",
+        "group relative isolate flex aspect-4/3 overflow-hidden rounded-lg bg-white shadow-card transition-shadow duration-200 focus-within:ring-2 focus-within:ring-ring hover:shadow-card-hover",
         className,
       )}
     >
@@ -40,7 +40,7 @@ export function CategoryCard({
         className="object-contain p-10 transition-transform duration-300 ease-out group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
       />
 
-      <div className="relative mt-auto flex w-full items-end justify-between gap-4 bg-linear-to-t from-neutral-100 via-neutral-100/95 to-transparent p-6 pt-10">
+      <div className="relative mt-auto flex w-full items-end justify-between gap-4 bg-linear-to-t from-white via-white/95 to-transparent p-6 pt-10">
         <div>
           <h3 className="font-heading text-xl">
             <Link

@@ -41,14 +41,14 @@ export function CartContents() {
           <li key={line.productId} className="flex gap-4 py-5">
             <Link
               href={routes.product(line.slug)}
-              className="relative aspect-4/5 w-20 shrink-0 overflow-hidden rounded-lg bg-muted"
+              className="relative aspect-square w-20 shrink-0 overflow-hidden rounded-lg bg-white"
             >
               <Image
                 src={line.imageUrl}
                 alt={line.imageAlt}
                 fill
                 sizes="80px"
-                className="object-cover"
+                className="object-contain p-2"
               />
             </Link>
 
