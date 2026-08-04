@@ -31,7 +31,27 @@ export function mapProduct(raw: Record<string, unknown>): Product | null {
   const image = mapImage(raw.image as RawImage);
   const category = raw.category as { slug?: string; name?: string } | null;
 
-  if (!image || !raw.slug || !category?.slug || !category.name) {
+  const variants = Array.isArray(raw.variants)
+    ? (raw.variants as Record<string, unknown>[])
+        .map((entry) => ({
+          size: String(entry.size ?? ""),
+          price: Number(entry.price ?? 0),
+          compareAtPrice:
+            typeof entry.compareAtPrice === "number"
+              ? entry.compareAtPrice
+              : undefined,
+          inStock: entry.inStock !== false,
+        }))
+        .filter((entry) => entry.size && entry.price > 0)
+    : [];
+
+  if (
+    !image ||
+    !raw.slug ||
+    !category?.slug ||
+    !category.name ||
+    variants.length === 0
+  ) {
     return null;
   }
 
@@ -41,10 +61,7 @@ export function mapProduct(raw: Record<string, unknown>): Product | null {
     name: String(raw.name ?? ""),
     summary: String(raw.summary ?? ""),
     description: String(raw.description ?? ""),
-    price: Number(raw.price ?? 0),
-    compareAtPrice:
-      typeof raw.compareAtPrice === "number" ? raw.compareAtPrice : undefined,
-    size: String(raw.size ?? ""),
+    variants,
     heat: raw.heat === "mild" || raw.heat === "hot" ? raw.heat : undefined,
     ingredients: list(raw.ingredients),
     allergens: list(raw.allergens),
@@ -63,9 +80,8 @@ export function mapProduct(raw: Record<string, unknown>): Product | null {
     category: { slug: category.slug, name: category.name },
     bundleItems:
       Array.isArray(raw.bundleItems) && raw.bundleItems.length > 0
-        ? (raw.bundleItems as { slug: string; name: string; size: string }[])
+        ? (raw.bundleItems as { slug: string; name: string }[])
         : undefined,
-    inStock: raw.inStock === true,
     isNew: raw.isNew === true ? true : undefined,
   };
 }

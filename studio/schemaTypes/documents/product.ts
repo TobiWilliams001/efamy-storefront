@@ -41,37 +41,56 @@ export const product = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'price',
-      title: 'Price (pence)',
-      type: 'number',
+      name: 'variants',
+      title: 'Sizes and prices',
+      type: 'array',
       group: 'details',
-      description: 'In pence, so £7.50 is 750. Money is never stored as a decimal.',
-      validation: (rule) => rule.required().integer().positive(),
-    }),
-    defineField({
-      name: 'compareAtPrice',
-      title: 'Was price (pence)',
-      type: 'number',
-      group: 'details',
-      description: 'Only set this when the product is on offer. Leave empty otherwise.',
-      validation: (rule) =>
-        rule
-          .integer()
-          .positive()
-          .custom((value, context) => {
-            const price = (context.document as {price?: number} | undefined)?.price
-            if (value === undefined || price === undefined) return true
-            return value > price || 'The was price must be higher than the current price'
-          }),
-    }),
-    defineField({
-      name: 'size',
-      title: 'Net weight or volume',
-      type: 'string',
-      group: 'details',
-      description:
-        'Exactly as printed on the jar, for example "250g". Shoppers ask this before they buy.',
-      validation: (rule) => rule.required(),
+      description: 'One entry per size on sale. Sauces have four, seasonings usually one.',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'variant',
+          fields: [
+            defineField({
+              name: 'size',
+              title: 'Net weight',
+              type: 'string',
+              description: 'Exactly as printed on the jar, for example "250g".',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'price',
+              title: 'Price (pence)',
+              type: 'number',
+              description: 'In pence, so £4.75 is 475. Money is never a decimal.',
+              validation: (rule) => rule.required().integer().positive(),
+            }),
+            defineField({
+              name: 'compareAtPrice',
+              title: 'Was price (pence)',
+              type: 'number',
+              description: 'Only when this size is on offer.',
+              validation: (rule) => rule.integer().positive(),
+            }),
+            defineField({
+              name: 'inStock',
+              type: 'boolean',
+              initialValue: true,
+            }),
+          ],
+          preview: {
+            select: {title: 'size', price: 'price', inStock: 'inStock'},
+            prepare({title, price, inStock}) {
+              const pounds = typeof price === 'number' ? (price / 100).toFixed(2) : '?'
+              return {
+                title: `${title} — £${pounds}`,
+                subtitle: inStock === false ? 'Out of stock' : 'In stock',
+              }
+            },
+          },
+        }),
+      ],
+      validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: 'category',
@@ -202,20 +221,6 @@ export const product = defineType({
     }),
 
     defineField({
-      name: 'availability',
-      type: 'string',
-      group: 'merchandising',
-      initialValue: 'inStock',
-      options: {
-        list: [
-          {title: 'In stock', value: 'inStock'},
-          {title: 'Out of stock', value: 'outOfStock'},
-        ],
-        layout: 'radio',
-      },
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: 'isNew',
       title: 'Show "New" badge',
       type: 'boolean',
@@ -259,14 +264,6 @@ export const product = defineType({
       title: 'name',
       subtitle: 'summary',
       media: 'image',
-      availability: 'availability',
-    },
-    prepare({title, subtitle, media, availability}) {
-      return {
-        title,
-        subtitle: availability === 'outOfStock' ? `Out of stock — ${subtitle}` : subtitle,
-        media,
-      }
     },
   },
 })
