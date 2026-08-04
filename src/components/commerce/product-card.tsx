@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { HeatLevel } from "@/components/commerce/heat-level";
+import { HeatBadge } from "@/components/commerce/heat-badge";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { formatPrice } from "@/lib/format";
@@ -25,7 +25,7 @@ export function ProductCard({
   sizes = DEFAULT_SIZES,
   className,
 }: ProductCardProps) {
-  const { image, price, compareAtPrice, heatLevel, inStock, isNew } = product;
+  const { image, price, compareAtPrice, heat, inStock, isNew } = product;
   const isDiscounted = compareAtPrice !== undefined && compareAtPrice > price;
 
   return (
@@ -75,9 +75,7 @@ export function ProductCard({
               {product.name}
             </Link>
           </h3>
-          {heatLevel ? (
-            <HeatLevel level={heatLevel} className="mt-0.5" />
-          ) : null}
+          {heat ? <HeatBadge heat={heat} className="mt-0.5" /> : null}
         </div>
 
         <p className="line-clamp-2 text-sm text-pretty text-muted-foreground">
@@ -92,9 +90,11 @@ export function ProductCard({
               {formatPrice(compareAtPrice)}
             </span>
           ) : null}
-          <span className="ml-auto text-sm text-muted-foreground">
-            {product.size}
-          </span>
+          {product.size ? (
+            <span className="ml-auto text-sm text-muted-foreground">
+              {product.size}
+            </span>
+          ) : null}
         </div>
       </div>
     </Card>

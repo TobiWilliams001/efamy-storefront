@@ -1,12 +1,9 @@
-import type { HeatLevel, Product } from "@/types/product";
+import type { Heat, Product } from "@/types/product";
 
-export const heatBands = [
-  { value: "mild", label: "Mild", levels: [1, 2] },
-  { value: "medium", label: "Medium", levels: [3] },
-  { value: "hot", label: "Hot", levels: [4, 5] },
+export const heatOptions = [
+  { value: "mild", label: "Mild" },
+  { value: "hot", label: "Hot" },
 ] as const;
-
-export type HeatBand = (typeof heatBands)[number]["value"];
 
 export const sortOptions = [
   { value: "featured", label: "Featured" },
@@ -19,12 +16,12 @@ export type SortOption = (typeof sortOptions)[number]["value"];
 
 export type ProductFilters = {
   category?: string;
-  heat?: HeatBand;
+  heat?: Heat;
   sort: SortOption;
 };
 
-function isHeatBand(value: unknown): value is HeatBand {
-  return heatBands.some((band) => band.value === value);
+function isHeat(value: unknown): value is Heat {
+  return value === "mild" || value === "hot";
 }
 
 function isSortOption(value: unknown): value is SortOption {
@@ -43,19 +40,9 @@ export function parseFilters(searchParams: SearchParams): ProductFilters {
 
   return {
     category: first(searchParams.category),
-    heat: isHeatBand(heat) ? heat : undefined,
+    heat: isHeat(heat) ? heat : undefined,
     sort: isSortOption(sort) ? sort : "featured",
   };
-}
-
-function matchesHeat(product: Product, band: HeatBand): boolean {
-  const levels = heatBands.find((entry) => entry.value === band)?.levels;
-  return (
-    product.heatLevel !== undefined &&
-    (levels as readonly HeatLevel[] | undefined)?.includes(
-      product.heatLevel,
-    ) === true
-  );
 }
 
 export function applyFilters(
@@ -66,7 +53,7 @@ export function applyFilters(
     if (filters.category && product.category.slug !== filters.category) {
       return false;
     }
-    if (filters.heat && !matchesHeat(product, filters.heat)) {
+    if (filters.heat && product.heat !== filters.heat) {
       return false;
     }
     return true;
@@ -82,7 +69,6 @@ export function applyFilters(
         a.name.localeCompare(b.name, "en-GB"),
       );
     default:
-      // In-stock first, then the catalogue's own order.
       return [...filtered].sort(
         (a, b) => Number(b.inStock) - Number(a.inStock),
       );

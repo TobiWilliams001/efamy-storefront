@@ -18,7 +18,6 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
     items: [
       { label: "All products", href: routes.shop },
       { label: "Chilli sauces", href: routes.category("chilli-sauces") },
-      { label: "Chilli oils", href: routes.category("chilli-oils") },
       { label: "Seasonings", href: routes.category("seasonings") },
     ],
   },

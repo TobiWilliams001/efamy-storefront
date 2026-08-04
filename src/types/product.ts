@@ -6,8 +6,8 @@ export type ProductImage = {
   blurDataURL?: string;
 };
 
-/** 1 = mild, 5 = very hot. */
-export type HeatLevel = 1 | 2 | 3 | 4 | 5;
+/** Matches the packaging, which is labelled Mild or Hot — nothing finer. */
+export type Heat = "mild" | "hot";
 
 export type ProductCategory = {
   id: string;
@@ -27,9 +27,15 @@ export type Product = {
   /** Minor units (pence). Format with `formatPrice()`. */
   price: number;
   compareAtPrice?: number;
-  /** Net contents as sold, e.g. "250ml". */
+  /** Net contents as printed on the jar, e.g. "250g". */
   size: string;
-  heatLevel?: HeatLevel;
+  heat?: Heat;
+  /** Transcribed from the label. Legally required — never guess these. */
+  ingredients?: string[];
+  /** Allergens to declare, e.g. "Fish", "Wheat (gluten)". */
+  allergens?: string[];
+  /** Claims printed on the packaging, e.g. "Suitable for vegans". */
+  dietary?: string[];
   image: ProductImage;
   images?: ProductImage[];
   category: Pick<ProductCategory, "slug" | "name">;
@@ -46,7 +52,7 @@ export type ProductSummary = Pick<
   | "price"
   | "compareAtPrice"
   | "size"
-  | "heatLevel"
+  | "heat"
   | "image"
   | "category"
   | "inStock"

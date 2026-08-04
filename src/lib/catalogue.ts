@@ -1,27 +1,27 @@
 import {
   bestSellerSlugs,
+  categories,
   featuredSlugs,
-  placeholderCategories,
-  placeholderProducts,
-} from "@/lib/placeholder-data";
+  products,
+} from "@/lib/catalogue-data";
 import type { Product, ProductCategory } from "@/types/product";
 
-// Data access seam. Backed by placeholder data until the CMS lands; the async
-// signatures are what let that swap happen without touching call sites.
+// Data access seam. Backed by the static catalogue until the CMS lands; the
+// async signatures are what let that swap happen without touching call sites.
 
 function bySlugs(slugs: readonly string[], limit: number): Product[] {
   return slugs
-    .map((slug) => placeholderProducts.find((p) => p.slug === slug))
-    .filter((p): p is Product => p !== undefined && p.inStock)
+    .map((slug) => products.find((product) => product.slug === slug))
+    .filter((product): product is Product => product !== undefined)
     .slice(0, limit);
 }
 
 export async function getCategories(): Promise<ProductCategory[]> {
-  return placeholderCategories;
+  return categories;
 }
 
 export async function getProducts(): Promise<Product[]> {
-  return placeholderProducts;
+  return products;
 }
 
 export async function getFeaturedProducts(limit = 4): Promise<Product[]> {
@@ -35,20 +35,20 @@ export async function getBestSellers(limit = 4): Promise<Product[]> {
 export async function getProductBySlug(
   slug: string,
 ): Promise<Product | undefined> {
-  return placeholderProducts.find((product) => product.slug === slug);
+  return products.find((product) => product.slug === slug);
 }
 
 export async function getCategoryBySlug(
   slug: string,
 ): Promise<ProductCategory | undefined> {
-  return placeholderCategories.find((category) => category.slug === slug);
+  return categories.find((category) => category.slug === slug);
 }
 
 export async function getRelatedProducts(
   product: Product,
   limit = 4,
 ): Promise<Product[]> {
-  return placeholderProducts
+  return products
     .filter(
       (candidate) =>
         candidate.id !== product.id &&

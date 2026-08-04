@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { AddToCart } from "@/components/cart/add-to-cart";
-import { HeatLevel } from "@/components/commerce/heat-level";
+import { HeatBadge } from "@/components/commerce/heat-badge";
 import { ProductShowcase } from "@/components/sections/product-showcase";
 import { Section } from "@/components/layout/section";
 import { Separator } from "@/components/ui/separator";
@@ -137,14 +137,22 @@ export default async function ProductPage({
                   {formatPrice(product.compareAtPrice!)}
                 </p>
               ) : null}
-              <p className="text-sm text-muted-foreground">{product.size}</p>
+              {product.size ? (
+                <p className="text-sm text-muted-foreground">{product.size}</p>
+              ) : null}
             </div>
 
-            {product.heatLevel ? (
-              <div className="mt-5">
-                <HeatLevel level={product.heatLevel} showLabel />
-              </div>
-            ) : null}
+            <div className="mt-5 flex flex-wrap items-center gap-2">
+              {product.heat ? <HeatBadge heat={product.heat} /> : null}
+              {product.dietary?.map((claim) => (
+                <span
+                  key={claim}
+                  className="inline-flex items-center rounded-full bg-accent px-2 py-0.5 text-xs font-medium text-accent-foreground"
+                >
+                  {claim}
+                </span>
+              ))}
+            </div>
 
             <p className="mt-6 text-pretty text-muted-foreground">
               {product.description}
@@ -161,6 +169,31 @@ export default async function ProductPage({
               </Link>
               .
             </p>
+
+            {product.ingredients || product.allergens ? (
+              <div className="mt-10 space-y-5 border-t pt-8 text-sm">
+                {product.ingredients ? (
+                  <div>
+                    <h2 className="font-heading font-medium">Ingredients</h2>
+                    <p className="mt-2 text-muted-foreground">
+                      {product.ingredients.join(", ")}.
+                    </p>
+                  </div>
+                ) : null}
+                {product.allergens ? (
+                  <div>
+                    <h2 className="font-heading font-medium">Allergens</h2>
+                    <p className="mt-2 text-muted-foreground">
+                      Contains {product.allergens.join(", ")}.
+                    </p>
+                  </div>
+                ) : null}
+                <p className="text-muted-foreground">
+                  Always check the label on the product you receive before
+                  eating.
+                </p>
+              </div>
+            ) : null}
           </div>
         </div>
       </Section>

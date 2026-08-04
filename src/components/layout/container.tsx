@@ -4,7 +4,7 @@ const containerWidths = {
   prose: "max-w-2xl",
   narrow: "max-w-3xl",
   default: "max-w-6xl",
-  wide: "max-w-[90rem]",
+  wide: "max-w-360",
 } as const;
 
 export type ContainerWidth = keyof typeof containerWidths;

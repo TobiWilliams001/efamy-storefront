@@ -12,8 +12,8 @@ export function CallToAction() {
           Not sure where to start?
         </h2>
         <p className="mx-auto mt-4 max-w-lg text-pretty">
-          Begin with the shito — it is the jar most people come back for. Or ask
-          us and we will point you to the right heat.
+          Every sauce comes in mild or hot. Tell us how you cook and we will
+          point you to the right jar.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Button asChild size="xl">

@@ -5,27 +5,27 @@ import { Section, SectionHeader } from "@/components/layout/section";
 const reasons = [
   {
     icon: Flame,
-    title: "Small batch, slow cooked",
+    title: "Mild or hot, your choice",
     description:
-      "Every jar is cooked in small runs so the flavour develops properly. Nothing is rushed.",
+      "Our chilli sauces come in two strengths, so everyone at the table gets the heat they want.",
   },
   {
     icon: Leaf,
-    title: "Real ingredients",
+    title: "No artificial preservatives",
     description:
-      "Scotch bonnet, ginger, dried shrimp and whole spices. No fillers, no artificial colour.",
+      "Straightforward ingredients — onions, chillies, garlic and spice. Nothing artificial added.",
   },
   {
     icon: Utensils,
-    title: "Recipes from home",
+    title: "Made for real cooking",
     description:
-      "Built on Ghanaian family recipes, adjusted only enough to make them repeatable.",
+      "Sauces, seasoning mixes and coatings built for everyday meals, not just the cupboard.",
   },
   {
     icon: Truck,
-    title: "UK made and shipped",
+    title: "Made in the UK",
     description:
-      "Produced in the UK and sent out from here, so orders arrive quickly and fresh.",
+      "Produced here and shipped from here, so your order arrives quickly.",
   },
 ];
 

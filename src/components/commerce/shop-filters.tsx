@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SortSelect } from "@/components/commerce/sort-select";
 import {
   buildQuery,
-  heatBands,
+  heatOptions,
   type ProductFilters,
 } from "@/lib/product-filters";
 import { cn } from "@/lib/utils";
@@ -75,7 +75,7 @@ export function ShopFilters({
           >
             Any
           </FilterChip>
-          {heatBands.map((band) => (
+          {heatOptions.map((band) => (
             <FilterChip
               key={band.value}
               href={buildQuery(filters, { heat: band.value })}

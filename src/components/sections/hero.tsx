@@ -7,10 +7,10 @@ import { routes } from "@/lib/routes";
 
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-[32rem] items-end overflow-hidden lg:min-h-[40rem]">
+    <section className="relative isolate flex min-h-128 items-end overflow-hidden lg:min-h-160">
       <Image
-        src="/images/placeholder/hero.png"
-        alt="Efamy chilli sauces and seasonings arranged on a warm wooden surface"
+        src="/images/lifestyle/hero-hot-sauce-trio.jpg"
+        alt="Efamy pork, beef and chicken chilli sauces on a wooden board with fresh chillies and garlic"
         fill
         sizes="100vw"
         preload
@@ -27,11 +27,11 @@ export function Hero() {
             Made in the UK
           </p>
           <h1 className="mt-4 text-4xl text-balance sm:text-5xl lg:text-6xl">
-            Authentic Ghanaian heat, made in small batches
+            Authentic Ghanaian chilli sauces
           </h1>
           <p className="mt-6 max-w-xl text-lg text-pretty text-white/85">
-            Slow-cooked chilli sauces, infused oils and hand-ground seasonings —
-            built on scotch bonnet, dried shrimp and West African spice.
+            Beans, beef, chicken, fish and pork chilli sauces in mild and hot,
+            alongside our seasoning mixes. No artificial preservatives.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Button asChild size="xl">

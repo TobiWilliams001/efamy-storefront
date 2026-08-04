@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PackageOpen, ShoppingBag } from "lucide-react";
 
 import { CategoryCard } from "@/components/commerce/category-card";
-import { HeatLevel } from "@/components/commerce/heat-level";
+import { HeatBadge } from "@/components/commerce/heat-badge";
 import { ProductCardSkeleton } from "@/components/commerce/product-card-skeleton";
 import { ProductGrid } from "@/components/commerce/product-grid";
 import { EmptyState } from "@/components/common/empty-state";
@@ -13,11 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  placeholderCategories,
-  placeholderProducts,
-} from "@/lib/placeholder-data";
-import type { HeatLevel as HeatLevelValue } from "@/types/product";
+import { categories, products } from "@/lib/catalogue-data";
 
 export const metadata: Metadata = {
   title: "Design system",
@@ -112,19 +108,16 @@ export default function DesignSystemPage() {
       </Section>
 
       <Section spacing="sm">
-        <SectionHeader as="h2" title="Badges & heat level" />
+        <SectionHeader as="h2" title="Badges & heat" />
         <div className="flex flex-wrap items-center gap-3">
           <Badge>New</Badge>
           <Badge variant="secondary">Out of stock</Badge>
           <Badge variant="outline">Offer</Badge>
         </div>
         <Separator className="my-6" />
-        <div className="space-y-3">
-          {([1, 2, 3, 4, 5] as HeatLevelValue[]).map((level) => (
-            <div key={level}>
-              <HeatLevel level={level} showLabel />
-            </div>
-          ))}
+        <div className="flex flex-wrap items-center gap-3">
+          <HeatBadge heat="mild" />
+          <HeatBadge heat="hot" />
         </div>
       </Section>
 
@@ -167,20 +160,19 @@ export default function DesignSystemPage() {
         <SectionHeader
           as="h2"
           title="Product cards"
-          description="Placeholder imagery — real photography replaces this."
           action={
             <Button variant="outline" size="lg">
               View all
             </Button>
           }
         />
-        <ProductGrid products={placeholderProducts} eagerCount={2} />
+        <ProductGrid products={products} eagerCount={2} />
       </Section>
 
       <Section surface="muted" spacing="sm">
         <SectionHeader as="h2" title="Category cards" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-          {placeholderCategories.map((item) => (
+          {categories.map((item) => (
             <CategoryCard key={item.id} category={item} />
           ))}
         </div>
