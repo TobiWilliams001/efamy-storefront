@@ -14,7 +14,7 @@ export function Logo({ className }: { className?: string }) {
       )}
     >
       {siteConfig.name}
-      <span className="text-primary">.</span>
+      <span className="text-brand">.</span>
       <span className="sr-only"> — {siteConfig.tagline}</span>
     </Link>
   );

@@ -31,7 +31,7 @@ export function ProductCard({
   return (
     <Card
       className={cn(
-        "group relative gap-0 py-0 transition-shadow duration-200 focus-within:ring-2 focus-within:ring-ring hover:shadow-lg hover:shadow-foreground/5",
+        "group relative gap-0 py-0 transition-shadow duration-200 focus-within:ring-2 focus-within:ring-ring hover:shadow-card-hover",
         className,
       )}
     >

@@ -1,4 +1,6 @@
-import { env } from "@/lib/env";
+// Read as a literal rather than via lib/env so this stays importable from
+// Client Components without dragging zod into the browser bundle.
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const siteConfig = {
   name: "Efamy",
@@ -6,7 +8,7 @@ export const siteConfig = {
   tagline: "Authentic Ghanaian chilli sauces & seasonings",
   description:
     "Efamy Food Products makes authentic Ghanaian chilli sauces and seasoning mixes in the UK. Beans, beef, chicken, fish and pork sauces in mild and hot.",
-  url: env.NEXT_PUBLIC_SITE_URL,
+  url: siteUrl,
   locale: "en_GB",
   currency: "GBP",
   contact: {

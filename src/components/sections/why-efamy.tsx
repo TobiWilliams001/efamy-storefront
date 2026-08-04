@@ -42,7 +42,7 @@ export function WhyEfamy() {
           <li key={title}>
             <Icon
               aria-hidden="true"
-              className="size-6 text-primary"
+              className="size-6 text-gold-ink"
               strokeWidth={1.5}
             />
             <h3 className="mt-4 font-heading text-lg font-medium">{title}</h3>

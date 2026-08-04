@@ -24,7 +24,7 @@ export function TrustBar() {
             >
               <Icon
                 aria-hidden="true"
-                className="size-4 shrink-0 text-primary"
+                className="size-4 shrink-0 text-gold-ink"
                 strokeWidth={1.75}
               />
               {label}

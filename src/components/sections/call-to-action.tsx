@@ -6,7 +6,7 @@ import { routes } from "@/lib/routes";
 
 export function CallToAction() {
   return (
-    <Section surface="accent" spacing="sm" width="narrow">
+    <Section surface="clay" spacing="sm" width="narrow">
       <div className="text-center">
         <h2 className="text-3xl text-balance sm:text-4xl">
           Not sure where to start?

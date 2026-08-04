@@ -20,7 +20,7 @@ export function HeatBadge({
       className={cn(
         "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium",
         heat === "hot"
-          ? "bg-primary/10 text-primary"
+          ? "bg-brand/10 text-brand"
           : "bg-secondary text-secondary-foreground",
         className,
       )}
