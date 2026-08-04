@@ -2,7 +2,7 @@ import { siteConfig } from "@/config/site";
 import { absoluteUrl } from "@/lib/format";
 import { routes } from "@/lib/routes";
 import type { Faq } from "@/lib/faqs";
-import type { Product } from "@/types/product";
+import { inStock, type Product } from "@/types/product";
 
 /**
  * `JSON.stringify` does not escape characters that can break out of a script
@@ -58,13 +58,18 @@ export function productSchema(product: Product) {
     image: absoluteUrl(product.image.url),
     sku: product.id,
     brand: { "@type": "Brand", name: siteConfig.name },
-    ...(product.size ? { weight: product.size } : {}),
     offers: {
-      "@type": "Offer",
+      "@type": "AggregateOffer",
       url: absoluteUrl(routes.product(product.slug)),
       priceCurrency: siteConfig.currency,
-      price: (product.price / 100).toFixed(2),
-      availability: product.inStock
+      lowPrice: (
+        Math.min(...product.variants.map((v) => v.price)) / 100
+      ).toFixed(2),
+      highPrice: (
+        Math.max(...product.variants.map((v) => v.price)) / 100
+      ).toFixed(2),
+      offerCount: product.variants.length,
+      availability: inStock(product)
         ? "https://schema.org/InStock"
         : "https://schema.org/OutOfStock",
       seller: { "@type": "Organization", name: siteConfig.legalName },

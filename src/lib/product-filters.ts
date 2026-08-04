@@ -1,4 +1,4 @@
-import type { Heat, Product } from "@/types/product";
+import { inStock, lowestPrice, type Heat, type Product } from "@/types/product";
 
 export const heatOptions = [
   { value: "mild", label: "Mild" },
@@ -61,16 +61,16 @@ export function applyFilters(
 
   switch (filters.sort) {
     case "price-asc":
-      return [...filtered].sort((a, b) => a.price - b.price);
+      return [...filtered].sort((a, b) => lowestPrice(a) - lowestPrice(b));
     case "price-desc":
-      return [...filtered].sort((a, b) => b.price - a.price);
+      return [...filtered].sort((a, b) => lowestPrice(b) - lowestPrice(a));
     case "name":
       return [...filtered].sort((a, b) =>
         a.name.localeCompare(b.name, "en-GB"),
       );
     default:
       return [...filtered].sort(
-        (a, b) => Number(b.inStock) - Number(a.inStock),
+        (a, b) => Number(inStock(b)) - Number(inStock(a)),
       );
   }
 }
