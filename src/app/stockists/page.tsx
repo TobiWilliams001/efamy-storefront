@@ -9,8 +9,8 @@ import { routes } from "@/lib/routes";
 import { stockists } from "@/lib/stockists";
 
 export const metadata: Metadata = {
-  title: "Stockists",
-  description: `Find ${siteConfig.name} chilli sauces and seasonings in store, or enquire about stocking us.`,
+  title: "Stockists & Wholesale",
+  description: `Buy ${siteConfig.name} chilli sauces and seasonings online, or enquire about stocking us in your shop.`,
   alternates: { canonical: routes.stockists },
 };
 
@@ -41,9 +41,9 @@ export default function StockistsPage() {
       <Section>
         <SectionHeader
           as="h1"
-          eyebrow="Stockists"
-          title="Where to buy"
-          description="Order the full range online, or find Efamy on the shelf near you."
+          eyebrow="Stockists & wholesale"
+          title="Where to buy Efamy"
+          description="Right now the surest way to get the full range is to order direct. We are also building our list of retail stockists."
         />
 
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
@@ -76,7 +76,8 @@ export default function StockistsPage() {
             {stockists.length === 0 ? (
               <>
                 <p className="mt-3 text-pretty text-muted-foreground">
-                  We are confirming which shops to list here. If you have seen
+                  We are confirming which shops to list here, so this page is
+                  the place for wholesale enquiries for now. If you have seen
                   Efamy on a shelf near you, tell us and we will add them.
                 </p>
                 <div className="mt-8">

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Clock, Mail, MessageCircle, Phone, Store } from "lucide-react";
+import { Check, Clock, Mail, MessageCircle, Phone, Store } from "lucide-react";
 
 import { ContactForm } from "@/app/contact/contact-form";
 import { Section, SectionHeader } from "@/components/layout/section";
@@ -22,15 +22,30 @@ export default function ContactPage() {
         as="h1"
         eyebrow="Contact"
         title="Get in touch"
-        description="Questions about an order, our products, or stocking Efamy? Send us a message and we will come back to you."
+        description="Questions about an order, our products, or stocking Efamy? Send us a message and a real person will come back to you."
       />
 
       <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:gap-12">
         <div className="rounded-lg bg-card p-6 shadow-card sm:p-10">
           <h2 className="font-heading text-xl">Send us a message</h2>
-          <p className="mt-2 mb-8 text-sm text-muted-foreground">
+          <p className="mt-2 text-sm text-muted-foreground">
             All fields are required.
           </p>
+          <ul className="mt-5 mb-8 space-y-2 text-sm text-muted-foreground">
+            {[
+              "Order help: problems, changes or anything that arrived wrong.",
+              "Product questions: heat levels, ingredients and allergens.",
+              "Wholesale: trade pricing and case quantities for retailers.",
+            ].map((line) => (
+              <li key={line} className="flex items-start gap-2">
+                <Check
+                  aria-hidden="true"
+                  className="mt-0.5 size-4 shrink-0 text-sage-ink"
+                />
+                {line}
+              </li>
+            ))}
+          </ul>
           <ContactForm />
         </div>
 
@@ -85,7 +100,7 @@ export default function ContactPage() {
                   aria-hidden="true"
                   className="mt-0.5 size-4 shrink-0 text-gold-ink"
                 />
-                We aim to reply within two working days.
+                We reply within two working days, Monday to Friday.
               </li>
             </ul>
           </div>
