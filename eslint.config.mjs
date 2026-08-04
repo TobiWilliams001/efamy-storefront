@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The Studio is a separate app with its own lint config.
+    "studio/**",
+    ".agents/**",
   ]),
 ]);
 
