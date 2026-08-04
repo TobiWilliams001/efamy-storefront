@@ -1,15 +1,24 @@
-import { createClient } from "next-sanity";
+import { createClient, type SanityClient } from "next-sanity";
 
-const sanityConfig = {
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "",
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
-  apiVersion: "2026-05-15",
-};
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "";
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production";
 
-// Falsy when unconfigured, which lets the catalogue fall back to static data.
-export const isSanityConfigured = Boolean(sanityConfig.projectId);
+export const isSanityConfigured = Boolean(projectId);
 
-export const client = createClient({
-  ...sanityConfig,
-  useCdn: false,
-});
+let cached: SanityClient | null = null;
+
+/**
+ * Null when Sanity is not configured, which lets the catalogue fall back to
+ * static data. Built lazily because createClient throws on an empty projectId,
+ * and at module scope that would take the whole build down.
+ */
+export function getSanityClient(): SanityClient | null {
+  if (!isSanityConfigured) return null;
+  cached ??= createClient({
+    projectId,
+    dataset,
+    apiVersion: "2026-05-15",
+    useCdn: false,
+  });
+  return cached;
+}

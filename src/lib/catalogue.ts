@@ -4,7 +4,7 @@ import {
   featuredSlugs,
   products as staticProducts,
 } from "@/lib/catalogue-data";
-import { client, isSanityConfigured } from "@/sanity/client";
+import { getSanityClient } from "@/sanity/client";
 import { mapCategory, mapProduct } from "@/sanity/map";
 import {
   BEST_SELLERS_QUERY,
@@ -24,7 +24,8 @@ async function fetchFromSanity<T>(
   query: string,
   params: Record<string, unknown> = {},
 ): Promise<T | null> {
-  if (!isSanityConfigured) return null;
+  const client = getSanityClient();
+  if (!client) return null;
   try {
     return await client.fetch<T>(query, params, CACHE);
   } catch (error) {
