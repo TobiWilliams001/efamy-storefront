@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 export function Logo({
   className,
   variant = "dark",
-  imageClassName = "h-10 w-auto lg:h-11",
+  imageClassName = "h-12 w-auto lg:h-14",
 }: {
   className?: string;
   /** "dark" for ink on light, "light" for the maroon footer. */

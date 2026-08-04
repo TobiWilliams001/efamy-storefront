@@ -30,6 +30,7 @@
 
   /* Brand accents. Used sparingly, because the products carry the colour. */
   --color-brand: var(--brand);
+  --color-brand-bright: var(--brand-bright);
   --color-brand-hover: var(--brand-hover);
   --color-gold: var(--gold);
   --color-gold-ink: var(--gold-ink);
@@ -85,18 +86,23 @@
   --accent: #f3f0ea;
   --accent-foreground: #302d2a;
 
-  --brand: #b52a2a;
-  --brand-hover: #962020;
-  --gold: #c89b2f;
+  /*
+   * Sampled from the logo: the swirl is #fc0d13 scarlet and #cb9954 tan.
+   * Both are too light to carry text — 3.8:1 and 2.4:1 on ivory — so the
+   * bright values stay decorative and each has an accessible sibling.
+   */
+  --brand-bright: #fc0d13;
+  --brand: #d40a10;
+  --brand-hover: #b00810;
+  --gold: #cb9954;
   --sage: #758c5b;
-  --clay: #d9c4aa;
+  --clay: #e3ceb0;
 
   /*
-   * Brand gold and sage are fills. Against the ivory background they land at
-   * 2.4:1 and 3.5:1, so icons and text use these darkened variants instead.
-   * Both clear 4.5:1.
+   * Fills, not text. Against ivory the tan lands at 2.4:1 and sage at 3.5:1,
+   * so icons and labels use these darkened siblings, which clear 4.5:1.
    */
-  --gold-ink: #8f6a1c;
+  --gold-ink: #96682c;
 
   /* Deep maroon, used only for the footer and feature bands. */
   --ink: #4a1414;
@@ -104,11 +110,11 @@
   --ink-muted: #d8bfae;
   --sage-ink: #66794e;
 
-  --destructive: #b52a2a;
+  --destructive: #d40a10;
 
   --border: #e5e0d8;
   --input: #d5cec3;
-  --ring: #b52a2a;
+  --ring: #d40a10;
 
   --radius: 12px;
 }
