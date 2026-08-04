@@ -1,54 +1,125 @@
 import {
   bestSellerSlugs,
-  categories,
+  categories as staticCategories,
   featuredSlugs,
-  products,
+  products as staticProducts,
 } from "@/lib/catalogue-data";
+import { client, isSanityConfigured } from "@/sanity/client";
+import { mapCategory, mapProduct } from "@/sanity/map";
+import {
+  BEST_SELLERS_QUERY,
+  CATEGORIES_QUERY,
+  CATEGORY_BY_SLUG_QUERY,
+  FEATURED_PRODUCTS_QUERY,
+  PRODUCT_BY_SLUG_QUERY,
+  PRODUCTS_QUERY,
+} from "@/sanity/queries";
 import type { Product, ProductCategory } from "@/types/product";
 
-// Data access seam. Backed by the static catalogue until the CMS lands; the
-// async signatures are what let that swap happen without touching call sites.
+/**
+ * The single seam between the site and its content source. Reads from Sanity
+ * when it is configured and falls back to the static catalogue otherwise, so
+ * the site still builds and renders before the CMS is populated.
+ */
+
+const CACHE = { next: { revalidate: 60, tags: ["catalogue"] } };
+
+async function fetchFromSanity<T>(
+  query: string,
+  params: Record<string, unknown> = {},
+): Promise<T | null> {
+  if (!isSanityConfigured) return null;
+  try {
+    return await client.fetch<T>(query, params, CACHE);
+  } catch (error) {
+    // A CMS outage should degrade to the static catalogue, not take the shop
+    // down. See docs/payments.md: external failures degrade, never destroy.
+    console.error("Sanity fetch failed, falling back to static data", error);
+    return null;
+  }
+}
+
+function mapProducts(raw: Record<string, unknown>[] | null): Product[] | null {
+  if (!raw) return null;
+  const mapped = raw
+    .map(mapProduct)
+    .filter((entry): entry is Product => entry !== null);
+  return mapped.length > 0 ? mapped : null;
+}
 
 function bySlugs(slugs: readonly string[], limit: number): Product[] {
   return slugs
-    .map((slug) => products.find((product) => product.slug === slug))
+    .map((slug) => staticProducts.find((product) => product.slug === slug))
     .filter((product): product is Product => product !== undefined)
     .slice(0, limit);
 }
 
 export async function getCategories(): Promise<ProductCategory[]> {
-  return categories;
+  const raw =
+    await fetchFromSanity<Record<string, unknown>[]>(CATEGORIES_QUERY);
+  const mapped = raw
+    ?.map(mapCategory)
+    .filter((entry): entry is ProductCategory => entry !== null);
+  return mapped?.length ? mapped : staticCategories;
 }
 
 export async function getProducts(): Promise<Product[]> {
-  return products;
+  const raw = await fetchFromSanity<Record<string, unknown>[]>(PRODUCTS_QUERY);
+  return mapProducts(raw) ?? staticProducts;
 }
 
 export async function getFeaturedProducts(limit = 4): Promise<Product[]> {
-  return bySlugs(featuredSlugs, limit);
+  const raw = await fetchFromSanity<Record<string, unknown>[]>(
+    FEATURED_PRODUCTS_QUERY,
+    { limit },
+  );
+  return mapProducts(raw) ?? bySlugs(featuredSlugs, limit);
 }
 
 export async function getBestSellers(limit = 4): Promise<Product[]> {
-  return bySlugs(bestSellerSlugs, limit);
+  const raw = await fetchFromSanity<Record<string, unknown>[]>(
+    BEST_SELLERS_QUERY,
+    { limit },
+  );
+  return mapProducts(raw) ?? bySlugs(bestSellerSlugs, limit);
 }
 
 export async function getProductBySlug(
   slug: string,
 ): Promise<Product | undefined> {
-  return products.find((product) => product.slug === slug);
+  const raw = await fetchFromSanity<Record<string, unknown> | null>(
+    PRODUCT_BY_SLUG_QUERY,
+    { slug },
+  );
+  const mapped = raw ? mapProduct(raw) : null;
+  return (
+    mapped ??
+    staticProducts.find((product) => product.slug === slug) ??
+    undefined
+  );
 }
 
 export async function getCategoryBySlug(
   slug: string,
 ): Promise<ProductCategory | undefined> {
-  return categories.find((category) => category.slug === slug);
+  const raw = await fetchFromSanity<Record<string, unknown> | null>(
+    CATEGORY_BY_SLUG_QUERY,
+    { slug },
+  );
+  const mapped = raw ? mapCategory(raw) : null;
+  return (
+    mapped ??
+    staticCategories.find((category) => category.slug === slug) ??
+    undefined
+  );
 }
 
 export async function getRelatedProducts(
   product: Product,
   limit = 4,
 ): Promise<Product[]> {
-  return products
+  const all = await getProducts();
+  return all
     .filter(
       (candidate) =>
         candidate.id !== product.id &&

@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     // 2048/3840 breakpoints only cost encode time and cache storage.
     deviceSizes: [640, 750, 828, 1080, 1200, 1600],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
   },
   experimental: {
     // `radix-ui` is a barrel that re-exports every primitive; without this the
@@ -16,7 +17,6 @@ const nextConfig: NextConfig = {
     // default, radix-ui is not.
     optimizePackageImports: ["radix-ui"],
   },
-  // remotePatterns will be added here once the CMS is chosen.
 };
 
 export default nextConfig;
