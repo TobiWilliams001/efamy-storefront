@@ -9,12 +9,14 @@ import {
   useState,
 } from "react";
 
-import type { Product } from "@/types/product";
+import type { Product, ProductVariant } from "@/types/product";
 
-const STORAGE_KEY = "efamy.cart.v1";
+const STORAGE_KEY = "efamy.cart.v2";
 const MAX_QUANTITY = 99;
 
 export type CartLine = {
+  /** productId and size together, because each size is bought separately. */
+  id: string;
   productId: string;
   slug: string;
   name: string;
@@ -26,12 +28,21 @@ export type CartLine = {
   quantity: number;
 };
 
+function lineId(productId: string, size: string): string {
+  return `${productId}:${size}`;
+}
+
 type CartState = { lines: CartLine[]; ready: boolean };
 
 type CartAction =
-  | { type: "add"; product: Product; quantity: number }
-  | { type: "setQuantity"; productId: string; quantity: number }
-  | { type: "remove"; productId: string }
+  | {
+      type: "add";
+      product: Product;
+      variant: ProductVariant;
+      quantity: number;
+    }
+  | { type: "setQuantity"; id: string; quantity: number }
+  | { type: "remove"; id: string }
   | { type: "clear" }
   | { type: "hydrate"; lines: CartLine[] };
 
@@ -45,15 +56,14 @@ function reducer(state: CartState, action: CartAction): CartState {
       return { lines: action.lines, ready: true };
 
     case "add": {
-      const existing = state.lines.find(
-        (line) => line.productId === action.product.id,
-      );
+      const id = lineId(action.product.id, action.variant.size);
+      const existing = state.lines.find((line) => line.id === id);
 
       if (existing) {
         return {
           ...state,
           lines: state.lines.map((line) =>
-            line.productId === action.product.id
+            line.id === id
               ? { ...line, quantity: clamp(line.quantity + action.quantity) }
               : line,
           ),
@@ -65,11 +75,12 @@ function reducer(state: CartState, action: CartAction): CartState {
         lines: [
           ...state.lines,
           {
+            id,
             productId: action.product.id,
             slug: action.product.slug,
             name: action.product.name,
-            size: action.product.size,
-            price: action.product.price,
+            size: action.variant.size,
+            price: action.variant.price,
             imageUrl: action.product.image.url,
             imageAlt: action.product.image.alt,
             quantity: clamp(action.quantity),
@@ -82,7 +93,7 @@ function reducer(state: CartState, action: CartAction): CartState {
       return {
         ...state,
         lines: state.lines.map((line) =>
-          line.productId === action.productId
+          line.id === action.id
             ? { ...line, quantity: clamp(action.quantity) }
             : line,
         ),
@@ -91,9 +102,7 @@ function reducer(state: CartState, action: CartAction): CartState {
     case "remove":
       return {
         ...state,
-        lines: state.lines.filter(
-          (line) => line.productId !== action.productId,
-        ),
+        lines: state.lines.filter((line) => line.id !== action.id),
       };
 
     case "clear":
@@ -107,11 +116,11 @@ type CartContextValue = {
   subtotal: number;
   /** False until localStorage has been read, so the UI can avoid a hydration mismatch. */
   ready: boolean;
-  add: (product: Product, quantity?: number) => void;
+  add: (product: Product, variant: ProductVariant, quantity?: number) => void;
   isOpen: boolean;
   setOpen: (open: boolean) => void;
-  setQuantity: (productId: string, quantity: number) => void;
-  remove: (productId: string) => void;
+  setQuantity: (id: string, quantity: number) => void;
+  remove: (id: string) => void;
   clear: () => void;
 };
 
@@ -127,6 +136,7 @@ function readStorage(): CartLine[] {
       (line): line is CartLine =>
         typeof line === "object" &&
         line !== null &&
+        typeof (line as CartLine).id === "string" &&
         typeof (line as CartLine).productId === "string" &&
         typeof (line as CartLine).quantity === "number",
     );
@@ -164,13 +174,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       ready: state.ready,
       isOpen,
       setOpen,
-      add: (product, quantity = 1) => {
-        dispatch({ type: "add", product, quantity });
+      add: (product, variant, quantity = 1) => {
+        dispatch({ type: "add", product, variant, quantity });
         setOpen(true);
       },
-      setQuantity: (productId, quantity) =>
-        dispatch({ type: "setQuantity", productId, quantity }),
-      remove: (productId) => dispatch({ type: "remove", productId }),
+      setQuantity: (id, quantity) =>
+        dispatch({ type: "setQuantity", id, quantity }),
+      remove: (id) => dispatch({ type: "remove", id }),
       clear: () => dispatch({ type: "clear" }),
     };
   }, [state.lines, state.ready, isOpen]);

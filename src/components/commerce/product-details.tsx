@@ -37,11 +37,6 @@ export function ProductDetails({ product }: { product: Product }) {
                 >
                   {item.name}
                 </Link>
-                {item.size ? (
-                  <span data-numeric className="text-sm text-muted-foreground">
-                    {item.size}
-                  </span>
-                ) : null}
               </li>
             ))}
           </ul>

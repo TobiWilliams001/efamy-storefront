@@ -7,7 +7,11 @@ import { Card } from "@/components/ui/card";
 import { formatPrice } from "@/lib/format";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
-import type { ProductSummary } from "@/types/product";
+import {
+  inStock as anyInStock,
+  lowestPrice,
+  type ProductSummary,
+} from "@/types/product";
 
 const DEFAULT_SIZES =
   "(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw";
@@ -25,9 +29,13 @@ export function ProductCard({
   sizes = DEFAULT_SIZES,
   className,
 }: ProductCardProps) {
-  const { image, price, compareAtPrice, heat, inStock, isNew, bundleItems } =
-    product;
-  const isDiscounted = compareAtPrice !== undefined && compareAtPrice > price;
+  const { image, heat, isNew, bundleItems, variants } = product;
+  const inStock = anyInStock(product);
+  const price = lowestPrice(product);
+  const cheapest = variants.find((variant) => variant.price === price);
+  const isDiscounted =
+    cheapest?.compareAtPrice !== undefined && cheapest.compareAtPrice > price;
+  const hasSizeChoice = variants.length > 1;
 
   return (
     <Card
@@ -94,7 +102,7 @@ export function ProductCard({
 
         <div className="mt-5 flex items-baseline gap-2 border-t pt-4">
           <span data-numeric className="font-medium text-brand">
-            {formatPrice(price)}
+            {hasSizeChoice ? `from ${formatPrice(price)}` : formatPrice(price)}
           </span>
           {isDiscounted ? (
             <span
@@ -102,17 +110,12 @@ export function ProductCard({
               className="text-sm text-muted-foreground line-through"
             >
               <span className="sr-only">Was </span>
-              {formatPrice(compareAtPrice)}
+              {formatPrice(cheapest!.compareAtPrice!)}
             </span>
           ) : null}
-          {product.size ? (
-            <span
-              data-numeric
-              className="ml-auto text-xs tracking-wide text-muted-foreground uppercase"
-            >
-              {product.size}
-            </span>
-          ) : null}
+          <span data-numeric className="ml-auto text-xs text-muted-foreground">
+            {hasSizeChoice ? `${variants.length} sizes` : variants[0].size}
+          </span>
         </div>
       </div>
     </Card>

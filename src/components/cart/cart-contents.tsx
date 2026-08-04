@@ -38,7 +38,7 @@ export function CartContents() {
     <div className="grid gap-12 lg:grid-cols-[1fr_20rem]">
       <ul className="divide-y border-y">
         {lines.map((line) => (
-          <li key={line.productId} className="flex gap-4 py-5">
+          <li key={line.id} className="flex gap-4 py-5">
             <Link
               href={routes.product(line.slug)}
               className="relative aspect-square w-20 shrink-0 overflow-hidden rounded-lg bg-white"
@@ -63,7 +63,9 @@ export function CartContents() {
                       {line.name}
                     </Link>
                   </h2>
-                  <p className="text-sm text-muted-foreground">{line.size}</p>
+                  <p data-numeric className="text-sm text-muted-foreground">
+                    {line.size}
+                  </p>
                 </div>
                 <p className="font-medium">
                   {formatPrice(line.price * line.quantity)}
@@ -75,9 +77,7 @@ export function CartContents() {
                   <Button
                     variant="ghost"
                     size="icon-sm"
-                    onClick={() =>
-                      setQuantity(line.productId, line.quantity - 1)
-                    }
+                    onClick={() => setQuantity(line.id, line.quantity - 1)}
                     disabled={line.quantity <= 1}
                   >
                     <Minus />
@@ -91,9 +91,7 @@ export function CartContents() {
                   <Button
                     variant="ghost"
                     size="icon-sm"
-                    onClick={() =>
-                      setQuantity(line.productId, line.quantity + 1)
-                    }
+                    onClick={() => setQuantity(line.id, line.quantity + 1)}
                     disabled={line.quantity >= 99}
                   >
                     <Plus />
@@ -106,7 +104,7 @@ export function CartContents() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => remove(line.productId)}
+                  onClick={() => remove(line.id)}
                   className="text-muted-foreground"
                 >
                   <Trash2 />

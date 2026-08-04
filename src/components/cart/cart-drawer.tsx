@@ -29,7 +29,7 @@ export function CartDrawer() {
         <div className="flex-1 overflow-y-auto px-6">
           <ul className="divide-y">
             {lines.map((line) => (
-              <li key={line.productId} className="flex gap-4 py-4">
+              <li key={line.id} className="flex gap-4 py-4">
                 <div className="relative size-16 shrink-0 overflow-hidden rounded-md bg-white ring-1 ring-neutral-200">
                   <Image
                     src={line.imageUrl}

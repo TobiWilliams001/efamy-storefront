@@ -16,6 +16,7 @@ import {
   getRelatedProducts,
 } from "@/lib/catalogue";
 import { formatPrice } from "@/lib/format";
+import { lowestPrice } from "@/types/product";
 import {
   breadcrumbSchema,
   productSchema,
@@ -62,9 +63,6 @@ export default async function ProductPage({
   }
 
   const related = await getRelatedProducts(product);
-  const isDiscounted =
-    product.compareAtPrice !== undefined &&
-    product.compareAtPrice > product.price;
 
   const trail = [
     { name: "Shop", path: routes.shop },
@@ -124,27 +122,17 @@ export default async function ProductPage({
               {product.name}
             </h1>
 
-            <div className="mt-5 flex flex-wrap items-center gap-4">
+            <div className="mt-5 flex flex-wrap items-baseline gap-3">
               <p data-numeric className="text-2xl font-medium text-brand">
-                {formatPrice(product.price)}
+                {product.variants.length > 1
+                  ? `from ${formatPrice(lowestPrice(product))}`
+                  : formatPrice(product.variants[0].price)}
               </p>
-              {isDiscounted ? (
-                <p
-                  data-numeric
-                  className="text-lg text-muted-foreground line-through"
-                >
-                  <span className="sr-only">Was </span>
-                  {formatPrice(product.compareAtPrice!)}
-                </p>
-              ) : null}
-              {product.size ? (
-                <p
-                  data-numeric
-                  className="text-xs tracking-wide text-muted-foreground uppercase"
-                >
-                  {product.size}
-                </p>
-              ) : null}
+              <p className="text-sm text-muted-foreground">
+                {product.variants.length > 1
+                  ? `${product.variants.length} sizes available`
+                  : product.variants[0].size}
+              </p>
             </div>
 
             <div className="mt-5 flex flex-wrap items-center gap-2">
