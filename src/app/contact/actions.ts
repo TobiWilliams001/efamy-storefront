@@ -20,7 +20,7 @@ export async function submitContact(
   }
 
   if (parsed.data.website) {
-    // Honeypot filled — accept silently so bots learn nothing.
+    // Honeypot filled, so accept silently and let bots learn nothing.
     return { status: "success" };
   }
 

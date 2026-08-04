@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Mail, MessageCircle, Store } from "lucide-react";
+import Link from "next/link";
+import { Clock, Mail, MessageCircle, Phone, Store } from "lucide-react";
 
 import { ContactForm } from "@/app/contact/contact-form";
 import { Section, SectionHeader } from "@/components/layout/section";
@@ -24,68 +25,88 @@ export default function ContactPage() {
         description="Questions about an order, our products, or stocking Efamy? Send us a message and we will come back to you."
       />
 
-      <div className="grid gap-12 lg:grid-cols-[1fr_20rem] lg:gap-16">
-        <ContactForm />
+      <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:gap-12">
+        <div className="rounded-lg bg-card p-6 shadow-card sm:p-10">
+          <h2 className="font-heading text-xl">Send us a message</h2>
+          <p className="mt-2 mb-8 text-sm text-muted-foreground">
+            All fields are required.
+          </p>
+          <ContactForm />
+        </div>
 
-        <aside className="space-y-8 text-sm">
-          <div>
-            <h2 className="font-heading text-base">Email</h2>
-            <a
-              href={`mailto:${email}`}
-              className="mt-2 inline-flex items-center gap-2 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+        <aside className="flex flex-col gap-4">
+          <div className="rounded-lg bg-clay/40 p-6">
+            <h2 className="font-heading text-lg">Prefer to write directly?</h2>
+            <ul className="mt-5 space-y-4 text-sm">
+              <li>
+                <a
+                  href={`mailto:${email}`}
+                  className="flex items-start gap-3 underline-offset-4 hover:underline"
+                >
+                  <Mail
+                    aria-hidden="true"
+                    className="mt-0.5 size-4 shrink-0 text-gold-ink"
+                  />
+                  {email}
+                </a>
+              </li>
+              {phone ? (
+                <li>
+                  <a
+                    href={`tel:${phone.replace(/\s/g, "")}`}
+                    className="flex items-start gap-3 underline-offset-4 hover:underline"
+                  >
+                    <Phone
+                      aria-hidden="true"
+                      className="mt-0.5 size-4 shrink-0 text-gold-ink"
+                    />
+                    {phone}
+                  </a>
+                </li>
+              ) : null}
+              {whatsapp ? (
+                <li>
+                  <a
+                    href={`https://wa.me/${whatsapp}`}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="flex items-start gap-3 underline-offset-4 hover:underline"
+                  >
+                    <MessageCircle
+                      aria-hidden="true"
+                      className="mt-0.5 size-4 shrink-0 text-gold-ink"
+                    />
+                    Message us on WhatsApp
+                  </a>
+                </li>
+              ) : null}
+              <li className="flex items-start gap-3 text-muted-foreground">
+                <Clock
+                  aria-hidden="true"
+                  className="mt-0.5 size-4 shrink-0 text-gold-ink"
+                />
+                We aim to reply within two working days.
+              </li>
+            </ul>
+          </div>
+
+          <div className="rounded-lg border border-neutral-200 p-6">
+            <Store
+              aria-hidden="true"
+              className="size-5 text-gold-ink"
+              strokeWidth={1.75}
+            />
+            <h2 className="mt-4 font-heading text-lg">Stock Efamy</h2>
+            <p className="mt-2 text-sm text-pretty text-muted-foreground">
+              We supply independent retailers and grocers across the UK. Ask us
+              for trade pricing and case quantities.
+            </p>
+            <Link
+              href={routes.stockists}
+              className="mt-4 inline-block text-sm underline underline-offset-4"
             >
-              <Mail aria-hidden="true" className="size-4" />
-              {email}
-            </a>
-          </div>
-
-          {phone ? (
-            <div>
-              <h2 className="font-heading text-base">Phone</h2>
-              <a
-                href={`tel:${phone.replace(/\s/g, "")}`}
-                className="mt-2 inline-block text-muted-foreground hover:text-foreground"
-              >
-                {phone}
-              </a>
-            </div>
-          ) : null}
-
-          {whatsapp ? (
-            <div>
-              <h2 className="font-heading text-base">WhatsApp</h2>
-              <a
-                href={`https://wa.me/${whatsapp}`}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="mt-2 inline-flex items-center gap-2 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-              >
-                <MessageCircle aria-hidden="true" className="size-4" />
-                Message us on WhatsApp
-              </a>
-            </div>
-          ) : null}
-
-          <div>
-            <h2 className="font-heading text-base">Stockists</h2>
-            <p className="mt-2 text-muted-foreground">
-              Interested in stocking Efamy?{" "}
-              <a
-                href={routes.stockists}
-                className="underline underline-offset-4 hover:text-foreground"
-              >
-                See our stockist page
-              </a>
-              .
-            </p>
-          </div>
-
-          <div>
-            <h2 className="font-heading text-base">Response time</h2>
-            <p className="mt-2 flex items-start gap-2 text-muted-foreground">
-              <Store aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
-              We aim to reply within two working days.
-            </p>
+              Stockists &amp; wholesale
+            </Link>
           </div>
         </aside>
       </div>

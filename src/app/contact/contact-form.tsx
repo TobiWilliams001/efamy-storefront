@@ -55,7 +55,7 @@ export function ContactForm() {
           className="mt-0.5 size-5 shrink-0 text-sage-ink"
         />
         <div>
-          <p className="font-medium">Thanks — your message is on its way.</p>
+          <p className="font-medium">Thanks, your message is on its way.</p>
           <p className="mt-1 text-sm text-muted-foreground">
             We usually reply within two working days.
           </p>
@@ -153,7 +153,7 @@ export function ContactForm() {
         ) : null}
       </div>
 
-      {/* Honeypot — hidden from people, tempting to bots. */}
+      {/* Honeypot: hidden from people, tempting to bots. */}
       <div aria-hidden="true" className="hidden">
         <label htmlFor="website">Leave this field empty</label>
         <input

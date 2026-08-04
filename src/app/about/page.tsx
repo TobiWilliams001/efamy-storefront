@@ -2,92 +2,121 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Prose } from "@/components/common/prose";
+import { CategoryCard } from "@/components/commerce/category-card";
+import { Container } from "@/components/layout/container";
 import { Section, SectionHeader } from "@/components/layout/section";
 import { CallToAction } from "@/components/sections/call-to-action";
-import { TrustBar } from "@/components/sections/trust-bar";
+import { WhyEfamy } from "@/components/sections/why-efamy";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
+import { getCategories } from "@/lib/catalogue";
 import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `${siteConfig.legalName} makes Ghanaian chilli sauces and seasoning mixes in the UK — beans, beef, chicken, fish and pork, in mild and hot.`,
+  description: `${siteConfig.legalName} is a premium Ghanaian food brand, proudly made in the UK, bringing authentic flavours, trusted quality and traditional recipes.`,
   alternates: { canonical: routes.about },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const categories = await getCategories();
+
   return (
     <>
-      <Section spacing="sm">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <SectionHeader
-              as="h1"
-              eyebrow="About"
-              title="Ghanaian flavour, made in Britain"
-              description="Efamy makes the chilli sauces and seasonings of Ghanaian home cooking, produced here in the UK."
-              className="mb-0"
-            />
-          </div>
-          <div className="relative aspect-5/4 w-full">
-            <Image
-              src="/products/collections/range-lineup.jpg"
-              alt="The Efamy range of chilli sauces and seasoning mixes"
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              preload
-              className="rounded-lg object-contain"
-            />
-          </div>
-        </div>
+      <Section spacing="lg" width="prose">
+        <p className="flex items-center gap-3 text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <span
+            aria-hidden="true"
+            className="h-px w-6 shrink-0 bg-neutral-300"
+          />
+          About Efamy
+        </p>
+        <h1 className="mt-6 text-4xl text-balance sm:text-5xl lg:text-6xl">
+          A premium Ghanaian food brand, proudly made in the UK.
+        </h1>
+        <p className="mt-8 text-lg text-pretty text-muted-foreground sm:text-xl">
+          Efamy brings authentic Ghanaian flavours, trusted quality and
+          traditional recipes to modern kitchens. These are the jars that sit on
+          the table at every meal, made here in Britain.
+        </p>
       </Section>
 
-      <TrustBar />
+      <Container>
+        <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-white shadow-card">
+          <Image
+            src="/products/collections/range-lineup.jpg"
+            alt="The Efamy range of chilli sauces and seasoning mixes"
+            fill
+            sizes="(min-width: 1280px) 1280px, 100vw"
+            className="object-contain p-8 sm:p-14"
+          />
+        </div>
+      </Container>
 
       <Section width="prose">
-        <Prose>
-          <h2>What we make</h2>
-          <p>
-            Our range starts with chilli sauces built around a protein — beans,
-            beef, chicken, fish and pork — each offered mild or hot so a table
-            with different tastes can share the same meal. Alongside them sit
-            our seasoning mixes: an All Purpose blend for meat, fish and
-            chicken, a Kelewele mix for spiced fried plantain, and Coat &amp;
-            Cook for a crisp coating.
-          </p>
-          <p>
-            Every jar is made without artificial preservatives. The ingredient
-            lists are short and readable, because that is how this food is
-            cooked at home.
-          </p>
+        <div className="grid gap-x-16 gap-y-10 sm:grid-cols-[10rem_1fr]">
+          <h2 className="text-2xl sm:text-xl">What we make</h2>
+          <div>
+            <p className="text-lg text-pretty text-muted-foreground">
+              Our range starts with chilli sauces built around a protein: beans,
+              beef, chicken, fish and pork. Alongside them sit the seasoning
+              mixes: an All Purpose blend for meat, fish and chicken, a Kelewele
+              mix for spiced fried plantain, and Coat &amp; Cook for a crisp
+              coating.
+            </p>
+            <p className="mt-5 text-pretty text-muted-foreground">
+              The ingredient lists are short and readable, because that is how
+              this food is cooked at home. Nothing artificial goes in.
+            </p>
+          </div>
 
-          <h2>Mild and hot</h2>
-          <p>
-            Heat is a preference, not a test. Where a sauce comes in two
-            strengths, the recipe underneath is the same — the mild version
-            simply carries less chilli. You are not trading away flavour by
-            choosing it.
-          </p>
+          <h2 className="text-2xl sm:text-xl">Mild and hot</h2>
+          <div>
+            <p className="text-lg text-pretty text-muted-foreground">
+              Heat is a preference, not a test. Where a sauce comes in two
+              strengths the recipe underneath is the same. The mild version
+              simply carries less chilli.
+            </p>
+            <p className="mt-5 text-pretty text-muted-foreground">
+              It means a table with different tastes can share the same meal,
+              which is rather the point.
+            </p>
+          </div>
 
-          <h2>Where to find us</h2>
-          <p>
-            You can order the full range directly from this site. We also supply
-            retailers — if you stock food and would like to carry Efamy, we
-            would like to hear from you.
-          </p>
-        </Prose>
-
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Button asChild size="xl" variant="accent">
-            <Link href={routes.shop}>Shop the range</Link>
-          </Button>
-          <Button asChild size="xl" variant="outline">
-            <Link href={routes.stockists}>Stockists &amp; wholesale</Link>
-          </Button>
+          <h2 className="text-2xl sm:text-xl">Where to find us</h2>
+          <div>
+            <p className="text-lg text-pretty text-muted-foreground">
+              You can order the full range directly from this site. We also
+              supply retailers, so if you stock food and would like to carry
+              Efamy, we would like to hear from you.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Button asChild size="xl" variant="accent">
+                <Link href={routes.shop}>Explore Our Products</Link>
+              </Button>
+              <Button asChild size="xl" variant="outline">
+                <Link href={routes.stockists}>Stockists &amp; wholesale</Link>
+              </Button>
+            </div>
+          </div>
         </div>
       </Section>
 
+      <Section surface="muted">
+        <SectionHeader
+          eyebrow="The range"
+          title="Two ways to cook with Efamy"
+        />
+        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8">
+          {categories.map((category) => (
+            <li key={category.id} className="flex">
+              <CategoryCard category={category} className="w-full" />
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <WhyEfamy />
       <CallToAction />
     </>
   );
