@@ -5,11 +5,11 @@ export function ProductCardSkeleton() {
   return (
     <Card className="gap-0 py-0">
       <Skeleton className="aspect-square rounded-none" />
-      <div className="flex flex-col gap-2 p-4">
-        <Skeleton className="h-5 w-3/4" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-2/3" />
-        <Skeleton className="mt-2 h-5 w-20" />
+      <div className="flex flex-col p-5">
+        <Skeleton className="h-7 w-3/4" />
+        <Skeleton className="mt-2 h-4 w-full" />
+        <Skeleton className="mt-1 h-4 w-2/3" />
+        <Skeleton className="mt-5 h-6 w-24" />
       </div>
     </Card>
   );

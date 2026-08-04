@@ -6,7 +6,9 @@ import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import type { ProductCategory } from "@/types/product";
 
-const DEFAULT_SIZES = "(min-width: 640px) 33vw, 100vw";
+// Two-up from the sm breakpoint, capped by the 1280px container.
+const DEFAULT_SIZES =
+  "(min-width: 1280px) 620px, (min-width: 640px) 50vw, 100vw";
 
 type CategoryCardProps = {
   category: ProductCategory;
