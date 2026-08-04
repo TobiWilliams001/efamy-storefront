@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Minus, Plus } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 
 import { useCart } from "@/components/cart/cart-provider";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,6 @@ import type { Product } from "@/types/product";
 export function AddToCart({ product }: { product: Product }) {
   const { add } = useCart();
   const [quantity, setQuantity] = useState(1);
-  const [added, setAdded] = useState(false);
 
   if (!product.inStock) {
     return (
@@ -22,8 +21,7 @@ export function AddToCart({ product }: { product: Product }) {
 
   function onAdd() {
     add(product, quantity);
-    setAdded(true);
-    window.setTimeout(() => setAdded(false), 2000);
+    setQuantity(1);
   }
 
   return (
@@ -55,15 +53,13 @@ export function AddToCart({ product }: { product: Product }) {
         </Button>
       </div>
 
-      <Button size="xl" onClick={onAdd} className="w-full sm:w-auto">
-        {added ? (
-          <>
-            <Check />
-            Added to basket
-          </>
-        ) : (
-          "Add to basket"
-        )}
+      <Button
+        size="xl"
+        variant="accent"
+        onClick={onAdd}
+        className="w-full sm:w-auto"
+      >
+        Add to basket
       </Button>
     </div>
   );

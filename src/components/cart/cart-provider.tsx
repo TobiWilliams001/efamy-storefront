@@ -6,6 +6,7 @@ import {
   useEffect,
   useMemo,
   useReducer,
+  useState,
 } from "react";
 
 import type { Product } from "@/types/product";
@@ -107,6 +108,8 @@ type CartContextValue = {
   /** False until localStorage has been read, so the UI can avoid a hydration mismatch. */
   ready: boolean;
   add: (product: Product, quantity?: number) => void;
+  isOpen: boolean;
+  setOpen: (open: boolean) => void;
   setQuantity: (productId: string, quantity: number) => void;
   remove: (productId: string) => void;
   clear: () => void;
@@ -134,6 +137,7 @@ function readStorage(): CartLine[] {
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, { lines: [], ready: false });
+  const [isOpen, setOpen] = useState(false);
 
   useEffect(() => {
     dispatch({ type: "hydrate", lines: readStorage() });
@@ -158,14 +162,18 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         0,
       ),
       ready: state.ready,
-      add: (product, quantity = 1) =>
-        dispatch({ type: "add", product, quantity }),
+      isOpen,
+      setOpen,
+      add: (product, quantity = 1) => {
+        dispatch({ type: "add", product, quantity });
+        setOpen(true);
+      },
       setQuantity: (productId, quantity) =>
         dispatch({ type: "setQuantity", productId, quantity }),
       remove: (productId) => dispatch({ type: "remove", productId }),
       clear: () => dispatch({ type: "clear" }),
     };
-  }, [state.lines, state.ready]);
+  }, [state.lines, state.ready, isOpen]);
 
   return <CartContext value={value}>{children}</CartContext>;
 }

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { DM_Serif_Display, Manrope } from "next/font/google";
 
 import { Analytics } from "@/components/analytics";
+import { CartDrawer } from "@/components/cart/cart-drawer";
 import { CartProvider } from "@/components/cart/cart-provider";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             {children}
           </main>
           <SiteFooter />
+          <CartDrawer />
         </CartProvider>
         <script
           type="application/ld+json"
