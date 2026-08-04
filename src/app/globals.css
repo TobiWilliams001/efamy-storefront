@@ -36,6 +36,9 @@
   --color-sage: var(--sage);
   --color-sage-ink: var(--sage-ink);
   --color-clay: var(--clay);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
 
   --color-neutral-50: #faf8f3;
   --color-neutral-100: #f3f0ea;
@@ -94,6 +97,11 @@
    * Both clear 4.5:1.
    */
   --gold-ink: #8f6a1c;
+
+  /* Deep maroon, used only for the footer and feature bands. */
+  --ink: #4a1414;
+  --ink-foreground: #f7efe6;
+  --ink-muted: #d8bfae;
   --sage-ink: #66794e;
 
   --destructive: #b52a2a;

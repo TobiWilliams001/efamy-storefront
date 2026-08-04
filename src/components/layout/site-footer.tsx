@@ -18,19 +18,19 @@ export function SiteFooter() {
   const social = socialLinks.filter(({ key }) => siteConfig.social[key]);
 
   return (
-    <footer className="mt-auto border-t bg-muted/40">
+    <footer className="mt-auto bg-ink text-ink-foreground">
       <Container className="py-14 lg:py-16">
         <div className="grid gap-10 lg:grid-cols-[1.5fr_2fr]">
           <div className="max-w-sm">
-            <Logo />
-            <p className="mt-4 text-sm text-pretty text-muted-foreground">
+            <Logo className="text-ink-foreground" />
+            <p className="mt-4 text-sm text-pretty text-ink-muted">
               {siteConfig.description}
             </p>
             <a
               href={`mailto:${siteConfig.contact.email}`}
-              className="mt-6 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="mt-6 inline-flex items-center gap-2 text-sm text-ink-muted transition-colors hover:text-ink-foreground"
             >
-              <Mail className="size-4" aria-hidden="true" />
+              <Mail className="size-4 text-gold" aria-hidden="true" />
               {siteConfig.contact.email}
             </a>
             {social.length > 0 ? (
@@ -41,7 +41,7 @@ export function SiteFooter() {
                       href={siteConfig.social[key]}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="text-sm text-ink-muted transition-colors hover:text-ink-foreground"
                     >
                       {label}
                     </a>
@@ -54,7 +54,7 @@ export function SiteFooter() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
             {footerNav.map((group) => (
               <nav key={group.title} aria-label={group.title}>
-                <h2 className="font-heading text-sm font-medium">
+                <h2 className="font-heading text-sm font-medium text-gold">
                   {group.title}
                 </h2>
                 <ul className="mt-4 space-y-3">
@@ -62,7 +62,7 @@ export function SiteFooter() {
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                        className="text-sm text-ink-muted transition-colors hover:text-ink-foreground"
                       >
                         {item.label}
                       </Link>

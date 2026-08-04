@@ -9,12 +9,12 @@ export function Logo({ className }: { className?: string }) {
     <Link
       href={routes.home}
       className={cn(
-        "font-heading text-2xl font-semibold tracking-tight text-foreground",
+        "font-heading text-2xl font-semibold tracking-tight",
         className,
       )}
     >
       {siteConfig.name}
-      <span className="text-brand">.</span>
+      <span className="text-gold">.</span>
       <span className="sr-only">, {siteConfig.tagline}</span>
     </Link>
   );
