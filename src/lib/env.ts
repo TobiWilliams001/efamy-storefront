@@ -4,7 +4,7 @@ import { z } from "zod";
 
 /**
  * Server-only. Importing this from a Client Component pulls all of zod into the
- * browser bundle — it did exactly that once, costing ~65 KB gzipped. The
+ * browser bundle. It did exactly that once, costing ~65 KB gzipped. The
  * `server-only` import makes that a build error instead of a silent regression.
  *
  * Client Components must read `process.env.NEXT_PUBLIC_*` as full literals so

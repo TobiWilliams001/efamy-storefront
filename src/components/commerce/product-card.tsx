@@ -36,7 +36,7 @@ export function ProductCard({
       )}
     >
       {/*
-       * White surface, because the packshots are JPEGs shot on white — on a
+       * White surface, because the packshots are JPEGs shot on white. On a
        * tinted background the image's own white rectangle shows through. Square
        * rather than portrait so the landscape case shots do not shrink to
        * nothing beside the upright jars.

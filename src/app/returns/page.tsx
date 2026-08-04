@@ -18,7 +18,7 @@ export default function ReturnsPage() {
       <SectionHeader as="h1" title="Returns &amp; Refunds" className="mb-8" />
 
       <DraftNotice>
-        <strong>Draft — not legally reviewed.</strong> Food returns are not
+        <strong>Draft, not legally reviewed.</strong> Food returns are not
         straightforward: perishable and sealed food carries specific exemptions
         from the usual 14-day right to cancel. The policy below must be
         confirmed with someone qualified before launch.
@@ -29,7 +29,7 @@ export default function ReturnsPage() {
         <p>
           If an item arrives damaged, incorrect, or past its best before date,
           contact us with your order number and a photograph and we will put it
-          right. This applies regardless of anything else on this page —
+          right. This applies regardless of anything else on this page, because
           statutory rights cannot be signed away.
         </p>
 
@@ -51,7 +51,7 @@ export default function ReturnsPage() {
         <h2>Refunds</h2>
         <p>
           Refunds go back to the original payment method. State the processing
-          time — the regulations require refunds within 14 days of receiving the
+          time. The regulations require refunds within 14 days of receiving the
           goods back or proof of return.
         </p>
 

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 /**
  * Placeholder until Stripe Checkout is connected. Deliberately does not collect
- * any payment or address details — a form that looks real but goes nowhere is
+ * any payment or address details. A form that looks real but goes nowhere is
  * worse than an honest message.
  */
 export default function CheckoutPage() {

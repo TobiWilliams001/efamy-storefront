@@ -1,8 +1,8 @@
 import { TriangleAlert } from "lucide-react";
 
 /**
- * Marks placeholder legal copy. This must be removed — along with the copy it
- * wraps — before the site goes live.
+ * Marks placeholder legal copy. This must be removed, along with the copy it
+ * wraps, before the site goes live.
  */
 export function DraftNotice({ children }: { children: React.ReactNode }) {
   return (

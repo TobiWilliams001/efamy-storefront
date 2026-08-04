@@ -18,7 +18,7 @@ export default function PrivacyPage() {
       <SectionHeader as="h1" title="Privacy Policy" className="mb-8" />
 
       <DraftNotice>
-        <strong>Draft — not legally reviewed.</strong> This outlines what a UK
+        <strong>Draft, not legally reviewed.</strong> This outlines what a UK
         GDPR compliant policy must cover. It must be completed and checked by
         someone qualified before launch, and the sections below are prompts
         rather than a policy.
@@ -35,16 +35,16 @@ export default function PrivacyPage() {
         <h2>What we collect</h2>
         <ul>
           <li>
-            Details you give us — name, email address, delivery address and
-            phone number when you order or contact us.
+            Details you give us: name, email address, delivery address and phone
+            number when you order or contact us.
           </li>
           <li>
-            Order information — what you bought, when, and the amount paid. Card
+            Order information: what you bought, when, and the amount paid. Card
             details are handled by our payment provider and never reach our
             servers.
           </li>
           <li>
-            Usage data — pages visited and interactions, collected through
+            Usage data: pages visited and interactions, collected through
             analytics. Confirm the cookie consent approach before enabling.
           </li>
         </ul>
@@ -59,9 +59,9 @@ export default function PrivacyPage() {
 
         <h2>Who we share it with</h2>
         <p>
-          List every processor — payment provider, email provider, hosting and
-          analytics — and note any transfers outside the UK together with the
-          safeguard relied on.
+          List every processor, including payment provider, email provider,
+          hosting and analytics, and note any transfers outside the UK together
+          with the safeguard relied on.
         </p>
 
         <h2>How long we keep it</h2>
@@ -74,7 +74,7 @@ export default function PrivacyPage() {
         <h2>Your rights</h2>
         <p>
           Cover the right of access, rectification, erasure, restriction,
-          portability, and objection — including objecting to direct marketing.
+          portability, and objection, including objecting to direct marketing.
           Give the contact route for exercising them and the right to complain
           to the Information Commissioner&apos;s Office.
         </p>

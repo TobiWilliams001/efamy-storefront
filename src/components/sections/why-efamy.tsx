@@ -13,7 +13,7 @@ const reasons = [
     icon: Leaf,
     title: "No artificial preservatives",
     description:
-      "Straightforward ingredients — onions, chillies, garlic and spice. Nothing artificial added.",
+      "Straightforward ingredients: onions, chillies, garlic and spice. Nothing artificial added.",
   },
   {
     icon: Utensils,

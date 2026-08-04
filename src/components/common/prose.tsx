@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Long-form text. Styles headings, paragraphs and lists by element so page
- * content stays readable markup rather than a wall of utility classes — and so
+ * content stays readable markup rather than a wall of utility classes, and so
  * it keeps working when this content moves to the CMS.
  */
 export function Prose({ className, ...props }: React.ComponentProps<"div">) {

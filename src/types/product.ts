@@ -6,7 +6,7 @@ export type ProductImage = {
   blurDataURL?: string;
 };
 
-/** Matches the packaging, which is labelled Mild or Hot — nothing finer. */
+/** Matches the packaging, which is labelled Mild or Hot and nothing finer. */
 export type Heat = "mild" | "hot";
 
 export type ProductCategory = {
@@ -30,7 +30,7 @@ export type Product = {
   /** Net contents as printed on the jar, e.g. "250g". */
   size: string;
   heat?: Heat;
-  /** Transcribed from the label. Legally required — never guess these. */
+  /** Transcribed from the label. Legally required, so never guess these. */
   ingredients?: string[];
   /** Allergens to declare, e.g. "Fish", "Wheat (gluten)". */
   allergens?: string[];

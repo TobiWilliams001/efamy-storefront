@@ -11,7 +11,7 @@ const buttonVariants = cva(
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-neutral-900",
         // Deep chilli red. Reserved for the single highest-priority action on a
-        // page — add to basket, checkout. Never more than one per view.
+        // page: add to basket, or checkout. Never more than one per view.
         accent: "bg-brand text-white hover:bg-brand-hover",
         outline:
           "border-neutral-300 bg-card text-foreground hover:bg-muted aria-expanded:bg-muted",

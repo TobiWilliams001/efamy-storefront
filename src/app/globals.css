@@ -28,7 +28,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
 
-  /* Brand accents. Used sparingly — the products carry the colour. */
+  /* Brand accents. Used sparingly, because the products carry the colour. */
   --color-brand: var(--brand);
   --color-brand-hover: var(--brand-hover);
   --color-gold: var(--gold);
@@ -90,8 +90,8 @@
 
   /*
    * Brand gold and sage are fills. Against the ivory background they land at
-   * 2.4:1 and 3.5:1, so icons and text use these darkened variants instead —
-   * both clear 4.5:1.
+   * 2.4:1 and 3.5:1, so icons and text use these darkened variants instead.
+   * Both clear 4.5:1.
    */
   --gold-ink: #8f6a1c;
   --sage-ink: #66794e;

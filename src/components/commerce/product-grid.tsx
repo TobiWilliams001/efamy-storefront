@@ -4,7 +4,7 @@ import type { ProductSummary } from "@/types/product";
 
 type ProductGridProps = {
   products: ProductSummary[];
-  /** Keep low — the grid is single-column on mobile, so a high count fetches below-the-fold images. */
+  /** Keep low: the grid is single-column on mobile, so a high count fetches below-the-fold images. */
   eagerCount?: number;
   empty?: React.ReactNode;
   className?: string;

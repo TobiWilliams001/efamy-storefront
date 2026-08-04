@@ -62,9 +62,9 @@ export default function DesignSystemPage() {
       <Section spacing="sm">
         <SectionHeader as="h2" title="Typography" />
         <div className="space-y-4">
-          <h1 className="text-4xl sm:text-5xl">Heading one — Fraunces</h1>
-          <h2 className="text-3xl sm:text-4xl">Heading two — Fraunces</h2>
-          <h3 className="text-2xl">Heading three — Fraunces</h3>
+          <h1 className="text-4xl sm:text-5xl">Heading one</h1>
+          <h2 className="text-3xl sm:text-4xl">Heading two</h2>
+          <h3 className="text-2xl">Heading three</h3>
           <p className="max-w-prose text-lg text-muted-foreground">
             Large body copy in Inter, used for section descriptions and
             introductory paragraphs.
@@ -74,7 +74,7 @@ export default function DesignSystemPage() {
             measure so lines stay readable.
           </p>
           <p className="text-sm text-muted-foreground">
-            Small print — used for metadata, sizes and legal copy.
+            Small print, used for metadata, sizes and legal copy.
           </p>
         </div>
       </Section>
@@ -102,7 +102,7 @@ export default function DesignSystemPage() {
           </div>
           <p className="text-sm text-muted-foreground">
             <code className="font-mono text-xs">xl</code> (44px) is the minimum
-            comfortable touch target — use it for primary calls to action.
+            comfortable touch target. Use it for primary calls to action.
           </p>
         </div>
       </Section>

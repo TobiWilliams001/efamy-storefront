@@ -4,7 +4,7 @@ import type { Product, ProductCategory } from "@/types/product";
  * Transcribed from the product photography supplied by the client.
  *
  * PRICES ARE NOT REAL. Every product uses PLACEHOLDER_PRICE because no price
- * list has been supplied yet — the uniform value is deliberate so wrong prices
+ * list has been supplied yet. The uniform value is deliberate so wrong prices
  * are obvious rather than plausible. Do not launch before replacing them.
  *
  * Ingredients and allergens are transcribed only where the label was legible.
@@ -19,7 +19,7 @@ export const categories: ProductCategory[] = [
     slug: "chilli-sauces",
     name: "Chilli Sauces",
     description:
-      "Slow-cooked chilli sauces in beans, beef, chicken, fish and pork — each in mild or hot.",
+      "Slow-cooked chilli sauces in beans, beef, chicken, fish and pork, each in mild or hot.",
     image: {
       url: "/products/white/chicken-chilli-sauce-hot-250g.jpg",
       alt: "Jar of Efamy chicken chilli sauce, hot",
@@ -53,7 +53,7 @@ export const products: Product[] = [
   {
     id: "beans-chilli-sauce-mild",
     slug: "beans-chilli-sauce-mild",
-    name: "Beans Chilli Sauce — Mild",
+    name: "Beans Chilli Sauce, Mild",
     summary: "A mild bean chilli sauce, suitable for vegetarians and vegans.",
     description:
       "A mild chilli sauce made with beans. Suitable for vegetarians and vegans.",
@@ -73,7 +73,7 @@ export const products: Product[] = [
   {
     id: "beef-chilli-sauce-mild",
     slug: "beef-chilli-sauce-mild",
-    name: "Beef Chilli Sauce — Mild",
+    name: "Beef Chilli Sauce, Mild",
     summary: "Beef chilli sauce with a gentler heat.",
     description: "Beef chilli sauce, mild.",
     price: PLACEHOLDER_PRICE,
@@ -91,7 +91,7 @@ export const products: Product[] = [
   {
     id: "beef-chilli-sauce-hot",
     slug: "beef-chilli-sauce-hot",
-    name: "Beef Chilli Sauce — Hot",
+    name: "Beef Chilli Sauce, Hot",
     summary:
       "Made with premium beef. Rich and spicy, with no artificial preservatives.",
     description:
@@ -120,7 +120,7 @@ export const products: Product[] = [
   {
     id: "chicken-chilli-sauce-hot",
     slug: "chicken-chilli-sauce-hot",
-    name: "Chicken Chilli Sauce — Hot",
+    name: "Chicken Chilli Sauce, Hot",
     summary:
       "Made with premium chicken. Rich and spicy, with no artificial preservatives.",
     description:
@@ -149,7 +149,7 @@ export const products: Product[] = [
   {
     id: "fish-chilli-sauce-mild",
     slug: "fish-chilli-sauce-mild",
-    name: "Fish Chilli Sauce — Mild",
+    name: "Fish Chilli Sauce, Mild",
     summary: "Fish chilli sauce with a gentler heat.",
     description: "Fish chilli sauce, mild.",
     price: PLACEHOLDER_PRICE,
@@ -168,7 +168,7 @@ export const products: Product[] = [
   {
     id: "fish-chilli-sauce-hot",
     slug: "fish-chilli-sauce-hot",
-    name: "Fish Chilli Sauce — Hot",
+    name: "Fish Chilli Sauce, Hot",
     summary: "Fish chilli sauce with a bold heat.",
     description: "Fish chilli sauce, hot.",
     price: PLACEHOLDER_PRICE,
@@ -195,7 +195,7 @@ export const products: Product[] = [
   {
     id: "pork-chilli-sauce-hot",
     slug: "pork-chilli-sauce-hot",
-    name: "Pork Chilli Sauce — Hot",
+    name: "Pork Chilli Sauce, Hot",
     summary:
       "Pork chilli sauce with a bold heat and no artificial preservatives.",
     description:
@@ -225,7 +225,7 @@ export const products: Product[] = [
   {
     id: "all-purpose-seasoning-mix",
     slug: "all-purpose-seasoning-mix",
-    name: "All Purpose Seasoning Mix — Original",
+    name: "All Purpose Seasoning Mix, Original",
     summary: "One mix for meat, fish and chicken. Enhances natural flavour.",
     description:
       "An all purpose seasoning mix for beef, fish, chicken and more. No artificial preservatives.",
@@ -253,7 +253,7 @@ export const products: Product[] = [
     id: "kelewele-seasoning-mix",
     slug: "kelewele-seasoning-mix",
     name: "Kelewele Seasoning Mix",
-    summary: "The spice blend for kelewele — spiced fried plantain.",
+    summary: "The spice blend for kelewele, spiced fried plantain.",
     description:
       "A seasoning mix for making kelewele, Ghanaian spiced fried plantain.",
     price: PLACEHOLDER_PRICE,

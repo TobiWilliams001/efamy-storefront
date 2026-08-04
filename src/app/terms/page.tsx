@@ -18,7 +18,7 @@ export default function TermsPage() {
       <SectionHeader as="h1" title="Terms &amp; Conditions" className="mb-8" />
 
       <DraftNotice>
-        <strong>Draft — not legally reviewed.</strong> These are the headings a
+        <strong>Draft, not legally reviewed.</strong> These are the headings a
         UK consumer sales contract needs. They are not enforceable terms and
         must be written and checked by someone qualified before launch.
       </DraftNotice>
@@ -33,9 +33,9 @@ export default function TermsPage() {
 
         <h2>Placing an order</h2>
         <p>
-          Explain when the contract is formed — typically on dispatch rather
-          than at payment — and reserve the right to decline an order, for
-          example where stock or pricing was wrong.
+          Explain when the contract is formed, typically on dispatch rather than
+          at payment, and reserve the right to decline an order, for example
+          where stock or pricing was wrong.
         </p>
 
         <h2>Prices and payment</h2>
