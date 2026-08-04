@@ -9,11 +9,11 @@ export function CallToAction() {
     <Section surface="clay" spacing="sm" width="narrow">
       <div className="text-center">
         <h2 className="text-3xl text-balance sm:text-4xl">
-          Not sure where to start?
+          Cook something worth sharing
         </h2>
         <p className="mx-auto mt-4 max-w-lg text-pretty">
-          Every sauce comes in mild or hot. Tell us how you cook and we will
-          point you to the right jar.
+          The full range ships across the UK. If you would rather ask a person
+          first, we are happy to help.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Button asChild size="xl">

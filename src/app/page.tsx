@@ -1,5 +1,6 @@
 import { CallToAction } from "@/components/sections/call-to-action";
 import { CategoryShowcase } from "@/components/sections/category-showcase";
+import { HeatGuide } from "@/components/sections/heat-guide";
 import { Hero } from "@/components/sections/hero";
 import { ProductShowcase } from "@/components/sections/product-showcase";
 import { Statement } from "@/components/sections/statement";
@@ -32,6 +33,7 @@ export default async function HomePage() {
         action={{ label: "View all", href: routes.shop }}
         eagerCount={2}
       />
+      <HeatGuide />
       <Statement />
       <WhyEfamy />
       <ProductShowcase
