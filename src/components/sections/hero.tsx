@@ -35,20 +35,17 @@ export function Hero() {
             </h1>
 
             <p className="mt-7 max-w-md text-lg text-pretty text-muted-foreground">
-              Chilli sauces in beans, beef, chicken, fish and pork — mild or hot
-              — alongside our seasoning mixes. No artificial preservatives.
+              Traditional recipes and premium ingredients, made for everyday
+              cooking. Chilli sauces in mild or hot, plus our seasoning mixes.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Button asChild size="xl" variant="accent">
                 <Link href={routes.shop}>Shop Now</Link>
               </Button>
-              <Link
-                href={routes.about}
-                className="text-sm underline decoration-neutral-300 underline-offset-8 transition-colors hover:decoration-foreground"
-              >
-                Our story
-              </Link>
+              <Button asChild size="xl" variant="outline">
+                <Link href={routes.shop}>Explore Products</Link>
+              </Button>
             </div>
           </div>
 

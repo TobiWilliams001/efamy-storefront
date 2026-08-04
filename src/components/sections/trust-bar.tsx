@@ -1,11 +1,13 @@
-import { CreditCard, Leaf, MapPin, Truck } from "lucide-react";
+import { CreditCard, Leaf, MapPin, Soup } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 
+// Ordered to the brand messaging hierarchy: heritage, provenance, quality,
+// then reassurance.
 const signals = [
-  { icon: MapPin, label: "Made in the UK" },
-  { icon: Leaf, label: "Quality ingredients" },
-  { icon: Truck, label: "UK delivery" },
+  { icon: Soup, label: "Authentic Ghanaian recipes" },
+  { icon: MapPin, label: "Proudly made in the UK" },
+  { icon: Leaf, label: "Premium ingredients" },
   { icon: CreditCard, label: "Secure checkout" },
 ];
 

@@ -29,9 +29,9 @@ export type SiteConfig = {
 export const siteConfig: SiteConfig = {
   name: "Efamy",
   legalName: "Efamy Food Products",
-  tagline: "Authentic Ghanaian chilli sauces & seasonings",
+  tagline: "Authentic Ghanaian flavours, crafted in the UK",
   description:
-    "Efamy Food Products makes authentic Ghanaian chilli sauces and seasoning mixes in the UK. Beans, beef, chicken, fish and pork sauces in mild and hot.",
+    "Efamy is a premium Ghanaian food brand, proudly made in the UK, bringing authentic flavours, trusted quality and traditional recipes to modern kitchens.",
   url: siteUrl,
   locale: "en_GB",
   currency: "GBP",
