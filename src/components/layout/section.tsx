@@ -104,6 +104,12 @@ export function SectionHeader({
         >
           {title}
         </Heading>
+        {centred ? (
+          <span
+            aria-hidden="true"
+            className="mx-auto mt-5 block h-px w-16 bg-gold"
+          />
+        ) : null}
         {description ? (
           <p className="mt-5 text-pretty text-muted-foreground sm:text-lg">
             {description}
