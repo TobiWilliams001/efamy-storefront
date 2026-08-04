@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { HeatBadge } from "@/components/commerce/heat-badge";
+import { CardAddToCart } from "@/components/commerce/card-add-to-cart";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { formatPrice } from "@/lib/format";
@@ -91,17 +91,24 @@ export function ProductCard({
       </div>
 
       <div className="flex flex-1 flex-col p-5">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="font-heading text-lg">
-            <Link
-              href={routes.product(product.slug)}
-              className="decoration-1 underline-offset-4 group-hover:underline after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
-            >
-              {product.name}
-            </Link>
-          </h3>
-          {heat ? <HeatBadge heat={heat} className="mt-1 shrink-0" /> : null}
-        </div>
+        <h3 className="font-heading text-lg leading-snug">
+          <Link
+            href={routes.product(product.slug)}
+            className="decoration-1 underline-offset-4 group-hover:underline after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
+          >
+            {product.name}
+          </Link>
+        </h3>
+        {heat ? (
+          <p
+            className={cn(
+              "mt-1 text-sm font-medium",
+              heat === "hot" ? "text-brand" : "text-sage-ink",
+            )}
+          >
+            {heat === "hot" ? "Hot" : "Mild"}
+          </p>
+        ) : null}
 
         <p className="mt-2 line-clamp-2 text-sm text-pretty text-muted-foreground">
           {product.summary}
@@ -123,6 +130,10 @@ export function ProductCard({
           <span data-numeric className="ml-auto text-xs text-muted-foreground">
             {hasSizeChoice ? `${variants.length} sizes` : variants[0].size}
           </span>
+        </div>
+
+        <div className="relative z-10 mt-4">
+          <CardAddToCart product={product} />
         </div>
       </div>
     </Card>

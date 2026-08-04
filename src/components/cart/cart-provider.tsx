@@ -11,6 +11,9 @@ import {
 
 import type { Product, ProductVariant } from "@/types/product";
 
+/** All the cart needs to build a line, so cards can add without a full product. */
+export type AddableProduct = Pick<Product, "id" | "slug" | "name" | "image">;
+
 const STORAGE_KEY = "efamy.cart.v2";
 const MAX_QUANTITY = 99;
 
@@ -37,7 +40,7 @@ type CartState = { lines: CartLine[]; ready: boolean };
 type CartAction =
   | {
       type: "add";
-      product: Product;
+      product: AddableProduct;
       variant: ProductVariant;
       quantity: number;
     }
@@ -116,7 +119,11 @@ type CartContextValue = {
   subtotal: number;
   /** False until localStorage has been read, so the UI can avoid a hydration mismatch. */
   ready: boolean;
-  add: (product: Product, variant: ProductVariant, quantity?: number) => void;
+  add: (
+    product: AddableProduct,
+    variant: ProductVariant,
+    quantity?: number,
+  ) => void;
   isOpen: boolean;
   setOpen: (open: boolean) => void;
   setQuantity: (id: string, quantity: number) => void;
