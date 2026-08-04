@@ -29,7 +29,6 @@ export default async function AboutPage() {
         eyebrow="About Efamy"
         title="A premium Ghanaian food brand, proudly made in the UK."
         description="Efamy brings authentic Ghanaian flavours, trusted quality and traditional recipes to modern kitchens. These are the jars that sit on the table at every meal, made here in Britain."
-        breadcrumb={[{ name: "Home", href: routes.home }, { name: "About" }]}
       />
 
       <Container className="mt-14 lg:mt-20">

@@ -36,19 +36,6 @@ export function organisationSchema() {
   };
 }
 
-export function breadcrumbSchema(trail: { name: string; path: string }[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: trail.map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: item.name,
-      item: absoluteUrl(item.path),
-    })),
-  };
-}
-
 export function productSchema(product: Product) {
   return {
     "@context": "https://schema.org",

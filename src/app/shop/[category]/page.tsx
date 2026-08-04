@@ -66,11 +66,6 @@ export default async function CategoryPage({
         eyebrow="Shop"
         title={category.name}
         description={category.description}
-        breadcrumb={[
-          { name: "Home", href: routes.home },
-          { name: "Shop", href: routes.shop },
-          { name: category.name },
-        ]}
       />
       <Section>
         <ShopFilters

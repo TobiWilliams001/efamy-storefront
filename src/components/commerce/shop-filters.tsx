@@ -72,8 +72,8 @@ export function ShopFilters({
 
       <div
         className={cn(
-          "flex flex-col items-center justify-between gap-5 border-t pt-6 sm:flex-row",
-          showCategories && "mt-10",
+          "flex flex-col items-center justify-between gap-5 sm:flex-row",
+          showCategories && "mt-8",
         )}
       >
         <div className="flex flex-wrap items-center justify-center gap-2">

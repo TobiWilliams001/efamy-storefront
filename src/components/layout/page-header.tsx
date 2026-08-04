@@ -1,15 +1,10 @@
-import Link from "next/link";
-
 import { Container } from "@/components/layout/container";
 import { cn } from "@/lib/utils";
-
-type Crumb = { name: string; href?: string };
 
 type PageHeaderProps = {
   eyebrow?: string;
   title: React.ReactNode;
   description?: React.ReactNode;
-  breadcrumb?: Crumb[];
   action?: React.ReactNode;
   align?: "start" | "center";
   /** "ink" for the pages that should open with weight rather than warmth. */
@@ -20,7 +15,6 @@ export function PageHeader({
   eyebrow,
   title,
   description,
-  breadcrumb,
   action,
   align = "start",
   tone = "warm",
@@ -31,52 +25,12 @@ export function PageHeader({
   return (
     <section
       className={cn(
-        "border-b",
         onInk
-          ? "border-transparent bg-ink text-ink-foreground"
-          : "border-neutral-200 bg-linear-to-b from-clay/35 to-background",
+          ? "bg-ink text-ink-foreground"
+          : "bg-linear-to-b from-clay/35 to-background",
       )}
     >
       <Container className="py-12 sm:py-16 lg:py-20">
-        {breadcrumb?.length ? (
-          <nav aria-label="Breadcrumb" className="mb-7">
-            <ol
-              className={cn(
-                "flex flex-wrap items-center gap-2 text-sm",
-                onInk ? "text-ink-muted" : "text-muted-foreground",
-                centred && "justify-center",
-              )}
-            >
-              {breadcrumb.map((crumb, index) => (
-                <li key={crumb.name} className="flex items-center gap-2">
-                  {index > 0 ? (
-                    <span aria-hidden="true" className="opacity-50">
-                      /
-                    </span>
-                  ) : null}
-                  {crumb.href ? (
-                    <Link
-                      href={crumb.href}
-                      className="underline-offset-4 hover:underline"
-                    >
-                      {crumb.name}
-                    </Link>
-                  ) : (
-                    <span
-                      aria-current="page"
-                      className={
-                        onInk ? "text-ink-foreground" : "text-foreground"
-                      }
-                    >
-                      {crumb.name}
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ol>
-          </nav>
-        ) : null}
-
         <div
           className={cn(
             "flex flex-col gap-8",

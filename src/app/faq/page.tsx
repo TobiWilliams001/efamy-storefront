@@ -28,7 +28,6 @@ export default function FaqPage() {
         eyebrow="Help"
         title="Frequently asked questions"
         description="Heat levels, ingredients, delivery and stocking Efamy in your shop."
-        breadcrumb={[{ name: "Home", href: routes.home }, { name: "FAQ" }]}
       />
 
       <Section width="prose">

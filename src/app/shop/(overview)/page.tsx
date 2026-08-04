@@ -36,7 +36,6 @@ export default async function ShopPage({ searchParams }: PageProps<"/shop">) {
         eyebrow="Shop"
         title="The full range"
         description="Every chilli sauce and seasoning we make, in mild and hot."
-        breadcrumb={[{ name: "Home", href: routes.home }, { name: "Shop" }]}
       />
       <Section>
         <ShopFilters

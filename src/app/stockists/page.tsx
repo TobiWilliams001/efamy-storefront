@@ -43,10 +43,6 @@ export default function StockistsPage() {
         eyebrow="Stockists & wholesale"
         title="Where to buy Efamy"
         description="Right now the surest way to get the full range is to order direct. We are also building our list of retail stockists."
-        breadcrumb={[
-          { name: "Home", href: routes.home },
-          { name: "Stockists" },
-        ]}
       />
       <Section>
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">

@@ -114,7 +114,7 @@ export function ProductCard({
           {product.summary}
         </p>
 
-        <div className="mt-5 flex items-baseline gap-2 border-t pt-4">
+        <div className="mt-5 flex items-baseline gap-2">
           <span data-numeric className="font-medium text-brand">
             {hasSizeChoice ? `from ${formatPrice(price)}` : formatPrice(price)}
           </span>
