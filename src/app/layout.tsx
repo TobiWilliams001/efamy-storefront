@@ -40,9 +40,9 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: "/products/collections/range-lineup.jpg",
-        width: 1402,
-        height: 1122,
+        url: "/products/hero/hero-hot-sauce-trio.jpg",
+        width: 2048,
+        height: 768,
         alt: `The ${siteConfig.name} range of chilli sauces and seasonings`,
       },
     ],
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${siteConfig.name} | ${siteConfig.tagline}`,
     description: siteConfig.description,
-    images: ["/products/collections/range-lineup.jpg"],
+    images: ["/products/hero/hero-hot-sauce-trio.jpg"],
   },
   robots: {
     index: true,

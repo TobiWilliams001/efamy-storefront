@@ -7,62 +7,51 @@ import { routes } from "@/lib/routes";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative isolate overflow-hidden bg-background">
+      <Image
+        src="/products/hero/hero-hot-sauce-trio.jpg"
+        alt="Efamy pork, beef and chicken chilli sauces on a wooden board with fresh chillies and garlic"
+        fill
+        sizes="100vw"
+        preload
+        className="-z-10 object-cover object-right"
+      />
+
       {/*
-       * A large soft clay field behind the product. The cut-out has no
-       * background of its own, so without something to sit against it floats;
-       * this grounds it and gives the page depth without adding clutter.
+       * The photograph already has an empty, well-lit left third. The scrim
+       * only deepens it enough to hold text at narrow widths, where the jars
+       * shift under the headline.
        */}
       <div
         aria-hidden="true"
-        className="absolute top-1/2 right-0 hidden aspect-square w-184 translate-x-1/4 -translate-y-1/2 rounded-full bg-clay/35 blur-[2px] lg:block"
+        className="absolute inset-0 -z-10 bg-linear-to-r from-background via-background/85 to-background/10 sm:via-background/70 sm:to-transparent"
       />
 
-      <Container className="relative py-20 lg:py-28">
-        <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-8">
-          <div className="max-w-xl">
-            <p className="flex items-center gap-3 text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+      <Container>
+        <div className="flex min-h-140 items-center py-20 lg:min-h-160">
+          <div className="max-w-lg">
+            <p className="flex items-center gap-3 text-xs font-medium tracking-[0.18em] text-neutral-700 uppercase">
               <span
                 aria-hidden="true"
-                className="h-px w-6 shrink-0 bg-neutral-300"
+                className="h-px w-6 shrink-0 bg-neutral-400"
               />
-              Efamy Food Products
+              Made in the UK
             </p>
-
-            <h1 className="mt-6 text-[2.75rem] text-balance sm:text-6xl lg:text-7xl">
-              Authentic Ghanaian Flavours.
-              <span className="block text-brand">Crafted in the UK.</span>
+            <h1 className="mt-6 text-4xl text-balance sm:text-5xl lg:text-6xl">
+              Authentic Ghanaian Flavours. Crafted in the UK.
             </h1>
-
-            <p className="mt-7 max-w-md text-lg text-pretty text-muted-foreground">
-              Traditional recipes and premium ingredients, made for everyday
-              cooking. Chilli sauces in mild or hot, plus our seasoning mixes.
+            <p className="mt-6 max-w-md text-lg text-pretty text-neutral-700">
+              Chilli sauces in beans, beef, chicken, fish and pork, mild or hot,
+              alongside our seasoning mixes. No artificial preservatives.
             </p>
-
-            <div className="mt-10 flex flex-wrap items-center gap-4">
+            <div className="mt-9 flex flex-wrap gap-3">
               <Button asChild size="xl" variant="accent">
                 <Link href={routes.shop}>Shop Now</Link>
               </Button>
               <Button asChild size="xl" variant="outline">
-                <Link href={routes.shop}>Explore Products</Link>
+                <Link href={routes.about}>Our story</Link>
               </Button>
             </div>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 -z-10 rounded-full bg-clay/35 lg:hidden"
-            />
-            <Image
-              src="/products/transparent/range-lineup-cutout.png"
-              alt="The Efamy range: all purpose seasoning mix with chicken, beef and fish chilli sauces"
-              width={558}
-              height={447}
-              sizes="(min-width: 1024px) 620px, 90vw"
-              preload
-              className="h-auto w-full drop-shadow-[0_24px_40px_rgba(0,0,0,0.14)]"
-            />
           </div>
         </div>
       </Container>
