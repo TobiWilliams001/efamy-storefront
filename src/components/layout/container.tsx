@@ -1,9 +1,11 @@
 import { cn } from "@/lib/utils";
 
 const containerWidths = {
-  prose: "max-w-2xl",
+  /** 720px reading measure. */
+  prose: "max-w-180",
   narrow: "max-w-3xl",
-  default: "max-w-6xl",
+  /** 1280px site maximum. */
+  default: "max-w-7xl",
   wide: "max-w-360",
 } as const;
 

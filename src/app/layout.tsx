@@ -1,24 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { DM_Serif_Display, Manrope } from "next/font/google";
 
+import { Analytics } from "@/components/analytics";
 import { CartProvider } from "@/components/cart/cart-provider";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { siteConfig } from "@/config/site";
+import { organisationSchema, serialiseJsonLd } from "@/lib/structured-data";
 
 import "./globals.css";
 
-const inter = Inter({
+const manrope = Manrope({
   variable: "--font-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const dmSerifDisplay = DM_Serif_Display({
   variable: "--font-heading",
   subsets: ["latin"],
+  weight: "400",
   display: "swap",
-  axes: ["SOFT", "WONK", "opsz"],
 });
 
 export const metadata: Metadata = {
@@ -36,11 +38,20 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
+    images: [
+      {
+        url: "/products/collections/range-lineup.jpg",
+        width: 1402,
+        height: 1122,
+        alt: `The ${siteConfig.name} range of chilli sauces and seasonings`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
+    images: ["/products/collections/range-lineup.jpg"],
   },
   robots: {
     index: true,
@@ -49,14 +60,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#faf8f3",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en-GB"
-      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${manrope.variable} ${dmSerifDisplay.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <a
@@ -72,6 +83,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </main>
           <SiteFooter />
         </CartProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: serialiseJsonLd(organisationSchema()),
+          }}
+        />
+        <Analytics />
       </body>
     </html>
   );

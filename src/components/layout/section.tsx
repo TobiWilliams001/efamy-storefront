@@ -2,16 +2,17 @@ import { cn } from "@/lib/utils";
 
 import { Container, type ContainerWidth } from "./container";
 
+/** 72 / 96 / 120px at mobile / tablet / desktop, per the design system. */
 const sectionSpacing = {
-  sm: "py-10 sm:py-14",
-  default: "py-14 sm:py-20 lg:py-24",
-  lg: "py-20 sm:py-28 lg:py-32",
+  sm: "py-12 sm:py-16 lg:py-20",
+  default: "py-18 sm:py-24 lg:py-30",
+  lg: "py-24 sm:py-30 lg:py-40",
 } as const;
 
 const sectionSurfaces = {
   default: "bg-background",
-  muted: "bg-muted/50",
-  accent: "bg-accent text-accent-foreground",
+  muted: "bg-neutral-100",
+  clay: "bg-clay/40",
 } as const;
 
 type SectionProps = Omit<React.ComponentProps<"section">, "children"> & {

@@ -10,6 +10,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
+
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -26,43 +27,82 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
+
+  /* Brand accents. Used sparingly — the products carry the colour. */
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-gold: var(--gold);
+  --color-gold-ink: var(--gold-ink);
+  --color-sage: var(--sage);
+  --color-sage-ink: var(--sage-ink);
+  --color-clay: var(--clay);
+
+  --color-neutral-50: #faf8f3;
+  --color-neutral-100: #f3f0ea;
+  --color-neutral-200: #e5e0d8;
+  --color-neutral-300: #d5cec3;
+  --color-neutral-400: #b5ada1;
+  --color-neutral-500: #8b847a;
+  --color-neutral-600: #676159;
+  --color-neutral-700: #4c4742;
+  --color-neutral-800: #302d2a;
+  --color-neutral-900: #1c1a18;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 24px;
+  --radius-3xl: 24px;
+  --radius-4xl: 24px;
+
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 16px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Warm neutrals + a single chilli-red accent. All pairs meet WCAG AA. */
 :root {
-  --background: oklch(0.99 0.006 85);
-  --foreground: oklch(0.22 0.021 45);
+  --background: #faf8f3;
+  --foreground: #242424;
 
-  --card: oklch(1 0 0);
+  --card: #ffffff;
   --card-foreground: var(--foreground);
-  --popover: oklch(1 0 0);
+  --popover: #ffffff;
   --popover-foreground: var(--foreground);
 
-  --primary: oklch(0.52 0.19 29);
-  --primary-foreground: oklch(0.99 0.008 85);
+  /* Charcoal carries primary actions; chilli red is the exception, not the rule. */
+  --primary: #242424;
+  --primary-foreground: #ffffff;
 
-  --secondary: oklch(0.96 0.013 80);
-  --secondary-foreground: oklch(0.28 0.03 45);
+  --secondary: #f3f0ea;
+  --secondary-foreground: #302d2a;
 
-  --muted: oklch(0.96 0.011 80);
-  --muted-foreground: oklch(0.5 0.021 60);
+  --muted: #f3f0ea;
+  --muted-foreground: #676159;
 
-  --accent: oklch(0.93 0.045 80);
-  --accent-foreground: oklch(0.28 0.045 45);
+  --accent: #f3f0ea;
+  --accent-foreground: #302d2a;
 
-  --destructive: oklch(0.51 0.2 27);
+  --brand: #b52a2a;
+  --brand-hover: #962020;
+  --gold: #c89b2f;
+  --sage: #758c5b;
+  --clay: #d9c4aa;
 
-  --border: oklch(0.91 0.012 80);
-  --input: oklch(0.91 0.012 80);
-  --ring: oklch(0.52 0.19 29);
+  /*
+   * Brand gold and sage are fills. Against the ivory background they land at
+   * 2.4:1 and 3.5:1, so icons and text use these darkened variants instead —
+   * both clear 4.5:1.
+   */
+  --gold-ink: #8f6a1c;
+  --sage-ink: #66794e;
 
-  --radius: 0.5rem;
+  --destructive: #b52a2a;
+
+  --border: #e5e0d8;
+  --input: #d5cec3;
+  --ring: #b52a2a;
+
+  --radius: 12px;
 }
 
 @layer base {
@@ -80,11 +120,15 @@
     text-rendering: optimizeLegibility;
   }
 
+  /*
+   * DM Serif Display ships a single weight. Pinning headings to 400 avoids the
+   * browser synthesising a bolder face, which looks smeared at display sizes.
+   */
   h1,
   h2,
   h3,
   h4 {
-    @apply font-heading tracking-tight;
+    @apply font-heading font-normal tracking-tight;
   }
 }
 
