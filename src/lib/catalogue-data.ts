@@ -13,7 +13,6 @@ import type { Product, ProductCategory } from "@/types/product";
  */
 const PLACEHOLDER_PRICE = 799;
 
-// Transcribed from the jars.
 const STORAGE_SAUCE =
   "Store in a cool, dry place. Refrigerate after opening and use within 4 weeks.";
 const STORAGE_DRY =

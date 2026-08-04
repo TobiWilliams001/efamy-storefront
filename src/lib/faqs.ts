@@ -51,7 +51,6 @@ export const faqs: Faq[] = [
   },
 ];
 
-/** The subset worth repeating on every product page. */
 export const productFaqs: Faq[] = faqs.filter((faq) =>
   [
     "What is the difference between mild and hot?",

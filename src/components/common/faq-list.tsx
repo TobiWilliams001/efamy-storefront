@@ -3,10 +3,7 @@ import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Faq } from "@/lib/faqs";
 
-/**
- * Native details/summary rather than a JS accordion: keyboard and screen reader
- * behaviour comes free, it works before hydration, and it ships no JavaScript.
- */
+// Native details/summary: keyboard and screen reader behaviour free, zero JS.
 export function FaqList({
   faqs,
   className,

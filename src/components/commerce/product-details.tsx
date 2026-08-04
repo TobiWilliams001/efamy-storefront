@@ -17,10 +17,6 @@ function Block({
   );
 }
 
-/**
- * Everything below the buy button. Ordered by the questions a food shopper
- * asks: what is in it, how do I use it, how do I keep it, how does it reach me.
- */
 export function ProductDetails({ product }: { product: Product }) {
   const hasLabelInfo =
     product.ingredients || product.allergens || product.nutrition;

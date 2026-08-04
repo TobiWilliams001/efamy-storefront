@@ -1,9 +1,6 @@
 import Script from "next/script";
 
-/**
- * Google Analytics 4. Renders nothing unless NEXT_PUBLIC_GA_ID is set, so
- * local and preview environments stay out of the production data.
- */
+// Renders nothing unless NEXT_PUBLIC_GA_ID is set, keeping preview out of prod data.
 export function Analytics() {
   const id = process.env.NEXT_PUBLIC_GA_ID;
 

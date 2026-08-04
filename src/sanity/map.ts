@@ -1,9 +1,6 @@
 import type { Product, ProductCategory, ProductImage } from "@/types/product";
 
-/**
- * GROQ already projects to our field names, so this only normalises what the
- * Content Lake returns as null into the optional shapes our types expect.
- */
+// GROQ already projects our field names; this only normalises null to undefined.
 
 type RawImage = {
   url?: string | null;

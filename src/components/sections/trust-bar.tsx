@@ -2,8 +2,6 @@ import { CreditCard, Leaf, MapPin, Soup } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 
-// Ordered to the brand messaging hierarchy: heritage, provenance, quality,
-// then reassurance.
 const signals = [
   { icon: Soup, label: "Authentic Ghanaian recipes" },
   { icon: MapPin, label: "Proudly made in the UK" },

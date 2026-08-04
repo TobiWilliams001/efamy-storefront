@@ -16,11 +16,7 @@ import {
 } from "@/sanity/queries";
 import type { Product, ProductCategory } from "@/types/product";
 
-/**
- * The single seam between the site and its content source. Reads from Sanity
- * when it is configured and falls back to the static catalogue otherwise, so
- * the site still builds and renders before the CMS is populated.
- */
+// The single seam between the site and its content source.
 
 const CACHE = { next: { revalidate: 60, tags: ["catalogue"] } };
 
