@@ -1,0 +1,57 @@
+import Image from "next/image";
+
+import { Container } from "@/components/layout/container";
+import { dishes } from "@/lib/dishes";
+import { productAccent } from "@/lib/product-accent";
+
+export function MealPairings() {
+  return (
+    <section aria-labelledby="pairings-heading" className="bg-background py-14">
+      <Container>
+        <div className="text-center">
+          <h2 id="pairings-heading" className="text-2xl sm:text-3xl">
+            Perfect with every meal
+          </h2>
+          <span
+            aria-hidden="true"
+            className="mx-auto mt-4 block h-px w-16 bg-gold"
+          />
+        </div>
+
+        {/*
+         * Horizontal scroll on small screens rather than a carousel: no
+         * JavaScript, and the native scrollbar tells people there is more.
+         */}
+        <ul className="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 sm:justify-center sm:gap-8 sm:overflow-visible lg:gap-10">
+          {dishes.map((dish) => (
+            <li
+              key={dish.name}
+              className="flex w-24 shrink-0 snap-start flex-col items-center gap-3 sm:w-auto"
+            >
+              <div className="relative size-24 overflow-hidden rounded-full ring-1 ring-neutral-200 lg:size-28">
+                {dish.image ? (
+                  <Image
+                    src={dish.image}
+                    alt=""
+                    fill
+                    sizes="112px"
+                    className="object-cover"
+                  />
+                ) : (
+                  <span
+                    aria-hidden="true"
+                    style={{ backgroundColor: productAccent(dish.name) }}
+                    className="block size-full opacity-25"
+                  />
+                )}
+              </div>
+              <p className="text-center text-sm font-medium text-balance">
+                {dish.name}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
+  );
+}
