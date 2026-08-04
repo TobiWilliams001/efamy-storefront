@@ -32,17 +32,18 @@ export default async function ShopPage({ searchParams }: PageProps<"/shop">) {
   return (
     <>
       <PageHeader
+        align="center"
         eyebrow="Shop"
         title="The full range"
         description="Every chilli sauce and seasoning we make, in mild and hot."
         breadcrumb={[{ name: "Home", href: routes.home }, { name: "Shop" }]}
       />
       <Section>
-        <ShopFilters categories={categories} filters={filters} />
-
-        <p className="mb-6 text-sm text-muted-foreground" aria-live="polite">
-          {visible.length} {visible.length === 1 ? "product" : "products"}
-        </p>
+        <ShopFilters
+          categories={categories}
+          filters={filters}
+          count={visible.length}
+        />
 
         <ProductGrid
           products={visible}

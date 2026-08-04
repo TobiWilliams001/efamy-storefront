@@ -9,22 +9,24 @@ import {
 import { cn } from "@/lib/utils";
 import type { ProductCategory } from "@/types/product";
 
-type FilterChipProps = {
+type ChipProps = {
   href: string;
   active: boolean;
+  size?: "lg" | "sm";
   children: React.ReactNode;
 };
 
-function FilterChip({ href, active, children }: FilterChipProps) {
+function FilterChip({ href, active, size = "lg", children }: ChipProps) {
   return (
     <Link
       href={href}
       aria-current={active ? "true" : undefined}
       className={cn(
-        "inline-flex h-9 items-center rounded-full border px-4 text-sm transition-colors",
+        "inline-flex items-center rounded-full border font-medium transition-colors",
+        size === "lg" ? "h-11 px-6 text-sm" : "h-9 px-4 text-sm",
         active
-          ? "border-primary bg-primary text-primary-foreground"
-          : "border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground",
+          ? "border-brand bg-brand text-white"
+          : "border-neutral-300 bg-card text-muted-foreground hover:border-foreground/40 hover:text-foreground",
       )}
     >
       {children}
@@ -37,22 +39,24 @@ type ShopFiltersProps = {
   filters: ProductFilters;
   /** Omitted on category pages, where the category is fixed by the route. */
   showCategories?: boolean;
+  count: number;
 };
 
 export function ShopFilters({
   categories,
   filters,
   showCategories = true,
+  count,
 }: ShopFiltersProps) {
   return (
-    <div className="mb-10 flex flex-col gap-5 border-b pb-6">
+    <div className="mb-12">
       {showCategories ? (
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap justify-center gap-3">
           <FilterChip
             href={buildQuery(filters, { category: undefined })}
             active={!filters.category}
           >
-            All
+            All products
           </FilterChip>
           {categories.map((category) => (
             <FilterChip
@@ -66,26 +70,39 @@ export function ShopFilters({
         </div>
       ) : null}
 
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-sm text-muted-foreground">Heat</span>
+      <div
+        className={cn(
+          "flex flex-col items-center justify-between gap-5 border-t pt-6 sm:flex-row",
+          showCategories && "mt-10",
+        )}
+      >
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <span className="mr-1 text-sm text-muted-foreground">Heat</span>
           <FilterChip
+            size="sm"
             href={buildQuery(filters, { heat: undefined })}
             active={!filters.heat}
           >
             Any
           </FilterChip>
-          {heatOptions.map((band) => (
+          {heatOptions.map((option) => (
             <FilterChip
-              key={band.value}
-              href={buildQuery(filters, { heat: band.value })}
-              active={filters.heat === band.value}
+              key={option.value}
+              size="sm"
+              href={buildQuery(filters, { heat: option.value })}
+              active={filters.heat === option.value}
             >
-              {band.label}
+              {option.label}
             </FilterChip>
           ))}
         </div>
-        <SortSelect value={filters.sort} />
+
+        <div className="flex items-center gap-5">
+          <p data-numeric className="text-sm text-muted-foreground">
+            {count} {count === 1 ? "product" : "products"}
+          </p>
+          <SortSelect value={filters.sort} />
+        </div>
       </div>
     </div>
   );

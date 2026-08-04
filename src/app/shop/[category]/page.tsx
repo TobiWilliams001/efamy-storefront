@@ -62,6 +62,7 @@ export default async function CategoryPage({
   return (
     <>
       <PageHeader
+        align="center"
         eyebrow="Shop"
         title={category.name}
         description={category.description}
@@ -75,12 +76,9 @@ export default async function CategoryPage({
         <ShopFilters
           categories={categories}
           filters={filters}
+          count={visible.length}
           showCategories={false}
         />
-
-        <p className="mb-6 text-sm text-muted-foreground" aria-live="polite">
-          {visible.length} {visible.length === 1 ? "product" : "products"}
-        </p>
 
         <ProductGrid
           products={visible}
