@@ -17,6 +17,6 @@ export const dishes: Dish[] = [
   { name: "Waakye" },
   { name: "Yam & Plantain" },
   { name: "Kelewele", image: "/dishes/kelewele.jpg" },
-  { name: "Rice & Stew" },
+  { name: "Rice & Stew", image: "/dishes/rice-stew.jpg" },
   { name: "Fried Eggs" },
 ];
