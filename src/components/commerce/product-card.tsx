@@ -46,18 +46,13 @@ export function ProductCard({
         className,
       )}
     >
-      {/*
-       * White surface, because the packshots are JPEGs shot on white. On a
-       * tinted background the image's own white rectangle shows through. Square
-       * rather than portrait so the landscape case shots do not shrink to
-       * nothing beside the upright jars.
-       */}
+      {/* Square so the landscape case shots keep their scale beside the jars. */}
       <span
         aria-hidden="true"
         style={{ backgroundColor: accent }}
         className="absolute inset-x-0 top-0 z-10 h-1"
       />
-      <div className="relative aspect-square overflow-hidden bg-white">
+      <div className="relative aspect-square overflow-hidden bg-linear-to-b from-white to-neutral-100">
         <Image
           src={image.url}
           alt={image.alt}
