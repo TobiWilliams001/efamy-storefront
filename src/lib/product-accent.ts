@@ -3,20 +3,20 @@
  * accents only: badges, chips and small highlights. Never a page background.
  */
 const ACCENTS: Record<string, string> = {
-  beans: "#5C7A3F",
+  beans: "#556B2F",
   beef: "#8D5446",
   chicken: "#E58D43",
-  fish: "#8EBB63",
-  goat: "#8D5446",
+  fish: "#8DBF3C",
+  goat: "#7A4A3E",
   pork: "#C34B6A",
-  turkey: "#E58D43",
-  seasoning: "#C89B2F",
-  kelewele: "#E07B39",
+  turkey: "#D96A1E",
+  seasoning: "#C89B3C",
+  kelewele: "#D96A1E",
   coat: "#294D96",
-  oil: "#C89B2F",
+  oil: "#C89B3C",
 };
 
-const FALLBACK = "#C89B2F";
+const FALLBACK = "#C89B3C";
 
 /** Matched on the slug so a new product picks up its colour without extra data. */
 export function productAccent(slug: string): string {

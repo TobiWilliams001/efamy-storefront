@@ -87,13 +87,13 @@
   --accent-foreground: #302d2a;
 
   /*
-   * Sampled from the logo: the swirl is #fc0d13 scarlet and #cb9954 tan.
-   * Both are too light to carry text — 3.8:1 and 2.4:1 on ivory — so the
-   * bright values stay decorative and each has an accessible sibling.
+   * The logo swirl is #fc0d13 scarlet and #cb9954 tan, both too light to carry
+   * text at 3.8:1 and 2.4:1 on ivory, so they stay decorative. Actions use a
+   * deeper burgundy, which reaches 7.9:1 as text and 8.4:1 behind white.
    */
   --brand-bright: #fc0d13;
-  --brand: #d40a10;
-  --brand-hover: #b00810;
+  --brand: #8b2d2d;
+  --brand-hover: #7a2626;
   --gold: #cb9954;
   --sage: #758c5b;
   --clay: #e3ceb0;
@@ -110,11 +110,11 @@
   --ink-muted: #d8bfae;
   --sage-ink: #66794e;
 
-  --destructive: #d40a10;
+  --destructive: #a01f1f;
 
   --border: #e5e0d8;
   --input: #d5cec3;
-  --ring: #d40a10;
+  --ring: #8b2d2d;
 
   --radius: 12px;
 }
