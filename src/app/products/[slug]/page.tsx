@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
 
 import { AddToCart } from "@/components/cart/add-to-cart";
+import { StickyAddToCart } from "@/components/cart/sticky-add-to-cart";
 import { HeatBadge } from "@/components/commerce/heat-badge";
 import { ProductDetails } from "@/components/commerce/product-details";
 import { ProductGallery } from "@/components/commerce/product-gallery";
@@ -114,6 +115,7 @@ export default async function ProductPage({
             <Separator className="my-8" />
 
             <AddToCart product={product} />
+            <StickyAddToCart product={product} />
 
             <ul className="mt-7 space-y-2 text-sm text-muted-foreground">
               {[
