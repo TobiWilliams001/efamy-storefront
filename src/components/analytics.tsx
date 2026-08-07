@@ -1,12 +1,20 @@
+"use client";
+
+import { useSyncExternalStore } from "react";
 import Script from "next/script";
 
-// Renders nothing unless NEXT_PUBLIC_GA_ID is set, keeping preview out of prod data.
-export function Analytics() {
-  const id = process.env.NEXT_PUBLIC_GA_ID;
+import { consentStore } from "@/lib/consent";
 
-  if (!id) {
-    return null;
-  }
+// Loads nothing until analytics cookies are consented to, and nothing at all
+// unless an ID is set, which keeps preview traffic out of the production data.
+export function Analytics({ id }: { id?: string }) {
+  const choice = useSyncExternalStore(
+    consentStore.subscribe,
+    consentStore.getSnapshot,
+    consentStore.getServerSnapshot,
+  );
+
+  if (!id || choice !== "accepted") return null;
 
   return (
     <>

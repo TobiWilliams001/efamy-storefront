@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { DM_Serif_Display, Manrope } from "next/font/google";
 
 import { Analytics } from "@/components/analytics";
+import { CookieConsent } from "@/components/cookie-consent";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { CartProvider } from "@/components/cart/cart-provider";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -91,7 +92,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             __html: serialiseJsonLd(organisationSchema()),
           }}
         />
-        <Analytics />
+        <CookieConsent />
+        <Analytics id={process.env.NEXT_PUBLIC_GA_ID} />
       </body>
     </html>
   );
