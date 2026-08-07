@@ -70,12 +70,31 @@ The rule of thumb: `app/` fetches and composes, `components/` renders, `lib/` co
 
 Brand colours live as CSS variables in `src/app/globals.css`:
 
-- Warm off-white background with warm near-black text
-- **Chilli red** as the single accent, used for actions and emphasis
-- **Warm sand** for quiet emphasis (badges, highlighted surfaces)
-- `Fraunces` for headings, `Inter` for body text
+- Warm ivory background, charcoal text
+- Accents sampled from the logo: `#FC0D13` scarlet and `#CB9954` tan
+- Neither is legible as text, so each has a darker sibling. `--gold` fills,
+  `--gold-ink` for icons and labels
+- Burgundy `#8B2D2D` carries actions; deep maroon `--ink` for the footer
+- `DM Serif Display` for headings, `Manrope` for body
 
-All foreground/background pairs meet WCAG AA at normal text sizes.
+Every foreground/background pair meets WCAG AA. See
+[decisions.md](docs/decisions.md) for why the palette has two tiers.
+
+## Documentation
+
+| Doc                                                    | For                                           |
+| ------------------------------------------------------ | --------------------------------------------- |
+| [Getting started](docs/getting-started.md)             | Running the site and Studio locally           |
+| [Architecture](docs/architecture.md)                   | How it fits together                          |
+| [Decisions](docs/decisions.md)                         | Why the non-obvious choices were made         |
+| [Deployment](docs/deployment.md)                       | Shipping the site and the Studio              |
+| [Environment variables](docs/environment-variables.md) | What each one does. No values                 |
+| [Integrations](docs/integrations.md)                   | Third-party services, live and planned        |
+| [CMS guide](docs/cms-guide.md)                         | Managing products. Written for the client     |
+| [Content guide](docs/content-guide.md)                 | Where copy lives and the rules for writing it |
+| [Troubleshooting](docs/troubleshooting.md)             | Things that have actually broken              |
+| [Handover](docs/handover.md)                           | Ownership, backups, launch checklist          |
+| [Payments](docs/payments.md)                           | Rules for money in this codebase              |
 
 ## Roadmap
 
