@@ -31,13 +31,13 @@ export type CartLine = {
   quantity: number;
 };
 
-function lineId(productId: string, size: string): string {
+export function lineId(productId: string, size: string): string {
   return `${productId}:${size}`;
 }
 
-type CartState = { lines: CartLine[]; ready: boolean };
+export type CartState = { lines: CartLine[]; ready: boolean };
 
-type CartAction =
+export type CartAction =
   | {
       type: "add";
       product: AddableProduct;
@@ -53,7 +53,7 @@ function clamp(quantity: number): number {
   return Math.max(1, Math.min(MAX_QUANTITY, Math.round(quantity)));
 }
 
-function reducer(state: CartState, action: CartAction): CartState {
+export function reducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case "hydrate":
       return { lines: action.lines, ready: true };
