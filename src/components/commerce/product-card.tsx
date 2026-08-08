@@ -39,6 +39,15 @@ export function ProductCard({
     cheapest?.compareAtPrice !== undefined && cheapest.compareAtPrice > price;
   const hasSizeChoice = variants.length > 1;
 
+  /*
+   * Product names carry the strength ("Beef Chilli Sauce, Hot") because that is
+   * what is printed on the jar, but the card shows it on its own coloured line
+   * below. Strip the suffix so it is not said twice.
+   */
+  const name = heat
+    ? product.name.replace(new RegExp(`,\\s*${heatLabels[heat]}$`, "i"), "")
+    : product.name;
+
   return (
     <Card
       className={cn(
@@ -91,7 +100,7 @@ export function ProductCard({
             href={routes.product(product.slug)}
             className="decoration-1 underline-offset-4 group-hover:underline after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
           >
-            {product.name}
+            {name}
           </Link>
         </h3>
         {heat ? (

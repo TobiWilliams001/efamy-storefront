@@ -23,7 +23,10 @@ export function ProductGrid({
   return (
     <ul
       className={cn(
-        "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+        "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3",
+        /* Only open a fourth column when there is a fourth card to put in it,
+           otherwise a three-item row leaves a gap that reads as broken. */
+        products.length >= 4 && "xl:grid-cols-4",
         className,
       )}
     >
