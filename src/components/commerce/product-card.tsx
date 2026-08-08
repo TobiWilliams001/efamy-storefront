@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { CardAddToCart } from "@/components/commerce/card-add-to-cart";
+import { DietaryBadges } from "@/components/commerce/dietary-badges";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { formatPrice } from "@/lib/format";
@@ -108,6 +109,12 @@ export function ProductCard({
         <p className="mt-2 line-clamp-2 text-sm text-pretty text-muted-foreground">
           {product.summary}
         </p>
+
+        <DietaryBadges
+          dietary={product.dietary}
+          allergens={product.allergens}
+          className="mt-3"
+        />
 
         <div className="mt-5 flex items-baseline gap-2">
           <span data-numeric className="font-medium text-brand">

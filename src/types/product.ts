@@ -65,6 +65,8 @@ export type ProductSummary = Pick<
   | "heat"
   | "image"
   | "category"
+  | "dietary"
+  | "allergens"
   | "bundleItems"
   | "isNew"
 >;
