@@ -128,11 +128,18 @@ export function ProductDetails({ product }: { product: Product }) {
         </Block>
       ) : null}
 
-      {product.storage ? (
+      {product.storage || product.shelfLife ? (
         <Block title="Storage">
-          <p className="text-sm text-pretty text-muted-foreground">
-            {product.storage}
-          </p>
+          {product.storage ? (
+            <p className="text-sm text-pretty text-muted-foreground">
+              {product.storage}
+            </p>
+          ) : null}
+          {product.shelfLife ? (
+            <p className="mt-2 text-sm text-muted-foreground">
+              Shelf life: {product.shelfLife}
+            </p>
+          ) : null}
         </Block>
       ) : null}
 

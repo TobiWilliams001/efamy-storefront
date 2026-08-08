@@ -45,6 +45,10 @@ export type Product = {
   allergens?: string[];
   dietary?: string[];
   storage?: string;
+  /** e.g. "12 months unopened". Sits with storage on the product page. */
+  shelfLife?: string;
+  /** Scheme names only, e.g. "SALSA", "BRC". Never invent one. */
+  certifications?: string[];
   servingSuggestions?: string[];
   nutrition?: { label: string; value: string }[];
   image: ProductImage;

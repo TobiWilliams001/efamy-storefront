@@ -67,6 +67,8 @@ export function mapProduct(raw: Record<string, unknown>): Product | null {
     allergens: list(raw.allergens),
     dietary: list(raw.dietary),
     storage: typeof raw.storage === "string" ? raw.storage : undefined,
+    shelfLife: typeof raw.shelfLife === "string" ? raw.shelfLife : undefined,
+    certifications: list(raw.certifications),
     servingSuggestions: list(raw.servingSuggestions),
     nutrition:
       Array.isArray(raw.nutrition) && raw.nutrition.length > 0

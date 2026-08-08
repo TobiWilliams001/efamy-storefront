@@ -20,6 +20,8 @@ const PRODUCT_FIELDS = `
   allergens,
   dietary,
   storage,
+  shelfLife,
+  certifications,
   servingSuggestions,
   nutrition[]{label, value},
   image{${IMAGE_FIELDS}},

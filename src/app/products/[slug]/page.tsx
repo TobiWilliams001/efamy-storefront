@@ -117,6 +117,19 @@ export default async function ProductPage({
             <AddToCart product={product} />
             <StickyAddToCart product={product} />
 
+            {product.certifications?.length ? (
+              <ul className="mt-7 flex flex-wrap gap-2">
+                {product.certifications.map((scheme) => (
+                  <li
+                    key={scheme}
+                    className="rounded-full border border-neutral-300 px-3 py-1 text-xs font-medium"
+                  >
+                    {scheme}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+
             <ul className="mt-7 space-y-2 text-sm text-muted-foreground">
               {[
                 "Authentic Ghanaian recipe",

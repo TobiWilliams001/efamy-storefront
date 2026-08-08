@@ -185,6 +185,21 @@ export const product = defineType({
         'Copy from the jar, for example "Refrigerate after opening and use within 4 weeks."',
     }),
     defineField({
+      name: 'shelfLife',
+      title: 'Shelf life',
+      type: 'string',
+      group: 'label',
+      description: 'As printed, for example "12 months unopened".',
+    }),
+    defineField({
+      name: 'certifications',
+      type: 'array',
+      group: 'label',
+      description:
+        'Scheme names only, such as SALSA or BRC. Only add a scheme the business actually holds.',
+      of: [defineArrayMember({type: 'string'})],
+    }),
+    defineField({
       name: 'nutrition',
       title: 'Nutrition (per 100g)',
       type: 'array',
