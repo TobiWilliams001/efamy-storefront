@@ -17,7 +17,7 @@ export function CallToAction() {
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Button asChild size="xl">
-            <Link href={routes.shop}>Shop all products</Link>
+            <Link href={routes.shop}>Shop the range</Link>
           </Button>
           <Button asChild size="xl" variant="outline">
             <Link href={routes.contact}>Ask a question</Link>

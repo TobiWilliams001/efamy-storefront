@@ -85,7 +85,7 @@ export default async function CategoryPage({
               description="Try a different heat level, or browse the full range."
               action={
                 <Button asChild size="lg" variant="outline">
-                  <Link href={routes.shop}>Browse all products</Link>
+                  <Link href={routes.shop}>Shop the range</Link>
                 </Button>
               }
             />

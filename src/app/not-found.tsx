@@ -17,7 +17,7 @@ export default function NotFound() {
         action={
           <div className="flex flex-wrap justify-center gap-3">
             <Button asChild size="xl">
-              <Link href={routes.shop}>Browse the shop</Link>
+              <Link href={routes.shop}>Shop the range</Link>
             </Button>
             <Button asChild size="xl" variant="outline">
               <Link href={routes.home}>Go home</Link>

@@ -24,7 +24,7 @@ export function CartContents() {
       <EmptyState
         icon={ShoppingBag}
         title="Your basket is empty"
-        description="Once you add something, it will show up here."
+        description="Nothing in it yet. The sauces are a good place to start."
         action={
           <Button asChild size="xl">
             <Link href={routes.shop}>Start shopping</Link>

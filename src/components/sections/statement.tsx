@@ -34,7 +34,7 @@ export function Statement() {
             </p>
             <div className="mt-8">
               <Button asChild size="xl" variant="gold">
-                <Link href={routes.about}>Learn more</Link>
+                <Link href={routes.about}>Read our story</Link>
               </Button>
             </div>
           </div>
