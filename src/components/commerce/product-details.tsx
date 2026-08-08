@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { FaqList } from "@/components/common/faq-list";
 import { productFaqs } from "@/lib/faqs";
+import { recipesForProduct } from "@/lib/recipes";
 import { routes } from "@/lib/routes";
 import type { Product } from "@/types/product";
 
@@ -21,6 +22,7 @@ function Block({
 }
 
 export function ProductDetails({ product }: { product: Product }) {
+  const relatedRecipes = recipesForProduct(product.slug);
   const hasLabelInfo =
     product.ingredients || product.allergens || product.nutrition;
 
@@ -37,6 +39,34 @@ export function ProductDetails({ product }: { product: Product }) {
                 >
                   {item.name}
                 </Link>
+              </li>
+            ))}
+          </ul>
+        </Block>
+      ) : null}
+
+      {relatedRecipes.length ? (
+        <Block title="Cook with it">
+          <ul className="space-y-3">
+            {relatedRecipes.map((recipe) => (
+              <li key={recipe.slug}>
+                <Link
+                  href={routes.recipe(recipe.slug)}
+                  className="group flex items-baseline justify-between gap-4"
+                >
+                  <span className="text-sm font-medium underline-offset-4 group-hover:underline">
+                    {recipe.title}
+                  </span>
+                  <span
+                    data-numeric
+                    className="shrink-0 text-xs text-muted-foreground"
+                  >
+                    {recipe.prepMinutes + recipe.cookMinutes} min
+                  </span>
+                </Link>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {recipe.summary}
+                </p>
               </li>
             ))}
           </ul>

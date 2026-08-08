@@ -36,6 +36,39 @@ export function organisationSchema() {
   };
 }
 
+export function recipeSchema(recipe: {
+  title: string;
+  summary: string;
+  slug: string;
+  serves: number;
+  prepMinutes: number;
+  cookMinutes: number;
+  ingredients: string[];
+  method: string[];
+  image?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Recipe",
+    name: recipe.title,
+    description: recipe.summary,
+    url: absoluteUrl(routes.recipe(recipe.slug)),
+    ...(recipe.image ? { image: absoluteUrl(recipe.image) } : {}),
+    recipeYield: `${recipe.serves} servings`,
+    prepTime: `PT${recipe.prepMinutes}M`,
+    cookTime: `PT${recipe.cookMinutes}M`,
+    totalTime: `PT${recipe.prepMinutes + recipe.cookMinutes}M`,
+    recipeCuisine: "Ghanaian",
+    recipeIngredient: recipe.ingredients,
+    recipeInstructions: recipe.method.map((step, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      text: step,
+    })),
+    author: { "@type": "Organization", name: siteConfig.legalName },
+  };
+}
+
 export function productSchema(product: Product) {
   return {
     "@context": "https://schema.org",

@@ -3,6 +3,8 @@ export const routes = {
   shop: "/shop",
   category: (slug: string) => `/shop/${slug}`,
   product: (slug: string) => `/products/${slug}`,
+  recipes: "/recipes",
+  recipe: (slug: string) => `/recipes/${slug}`,
   about: "/about",
   contact: "/contact",
   stockists: "/stockists",

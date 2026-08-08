@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { getCategories, getProducts } from "@/lib/catalogue";
 import { absoluteUrl } from "@/lib/format";
+import { recipes } from "@/lib/recipes";
 import { routes } from "@/lib/routes";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -13,6 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
     { path: routes.home, priority: 1 },
     { path: routes.shop, priority: 0.9 },
+    { path: routes.recipes, priority: 0.8 },
     { path: routes.about, priority: 0.7 },
     { path: routes.stockists, priority: 0.6 },
     { path: routes.contact, priority: 0.6 },
@@ -32,6 +34,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: absoluteUrl(routes.category(category.slug)),
       changeFrequency: "weekly" as const,
       priority: 0.8,
+    })),
+    ...recipes.map((recipe) => ({
+      url: absoluteUrl(routes.recipe(recipe.slug)),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
     ...products.map((product) => ({
       url: absoluteUrl(routes.product(product.slug)),
