@@ -102,7 +102,23 @@ been completed, so **it cannot take a real payment or pay money out**. Test mode
 works fully; live mode does not exist yet. Completing that — business details,
 bank account, ID verification — is Efamy's to do and nobody else can.
 
-### Known limitation: idempotency is per-instance
+### Why session creation has no idempotency key
+
+The obvious key is a hash of the basket. It is wrong twice over, and both were
+found the hard way:
+
+1. **It is shared between customers.** Two people buying the same jar produce
+   the same key, so Stripe replays the first person's session to the second —
+   handing them someone else's email and delivery address.
+2. **It pins the request to its first parameters.** Changing anything about the
+   session, such as a shipping rate, makes every repeat of that basket fail for
+   24 hours with `StripeIdempotencyError`.
+
+There is no double-charge to guard against: creating a second Checkout Session
+costs nothing and only one of them can be paid. The submit button disabling
+itself while the request is in flight is what actually stops double clicks.
+
+### Known limitation: webhook idempotency is per-instance
 
 The webhook keeps handled event ids in a module-level `Set`. On Vercel each
 serverless instance has its own memory, so a redelivery routed to a different
