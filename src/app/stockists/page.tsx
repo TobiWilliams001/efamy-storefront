@@ -43,7 +43,7 @@ export default function StockistsPage() {
         tone="ink"
         eyebrow="Stockists & wholesale"
         title="Where to buy Efamy"
-        description="Right now the surest way to get the full range is to order direct. We are also building our list of retail stockists."
+        description="Order the full range direct, or pick up a jar from one of the independent grocers who have carried Efamy for years."
       />
       <Section spacing="afterHeader">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
@@ -55,8 +55,9 @@ export default function StockistsPage() {
             />
             <h2 className="mt-5 font-heading text-2xl">Buy online</h2>
             <p className="mt-3 text-pretty text-muted-foreground">
-              Every sauce and seasoning we make, delivered across the UK.
-              Ordering direct is the surest way to get the full range.
+              Every sauce and seasoning we make, delivered across the UK. Shops
+              carry a selection; ordering direct is the only way to get all of
+              it.
             </p>
             <div className="mt-8">
               <Button asChild size="xl" variant="accent">
@@ -65,13 +66,19 @@ export default function StockistsPage() {
             </div>
           </div>
 
-          <div className="flex flex-col rounded-lg border border-dashed border-neutral-300 p-8 sm:p-10">
+          <div className="flex flex-col rounded-lg border border-neutral-200 p-8 sm:p-10">
             <Store
               aria-hidden="true"
               className="size-6 text-muted-foreground"
               strokeWidth={1.75}
             />
             <h2 className="mt-5 font-heading text-2xl">Find us in store</h2>
+            {stockists.length > 0 ? (
+              <p className="mt-3 text-pretty text-muted-foreground">
+                Independent grocers who stock Efamy. Stock varies from shop to
+                shop, so it is worth ringing ahead for a particular jar.
+              </p>
+            ) : null}
 
             {stockists.length === 0 ? (
               <>
@@ -119,6 +126,16 @@ export default function StockistsPage() {
                     </ul>
                   </div>
                 ))}
+                <p className="text-sm text-pretty text-muted-foreground">
+                  Seen Efamy somewhere that is not on this list?{" "}
+                  <Link
+                    href={routes.contact}
+                    className="underline underline-offset-4"
+                  >
+                    Tell us
+                  </Link>{" "}
+                  and we will add them.
+                </p>
               </div>
             )}
           </div>
