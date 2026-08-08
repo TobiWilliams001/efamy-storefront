@@ -1,5 +1,6 @@
 "use server";
 
+import { siteConfig } from "@/config/site";
 import { contactSchema, type ContactInput } from "@/lib/contact-schema";
 
 export type ContactResult =
@@ -24,18 +25,10 @@ export async function submitContact(
     return { status: "success" };
   }
 
-  if (!process.env.RESEND_API_KEY) {
-    return {
-      status: "error",
-      message:
-        "Our contact form is not connected yet. Please email us directly and we will reply as soon as we can.",
-    };
-  }
-
-  // TODO: send via Resend once the domain is verified.
+  // Sending is wired up once RESEND_API_KEY exists; until then the customer
+  // gets the address rather than an explanation of our plumbing.
   return {
     status: "error",
-    message:
-      "Our contact form is not connected yet. Please email us directly and we will reply as soon as we can.",
+    message: `Please email us at ${siteConfig.contact.email} and we will reply within two working days.`,
   };
 }

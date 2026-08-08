@@ -14,11 +14,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-/**
- * Placeholder until Stripe Checkout is connected. Deliberately does not collect
- * any payment or address details. A form that looks real but goes nowhere is
- * worse than an honest message.
- */
 export default function CheckoutPage() {
   return (
     <>
@@ -26,8 +21,8 @@ export default function CheckoutPage() {
       <Section spacing="afterHeader" width="narrow">
         <EmptyState
           icon={CreditCard}
-          title="Online payment is being set up"
-          description="We are finishing our secure checkout. Until it is live, email us with what you would like and we will arrange your order and delivery."
+          title="Order by email"
+          description="Send us your basket and we will confirm your order, delivery and payment by return. We usually reply within two working days."
           action={
             <div className="flex flex-wrap justify-center gap-3">
               <Button asChild size="xl" variant="accent">
