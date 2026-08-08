@@ -154,8 +154,14 @@
     scroll-behavior: smooth;
   }
 
+  /*
+   * Manrope's 400 sits lighter than most sans faces at the same nominal weight
+   * and reads thin against warm ivory. 450 is a real cut on the variable font,
+   * so this costs nothing and is not a synthesised bold.
+   */
   body {
     @apply bg-background text-foreground;
+    font-weight: 450;
     text-rendering: optimizeLegibility;
   }
 
