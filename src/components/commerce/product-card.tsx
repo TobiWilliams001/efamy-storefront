@@ -6,7 +6,6 @@ import { DietaryBadges } from "@/components/commerce/dietary-badges";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { formatPrice } from "@/lib/format";
-import { productAccent } from "@/lib/product-accent";
 import { routes } from "@/lib/routes";
 import { heatLabels } from "@/components/commerce/heat-badge";
 import { cn } from "@/lib/utils";
@@ -39,7 +38,6 @@ export function ProductCard({
   const isDiscounted =
     cheapest?.compareAtPrice !== undefined && cheapest.compareAtPrice > price;
   const hasSizeChoice = variants.length > 1;
-  const accent = productAccent(product.slug);
 
   return (
     <Card
@@ -49,11 +47,6 @@ export function ProductCard({
       )}
     >
       {/* Square so the landscape case shots keep their scale beside the jars. */}
-      <span
-        aria-hidden="true"
-        style={{ backgroundColor: accent }}
-        className="absolute inset-x-0 top-0 z-10 h-1"
-      />
       <div className="relative aspect-square overflow-hidden bg-linear-to-b from-white to-neutral-100">
         <Image
           src={image.url}
@@ -93,7 +86,7 @@ export function ProductCard({
       </div>
 
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="font-heading text-lg leading-snug">
+        <h3 className="font-heading text-lg leading-snug text-brand">
           <Link
             href={routes.product(product.slug)}
             className="decoration-1 underline-offset-4 group-hover:underline after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
