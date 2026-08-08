@@ -15,7 +15,7 @@ const signals = [
 
 export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden bg-ink">
+    <section className="relative isolate -mt-16 overflow-hidden bg-ink lg:-mt-20">
       <Image
         src="/products/hero/hero-hot-sauce-trio.jpg"
         alt="Efamy pork, beef and chicken chilli sauces on a wooden board with fresh chillies and garlic"
@@ -37,7 +37,7 @@ export function Hero() {
       />
 
       <Container>
-        <div className="flex min-h-140 flex-col justify-center py-20 lg:min-h-165">
+        <div className="flex min-h-140 flex-col justify-center pt-36 pb-20 lg:min-h-165 lg:pt-44">
           <div className="max-w-xl">
             <h1 className="display-title text-4xl text-balance text-white sm:text-5xl lg:text-6xl">
               Bold flavour.
