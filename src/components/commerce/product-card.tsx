@@ -86,7 +86,7 @@ export function ProductCard({
       </div>
 
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="font-heading text-lg leading-snug text-brand">
+        <h3 className="text-base leading-snug font-bold text-brand">
           <Link
             href={routes.product(product.slug)}
             className="decoration-1 underline-offset-4 group-hover:underline after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
@@ -117,7 +117,7 @@ export function ProductCard({
         />
 
         <div className="mt-5 flex items-baseline gap-2">
-          <span data-numeric className="font-medium text-brand">
+          <span data-numeric className="text-lg font-bold">
             {hasSizeChoice ? `from ${formatPrice(price)}` : formatPrice(price)}
           </span>
           {isDiscounted ? (
