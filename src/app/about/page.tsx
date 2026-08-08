@@ -45,15 +45,36 @@ export default async function AboutPage() {
 
       <Section width="prose">
         <div className="grid gap-x-16 gap-y-10 sm:grid-cols-[10rem_1fr]">
+          <h2 className="text-2xl sm:text-xl">How it started</h2>
+          <div>
+            <p className="text-lg text-pretty text-muted-foreground">
+              On 30 December 2008 we made our first batch of chilli sauce and
+              sold it amongst friends and family. The response to that first
+              production gave us the green light to carry on.
+            </p>
+            <p className="mt-5 text-pretty text-muted-foreground">
+              Two years later, by popular request, came the All Purpose
+              Seasoning Mix, and Coat &amp; Cook followed shortly after. In
+              December 2015 we made our first Kelewele Seasoning.
+            </p>
+            <p className="mt-5 text-pretty text-muted-foreground">
+              We try to make our products as authentic as possible and easy to
+              use, and we keep exploring how to make them better while holding
+              the same quality.
+            </p>
+          </div>
+
           <h2 className="text-2xl sm:text-xl">Our chilli sauces</h2>
           <div>
             <p className="text-lg text-pretty text-muted-foreground">
-              We use meat, poultry, fish and beans. Fresh ginger, garlic and
-              onions are our main ingredients, and our oils are vegetable oil
-              and extra virgin olive oil.
+              Seven flavours made from real meat, poultry, beans and fish. Fresh
+              ginger, garlic and onions are our main ingredients, and our oils
+              are mainly vegetable oil and extra virgin olive oil.
             </p>
             <p className="mt-5 text-pretty text-muted-foreground">
-              No colours, additives or preservatives added.
+              No colours, additives or preservatives added. Use them as a
+              condiment with rice, chips, pasta or couscous, stir them through a
+              salad, or take them to a barbecue.
             </p>
           </div>
 
@@ -73,9 +94,9 @@ export default async function AboutPage() {
           <h2 className="text-2xl sm:text-xl">Mild and hot</h2>
           <div>
             <p className="text-lg text-pretty text-muted-foreground">
-              Heat is a preference, not a test. Where a sauce comes in two
-              strengths the recipe underneath is the same. The mild version
-              simply carries less chilli.
+              Heat is a preference, not a test. Where a sauce comes in more than
+              one strength the recipe underneath is the same, so choosing the
+              gentler jar never means settling for less flavour.
             </p>
             <p className="mt-5 text-pretty text-muted-foreground">
               It means a table with different tastes can share the same meal,
