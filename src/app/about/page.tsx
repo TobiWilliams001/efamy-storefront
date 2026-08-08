@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Flame, Leaf, Utensils } from "lucide-react";
 
 import { CategoryCard } from "@/components/commerce/category-card";
-import { PageHeader } from "@/components/layout/page-header";
+import { Hero } from "@/components/sections/hero";
 import { Rule } from "@/components/layout/rule";
 import { Section, SectionHeader } from "@/components/layout/section";
 import { CallToAction } from "@/components/sections/call-to-action";
@@ -61,10 +61,15 @@ export default async function AboutPage() {
 
   return (
     <>
-      <PageHeader
-        tone="ink"
-        eyebrow="About Efamy"
-        title="It began with one batch, at the end of 2008."
+      <Hero
+        size="compact"
+        title={
+          <>
+            It began with
+            <br />
+            <span className="text-gold">one batch, in 2008.</span>
+          </>
+        }
         description="Ghanaian chilli sauces and seasonings, made in Kettering ever since. The same recipes, the same short ingredient lists, and no shortcuts we would not take at home."
       />
 

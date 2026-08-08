@@ -22,13 +22,10 @@ export function SiteHeader() {
    * off the image. Every other route opens on a light page and needs the solid
    * bar from the first pixel.
    */
-  const overlay = pathname === routes.home && !scrolled;
-
-  /*
-   * Pages that open on a maroon band carry the bar in the same maroon, so the
-   * header reads as part of the block rather than a light strip sitting on it.
-   */
-  const onInk = overlay || pathname === routes.about;
+  /* Routes whose first section is the dark photographic hero. */
+  const overlay =
+    (pathname === routes.home || pathname === routes.about) && !scrolled;
+  const onInk = overlay;
 
   return (
     <header className="sticky top-0 z-40">
@@ -37,9 +34,7 @@ export function SiteHeader() {
           "transition-colors duration-200",
           overlay
             ? "bg-transparent"
-            : onInk
-              ? "bg-ink"
-              : "border-b border-neutral-200/70 bg-background/85 backdrop-blur-md",
+            : "border-b border-neutral-200/70 bg-background/85 backdrop-blur-md",
         )}
       >
         <Container>

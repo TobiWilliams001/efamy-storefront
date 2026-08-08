@@ -2,7 +2,7 @@ import { CallToAction } from "@/components/sections/call-to-action";
 import { CategoryShowcase } from "@/components/sections/category-showcase";
 import { HeatGuide } from "@/components/sections/heat-guide";
 import { MealPairings } from "@/components/sections/meal-pairings";
-import { Hero } from "@/components/sections/hero";
+import { HomeHero } from "@/components/sections/hero";
 import { RecipeInspiration } from "@/components/sections/recipe-inspiration";
 import { ProductShowcase } from "@/components/sections/product-showcase";
 import { Statement } from "@/components/sections/statement";
@@ -23,7 +23,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <Hero />
+      <HomeHero />
       <CategoryShowcase categories={categories} />
       <ProductShowcase
         eyebrow="Featured"
