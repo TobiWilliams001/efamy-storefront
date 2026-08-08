@@ -5,7 +5,7 @@ import { Container } from "@/components/layout/container";
 const signals = [
   { icon: Soup, label: "Authentic Ghanaian recipes" },
   { icon: MapPin, label: "Proudly made in the UK" },
-  { icon: Leaf, label: "Premium ingredients" },
+  { icon: Leaf, label: "No additives or preservatives" },
   { icon: CreditCard, label: "Secure checkout" },
 ];
 

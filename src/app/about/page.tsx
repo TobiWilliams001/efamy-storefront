@@ -45,18 +45,28 @@ export default async function AboutPage() {
 
       <Section width="prose">
         <div className="grid gap-x-16 gap-y-10 sm:grid-cols-[10rem_1fr]">
-          <h2 className="text-2xl sm:text-xl">What we make</h2>
+          <h2 className="text-2xl sm:text-xl">Our chilli sauces</h2>
           <div>
             <p className="text-lg text-pretty text-muted-foreground">
-              Our range starts with chilli sauces built around a protein: beans,
-              beef, chicken, fish and pork. Alongside them sit the seasoning
-              mixes: an All Purpose blend for meat, fish and chicken, a Kelewele
-              mix for spiced fried plantain, and Coat &amp; Cook for a crisp
-              coating.
+              We use meat, poultry, fish and beans. Fresh ginger, garlic and
+              onions are our main ingredients, and our oils are vegetable oil
+              and extra virgin olive oil.
             </p>
             <p className="mt-5 text-pretty text-muted-foreground">
-              The ingredient lists are short and readable, because that is how
-              this food is cooked at home. Nothing artificial goes in.
+              No colours, additives or preservatives added.
+            </p>
+          </div>
+
+          <h2 className="text-2xl sm:text-xl">Our seasonings</h2>
+          <div>
+            <p className="text-lg text-pretty text-muted-foreground">
+              Made mainly from natural ingredients including ginger and garlic
+              powder, spices and chilli peppers.
+            </p>
+            <p className="mt-5 text-pretty text-muted-foreground">
+              An All Purpose blend for meat, fish and chicken, a Kelewele mix
+              for spiced fried plantain, and Coat &amp; Cook for a crisp
+              coating.
             </p>
           </div>
 
