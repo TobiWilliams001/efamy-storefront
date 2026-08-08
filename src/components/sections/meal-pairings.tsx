@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -13,6 +13,7 @@ export function MealPairings() {
   const track = useRef<HTMLUListElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   /*
    * Read from the scroll event rather than an effect, so the arrows reflect a
@@ -33,6 +34,27 @@ export function MealPairings() {
     el.scrollBy({ left: direction * el.clientWidth * 0.8, behavior: "smooth" });
   }
 
+  /*
+   * Advances on its own, but stops the moment anyone touches it — hover, focus
+   * or a manual scroll — and never starts at all under prefers-reduced-motion.
+   * Autoplay that fights the person using it is worse than no autoplay.
+   */
+  useEffect(() => {
+    if (paused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const id = window.setInterval(() => {
+      const el = track.current;
+      if (!el) return;
+
+      const end = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
+      if (end) el.scrollTo({ left: 0, behavior: "smooth" });
+      else el.scrollBy({ left: el.clientWidth / 3, behavior: "smooth" });
+    }, 3500);
+
+    return () => window.clearInterval(id);
+  }, [paused]);
+
   return (
     <section aria-labelledby="pairings-heading" className="bg-background py-16">
       <Container>
@@ -49,7 +71,14 @@ export function MealPairings() {
           />
         </div>
 
-        <div className="relative mt-10">
+        <div
+          className="relative mt-10"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocusCapture={() => setPaused(true)}
+          onBlurCapture={() => setPaused(false)}
+          onTouchStart={() => setPaused(true)}
+        >
           <Arrow
             direction="left"
             disabled={atStart}
