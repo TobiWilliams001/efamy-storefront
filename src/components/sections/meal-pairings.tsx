@@ -9,12 +9,15 @@ export function MealPairings() {
     <section aria-labelledby="pairings-heading" className="bg-background py-14">
       <Container>
         <div className="text-center">
-          <h2 id="pairings-heading" className="text-2xl sm:text-3xl">
+          <h2
+            id="pairings-heading"
+            className="display-title text-2xl text-brand sm:text-3xl lg:text-4xl"
+          >
             Perfect with every meal
           </h2>
           <span
             aria-hidden="true"
-            className="mx-auto mt-4 block h-px w-16 bg-gold"
+            className="mx-auto mt-5 block h-0.5 w-14 rounded-full bg-gold"
           />
         </div>
 

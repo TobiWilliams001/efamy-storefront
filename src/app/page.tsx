@@ -5,7 +5,6 @@ import { MealPairings } from "@/components/sections/meal-pairings";
 import { Hero } from "@/components/sections/hero";
 import { ProductShowcase } from "@/components/sections/product-showcase";
 import { Statement } from "@/components/sections/statement";
-import { TrustBar } from "@/components/sections/trust-bar";
 import { WhyEfamy } from "@/components/sections/why-efamy";
 import {
   getBestSellers,
@@ -24,7 +23,6 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
-      <TrustBar />
       <CategoryShowcase categories={categories} />
       <ProductShowcase
         eyebrow="Featured"

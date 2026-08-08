@@ -59,8 +59,9 @@ export function PageHeader({
 
             <h1
               className={cn(
-                "text-4xl text-balance sm:text-5xl lg:text-[3.25rem]",
+                "display-title text-3xl text-balance sm:text-4xl lg:text-5xl",
                 eyebrow && "mt-5",
+                onInk ? "text-white" : "text-brand",
               )}
             >
               {title}
@@ -69,7 +70,7 @@ export function PageHeader({
             <span
               aria-hidden="true"
               className={cn(
-                "mt-6 block h-px w-16 bg-gold",
+                "mt-6 block h-0.5 w-14 rounded-full bg-gold",
                 centred && "mx-auto",
               )}
             />

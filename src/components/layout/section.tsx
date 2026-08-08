@@ -96,21 +96,22 @@ export function SectionHeader({
         ) : null}
         <Heading
           className={cn(
-            "text-balance",
+            "display-title text-balance text-brand",
             eyebrow && "mt-4",
             Heading === "h1"
-              ? "text-4xl sm:text-5xl lg:text-[3.25rem]"
-              : "text-3xl sm:text-4xl lg:text-[2.75rem]",
+              ? "text-3xl sm:text-4xl lg:text-[2.75rem]"
+              : "text-2xl sm:text-3xl lg:text-4xl",
           )}
         >
           {title}
         </Heading>
-        {centred ? (
-          <span
-            aria-hidden="true"
-            className="mx-auto mt-5 block h-px w-16 bg-gold"
-          />
-        ) : null}
+        <span
+          aria-hidden="true"
+          className={cn(
+            "mt-5 block h-0.5 w-14 rounded-full bg-gold",
+            centred && "mx-auto",
+          )}
+        />
         {description ? (
           <p className="mt-5 text-pretty text-muted-foreground sm:text-lg">
             {description}

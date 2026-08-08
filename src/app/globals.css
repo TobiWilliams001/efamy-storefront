@@ -119,6 +119,20 @@
   --radius: 12px;
 }
 
+/*
+ * The section-heading treatment the client signed off: a heavy uppercase sans
+ * in burgundy over a gold rule. It deliberately overrides the serif set on
+ * every h1-h4 in the base layer, so it has to be a utility rather than a class
+ * the cascade can lose.
+ */
+@utility display-title {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

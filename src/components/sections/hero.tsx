@@ -1,13 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Flame, Leaf, MapPin, Sprout } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 
+const signals = [
+  { icon: Sprout, label: "Premium ingredients" },
+  { icon: Leaf, label: "No artificial preservatives" },
+  { icon: MapPin, label: "Made in the UK" },
+  { icon: Flame, label: "Three strengths" },
+];
+
 export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden bg-background">
+    <section className="relative isolate overflow-hidden bg-ink">
       <Image
         src="/products/hero/hero-hot-sauce-trio.jpg"
         alt="Efamy pork, beef and chicken chilli sauces on a wooden board with fresh chillies and garlic"
@@ -17,38 +25,63 @@ export function Hero() {
         className="-z-10 object-cover object-right"
       />
 
-      {/* Only enough scrim to hold text where the jars sit under it on narrow screens. */}
+      {/*
+       * Two scrims, not one. The horizontal wash keeps the headline legible on
+       * the left; the flat overlay darkens the photograph as a whole so the
+       * jars read as lit rather than washed out.
+       */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-ink/45" />
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-linear-to-r from-background/90 via-background/55 to-transparent sm:from-background/80 sm:via-background/35 lg:from-background/68 lg:via-background/20"
+        className="absolute inset-0 -z-10 bg-linear-to-r from-ink via-ink/80 to-ink/10 sm:via-ink/65 lg:to-transparent"
       />
 
       <Container>
-        <div className="flex min-h-140 items-center py-20 lg:min-h-160">
-          <div className="max-w-lg">
-            <p className="flex items-center gap-3 text-xs font-medium tracking-[0.18em] text-neutral-800 uppercase">
-              <span
-                aria-hidden="true"
-                className="h-px w-6 shrink-0 bg-neutral-400"
-              />
-              Made in the UK
-            </p>
-            <h1 className="mt-6 text-4xl text-balance sm:text-5xl lg:text-6xl">
-              Authentic Ghanaian Flavours. Crafted in the UK.
+        <div className="flex min-h-140 flex-col justify-center py-20 lg:min-h-165">
+          <div className="max-w-xl">
+            <h1 className="display-title text-4xl text-balance text-white sm:text-5xl lg:text-6xl">
+              Bold flavour.
+              <br />
+              <span className="text-gold">Made with love.</span>
             </h1>
-            <p className="mt-6 max-w-md text-lg text-pretty text-neutral-800">
-              Chilli sauces in beans, beef, chicken, fish and pork, mild or hot,
-              alongside our seasoning mixes. No artificial preservatives.
+            <p className="mt-6 max-w-md text-lg text-pretty text-white/80">
+              Ghanaian chilli sauces and seasonings, made in the UK since 2008.
+              Real meat, poultry, beans and fish — never a smooth paste.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Button asChild size="xl" variant="accent">
-                <Link href={routes.shop}>Shop Now</Link>
+                <Link href={routes.shop}>Shop now</Link>
               </Button>
-              <Button asChild size="xl" variant="outline">
+              <Button
+                asChild
+                size="xl"
+                variant="outline"
+                className="border-white/35 bg-transparent text-white hover:bg-white/10 hover:text-white"
+              >
                 <Link href={routes.about}>Our story</Link>
               </Button>
             </div>
           </div>
+
+          <ul className="mt-14 flex flex-wrap gap-x-8 gap-y-6 sm:gap-x-12">
+            {signals.map(({ icon: Icon, label }) => (
+              <li
+                key={label}
+                className="flex w-20 flex-col items-center gap-2 text-center sm:w-24"
+              >
+                <span className="flex size-11 items-center justify-center rounded-full border border-gold/50">
+                  <Icon
+                    aria-hidden="true"
+                    className="size-5 text-gold"
+                    strokeWidth={1.5}
+                  />
+                </span>
+                <span className="text-xs text-balance text-white/75">
+                  {label}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
       </Container>
     </section>
