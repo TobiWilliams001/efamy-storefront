@@ -42,7 +42,7 @@ export const categories: ProductCategory[] = [
     slug: "chilli-sauces",
     name: "Chilli Sauces",
     description:
-      "Slow-cooked chilli sauces in beans, beef, chicken, fish and pork, each in mild or hot.",
+      "Chilli sauces in beans, beef, chicken, fish and pork, with real meat and fish chunks you can see.",
     image: {
       url: "/products/cutout/chicken-chilli-sauce-hot-250g.png",
       alt: "Jar of Efamy chicken chilli sauce, hot",
@@ -78,9 +78,10 @@ export const products: Product[] = [
     slug: "beans-chilli-sauce-mild",
     name: "Beans Chilli Sauce, Mild",
     variants: BEANS(),
-    summary: "A mild bean chilli sauce, suitable for vegetarians and vegans.",
+    summary:
+      "Red kidney beans and green lentils in a gentle chilli sauce. Vegan.",
     description:
-      "A mild chilli sauce made with beans. Suitable for vegetarians and vegans.",
+      "Red kidney beans and green lentils in a chilli sauce built on fresh ginger, garlic and onions. Mild, so the flavour comes through before the heat does.\n\nSpoon it over rice, stir it through pasta or couscous, or serve it alongside grilled vegetables. It is substantial enough to be the meal rather than the thing beside it.\n\nMade in Kettering to the recipe we started with in 2008. No colours, additives or preservatives.",
     heat: "mild",
     dietary: ["Suitable for vegetarians", "Suitable for vegans"],
     image: {
@@ -98,8 +99,9 @@ export const products: Product[] = [
     slug: "beef-chilli-sauce-mild",
     name: "Beef Chilli Sauce, Mild",
     variants: MEAT(),
-    summary: "Beef chilli sauce with a gentler heat.",
-    description: "Beef chilli sauce, mild.",
+    summary: "Chunks of real beef in a gentler chilli sauce.",
+    description:
+      "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the mild strength carries the same recipe as our hot jar with less chilli.\n\nThe one for a table where tastes differ. Good with rice and stew, jollof, or a plate of chips.\n\nMade in Kettering to the recipe we started with in 2008. No colours, additives or preservatives.",
     heat: "mild",
     image: {
       url: "/products/cutout/beef-chilli-sauce-mild.png",
@@ -120,10 +122,9 @@ export const products: Product[] = [
     slug: "beef-chilli-sauce-hot",
     name: "Beef Chilli Sauce, Hot",
     variants: MEAT(),
-    summary:
-      "Made with premium beef. Rich and spicy, with no artificial preservatives.",
+    summary: "Chunks of real beef in a chilli sauce with a proper kick.",
     description:
-      "Beef chilli sauce with a bold heat. Made with premium beef and no artificial preservatives.",
+      "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the hot strength is for cooks who already reach for chilli.\n\nSpoon it over rice, take it to a barbecue, or use it to lift a plate of chips or couscous.\n\nMade in Kettering to the recipe we started with in 2008. No colours, additives or preservatives.",
     heat: "hot",
     dietary: ["No artificial preservatives"],
     image: {
@@ -149,10 +150,9 @@ export const products: Product[] = [
     slug: "chicken-chilli-sauce-hot",
     name: "Chicken Chilli Sauce, Hot",
     variants: MEAT(),
-    summary:
-      "Made with premium chicken. Rich and spicy, with no artificial preservatives.",
+    summary: "Chunks of real chicken in a chilli sauce with a proper kick.",
     description:
-      "Chicken chilli sauce with a bold heat. Made with premium chicken and no artificial preservatives.",
+      "Real chicken in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions. The hot strength is for people who already cook with chilli.\n\nSpoon it over rice, stir it through pasta, or serve it with fried plantain and yam.\n\nMade in Kettering to the recipe we started with in 2008. No colours, additives or preservatives.",
     heat: "hot",
     dietary: ["No artificial preservatives"],
     image: {
@@ -178,8 +178,9 @@ export const products: Product[] = [
     slug: "fish-chilli-sauce-mild",
     name: "Fish Chilli Sauce, Mild",
     variants: MEAT(),
-    summary: "Fish chilli sauce with a gentler heat.",
-    description: "Fish chilli sauce, mild.",
+    summary: "Chunks of real fish in a gentler chilli sauce.",
+    description:
+      "Made mainly with barracuda, in pieces you can see rather than a smooth paste. Fresh ginger, garlic and onions carry it, and the mild strength lets the fish come through first.\n\nThe jar for kenkey and fish, for rice, or for a salad that needs something with backbone.\n\nMade in Kettering to the recipe we started with in 2008. No colours, additives or preservatives.",
     heat: "mild",
     allergens: ["Fish"],
     image: {
@@ -197,8 +198,9 @@ export const products: Product[] = [
     slug: "fish-chilli-sauce-hot",
     name: "Fish Chilli Sauce, Hot",
     variants: MEAT(),
-    summary: "Fish chilli sauce with a bold heat.",
-    description: "Fish chilli sauce, hot.",
+    summary: "Chunks of real fish in a chilli sauce with a proper kick.",
+    description:
+      "Made mainly with barracuda, in pieces you can see rather than a smooth paste. Fresh ginger, garlic and onions carry it, and the hot strength stands up to a full plate.\n\nThe jar for kenkey and fish, for waakye, or for rice that needs waking up.\n\nMade in Kettering to the recipe we started with in 2008. No colours, additives or preservatives.",
     heat: "hot",
     allergens: ["Fish"],
     image: {
@@ -224,10 +226,9 @@ export const products: Product[] = [
     slug: "pork-chilli-sauce-hot",
     name: "Pork Chilli Sauce, Hot",
     variants: MEAT(),
-    summary:
-      "Pork chilli sauce with a bold heat and no artificial preservatives.",
+    summary: "Chunks of real pork in a chilli sauce with a proper kick.",
     description:
-      "Pork chilli sauce, hot. Store in a cool, dry place. Refrigerate after opening and use within 4 weeks.",
+      "Real pork in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions. The hot strength is for people who already cook with chilli.\n\nGood over rice, with chips, or taken to a barbecue where it tends not to come home again.\n\nMade in Kettering to the recipe we started with in 2008. No colours, additives or preservatives.",
     heat: "hot",
     ingredients: [
       "Onions",

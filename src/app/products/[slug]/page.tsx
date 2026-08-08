@@ -108,9 +108,13 @@ export default async function ProductPage({
               ))}
             </div>
 
-            <p className="mt-6 text-pretty text-muted-foreground">
-              {product.description}
-            </p>
+            {/* Blank-line separated in the catalogue, so it renders as prose
+                rather than one unbroken block. */}
+            <div className="mt-6 space-y-4 text-pretty text-muted-foreground">
+              {product.description.split("\n\n").map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
 
             <Separator className="my-8" />
 
