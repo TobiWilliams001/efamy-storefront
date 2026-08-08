@@ -44,8 +44,15 @@ anyone qualified.
 
 - [x] **Contact email, phone and address** — taken from the old website and now
       live on the site
-- [ ] **Registered company name and number** — the trading address is on the
-      site, but the company number is not
+- [ ] **Registered company name and number.** The Stripe account is in the name
+      **EFAMY COMPANY LIMITED**, but the site says "Efamy Food Products"
+      throughout. Which is the registered company? The legal name belongs in
+      the footer, the terms and the receipts, and it should match Stripe.
+- [ ] **Complete the Stripe account.** It is currently a sandbox with no
+      business details submitted, so it cannot take a real payment or pay money
+      out. Finishing it needs the company details, a business bank account and
+      ID — only Efamy can do this. Card payment cannot go live until it is
+      done.
 - [ ] **Is the mobile number also on WhatsApp?** It is currently linked as if it
       is. Say the word and it comes off
 - [ ] **Instagram, Facebook, TikTok** links, if they exist

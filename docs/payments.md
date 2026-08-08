@@ -90,6 +90,30 @@ shipping address and line items, and Mr Emmanuel already has a login. No
 database means nothing extra to pay for, back up, or depend on the contractor
 for. `notifyOrder` will email each order through once a provider is connected.
 
+### The account, as it stands
+
+The test keys authenticate against `acct_1U1ZC36nFQCsbMAY` — a **GB, GBP,
+standard account** named "EFAMY COMPANY LIMITED sandbox". Correct country and
+currency, so nothing to change.
+
+But `details_submitted` is **false**, and both `charges_enabled` and
+`payouts_enabled` are **false**. The account is a sandbox and onboarding has not
+been completed, so **it cannot take a real payment or pay money out**. Test mode
+works fully; live mode does not exist yet. Completing that — business details,
+bank account, ID verification — is Efamy's to do and nobody else can.
+
+### Known limitation: idempotency is per-instance
+
+The webhook keeps handled event ids in a module-level `Set`. On Vercel each
+serverless instance has its own memory, so a redelivery routed to a different
+instance is not recognised as a duplicate.
+
+The consequence today is bounded: the only side effect is a notification, so the
+worst case is Efamy receiving the same order email twice. No double charge is
+possible — Stripe holds the payment record and we never create one. If order
+side effects grow beyond notification, this needs a shared store before that
+happens.
+
 ### Two things still to wire
 
 - [ ] **Real delivery rates.** `src/config/delivery.ts` holds invented numbers
@@ -110,7 +134,8 @@ for. `notifyOrder` will email each order through once a provider is connected.
    stripe listen --forward-to localhost:3000/api/stripe/webhook
    ```
 
-3. Put that value in `.env.local` as `STRIPE_WEBHOOK_SECRET` and restart
+3. Put that value in `.env.local` as `STRIPE_WEBHOOK_SECRET` and restart — Next
+   reads env files at boot, not per request
 4. Pay with `4242 4242 4242 4242`, any future expiry, any CVC
 5. Check the terminal for `Order paid` and the Stripe dashboard for the payment
 
