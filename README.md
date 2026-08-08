@@ -85,6 +85,7 @@ Every foreground/background pair meets WCAG AA. See
 | Doc                                                    | For                                           |
 | ------------------------------------------------------ | --------------------------------------------- |
 | [Getting started](docs/getting-started.md)             | Running the site and Studio locally           |
+| [Design system](docs/design-system.md)                 | Colour, type, spacing, components             |
 | [Architecture](docs/architecture.md)                   | How it fits together                          |
 | [Decisions](docs/decisions.md)                         | Why the non-obvious choices were made         |
 | [Deployment](docs/deployment.md)                       | Shipping the site and the Studio              |
