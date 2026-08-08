@@ -58,7 +58,7 @@ export function CheckoutButton() {
         disabled={pending}
         className="w-full"
       >
-        {pending ? "Taking you to payment…" : "Pay securely"}
+        {pending ? "Taking you to Stripe…" : "Continue to secure payment"}
       </Button>
 
       {error ? (
