@@ -1,8 +1,15 @@
-import { inStock, lowestPrice, type Heat, type Product } from "@/types/product";
+import {
+  inStock,
+  isHeat,
+  lowestPrice,
+  type Heat,
+  type Product,
+} from "@/types/product";
 
 export const heatOptions = [
   { value: "mild", label: "Mild" },
   { value: "hot", label: "Hot" },
+  { value: "extra-hot", label: "Extra hot" },
 ] as const;
 
 /**
@@ -39,10 +46,6 @@ export type ProductFilters = {
 
 function isDietary(value: unknown): value is DietaryOption {
   return dietaryOptions.some((option) => option.value === value);
-}
-
-function isHeat(value: unknown): value is Heat {
-  return value === "mild" || value === "hot";
 }
 
 function isSortOption(value: unknown): value is SortOption {

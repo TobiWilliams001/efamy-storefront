@@ -75,9 +75,10 @@ describe("mapProduct", () => {
     expect(product!.nutrition).toBeUndefined();
   });
 
-  it("ignores a heat value that is not mild or hot", () => {
+  it("keeps known heat levels and drops anything else", () => {
     expect(mapProduct({ ...valid, heat: "scorching" })!.heat).toBeUndefined();
     expect(mapProduct({ ...valid, heat: "mild" })!.heat).toBe("mild");
+    expect(mapProduct({ ...valid, heat: "extra-hot" })!.heat).toBe("extra-hot");
   });
 
   it("skips additional images that are incomplete", () => {

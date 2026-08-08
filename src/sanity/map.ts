@@ -1,4 +1,9 @@
-import type { Product, ProductCategory, ProductImage } from "@/types/product";
+import {
+  isHeat,
+  type Product,
+  type ProductCategory,
+  type ProductImage,
+} from "@/types/product";
 
 // GROQ already projects our field names; this only normalises null to undefined.
 
@@ -62,7 +67,7 @@ export function mapProduct(raw: Record<string, unknown>): Product | null {
     summary: String(raw.summary ?? ""),
     description: String(raw.description ?? ""),
     variants,
-    heat: raw.heat === "mild" || raw.heat === "hot" ? raw.heat : undefined,
+    heat: isHeat(raw.heat) ? raw.heat : undefined,
     ingredients: list(raw.ingredients),
     allergens: list(raw.allergens),
     dietary: list(raw.dietary),

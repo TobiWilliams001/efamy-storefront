@@ -118,6 +118,7 @@ export default function DesignSystemPage() {
         <div className="flex flex-wrap items-center gap-3">
           <HeatBadge heat="mild" />
           <HeatBadge heat="hot" />
+          <HeatBadge heat="extra-hot" />
         </div>
       </Section>
 

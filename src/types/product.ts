@@ -7,7 +7,11 @@ export type ProductImage = {
 };
 
 /** Matches the packaging, which is labelled Mild or Hot and nothing finer. */
-export type Heat = "mild" | "hot";
+export type Heat = "mild" | "hot" | "extra-hot";
+
+export function isHeat(value: unknown): value is Heat {
+  return value === "mild" || value === "hot" || value === "extra-hot";
+}
 
 export type ProductCategory = {
   id: string;

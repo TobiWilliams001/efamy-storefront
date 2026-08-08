@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { formatPrice } from "@/lib/format";
 import { productAccent } from "@/lib/product-accent";
 import { routes } from "@/lib/routes";
+import { heatLabels } from "@/components/commerce/heat-badge";
 import { cn } from "@/lib/utils";
 import {
   inStock as anyInStock,
@@ -104,10 +105,10 @@ export function ProductCard({
           <p
             className={cn(
               "mt-1 text-sm font-medium",
-              heat === "hot" ? "text-brand" : "text-sage-ink",
+              heat === "mild" ? "text-sage-ink" : "text-brand",
             )}
           >
-            {heat === "hot" ? "Hot" : "Mild"}
+            {heatLabels[heat]}
           </p>
         ) : null}
 

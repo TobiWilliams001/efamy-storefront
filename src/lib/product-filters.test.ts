@@ -54,6 +54,7 @@ describe("parseFilters", () => {
       dietary: "carnivore",
     });
     expect(filters.heat).toBeUndefined();
+    expect(parseFilters({ heat: "extra-hot" }).heat).toBe("extra-hot");
     expect(filters.sort).toBe("featured");
     expect(filters.dietary).toBeUndefined();
   });

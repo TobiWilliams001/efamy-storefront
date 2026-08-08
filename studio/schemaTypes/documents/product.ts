@@ -103,11 +103,13 @@ export const product = defineType({
       name: 'heat',
       type: 'string',
       group: 'details',
-      description: 'Leave empty for products that are not labelled mild or hot.',
+      description:
+        'Match the strength printed on the jar. Leave empty for products with no heat rating.',
       options: {
         list: [
           {title: 'Mild', value: 'mild'},
           {title: 'Hot', value: 'hot'},
+          {title: 'Extra hot', value: 'extra-hot'},
         ],
         layout: 'radio',
       },
