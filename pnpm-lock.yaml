@@ -37,6 +37,9 @@ importers:
       react-hook-form:
         specifier: ^7.84.0
         version: 7.84.0(react@19.2.8)
+      stripe:
+        specifier: ^22.4.0
+        version: 22.4.0(@types/node@20.19.43)
       tailwind-merge:
         specifier: ^3.6.0
         version: 3.6.0
@@ -10735,6 +10738,18 @@ packages:
       }
     engines: { node: ">=8" }
 
+  stripe@22.4.0:
+    resolution:
+      {
+        integrity: sha512-LVJ+tcSYeqOSnXr3i+Kz2tZ7y0crLLdP2uwD/4wccrmEVyn0g/Heo0pF7as7rxS/sOjJzrb1lxgZY0Y0Dx1pSA==,
+      }
+    engines: { node: ">=18" }
+    peerDependencies:
+      "@types/node": ">=18"
+    peerDependenciesMeta:
+      "@types/node":
+        optional: true
+
   styled-components@6.4.4:
     resolution:
       {
@@ -19211,6 +19226,10 @@ snapshots:
   strip-final-newline@4.0.0: {}
 
   strip-json-comments@3.1.1: {}
+
+  stripe@22.4.0(@types/node@20.19.43):
+    optionalDependencies:
+      "@types/node": 20.19.43
 
   styled-components@6.4.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
