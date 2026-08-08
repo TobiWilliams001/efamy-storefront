@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Rule } from "@/components/layout/rule";
 import { Button } from "@/components/ui/button";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { routes } from "@/lib/routes";
@@ -17,10 +18,7 @@ export function Statement() {
             <h2 className="display-title text-2xl text-white sm:text-3xl lg:text-4xl">
               About Efamy
             </h2>
-            <span
-              aria-hidden="true"
-              className="mt-5 block h-0.5 w-14 rounded-full bg-gold"
-            />
+            <Rule className="mt-5 justify-start" />
             <p className="mt-7 text-lg text-pretty text-ink-muted">
               Good food is what brings everyone to the table. We have been
               making ours in Kettering since 2008 — Ghanaian chilli sauces and

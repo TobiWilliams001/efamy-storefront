@@ -1,3 +1,4 @@
+import { Rule } from "@/components/layout/rule";
 import { Container } from "@/components/layout/container";
 import { cn } from "@/lib/utils";
 
@@ -67,12 +68,8 @@ export function PageHeader({
               {title}
             </h1>
 
-            <span
-              aria-hidden="true"
-              className={cn(
-                "mt-6 block h-0.5 w-14 rounded-full bg-gold",
-                centred && "mx-auto",
-              )}
+            <Rule
+              className={cn("mt-6", centred ? "mx-auto" : "justify-start")}
             />
 
             {description ? (

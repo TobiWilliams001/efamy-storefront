@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Flame, Leaf, MapPin, Utensils } from "lucide-react";
 
+import { Rule } from "@/components/layout/rule";
 import { Section } from "@/components/layout/section";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 
@@ -42,10 +43,7 @@ export function WhyEfamy() {
           <h2 className="display-title text-2xl text-brand sm:text-3xl lg:text-4xl">
             Why choose Efamy?
           </h2>
-          <span
-            aria-hidden="true"
-            className="mt-5 block h-0.5 w-14 rounded-full bg-gold"
-          />
+          <Rule className="mt-5 justify-start" />
 
           <ul className="mt-10 space-y-8">
             {reasons.map(({ icon: Icon, title, description }) => (

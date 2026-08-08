@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Clock, Mail, MapPin, MessageCircle, Phone, Store } from "lucide-react";
 
+import { Rule } from "@/components/layout/rule";
 import { ContactForm } from "@/app/contact/contact-form";
 import { FaqList } from "@/components/common/faq-list";
 import { Container } from "@/components/layout/container";
@@ -41,10 +42,7 @@ export default function ContactPage() {
             <h1 className="display-title text-3xl text-brand sm:text-4xl">
               Contact us
             </h1>
-            <span
-              aria-hidden="true"
-              className="mt-5 block h-0.5 w-14 rounded-full bg-gold"
-            />
+            <Rule className="mt-5 justify-start" />
 
             <div className="mt-10 grid gap-10 md:grid-cols-[minmax(0,15rem)_1fr] md:gap-12">
               <div>

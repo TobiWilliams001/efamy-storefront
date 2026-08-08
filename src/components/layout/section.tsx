@@ -1,3 +1,4 @@
+import { Rule } from "@/components/layout/rule";
 import { cn } from "@/lib/utils";
 
 import { Container, type ContainerWidth } from "./container";
@@ -105,13 +106,7 @@ export function SectionHeader({
         >
           {title}
         </Heading>
-        <span
-          aria-hidden="true"
-          className={cn(
-            "mt-5 block h-0.5 w-14 rounded-full bg-gold",
-            centred && "mx-auto",
-          )}
-        />
+        <Rule className={cn("mt-5", centred ? "mx-auto" : "justify-start")} />
         {description ? (
           <p className="mt-5 text-pretty text-muted-foreground sm:text-lg">
             {description}
