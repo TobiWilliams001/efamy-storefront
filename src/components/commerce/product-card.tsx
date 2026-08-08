@@ -31,7 +31,7 @@ export function ProductCard({
   sizes = DEFAULT_SIZES,
   className,
 }: ProductCardProps) {
-  const { image, heat, isNew, bundleItems, variants } = product;
+  const { image, heat, isNew, isBestSeller, bundleItems, variants } = product;
   const inStock = anyInStock(product);
   const price = lowestPrice(product);
   const cheapest = variants.find((variant) => variant.price === price);
@@ -69,13 +69,18 @@ export function ProductCard({
           )}
         />
 
-        {(isNew || isDiscounted || !inStock || bundleItems?.length) && (
+        {(isNew ||
+          isBestSeller ||
+          isDiscounted ||
+          !inStock ||
+          bundleItems?.length) && (
           <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
             {!inStock ? (
               <Badge variant="secondary">Out of stock</Badge>
             ) : (
               <>
-                {isNew ? <Badge>New</Badge> : null}
+                {isBestSeller ? <Badge>Bestseller</Badge> : null}
+                {isNew ? <Badge variant="outline">New</Badge> : null}
                 {bundleItems?.length ? (
                   <Badge variant="secondary">Set</Badge>
                 ) : null}

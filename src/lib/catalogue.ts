@@ -44,6 +44,15 @@ function mapProducts(raw: Record<string, unknown>[] | null): Product[] | null {
   return mapped.length > 0 ? mapped : null;
 }
 
+/** The static catalogue curates by slug; Sanity carries a flag per product. */
+function markBestSellers(products: Product[]): Product[] {
+  return products.map((product) =>
+    bestSellerSlugs.includes(product.slug)
+      ? { ...product, isBestSeller: true }
+      : product,
+  );
+}
+
 function bySlugs(slugs: readonly string[], limit: number): Product[] {
   return slugs
     .map((slug) => staticProducts.find((product) => product.slug === slug))
@@ -62,7 +71,7 @@ export async function getCategories(): Promise<ProductCategory[]> {
 
 export async function getProducts(): Promise<Product[]> {
   const raw = await fetchFromSanity<Record<string, unknown>[]>(PRODUCTS_QUERY);
-  return mapProducts(raw) ?? staticProducts;
+  return mapProducts(raw) ?? markBestSellers(staticProducts);
 }
 
 export async function getFeaturedProducts(limit = 4): Promise<Product[]> {

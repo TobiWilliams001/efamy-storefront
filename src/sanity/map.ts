@@ -83,6 +83,7 @@ export function mapProduct(raw: Record<string, unknown>): Product | null {
         ? (raw.bundleItems as { slug: string; name: string }[])
         : undefined,
     isNew: raw.isNew === true ? true : undefined,
+    isBestSeller: raw.bestSeller === true ? true : undefined,
   };
 }
 

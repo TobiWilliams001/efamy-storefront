@@ -53,6 +53,7 @@ export type Product = {
   /** Populated only for multipacks and gift sets. */
   bundleItems?: { slug: string; name: string }[];
   isNew?: boolean;
+  isBestSeller?: boolean;
 };
 
 export type ProductSummary = Pick<
@@ -69,6 +70,7 @@ export type ProductSummary = Pick<
   | "allergens"
   | "bundleItems"
   | "isNew"
+  | "isBestSeller"
 >;
 
 /** Lowest price across variants, for "from £x" on cards and price sorting. */
