@@ -25,7 +25,7 @@ export function CardAddToCart({ product }: { product: ProductSummary }) {
 
   if (product.variants.length > 1) {
     return (
-      <Button asChild size="lg" variant="outline" className="w-full">
+      <Button asChild size="lg" variant="accent" className="w-full">
         <Link href={routes.product(product.slug)}>Choose size</Link>
       </Button>
     );
