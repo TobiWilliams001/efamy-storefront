@@ -6,7 +6,6 @@ import { Clock, Users } from "lucide-react";
 
 import { ProductCard } from "@/components/commerce/product-card";
 import { RecipeCard } from "@/components/commerce/recipe-card";
-import { DraftNotice } from "@/components/common/draft-notice";
 import { PageHeader } from "@/components/layout/page-header";
 import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
@@ -122,14 +121,6 @@ export default async function RecipePage({
                 </dd>
               </div>
             </dl>
-
-            <div className="mt-10">
-              <DraftNotice>
-                <strong>Draft recipe.</strong> An ordinary version of a
-                well-known dish, written so this page could be built. Not
-                Efamy&rsquo;s own recipe, and to be replaced before launch.
-              </DraftNotice>
-            </div>
 
             <h2 className="mt-12 font-heading text-2xl">Ingredients</h2>
             <ul className="mt-5 space-y-3">

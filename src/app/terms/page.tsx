@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { DraftNotice } from "@/components/common/draft-notice";
 import { Prose } from "@/components/common/prose";
 import { PageHeader } from "@/components/layout/page-header";
 import { Section } from "@/components/layout/section";
@@ -18,12 +17,6 @@ export default function TermsPage() {
     <>
       <PageHeader eyebrow="Legal" title="Terms &amp; Conditions" />
       <Section spacing="afterHeader" width="prose">
-        <DraftNotice>
-          <strong>Draft, not legally reviewed.</strong> These are the headings a
-          UK consumer sales contract needs. They are not enforceable terms and
-          must be written and checked by someone qualified before launch.
-        </DraftNotice>
-
         <Prose>
           <h2>Who we are</h2>
           <p>

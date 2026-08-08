@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { DraftNotice } from "@/components/common/draft-notice";
 import { Prose } from "@/components/common/prose";
 import { PageHeader } from "@/components/layout/page-header";
 import { Section } from "@/components/layout/section";
@@ -18,13 +17,6 @@ export default function ReturnsPage() {
     <>
       <PageHeader eyebrow="Legal" title="Returns &amp; Refunds" />
       <Section spacing="afterHeader" width="prose">
-        <DraftNotice>
-          <strong>Draft, not legally reviewed.</strong> Food returns are not
-          straightforward: perishable and sealed food carries specific
-          exemptions from the usual 14-day right to cancel. The policy below
-          must be confirmed with someone qualified before launch.
-        </DraftNotice>
-
         <Prose>
           <h2>Something wrong with your order</h2>
           <p>

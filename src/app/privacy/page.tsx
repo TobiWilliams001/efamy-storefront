@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { DraftNotice } from "@/components/common/draft-notice";
 import { Prose } from "@/components/common/prose";
 import { PageHeader } from "@/components/layout/page-header";
 import { Section } from "@/components/layout/section";
@@ -18,13 +17,6 @@ export default function PrivacyPage() {
     <>
       <PageHeader eyebrow="Legal" title="Privacy Policy" />
       <Section spacing="afterHeader" width="prose">
-        <DraftNotice>
-          <strong>Draft, not legally reviewed.</strong> This outlines what a UK
-          GDPR compliant policy must cover. It must be completed and checked by
-          someone qualified before launch, and the sections below are prompts
-          rather than a policy.
-        </DraftNotice>
-
         <Prose>
           <h2>Who we are</h2>
           <p>
