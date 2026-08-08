@@ -42,10 +42,12 @@ anyone qualified.
 
 ### Business details
 
-- [ ] **Registered company name and number**, and registered address
-- [ ] **Contact email** for customers
-- [ ] **Phone number**, if you want one shown
-- [ ] **WhatsApp number**, if you want customers to message
+- [x] **Contact email, phone and address** — taken from the old website and now
+      live on the site
+- [ ] **Registered company name and number** — the trading address is on the
+      site, but the company number is not
+- [ ] **Is the mobile number also on WhatsApp?** It is currently linked as if it
+      is. Say the word and it comes off
 - [ ] **Instagram, Facebook, TikTok** links, if they exist
 
 ---
@@ -74,8 +76,12 @@ legal matter.
 - [ ] **Certifications** — SALSA, BRC, organic, halal, anything else? Fifteen
       years of trading usually means at least one, and it belongs beside the
       price.
-- [ ] **Which products come in which heat?** We know from photographs that Beef
-      and Fish come in both mild and hot. Is there a Chicken Mild? A Pork Mild?
+- [ ] **Which products come in which heat?** The old website says every chilli
+      sauce comes in **mild, hot and extra hot**, plus a **non-chilli version**
+      with all the taste and no heat. The site currently only knows mild and
+      hot, because that is all the photographs showed. If extra hot and
+      non-chilli are still made, they are missing from the shop entirely — and
+      the non-chilli version in particular is the one that sells to families.
 
 ### Products we have prices for but cannot show
 
@@ -84,8 +90,24 @@ the site:
 
 - [ ] **Goat Chilli Sauce** — photo, description, heat levels
 - [ ] **Turkey Chilli Sauce** — photo, description, heat levels
-- [ ] **Efamy Oils** — photo, description, sizes. The price list shows £2.99
-      but we have no other information
+- [ ] **Chilli Oils — seven of them.** The old website lists Beans, Beef,
+      Chicken, Fish, Goat, Pork and Turkey chilli oils in 300ml. That is a
+      whole product line the shop does not sell today. Needed: **a photograph
+      of each bottle** and the retail price. The trade list shows £2.99, which
+      looks like it may be per bottle at trade rather than retail
+
+---
+
+## 2a. A size that does not match
+
+The old website lists chilli sauces in **175g, 250g, 500g and 650g**. The trade
+price list you sent lists **175g, 250g, 500g and 800g**.
+
+The site currently sells the four sizes from the price list, on the assumption
+it is the newer document.
+
+- [ ] **Is the largest jar 650g or 800g?** This is printed on every product page
+      and used in the delivery weight, so it needs to be right.
 
 ---
 
@@ -128,12 +150,18 @@ See `photography-brief.md` for the full shot list. In short:
 
 - [ ] **The real recipes.** The six on the site are ordinary versions of
       well-known dishes, marked as drafts. Efamy's own would be far better.
-- [ ] **The founder's story.** Who started it, when, and why. This is the
-      warmth the site is missing and it costs nothing but a conversation.
+- [x] **The founder's story** — taken from the old website. The About page now
+      opens with the first production on 30 December 2008.
 - [ ] **Customer reviews or testimonials.** Fifteen years of customers is real
       social proof, and there is none on the site. Even six quotes with first
       names would change how the pages read.
-- [ ] **A stockist list**, if any shops carry Efamy.
+- [x] **A stockist list** — nine shops taken from the old website, across
+      Berkshire, Essex, Northamptonshire, Bedfordshire and Buckinghamshire.
+- [ ] **The London stockists.** The old website had a London section that we
+      could not read. Please send it.
+- [ ] **Are all nine shops still stocking Efamy?** The list is several years
+      old. A shop that has stopped carrying it is a wasted journey for a
+      customer, so it is worth a quick check before launch.
 
 ---
 
@@ -146,6 +174,8 @@ Not information, but choices only the business can make.
       deciding early.
 - [ ] **Multipacks or gift sets for customers?** The site supports them. Which
       sets, and at what price?
-- [ ] **A domain name.** `efamy.co.uk` or similar, registered to the business.
+- [ ] **The `efamys.co.uk` domain.** The old website used it and the email
+      address still does, so the business may already own it — worth checking
+      before buying anything.
       This also fixes a real problem: some UK mobile networks block the
       temporary web address entirely, so the site is unreachable on them.
