@@ -82,20 +82,22 @@ Every foreground/background pair meets WCAG AA. See
 
 ## Documentation
 
-| Doc                                                    | For                                           |
-| ------------------------------------------------------ | --------------------------------------------- |
-| [Getting started](docs/getting-started.md)             | Running the site and Studio locally           |
-| [Design system](docs/design-system.md)                 | Colour, type, spacing, components             |
-| [Architecture](docs/architecture.md)                   | How it fits together                          |
-| [Decisions](docs/decisions.md)                         | Why the non-obvious choices were made         |
-| [Deployment](docs/deployment.md)                       | Shipping the site and the Studio              |
-| [Environment variables](docs/environment-variables.md) | What each one does. No values                 |
-| [Integrations](docs/integrations.md)                   | Third-party services, live and planned        |
-| [CMS guide](docs/cms-guide.md)                         | Managing products. Written for the client     |
-| [Content guide](docs/content-guide.md)                 | Where copy lives and the rules for writing it |
-| [Troubleshooting](docs/troubleshooting.md)             | Things that have actually broken              |
-| [Handover](docs/handover.md)                           | Ownership, backups, launch checklist          |
-| [Payments](docs/payments.md)                           | Rules for money in this codebase              |
+| Doc                                                              | For                                           |
+| ---------------------------------------------------------------- | --------------------------------------------- |
+| [Getting started](docs/getting-started.md)                       | Running the site and Studio locally           |
+| [Design system](docs/design-system.md)                           | Colour, type, spacing, components             |
+| [Architecture](docs/architecture.md)                             | How it fits together                          |
+| [Decisions](docs/decisions.md)                                   | Why the non-obvious choices were made         |
+| [Deployment](docs/deployment.md)                                 | Shipping the site and the Studio              |
+| [Environment variables](docs/environment-variables.md)           | What each one does. No values                 |
+| [Integrations](docs/integrations.md)                             | Third-party services, live and planned        |
+| [CMS guide](docs/cms-guide.md)                                   | Managing products. Written for the client     |
+| [Content guide](docs/content-guide.md)                           | Where copy lives and the rules for writing it |
+| [Troubleshooting](docs/troubleshooting.md)                       | Things that have actually broken              |
+| [Client information request](docs/client-information-request.md) | Everything waiting on the client. Send as-is  |
+| [Photography brief](docs/photography-brief.md)                   | Shot list and copy direction                  |
+| [Handover](docs/handover.md)                                     | Ownership, backups, launch checklist          |
+| [Payments](docs/payments.md)                                     | Rules for money in this codebase              |
 
 ## Roadmap
 
