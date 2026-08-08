@@ -33,9 +33,8 @@ export default async function ShopPage({ searchParams }: PageProps<"/shop">) {
     <>
       <PageHeader
         align="center"
-        eyebrow="Shop"
-        title="The full range"
-        description="Every chilli sauce and seasoning we make, in mild and hot."
+        title="Our products"
+        description="A range of chilli sauces and seasonings made to lift every meal."
       />
       <Section spacing="afterHeader">
         <ShopFilters
