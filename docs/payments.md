@@ -68,6 +68,52 @@ verified payment, and switches to live mode by configuration alone.
 
 ## Current state
 
-Nothing here is implemented yet. `/checkout` is an honest placeholder that
-collects nothing. `CartLine.price` in `cart-provider.tsx` is a display snapshot
-and is explicitly marked as needing server-side re-pricing before any charge.
+**Implemented and testable.** Stripe hosted Checkout, in test mode.
+
+| Piece              | Where                                 |
+| ------------------ | ------------------------------------- |
+| Server re-pricing  | `src/lib/pricing.ts` (13 tests)       |
+| Session creation   | `src/app/checkout/actions.ts`         |
+| Webhook            | `src/app/api/stripe/webhook/route.ts` |
+| Order notification | `src/lib/order-email.ts`              |
+| Delivery rates     | `src/config/delivery.ts`              |
+
+**Hosted Checkout, not embedded Elements.** Stripe hosts the card page, so no
+card data reaches this application and PCI scope stays at SAQ-A. It also brings
+Apple Pay, Google Pay and SCA/3-D Secure with no extra work — all three are
+required in the UK and all three are easy to get subtly wrong. The tradeoff is
+less control over the payment page's styling, which is the right trade for a
+business with no in-house developer.
+
+**Stripe is the order book.** Stripe records the payment, customer, phone,
+shipping address and line items, and Mr Emmanuel already has a login. No
+database means nothing extra to pay for, back up, or depend on the contractor
+for. `notifyOrder` will email each order through once a provider is connected.
+
+### Two things still to wire
+
+- [ ] **Real delivery rates.** `src/config/delivery.ts` holds invented numbers
+      (£4.95, free over £40) flagged `provisional: true`. `assertDeliveryIsReal`
+      throws if a `sk_live_` key is used while that flag is set, so a real
+      customer cannot be charged made-up postage. Set the rates, flip the flag.
+- [ ] **An email provider.** `notifyOrder` logs the order and returns. It never
+      throws, because a failed notification must not reverse a payment Stripe
+      has already taken.
+
+### Testing in test mode
+
+1. Put the test keys in `.env.local` — `STRIPE_SECRET_KEY`,
+   `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
+2. Forward webhooks and take the signing secret it prints:
+
+   ```bash
+   stripe listen --forward-to localhost:3000/api/stripe/webhook
+   ```
+
+3. Put that value in `.env.local` as `STRIPE_WEBHOOK_SECRET` and restart
+4. Pay with `4242 4242 4242 4242`, any future expiry, any CVC
+5. Check the terminal for `Order paid` and the Stripe dashboard for the payment
+
+Worth testing beyond the happy path: `4000 0000 0000 9995` declines,
+`4000 0027 6000 3184` forces a 3-D Secure challenge, and closing the Stripe tab
+should leave the basket intact.
