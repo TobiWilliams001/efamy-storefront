@@ -85,18 +85,19 @@ legal matter.
       have kept the newer photographs, but that means the shop may be offering
       jars you no longer make and hiding ones you do.
 
-      The simplest answer is a list: for each of the seven flavours, tick the
-          strengths you currently produce.
+      The simplest answer is the table below.
 
-          | Flavour | Non-chilli | Mild | Hot | Extra hot |
-          | ------- | ---------- | ---- | --- | --------- |
-          | Beans   |            |      |     |           |
-          | Beef    |            |      |     |           |
-          | Chicken |            |      |     |           |
-          | Fish    |            |      |     |           |
-          | Goat    |            |      |     |           |
-          | Pork    |            |      |     |           |
-          | Turkey  |            |      |     |           |
+**Which strengths do you currently make?** Tick every jar that exists.
+
+| Flavour | Non-chilli | Mild | Hot | Extra hot |
+| ------- | ---------- | ---- | --- | --------- |
+| Beans   |            |      |     |           |
+| Beef    |            |      |     |           |
+| Chicken |            |      |     |           |
+| Fish    |            |      |     |           |
+| Goat    |            |      |     |           |
+| Pork    |            |      |     |           |
+| Turkey  |            |      |     |           |
 
 - [ ] **Is the non-chilli version still made?** Your old website describes one
       with "all the quality and taste except chillies". Nothing on the site
@@ -153,13 +154,22 @@ checking before it goes to a wholesale customer.
 The biggest gap. Every product photo is a jar on a white background. They are
 good photographs, but people buy the meal, not the jar.
 
+The site is now built to the design the client approved, and every image it
+calls for that we do not have shows a visible placeholder saying what belongs
+there. Nothing is invented and nothing is stock. Filling these in is the single
+biggest remaining improvement to how the site looks.
+
 See `photography-brief.md` for the full shot list. In short:
 
+- [ ] **The two feature photographs on the home page** — one bowl of sauce shot
+      close and warmly lit for "Why choose Efamy", and one overhead of chillies,
+      garlic, onions and tomatoes around an open bowl for the About band
+- [ ] **Six dish photographs** — Kenkey & Fish, Jollof Rice, Grilled Chicken,
+      Waakye, Yam & Plantain and Fried Eggs. Three of the nine exist
+- [ ] **Recipe photographs** — none of the six recipes has one
 - [ ] **Food in context** for each product — the jar beside the meal it belongs
       to
-- [ ] **Close-ups** of the sauce itself
-- [ ] **Dish photography** for the meal row and recipes. Nine dishes needed,
-      three exist
+- [ ] **Close-ups** of the sauce itself, showing the meat and fish chunks
 - [ ] **A proper logo file** — SVG or a transparent PNG. The current one is a
       screenshot with the background removed
 
