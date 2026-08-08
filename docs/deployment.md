@@ -39,10 +39,22 @@ static fallback doing its job, and it is easy to break without noticing.
 Vercel → Deployments → pick the last good one → **Promote to Production**.
 Instant, no rebuild. Do this first when production is broken, then diagnose.
 
-### Custom domain
+### The domain
 
-Vercel → Settings → Domains. Add the domain and follow the DNS instructions at
-the registrar.
+Efamy already owns and uses **`efamys.co.uk`**. This site replaces what sits
+there today, so there is no domain to buy — only DNS to repoint.
+
+Vercel → Settings → Domains. Add `efamys.co.uk` and `www.efamys.co.uk`, then
+follow the DNS instructions at whoever the domain is registered with.
+
+Two things to sort out before switching the DNS over:
+
+- **Find out where the domain is registered and who controls it.** Access to
+  that account is as important as the Vercel and Sanity logins, and it belongs
+  in the business's own name.
+- **`info@efamys.co.uk` runs on this domain.** Changing the wrong DNS record
+  takes the email down with the website. Only the A and CNAME records that
+  point at the web host should change; leave the MX records alone.
 
 Do this before launch. Some UK mobile networks block `*.vercel.app` wholesale
 because it is heavily used for phishing, so on those carriers the site is
@@ -51,8 +63,8 @@ project.
 
 After adding the domain:
 
-1. Update `NEXT_PUBLIC_SITE_URL` and redeploy, or the sitemap and social
-   previews keep pointing at the old host
+1. Set `NEXT_PUBLIC_SITE_URL` to `https://efamys.co.uk` and redeploy, or the
+   sitemap and social previews keep pointing at the old host
 2. Add the domain to Sanity CORS (below)
 
 ## Studio
