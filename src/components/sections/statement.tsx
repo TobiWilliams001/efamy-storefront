@@ -3,11 +3,12 @@ import Link from "next/link";
 
 import { Rule } from "@/components/layout/rule";
 import { Button } from "@/components/ui/button";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { routes } from "@/lib/routes";
 
-/** Set once we have the shot; the placeholder keeps the band whole until then. */
-const feature = { src: undefined, alt: "" };
+const feature = {
+  src: "/products/hero/hero-hot-sauce-trio.jpg",
+  alt: "Efamy pork, beef and chicken chilli sauces on a wooden board with fresh chillies and garlic",
+};
 
 export function Statement() {
   return (
@@ -40,21 +41,13 @@ export function Statement() {
         </div>
 
         <div className="relative min-h-72 lg:min-h-full">
-          {feature.src ? (
-            <Image
-              src={feature.src}
-              alt={feature.alt}
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
-            />
-          ) : (
-            <ImagePlaceholder
-              tone="dark"
-              label="Chillies, garlic, onions and tomatoes around an open bowl of Efamy sauce, shot from above"
-              className="absolute inset-0"
-            />
-          )}
+          <Image
+            src={feature.src}
+            alt={feature.alt}
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
         </div>
       </div>
     </section>
