@@ -5,6 +5,22 @@ export const heatOptions = [
   { value: "hot", label: "Hot" },
 ] as const;
 
+/**
+ * Only claims printed on the label. Absence of an allergen in our data means
+ * it was not transcribed, not that it is absent, so no "gluten free" or
+ * "nut free" option is offered — that would be a safety claim we cannot make.
+ */
+export const dietaryOptions = [
+  { value: "vegan", label: "Vegan", claim: "Suitable for vegans" },
+  {
+    value: "vegetarian",
+    label: "Vegetarian",
+    claim: "Suitable for vegetarians",
+  },
+] as const;
+
+export type DietaryOption = (typeof dietaryOptions)[number]["value"];
+
 export const sortOptions = [
   { value: "featured", label: "Featured" },
   { value: "price-asc", label: "Price: low to high" },
@@ -17,8 +33,13 @@ export type SortOption = (typeof sortOptions)[number]["value"];
 export type ProductFilters = {
   category?: string;
   heat?: Heat;
+  dietary?: DietaryOption;
   sort: SortOption;
 };
+
+function isDietary(value: unknown): value is DietaryOption {
+  return dietaryOptions.some((option) => option.value === value);
+}
 
 function isHeat(value: unknown): value is Heat {
   return value === "mild" || value === "hot";
@@ -37,10 +58,12 @@ function first(value: string | string[] | undefined): string | undefined {
 export function parseFilters(searchParams: SearchParams): ProductFilters {
   const heat = first(searchParams.heat);
   const sort = first(searchParams.sort);
+  const dietary = first(searchParams.dietary);
 
   return {
     category: first(searchParams.category),
     heat: isHeat(heat) ? heat : undefined,
+    dietary: isDietary(dietary) ? dietary : undefined,
     sort: isSortOption(sort) ? sort : "featured",
   };
 }
@@ -55,6 +78,12 @@ export function applyFilters(
     }
     if (filters.heat && product.heat !== filters.heat) {
       return false;
+    }
+    if (filters.dietary) {
+      const claim = dietaryOptions.find(
+        (option) => option.value === filters.dietary,
+      )?.claim;
+      if (!claim || !product.dietary?.includes(claim)) return false;
     }
     return true;
   });
@@ -84,6 +113,7 @@ export function buildQuery(
 
   if (next.category) params.set("category", next.category);
   if (next.heat) params.set("heat", next.heat);
+  if (next.dietary) params.set("dietary", next.dietary);
   if (next.sort && next.sort !== "featured") params.set("sort", next.sort);
 
   const query = params.toString();

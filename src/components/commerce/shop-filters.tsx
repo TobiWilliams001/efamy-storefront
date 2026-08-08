@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SortSelect } from "@/components/commerce/sort-select";
 import {
   buildQuery,
+  dietaryOptions,
   heatOptions,
   type ProductFilters,
 } from "@/lib/product-filters";
@@ -91,6 +92,27 @@ export function ShopFilters({
               size="sm"
               href={buildQuery(filters, { heat: option.value })}
               active={filters.heat === option.value}
+            >
+              {option.label}
+            </FilterChip>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <span className="mr-1 text-sm text-muted-foreground">Diet</span>
+          <FilterChip
+            size="sm"
+            href={buildQuery(filters, { dietary: undefined })}
+            active={!filters.dietary}
+          >
+            Any
+          </FilterChip>
+          {dietaryOptions.map((option) => (
+            <FilterChip
+              key={option.value}
+              size="sm"
+              href={buildQuery(filters, { dietary: option.value })}
+              active={filters.dietary === option.value}
             >
               {option.label}
             </FilterChip>

@@ -27,7 +27,11 @@ function product(
 
 const catalogue: Product[] = [
   product("beef-hot", { prices: [325, 1250], heat: "hot" }),
-  product("beans-mild", { prices: [275, 1150], heat: "mild" }),
+  product("beans-mild", {
+    prices: [275, 1150],
+    heat: "mild",
+    dietary: ["Suitable for vegetarians", "Suitable for vegans"],
+  }),
   product("coat-and-cook", {
     prices: [350],
     category: { slug: "seasonings", name: "Seasonings" },
@@ -44,9 +48,14 @@ describe("parseFilters", () => {
   });
 
   it("ignores values that are not real options", () => {
-    const filters = parseFilters({ heat: "nuclear", sort: "cheapest" });
+    const filters = parseFilters({
+      heat: "nuclear",
+      sort: "cheapest",
+      dietary: "carnivore",
+    });
     expect(filters.heat).toBeUndefined();
     expect(filters.sort).toBe("featured");
+    expect(filters.dietary).toBeUndefined();
   });
 
   it("takes the first value when a param is repeated", () => {
@@ -80,6 +89,28 @@ describe("applyFilters", () => {
 
     const dear = applyFilters(catalogue, { sort: "price-desc" });
     expect(dear[0].slug).toBe("coat-and-cook");
+  });
+
+  it("filters by a dietary claim printed on the label", () => {
+    const vegan = applyFilters(catalogue, { ...base, dietary: "vegan" });
+    expect(vegan.map((p) => p.slug)).toEqual(["beans-mild"]);
+  });
+
+  // Missing allergen data means "not transcribed", never "not present", so a
+  // product is only ever included on a claim it actually carries.
+  it("excludes products with no dietary claims rather than assuming", () => {
+    const vegetarian = applyFilters(catalogue, {
+      ...base,
+      dietary: "vegetarian",
+    });
+    expect(vegetarian.map((p) => p.slug)).toEqual(["beans-mild"]);
+    expect(vegetarian).toHaveLength(1);
+  });
+
+  it("combines dietary with heat", () => {
+    expect(
+      applyFilters(catalogue, { ...base, dietary: "vegan", heat: "hot" }),
+    ).toEqual([]);
   });
 
   it("returns an empty list rather than throwing when nothing matches", () => {
