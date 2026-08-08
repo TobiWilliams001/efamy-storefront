@@ -29,6 +29,6 @@ export async function submitContact(
   // gets the address rather than an explanation of our plumbing.
   return {
     status: "error",
-    message: `Please email us at ${siteConfig.contact.email} and we will reply within two working days.`,
+    message: `Please email us at ${siteConfig.contact.email} and we will come back to you.`,
   };
 }

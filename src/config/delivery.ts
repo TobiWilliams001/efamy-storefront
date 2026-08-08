@@ -16,9 +16,13 @@ export const delivery = {
   freeOverSubtotal: 4000,
 
   label: "Standard UK delivery",
-  /** Working days, shown to the customer before they pay. */
-  estimatedDaysMin: 2,
-  estimatedDaysMax: 4,
+  /*
+   * Working days, shown on the Stripe payment page. Null until Efamy confirms
+   * how long delivery actually takes — Stripe simply omits the estimate, which
+   * is better than showing a window nobody has agreed to meet.
+   */
+  estimatedDaysMin: null as number | null,
+  estimatedDaysMax: null as number | null,
 
   /** ISO 3166-1 alpha-2. Stripe refuses addresses outside this list. */
   countries: ["GB"] as const,

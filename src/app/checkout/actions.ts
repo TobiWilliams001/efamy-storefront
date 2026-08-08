@@ -99,16 +99,19 @@ export async function startCheckout(input: unknown): Promise<CheckoutResult> {
               type: "fixed_amount",
               display_name: delivery.label,
               fixed_amount: { amount: shipping, currency: "gbp" },
-              delivery_estimate: {
-                minimum: {
-                  unit: "business_day",
-                  value: delivery.estimatedDaysMin,
-                },
-                maximum: {
-                  unit: "business_day",
-                  value: delivery.estimatedDaysMax,
-                },
-              },
+              delivery_estimate:
+                delivery.estimatedDaysMin && delivery.estimatedDaysMax
+                  ? {
+                      minimum: {
+                        unit: "business_day",
+                        value: delivery.estimatedDaysMin,
+                      },
+                      maximum: {
+                        unit: "business_day",
+                        value: delivery.estimatedDaysMax,
+                      },
+                    }
+                  : undefined,
             },
           },
         ],

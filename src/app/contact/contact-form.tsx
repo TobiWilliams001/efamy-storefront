@@ -57,7 +57,7 @@ export function ContactForm() {
         <div>
           <p className="font-medium">Thanks, your message is on its way.</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            We usually reply within two working days.
+            We read every message and will come back to you.
           </p>
         </div>
       </div>

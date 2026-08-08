@@ -16,15 +16,19 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+/*
+ * No packing schedule, posting day or delivery window until Efamy confirms
+ * them. A promise the business has not agreed to is one it can still break.
+ */
 const steps = [
-  { title: "Order received", description: "We have your order." },
+  { title: "Order received", description: "Your payment has gone through." },
   {
     title: "Preparing your order",
-    description: "We pack Monday to Friday.",
+    description: "We pack it by hand and get it ready to send.",
   },
   {
     title: "On its way",
-    description: "We will email you when it is posted.",
+    description: "We will let you know when it leaves us.",
   },
 ];
 

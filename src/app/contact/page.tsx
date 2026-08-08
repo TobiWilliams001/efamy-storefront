@@ -108,7 +108,7 @@ export default function ContactPage() {
                       aria-hidden="true"
                       className="mt-0.5 size-4 shrink-0 text-gold-ink"
                     />
-                    {hours}. We reply within two working days.
+                    {hours}
                   </li>
                 </ul>
 

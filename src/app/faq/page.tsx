@@ -37,10 +37,10 @@ export default function FaqPage() {
           <h2 className="font-heading text-xl">Still have a question?</h2>
           <p className="mt-2 text-pretty text-muted-foreground">
             If your question is not answered here, send us a message and we will
-            come back to you within two working days.
+            come back to you.
           </p>
           <Button asChild size="xl" className="mt-6">
-            <Link href={routes.contact}>Get in Touch</Link>
+            <Link href={routes.contact}>Send us a message</Link>
           </Button>
         </div>
       </Section>
