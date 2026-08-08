@@ -35,11 +35,6 @@ export function Hero() {
         aria-hidden="true"
         className="absolute inset-0 -z-10 bg-linear-to-r from-ink via-ink/80 to-ink/10 sm:via-ink/65 lg:to-transparent"
       />
-      {/* Lands the photograph on the section below rather than cutting it off. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 -z-10 h-28 bg-linear-to-b from-transparent to-background"
-      />
 
       <Container>
         <div className="flex min-h-140 flex-col justify-center pt-36 pb-20 lg:min-h-165 lg:pt-44">
