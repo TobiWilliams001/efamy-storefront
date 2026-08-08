@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Flame, Leaf, Utensils } from "lucide-react";
 
@@ -72,16 +71,6 @@ export default async function AboutPage() {
         }
         description="Ghanaian chilli sauces and seasonings, made in Kettering ever since. The same recipes, the same short ingredient lists, and no shortcuts we would not take at home."
       />
-
-      <div className="relative aspect-21/9 w-full overflow-hidden bg-clay/25 sm:aspect-3/1">
-        <Image
-          src="/products/collections/range-lineup.jpg"
-          alt="The Efamy range of chilli sauces and seasoning mixes"
-          fill
-          sizes="100vw"
-          className="object-contain p-6 sm:p-10"
-        />
-      </div>
 
       <Section>
         <SectionHeader
