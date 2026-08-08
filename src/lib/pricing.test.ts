@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { basketFingerprint, priceBasket } from "@/lib/pricing";
+import { priceBasket } from "@/lib/pricing";
 import type { Product } from "@/types/product";
 
 const getProductBySlug = vi.hoisted(() => vi.fn());
@@ -90,28 +90,5 @@ describe("priceBasket", () => {
     ]);
 
     expect(result.ok).toBe(false);
-  });
-});
-
-describe("basketFingerprint", () => {
-  it("is stable regardless of line order", () => {
-    const a = basketFingerprint([
-      { slug: "beef", size: "175g", quantity: 1 },
-      { slug: "pork", size: "250g", quantity: 2 },
-    ]);
-    const b = basketFingerprint([
-      { slug: "pork", size: "250g", quantity: 2 },
-      { slug: "beef", size: "175g", quantity: 1 },
-    ]);
-
-    expect(a).toBe(b);
-  });
-
-  it("changes when a quantity changes", () => {
-    expect(
-      basketFingerprint([{ slug: "beef", size: "175g", quantity: 1 }]),
-    ).not.toBe(
-      basketFingerprint([{ slug: "beef", size: "175g", quantity: 2 }]),
-    );
   });
 });

@@ -107,15 +107,3 @@ export async function priceBasket(
 
   return { ok: true, lines, subtotal };
 }
-
-/**
- * Two baskets are the same order if they ask for the same things in the same
- * amounts. Used to key the idempotency of session creation, so a double click
- * or a refresh reuses a session rather than opening a second one.
- */
-export function basketFingerprint(lines: RequestedLine[]): string {
-  return lines
-    .map((line) => `${line.slug}:${line.size}:${line.quantity}`)
-    .sort()
-    .join("|");
-}

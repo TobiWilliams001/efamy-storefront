@@ -8,11 +8,7 @@ import {
   delivery,
   deliveryCost,
 } from "@/config/delivery";
-import {
-  basketFingerprint,
-  MAX_LINE_QUANTITY,
-  priceBasket,
-} from "@/lib/pricing";
+import { MAX_LINE_QUANTITY, priceBasket } from "@/lib/pricing";
 import { getStripe } from "@/lib/stripe";
 
 const schema = z.object({
@@ -72,62 +68,64 @@ export async function startCheckout(input: unknown): Promise<CheckoutResult> {
   const shipping = deliveryCost(priced.subtotal);
   const stripe = getStripe();
 
+  /*
+   * No idempotency key. The obvious one — a hash of the basket — is wrong twice
+   * over: it is shared by every customer buying the same items, so Stripe would
+   * replay the first customer's session to the second, handing them someone
+   * else's email and address; and it pins the request to whatever parameters it
+   * first saw, so any change to shipping or line items breaks checkout for 24
+   * hours.
+   *
+   * Creating a second session costs nothing and only one of them can be paid,
+   * so there is no double-charge to guard against. The button disables itself
+   * while the request is in flight, which is what actually stops double clicks.
+   */
   try {
-    const session = await stripe.checkout.sessions.create(
-      {
-        mode: "payment",
-        currency: "gbp",
-        line_items: priced.lines.map((line) => ({
-          quantity: line.quantity,
-          price_data: {
-            currency: "gbp",
-            unit_amount: line.unitPrice,
-            product_data: {
-              name: line.name,
-              images: line.imageUrl
-                ? [new URL(line.imageUrl, siteConfig.url).toString()]
-                : undefined,
-            },
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      currency: "gbp",
+      line_items: priced.lines.map((line) => ({
+        quantity: line.quantity,
+        price_data: {
+          currency: "gbp",
+          unit_amount: line.unitPrice,
+          product_data: {
+            name: line.name,
+            images: line.imageUrl
+              ? [new URL(line.imageUrl, siteConfig.url).toString()]
+              : undefined,
           },
-        })),
-        shipping_address_collection: {
-          allowed_countries: [...delivery.countries],
         },
-        shipping_options: [
-          {
-            shipping_rate_data: {
-              type: "fixed_amount",
-              display_name: delivery.label,
-              fixed_amount: { amount: shipping, currency: "gbp" },
-              delivery_estimate:
-                delivery.estimatedDaysMin && delivery.estimatedDaysMax
-                  ? {
-                      minimum: {
-                        unit: "business_day",
-                        value: delivery.estimatedDaysMin,
-                      },
-                      maximum: {
-                        unit: "business_day",
-                        value: delivery.estimatedDaysMax,
-                      },
-                    }
-                  : undefined,
-            },
+      })),
+      shipping_address_collection: {
+        allowed_countries: [...delivery.countries],
+      },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            display_name: delivery.label,
+            fixed_amount: { amount: shipping, currency: "gbp" },
+            delivery_estimate:
+              delivery.estimatedDaysMin && delivery.estimatedDaysMax
+                ? {
+                    minimum: {
+                      unit: "business_day",
+                      value: delivery.estimatedDaysMin,
+                    },
+                    maximum: {
+                      unit: "business_day",
+                      value: delivery.estimatedDaysMax,
+                    },
+                  }
+                : undefined,
           },
-        ],
-        phone_number_collection: { enabled: true },
-        success_url: `${siteConfig.url}/order/confirmed?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${siteConfig.url}/cart`,
-      },
-      {
-        /*
-         * A double click or a refresh returns the same session rather than
-         * opening a second one. Scoped to the basket contents, so changing the
-         * basket correctly starts a new session.
-         */
-        idempotencyKey: `checkout:${basketFingerprint(parsed.data.lines)}`,
-      },
-    );
+        },
+      ],
+      phone_number_collection: { enabled: true },
+      success_url: `${siteConfig.url}/order/confirmed?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${siteConfig.url}/cart`,
+    });
 
     if (!session.url) {
       return {
