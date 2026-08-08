@@ -1,57 +1,90 @@
-import { Flame, Leaf, Truck, Utensils } from "lucide-react";
+import Image from "next/image";
+import { Flame, Leaf, MapPin, Utensils } from "lucide-react";
 
-import { Section, SectionHeader } from "@/components/layout/section";
+import { Section } from "@/components/layout/section";
+import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 
 const reasons = [
   {
-    icon: Flame,
-    title: "Mild or hot, your choice",
-    description:
-      "Every chilli sauce is made in more than one strength, so everyone at the table gets the heat they want.",
-  },
-  {
     icon: Leaf,
-    title: "No artificial preservatives",
+    title: "Premium ingredients",
     description:
-      "Straightforward ingredients: onions, chillies, garlic and spice. Nothing artificial added.",
+      "Fresh ginger, garlic and onions, with vegetable and extra virgin olive oil. Nothing artificial.",
   },
   {
     icon: Utensils,
-    title: "Made for real cooking",
+    title: "Meat and fish you can see",
     description:
-      "Sauces, seasoning mixes and coatings built for everyday meals, not just the cupboard.",
+      "Our sauces carry real chunks rather than a smooth paste, which is what makes them a meal and not a condiment.",
   },
   {
-    icon: Truck,
+    icon: MapPin,
     title: "Made in the UK",
     description:
-      "Produced here and shipped from here, so your order arrives quickly.",
+      "Produced in Kettering to the same recipes we started with in 2008, and shipped from here.",
+  },
+  {
+    icon: Flame,
+    title: "A strength for everyone",
+    description:
+      "Mild, hot and extra hot from the same recipe, so a table with different tastes shares the same meal.",
   },
 ];
 
+/** The image is optional so the section stands up before the shoot happens. */
+const feature = { src: undefined, alt: "" };
+
 export function WhyEfamy() {
   return (
-    <Section>
-      <SectionHeader
-        eyebrow="Why Efamy"
-        title="Flavour worth the wait"
-        description="We make the sauces we grew up with, to the standard they deserve."
-      />
-      <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        {reasons.map(({ icon: Icon, title, description }) => (
-          <li key={title}>
-            <Icon
-              aria-hidden="true"
-              className="size-6 text-gold-ink"
-              strokeWidth={1.5}
+    <Section surface="muted">
+      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <h2 className="display-title text-2xl text-brand sm:text-3xl lg:text-4xl">
+            Why choose Efamy?
+          </h2>
+          <span
+            aria-hidden="true"
+            className="mt-5 block h-0.5 w-14 rounded-full bg-gold"
+          />
+
+          <ul className="mt-10 space-y-8">
+            {reasons.map(({ icon: Icon, title, description }) => (
+              <li key={title} className="flex gap-5">
+                <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-gold/60 bg-background">
+                  <Icon
+                    aria-hidden="true"
+                    className="size-5 text-gold-ink"
+                    strokeWidth={1.5}
+                  />
+                </span>
+                <div>
+                  <h3 className="font-heading text-lg font-medium">{title}</h3>
+                  <p className="mt-1.5 text-sm text-pretty text-muted-foreground">
+                    {description}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="relative aspect-4/3 overflow-hidden rounded-lg shadow-card">
+          {feature.src ? (
+            <Image
+              src={feature.src}
+              alt={feature.alt}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
             />
-            <h3 className="mt-4 font-heading text-lg font-medium">{title}</h3>
-            <p className="mt-2 text-sm text-pretty text-muted-foreground">
-              {description}
-            </p>
-          </li>
-        ))}
-      </ul>
+          ) : (
+            <ImagePlaceholder
+              label="A bowl of Efamy chilli sauce, close and warmly lit, with fresh chillies and garlic alongside"
+              className="size-full"
+            />
+          )}
+        </div>
+      </div>
     </Section>
   );
 }

@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 import { Container } from "@/components/layout/container";
+import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { dishes } from "@/lib/dishes";
-import { productAccent } from "@/lib/product-accent";
 
 export function MealPairings() {
   return (
@@ -41,10 +41,10 @@ export function MealPairings() {
                     className="object-cover"
                   />
                 ) : (
-                  <span
-                    aria-hidden="true"
-                    style={{ backgroundColor: productAccent(dish.name) }}
-                    className="block size-full opacity-25"
+                  <ImagePlaceholder
+                    compact
+                    label={dish.name}
+                    className="size-full"
                   />
                 )}
               </div>
