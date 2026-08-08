@@ -12,7 +12,7 @@ export const faqs: Faq[] = [
   {
     question: "What is the difference between mild and hot?",
     answer:
-      "The recipe underneath is the same. The mild version simply carries less chilli, so you get the full depth of flavour with a gentler heat. It means a table with different tastes can share the same meal.",
+      "The recipe underneath is the same. Mild simply carries less chilli and extra hot carries more, so you get the full depth of flavour at whichever strength suits you. It means a table with different tastes can share the same meal.",
   },
   {
     question: "Where are your products made?",

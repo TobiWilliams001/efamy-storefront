@@ -68,9 +68,11 @@ export default async function AboutPage() {
           <h2 className="text-2xl sm:text-xl">Our chilli sauces</h2>
           <div>
             <p className="text-lg text-pretty text-muted-foreground">
-              Seven flavours made from real meat, poultry, beans and fish. Fresh
-              ginger, garlic and onions are our main ingredients, and our oils
-              are mainly vegetable oil and extra virgin olive oil.
+              Seven flavours made from real meat, poultry, beans and fish, and
+              you can see it — our sauces carry chunks of meat and fish rather
+              than a smooth paste. Fresh ginger, garlic and onions are our main
+              ingredients, and our oils are vegetable oil and extra virgin olive
+              oil.
             </p>
             <p className="mt-5 text-pretty text-muted-foreground">
               No colours, additives or preservatives. Spoon them over rice,
@@ -95,9 +97,9 @@ export default async function AboutPage() {
           <h2 className="text-2xl sm:text-xl">On heat</h2>
           <div>
             <p className="text-lg text-pretty text-muted-foreground">
-              Heat is a preference, not a test. Where a sauce comes in more than
-              one strength the recipe underneath is the same, so choosing the
-              gentler jar never means settling for less flavour.
+              Heat is a preference, not a test. Our sauces are made mild, hot
+              and extra hot, and the recipe underneath is the same every time,
+              so choosing the gentler jar never means settling for less flavour.
             </p>
             <p className="mt-5 text-pretty text-muted-foreground">
               It means a table with different tastes can share the same meal,

@@ -7,7 +7,7 @@ const reasons = [
     icon: Flame,
     title: "Mild or hot, your choice",
     description:
-      "Our chilli sauces come in two strengths, so everyone at the table gets the heat they want.",
+      "Every chilli sauce is made in more than one strength, so everyone at the table gets the heat they want.",
   },
   {
     icon: Leaf,
