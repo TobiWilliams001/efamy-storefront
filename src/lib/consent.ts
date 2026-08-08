@@ -3,7 +3,7 @@ export type ConsentChoice = "accepted" | "rejected";
 const STORAGE_KEY = "efamy.consent.v1";
 const EVENT = "efamy:consent";
 
-export function readConsent(): ConsentChoice | null {
+function readConsent(): ConsentChoice | null {
   try {
     const value = window.localStorage.getItem(STORAGE_KEY);
     return value === "accepted" || value === "rejected" ? value : null;

@@ -10,9 +10,6 @@ importers:
       "@hookform/resolvers":
         specifier: ^5.7.1
         version: 5.7.1(@standard-schema/spec@1.1.0)(ajv-formats@2.1.1(ajv@8.20.0))(ajv@8.20.0)(react-hook-form@7.84.0(react@19.2.8))(valibot@1.4.2(typescript@5.9.3))(zod@4.4.3)
-      "@sanity/image-url":
-        specifier: ^2.1.1
-        version: 2.1.1
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1

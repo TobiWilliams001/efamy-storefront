@@ -3,7 +3,7 @@ import { createClient, type SanityClient } from "next-sanity";
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "";
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production";
 
-export const isSanityConfigured = Boolean(projectId);
+const isSanityConfigured = Boolean(projectId);
 
 let cached: SanityClient | null = null;
 

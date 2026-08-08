@@ -1,5 +1,5 @@
-// Read as a literal rather than via lib/env so this stays importable from
-// Client Components without dragging zod into the browser bundle.
+// Read directly rather than through a validator, so this stays importable from
+// Client Components without pulling zod into the browser bundle.
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 type LogoAsset = { src: string; width: number; height: number };
