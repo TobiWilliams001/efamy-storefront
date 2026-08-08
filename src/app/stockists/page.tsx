@@ -7,7 +7,7 @@ import { Section, SectionHeader } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import { routes } from "@/lib/routes";
-import { stockists } from "@/lib/stockists";
+import { stockists, stockistsByCounty } from "@/lib/stockists";
 
 export const metadata: Metadata = {
   title: "Stockists & Wholesale",
@@ -77,8 +77,7 @@ export default function StockistsPage() {
               <>
                 <p className="mt-3 text-pretty text-muted-foreground">
                   We are confirming which shops to list here, so this page is
-                  the place for wholesale enquiries for now. If you have seen
-                  Efamy on a shelf near you, tell us and we will add them.
+                  the place for wholesale enquiries for now.
                 </p>
                 <div className="mt-8">
                   <Button asChild size="xl" variant="outline">
@@ -87,26 +86,40 @@ export default function StockistsPage() {
                 </div>
               </>
             ) : (
-              <ul className="mt-6 space-y-6">
-                {stockists.map((stockist) => (
-                  <li key={stockist.id}>
-                    <h3 className="font-medium">{stockist.name}</h3>
-                    <address className="mt-1 text-sm text-muted-foreground not-italic">
-                      {stockist.address}, {stockist.city} {stockist.postcode}
-                    </address>
-                    {stockist.url ? (
-                      <a
-                        href={stockist.url}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="mt-1 inline-block text-sm underline underline-offset-4"
-                      >
-                        Visit website
-                      </a>
-                    ) : null}
-                  </li>
+              <div className="mt-6 space-y-8">
+                {stockistsByCounty().map(({ county, shops }) => (
+                  <div key={county}>
+                    <h3 className="text-xs font-medium tracking-[0.18em] text-gold-ink uppercase">
+                      {county}
+                    </h3>
+                    <ul className="mt-3 grid gap-4 sm:grid-cols-2">
+                      {shops.map((shop) => (
+                        <li
+                          key={shop.id}
+                          className="rounded-lg border border-neutral-200 p-4"
+                        >
+                          <p className="font-medium">{shop.name}</p>
+                          {shop.address || shop.city ? (
+                            <address className="mt-1 text-sm text-muted-foreground not-italic">
+                              {[shop.address, shop.city, shop.postcode]
+                                .filter(Boolean)
+                                .join(", ")}
+                            </address>
+                          ) : null}
+                          {shop.phone ? (
+                            <a
+                              href={`tel:${shop.phone.replace(/\s/g, "")}`}
+                              className="mt-2 inline-block text-sm underline underline-offset-4"
+                            >
+                              {shop.phone}
+                            </a>
+                          ) : null}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
+              </div>
             )}
           </div>
         </div>
