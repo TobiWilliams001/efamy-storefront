@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Check, Clock, Mail, MessageCircle, Phone, Store } from "lucide-react";
+import {
+  Check,
+  Clock,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+  Store,
+} from "lucide-react";
 
 import { ContactForm } from "@/app/contact/contact-form";
 import { FaqList } from "@/components/common/faq-list";
@@ -17,7 +25,8 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const { email, phone, whatsapp } = siteConfig.contact;
+  const { email, phone, whatsapp, hours } = siteConfig.contact;
+  const { line1, town, postcode } = siteConfig.address;
 
   return (
     <>
@@ -105,7 +114,20 @@ export default function ContactPage() {
                     aria-hidden="true"
                     className="mt-0.5 size-4 shrink-0 text-gold-ink"
                   />
-                  We reply within two working days, Monday to Friday.
+                  {hours}. We reply within two working days.
+                </li>
+                <li className="flex items-start gap-3 text-muted-foreground">
+                  <MapPin
+                    aria-hidden="true"
+                    className="mt-0.5 size-4 shrink-0 text-gold-ink"
+                  />
+                  <address className="not-italic">
+                    {siteConfig.legalName}
+                    <br />
+                    {line1}
+                    <br />
+                    {town} {postcode}
+                  </address>
                 </li>
               </ul>
             </div>
