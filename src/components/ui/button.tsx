@@ -13,6 +13,8 @@ const buttonVariants = cva(
         // Deep chilli red. Reserved for the single highest-priority action on a
         // page: add to basket, or checkout. Never more than one per view.
         accent: "bg-brand text-white hover:bg-brand-hover",
+        // 5.87:1 with ink on gold. White on gold is 2.55:1, so never that.
+        gold: "bg-gold text-ink hover:bg-gold/85",
         outline:
           "border-neutral-300 bg-card text-foreground hover:bg-muted aria-expanded:bg-muted",
         secondary:

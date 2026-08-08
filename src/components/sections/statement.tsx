@@ -34,7 +34,7 @@ export function Statement() {
               Pure quality, pure taste, pure satisfaction.
             </p>
             <div className="mt-8">
-              <Button asChild size="xl" variant="accent">
+              <Button asChild size="xl" variant="gold">
                 <Link href={routes.about}>Learn more</Link>
               </Button>
             </div>
