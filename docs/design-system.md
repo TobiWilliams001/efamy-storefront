@@ -67,13 +67,26 @@ Never a page background. They are identification, not decoration.
 
 ## Typography
 
-**DM Serif Display** for headings, **Manrope** for body. Both self-hosted via
-`next/font`, so there is no layout shift and no third-party request.
+**Manrope** carries the interface; **DM Serif Display** is kept for card and
+block titles. Both self-hosted via `next/font`, so there is no layout shift and
+no third-party request.
+
+Section and page headings use the `display-title` utility — Manrope at weight
+800, uppercase, `0.02em` tracking, in `--brand` over a gold rule. This is the
+treatment the client approved and it is what makes a page read as Efamy's. It
+has to be a utility rather than a class because the base layer sets the serif
+on every `h1`–`h4`, and a plain class loses that fight.
+
+Manrope loads as a variable font spanning 200–800, so weight 800 is a real cut
+rather than a synthesised one.
+
+Buttons are uppercase with `0.08em` tracking, set on the base variant so no
+call site has to remember.
 
 | Level   | Size                                    | Notes                     |
 | ------- | --------------------------------------- | ------------------------- |
-| H1      | `text-4xl` → `text-[3.25rem]`           | One per page              |
-| H2      | `text-3xl` → `text-[2.75rem]`           | Section headings          |
+| H1      | `text-3xl` → `text-5xl`                 | One per page              |
+| H2      | `text-2xl` → `text-4xl`                 | Section headings          |
 | H3      | `text-xl` – `text-2xl`                  | Card and block titles     |
 | Body    | `text-base`                             | `text-lg` for intros      |
 | Small   | `text-sm`                               | Metadata, captions        |
@@ -125,6 +138,16 @@ guessing.
 
 **Page header** — every inner page opens with an eyebrow rule, title, gold
 divider and optional description. `warm` (clay gradient) or `ink` (maroon).
+
+**Site header** — transparent over the home hero, which runs full bleed behind
+it, and solid from the first pixel everywhere else. It takes its background
+once scrolled past the photograph, read through `useScrolled` rather than an
+effect.
+
+**Image placeholder** — `ImagePlaceholder` stands in wherever the design calls
+for a photograph we have not been sent. It names the shot, so the page doubles
+as the brief. Deliberately plain: a handsome placeholder gets mistaken for
+finished work.
 
 **Forms** — 44px inputs, labels always visible, errors below the field in
 `--destructive` with `aria-invalid`. Never placeholder-as-label.
