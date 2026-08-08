@@ -133,6 +133,17 @@
   line-height: 1.1;
 }
 
+/* Hides the horizontal scrollbar on carousels, where the arrows already say
+ * there is more and the bar reads as a stray line under the content. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

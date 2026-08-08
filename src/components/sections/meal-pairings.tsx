@@ -88,7 +88,7 @@ export function MealPairings() {
           <ul
             ref={track}
             onScroll={onScroll}
-            className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4 lg:gap-8"
+            className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth lg:gap-8"
           >
             {dishes.map((dish) => (
               <li
