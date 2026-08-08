@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  Check,
-  Clock,
-  Mail,
-  MapPin,
-  MessageCircle,
-  Phone,
-  Store,
-} from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Phone, Store } from "lucide-react";
 
 import { ContactForm } from "@/app/contact/contact-form";
 import { FaqList } from "@/components/common/faq-list";
-import { PageHeader } from "@/components/layout/page-header";
+import { Container } from "@/components/layout/container";
 import { Section, SectionHeader } from "@/components/layout/section";
+import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { siteConfig } from "@/config/site";
 import { contactFaqs } from "@/lib/faqs";
 import { routes } from "@/lib/routes";
@@ -30,109 +23,97 @@ export default function ContactPage() {
 
   return (
     <>
-      <PageHeader
-        tone="ink"
-        eyebrow="Contact"
-        title="Get in touch"
-        description="Questions about an order, our products, or stocking Efamy? Send us a message and a real person will come back to you."
-      />
-      <Section spacing="afterHeader">
-        <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:gap-12">
-          <div className="rounded-lg bg-card p-6 shadow-card sm:p-10">
-            <h2 className="font-heading text-xl">Send us a message</h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              All fields are required.
-            </p>
-            <ul className="mt-5 mb-8 space-y-2 text-sm text-muted-foreground">
-              {[
-                "Order help: problems, changes or anything that arrived wrong.",
-                "Product questions: heat levels, ingredients and allergens.",
-                "Wholesale: trade pricing and case quantities for retailers.",
-              ].map((line) => (
-                <li key={line} className="flex items-start gap-2">
-                  <Check
-                    aria-hidden="true"
-                    className="mt-0.5 size-4 shrink-0 text-sage-ink"
-                  />
-                  {line}
-                </li>
-              ))}
-            </ul>
-            <ContactForm />
-          </div>
+      <section className="relative overflow-hidden bg-background">
+        {/*
+         * The photograph bleeds off the right edge on wide screens and drops to
+         * a band above the content on narrow ones, so it never squeezes the
+         * form into a column too tight to type in.
+         */}
+        <div className="relative h-56 sm:h-72 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[38%]">
+          <ImagePlaceholder
+            label="A bowl of rice and beans with plantain and Efamy sauce, shot close on a dark surface"
+            className="absolute inset-0"
+          />
+        </div>
 
-          <aside className="flex flex-col gap-4">
-            <div className="rounded-lg bg-clay/40 p-6">
-              <h2 className="font-heading text-lg">
-                Prefer to write directly?
-              </h2>
-              <ul className="mt-5 space-y-4 text-sm">
-                <li>
-                  <a
-                    href={`mailto:${email}`}
-                    className="flex items-start gap-3 underline-offset-4 hover:underline"
-                  >
-                    <Mail
+        <Container>
+          <div className="py-14 lg:w-[58%] lg:py-20 lg:pr-10">
+            <h1 className="display-title text-3xl text-brand sm:text-4xl">
+              Contact us
+            </h1>
+            <span
+              aria-hidden="true"
+              className="mt-5 block h-0.5 w-14 rounded-full bg-gold"
+            />
+
+            <div className="mt-10 grid gap-10 md:grid-cols-[minmax(0,15rem)_1fr] md:gap-12">
+              <div>
+                <ul className="space-y-5 text-sm">
+                  {phone ? (
+                    <li>
+                      <a
+                        href={`tel:${phone.replace(/\s/g, "")}`}
+                        className="flex items-start gap-3 underline-offset-4 hover:underline"
+                      >
+                        <Phone
+                          aria-hidden="true"
+                          className="mt-0.5 size-4 shrink-0 text-gold-ink"
+                        />
+                        {phone}
+                      </a>
+                    </li>
+                  ) : null}
+                  <li>
+                    <a
+                      href={`mailto:${email}`}
+                      className="flex items-start gap-3 underline-offset-4 hover:underline"
+                    >
+                      <Mail
+                        aria-hidden="true"
+                        className="mt-0.5 size-4 shrink-0 text-gold-ink"
+                      />
+                      {email}
+                    </a>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <MapPin
                       aria-hidden="true"
                       className="mt-0.5 size-4 shrink-0 text-gold-ink"
                     />
-                    {email}
-                  </a>
-                </li>
-                {phone ? (
-                  <li>
-                    <a
-                      href={`tel:${phone.replace(/\s/g, "")}`}
-                      className="flex items-start gap-3 underline-offset-4 hover:underline"
-                    >
-                      <Phone
-                        aria-hidden="true"
-                        className="mt-0.5 size-4 shrink-0 text-gold-ink"
-                      />
-                      {phone}
-                    </a>
+                    <address className="not-italic">
+                      {siteConfig.legalName}
+                      <br />
+                      {line1}
+                      <br />
+                      {town} {postcode}
+                    </address>
                   </li>
-                ) : null}
+                  <li className="flex items-start gap-3 text-muted-foreground">
+                    <Clock
+                      aria-hidden="true"
+                      className="mt-0.5 size-4 shrink-0 text-gold-ink"
+                    />
+                    {hours}. We reply within two working days.
+                  </li>
+                </ul>
+
                 {whatsapp ? (
-                  <li>
-                    <a
-                      href={`https://wa.me/${whatsapp}`}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="flex items-start gap-3 underline-offset-4 hover:underline"
-                    >
-                      <MessageCircle
-                        aria-hidden="true"
-                        className="mt-0.5 size-4 shrink-0 text-gold-ink"
-                      />
-                      Message us on WhatsApp
-                    </a>
-                  </li>
+                  <a
+                    href={`https://wa.me/${whatsapp}`}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="mt-7 inline-flex size-10 items-center justify-center rounded-full bg-brand text-white transition-colors hover:bg-brand-hover"
+                  >
+                    <MessageCircle aria-hidden="true" className="size-5" />
+                    <span className="sr-only">Message us on WhatsApp</span>
+                  </a>
                 ) : null}
-                <li className="flex items-start gap-3 text-muted-foreground">
-                  <Clock
-                    aria-hidden="true"
-                    className="mt-0.5 size-4 shrink-0 text-gold-ink"
-                  />
-                  {hours}. We reply within two working days.
-                </li>
-                <li className="flex items-start gap-3 text-muted-foreground">
-                  <MapPin
-                    aria-hidden="true"
-                    className="mt-0.5 size-4 shrink-0 text-gold-ink"
-                  />
-                  <address className="not-italic">
-                    {siteConfig.legalName}
-                    <br />
-                    {line1}
-                    <br />
-                    {town} {postcode}
-                  </address>
-                </li>
-              </ul>
+              </div>
+
+              <ContactForm />
             </div>
 
-            <div className="rounded-lg border border-neutral-200 p-6">
+            <div className="mt-12 rounded-lg border border-neutral-200 p-6">
               <Store
                 aria-hidden="true"
                 className="size-5 text-gold-ink"
@@ -150,9 +131,9 @@ export default function ContactPage() {
                 Stockists &amp; wholesale
               </Link>
             </div>
-          </aside>
-        </div>
-      </Section>
+          </div>
+        </Container>
+      </section>
 
       <Section surface="muted" spacing="sm">
         <SectionHeader
