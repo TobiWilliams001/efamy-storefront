@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
+import { NewsletterSignup } from "@/components/layout/newsletter-signup";
 import { Logo } from "@/components/layout/logo";
 import { footerNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
@@ -20,7 +21,7 @@ export function SiteFooter() {
   return (
     <footer className="mt-auto bg-ink text-ink-foreground">
       <Container className="py-14 lg:py-16">
-        <div className="grid gap-10 lg:grid-cols-[1.5fr_2fr]">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_2fr_1.2fr]">
           <div className="max-w-sm">
             <Logo
               variant="light"
@@ -58,7 +59,7 @@ export function SiteFooter() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
             {footerNav.map((group) => (
               <nav key={group.title} aria-label={group.title}>
-                <h2 className="font-heading text-sm font-medium text-gold">
+                <h2 className="display-title text-xs tracking-[0.14em] text-gold">
                   {group.title}
                 </h2>
                 <ul className="mt-4 space-y-3">
@@ -76,9 +77,20 @@ export function SiteFooter() {
               </nav>
             ))}
           </div>
+
+          <div>
+            <h2 className="display-title text-xs tracking-[0.14em] text-gold">
+              Newsletter
+            </h2>
+            <p className="mt-4 text-sm text-pretty text-ink-muted">
+              New products, recipes and the occasional offer. No more than once
+              a month.
+            </p>
+            <NewsletterSignup />
+          </div>
         </div>
 
-        <p className="mt-12 border-t pt-6 text-center text-sm text-muted-foreground">
+        <p className="mt-12 border-t border-white/10 pt-6 text-center text-sm text-ink-muted">
           © {year} {siteConfig.legalName}. All rights reserved.
         </p>
       </Container>
