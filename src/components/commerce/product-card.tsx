@@ -116,6 +116,7 @@ export function ProductCard({
         </p>
 
         <DietaryBadges
+          variant="card"
           dietary={product.dietary}
           allergens={product.allergens}
           className="mt-3"
