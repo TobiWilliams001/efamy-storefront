@@ -76,12 +76,31 @@ legal matter.
 - [ ] **Certifications** — SALSA, BRC, organic, halal, anything else? Fifteen
       years of trading usually means at least one, and it belongs beside the
       price.
-- [ ] **Which products come in which heat?** The old website says every chilli
-      sauce comes in **mild, hot and extra hot**, plus a **non-chilli version**
-      with all the taste and no heat. The site currently only knows mild and
-      hot, because that is all the photographs showed. If extra hot and
-      non-chilli are still made, they are missing from the shop entirely — and
-      the non-chilli version in particular is the one that sells to families.
+- [x] **Extra hot exists** — it is printed on the Chicken and Beans labels, so
+      the site now supports mild, hot and extra hot.
+- [ ] **Which jars do you actually make?** This is the biggest gap left. The
+      photographs disagree with each other: the range lineup on your old
+      website shows Beans and Chicken as **extra hot** and Goat as **mild**,
+      while the jars you sent us are Beans **mild** and Chicken **hot**. We
+      have kept the newer photographs, but that means the shop may be offering
+      jars you no longer make and hiding ones you do.
+
+      The simplest answer is a list: for each of the seven flavours, tick the
+          strengths you currently produce.
+
+          | Flavour | Non-chilli | Mild | Hot | Extra hot |
+          | ------- | ---------- | ---- | --- | --------- |
+          | Beans   |            |      |     |           |
+          | Beef    |            |      |     |           |
+          | Chicken |            |      |     |           |
+          | Fish    |            |      |     |           |
+          | Goat    |            |      |     |           |
+          | Pork    |            |      |     |           |
+          | Turkey  |            |      |     |           |
+
+- [ ] **Is the non-chilli version still made?** Your old website describes one
+      with "all the quality and taste except chillies". Nothing on the site
+      offers it, and it is the jar a family with young children buys.
 
 ### Products we have prices for but cannot show
 
