@@ -41,6 +41,11 @@ export function Statement() {
         </div>
 
         <div className="relative min-h-72 lg:min-h-full">
+          {/* Feathers the seam where the photograph meets the maroon. */}
+          <span
+            aria-hidden="true"
+            className="absolute inset-0 z-10 bg-linear-to-b from-ink via-transparent to-transparent lg:bg-linear-to-r"
+          />
           <Image
             src={feature.src}
             alt={feature.alt}

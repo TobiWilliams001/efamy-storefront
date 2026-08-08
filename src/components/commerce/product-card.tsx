@@ -56,7 +56,12 @@ export function ProductCard({
       )}
     >
       {/* Square so the landscape case shots keep their scale beside the jars. */}
-      <div className="relative aspect-square overflow-hidden bg-linear-to-b from-white to-neutral-100">
+      <div className="relative aspect-square overflow-hidden bg-[radial-gradient(ellipse_at_50%_38%,#FFFFFF_0%,#F7F2E9_58%,#EBE3D6_100%)]">
+        {/* The pool of shadow the jar stands in. */}
+        <span
+          aria-hidden="true"
+          className="absolute inset-x-[22%] bottom-[14%] h-3 rounded-[50%] bg-ink/20 blur-md"
+        />
         <Image
           src={image.url}
           alt={image.alt}
@@ -67,7 +72,7 @@ export function ProductCard({
           placeholder={image.blurDataURL ? "blur" : undefined}
           blurDataURL={image.blurDataURL}
           className={cn(
-            "object-contain p-8 transition-transform duration-300 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
+            "object-contain p-8 drop-shadow-[0_10px_12px_rgb(74_20_20/0.18)] transition-transform duration-300 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
             !inStock && "opacity-50",
           )}
         />

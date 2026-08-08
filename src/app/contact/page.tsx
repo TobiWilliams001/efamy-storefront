@@ -35,6 +35,11 @@ export default function ContactPage() {
             label="A bowl of rice and beans with plantain and Efamy sauce, shot close on a dark surface"
             className="absolute inset-0"
           />
+          {/* Feathers the seam so the panel reads as part of the page. */}
+          <span
+            aria-hidden="true"
+            className="absolute inset-0 bg-linear-to-b from-background to-transparent lg:bg-linear-to-r"
+          />
         </div>
 
         <Container>
