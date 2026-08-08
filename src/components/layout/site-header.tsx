@@ -24,6 +24,12 @@ export function SiteHeader() {
    */
   const overlay = pathname === routes.home && !scrolled;
 
+  /*
+   * Pages that open on a maroon band carry the bar in the same maroon, so the
+   * header reads as part of the block rather than a light strip sitting on it.
+   */
+  const onInk = overlay || pathname === routes.about;
+
   return (
     <header className="sticky top-0 z-40">
       <div
@@ -31,12 +37,14 @@ export function SiteHeader() {
           "transition-colors duration-200",
           overlay
             ? "bg-transparent"
-            : "border-b border-neutral-200/70 bg-background/85 backdrop-blur-md",
+            : onInk
+              ? "bg-ink"
+              : "border-b border-neutral-200/70 bg-background/85 backdrop-blur-md",
         )}
       >
         <Container>
           <div className="relative flex h-16 items-center justify-between gap-6 lg:h-20">
-            <Logo variant={overlay ? "light" : "dark"} />
+            <Logo variant={onInk ? "light" : "dark"} />
 
             <nav
               aria-label="Main"
@@ -49,13 +57,13 @@ export function SiteHeader() {
                       href={item.href}
                       className={cn(
                         "relative py-2 text-xs font-semibold tracking-[0.14em] uppercase transition-colors",
-                        overlay
+                        onInk
                           ? "text-white/80 hover:text-white"
                           : "text-muted-foreground hover:text-brand",
                       )}
                       activeClassName={cn(
                         "after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-gold after:content-['']",
-                        overlay ? "text-white" : "text-brand",
+                        onInk ? "text-white" : "text-brand",
                       )}
                     >
                       {item.label}
@@ -68,7 +76,7 @@ export function SiteHeader() {
             <div
               className={cn(
                 "flex items-center gap-1",
-                overlay && "text-white [&_svg]:text-white",
+                onInk && "text-white [&_svg]:text-white",
               )}
             >
               <CartBadge />
