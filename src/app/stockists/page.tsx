@@ -46,8 +46,8 @@ export default function StockistsPage() {
         description="Order the full range direct, or pick up a jar from one of the independent grocers who have carried Efamy for years."
       />
       <Section spacing="afterHeader">
-        <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
-          <div className="flex flex-col rounded-lg bg-card p-8 shadow-card sm:p-10">
+        <div className="grid gap-6 lg:grid-cols-[1fr_1.5fr] lg:items-start lg:gap-8">
+          <div className="rounded-lg bg-card p-8 shadow-card sm:p-10">
             <ShoppingBag
               aria-hidden="true"
               className="size-6 text-gold-ink"
@@ -66,7 +66,7 @@ export default function StockistsPage() {
             </div>
           </div>
 
-          <div className="flex flex-col rounded-lg border border-neutral-200 p-8 sm:p-10">
+          <div className="rounded-lg border border-neutral-200 p-8 sm:p-10">
             <Store
               aria-hidden="true"
               className="size-6 text-muted-foreground"
