@@ -6,6 +6,7 @@ import { Rule } from "@/components/layout/rule";
 import { ContactForm } from "@/app/contact/contact-form";
 import { FaqList } from "@/components/common/faq-list";
 import { Container } from "@/components/layout/container";
+import { PageHeader } from "@/components/layout/page-header";
 import { Section, SectionHeader } from "@/components/layout/section";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
@@ -24,6 +25,13 @@ export default function ContactPage() {
 
   return (
     <>
+      <PageHeader
+        tone="ink"
+        eyebrow="Contact"
+        title="Get in touch"
+        description="Questions about an order, our products, or stocking Efamy? Send us a message and a real person will come back to you."
+      />
+
       <section className="relative overflow-hidden bg-background">
         {/*
          * The photograph bleeds off the right edge on wide screens and drops to
@@ -48,9 +56,9 @@ export default function ContactPage() {
 
         <Container>
           <div className="py-14 lg:w-[58%] lg:py-20 lg:pr-10">
-            <h1 className="display-title text-3xl text-brand sm:text-4xl">
-              Contact us
-            </h1>
+            <h2 className="display-title text-2xl text-brand sm:text-3xl">
+              Our details
+            </h2>
             <Rule className="mt-5 justify-start" />
 
             <div className="mt-10 grid gap-10 md:grid-cols-[minmax(0,15rem)_1fr] md:gap-12">
