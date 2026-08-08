@@ -29,14 +29,14 @@ not folksy, not a market stall.
 
 Six per SKU. The site has slots for all of them today.
 
-| # | Shot | Where it appears | Notes |
-| - | ---- | ---------------- | ----- |
-| 1 | **Packshot, background removed** | Product cards, PLP, basket | Already have these. Square, jar centred, even lighting, label readable |
-| 2 | **Hero in context** | Product page gallery, first slot | The jar on a worktop beside the meal it belongs to. This is the one that sells |
-| 3 | **Texture close-up** | Gallery | The sauce itself — spooned, glossy, chilli flecks visible. Macro |
-| 4 | **Ingredients** | Gallery | Scotch bonnet, onion, garlic, ginger around the open jar. Supports the short ingredient list |
-| 5 | **Served** | Gallery, meal pairings, recipes | The finished dish with the jar in frame. Jollof, waakye, kenkey and fish, grilled chicken |
-| 6 | **Scale** | Gallery | Jar in hand or beside a plate. Four sizes make this genuinely useful |
+| #   | Shot                             | Where it appears                 | Notes                                                                                        |
+| --- | -------------------------------- | -------------------------------- | -------------------------------------------------------------------------------------------- |
+| 1   | **Packshot, background removed** | Product cards, PLP, basket       | Already have these. Square, jar centred, even lighting, label readable                       |
+| 2   | **Hero in context**              | Product page gallery, first slot | The jar on a worktop beside the meal it belongs to. This is the one that sells               |
+| 3   | **Texture close-up**             | Gallery                          | The sauce itself — spooned, glossy, chilli flecks visible. Macro                             |
+| 4   | **Ingredients**                  | Gallery                          | Scotch bonnet, onion, garlic, ginger around the open jar. Supports the short ingredient list |
+| 5   | **Served**                       | Gallery, meal pairings, recipes  | The finished dish with the jar in frame. Jollof, waakye, kenkey and fish, grilled chicken    |
+| 6   | **Scale**                        | Gallery                          | Jar in hand or beside a plate. Four sizes make this genuinely useful                         |
 
 **Optional:** 10–20s vertical video of a spoonful being lifted or stirred
 through rice. Mobile hero only.
