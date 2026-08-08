@@ -3,7 +3,6 @@ import { Flame, Leaf, MapPin, Utensils } from "lucide-react";
 
 import { Rule } from "@/components/layout/rule";
 import { Section } from "@/components/layout/section";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 
 const reasons = [
   {
@@ -32,8 +31,14 @@ const reasons = [
   },
 ];
 
-/** The image is optional so the section stands up before the shoot happens. */
-const feature = { src: undefined, alt: "" };
+/*
+ * A stand-in from the existing photography. The brief for the shot that belongs
+ * here is in docs/photography-brief.md; swap the src when it arrives.
+ */
+const feature = {
+  src: "/dishes/rice-stew.jpg",
+  alt: "A bowl of rice and stew made with Efamy chilli sauce",
+};
 
 export function WhyEfamy() {
   return (
@@ -67,20 +72,13 @@ export function WhyEfamy() {
         </div>
 
         <div className="relative aspect-4/3 overflow-hidden rounded-lg shadow-card">
-          {feature.src ? (
-            <Image
-              src={feature.src}
-              alt={feature.alt}
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
-            />
-          ) : (
-            <ImagePlaceholder
-              label="A bowl of Efamy chilli sauce, close and warmly lit, with fresh chillies and garlic alongside"
-              className="size-full"
-            />
-          )}
+          <Image
+            src={feature.src}
+            alt={feature.alt}
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
         </div>
       </div>
     </Section>

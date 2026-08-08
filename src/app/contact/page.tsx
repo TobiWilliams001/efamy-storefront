@@ -7,7 +7,7 @@ import { ContactForm } from "@/app/contact/contact-form";
 import { FaqList } from "@/components/common/faq-list";
 import { Container } from "@/components/layout/container";
 import { Section, SectionHeader } from "@/components/layout/section";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
+import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { contactFaqs } from "@/lib/faqs";
 import { routes } from "@/lib/routes";
@@ -31,9 +31,13 @@ export default function ContactPage() {
          * form into a column too tight to type in.
          */}
         <div className="relative h-56 sm:h-72 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[38%]">
-          <ImagePlaceholder
-            label="A bowl of rice and beans with plantain and Efamy sauce, shot close on a dark surface"
-            className="absolute inset-0"
+          {/* Stand-in; see docs/photography-brief.md for the shot intended here. */}
+          <Image
+            src="/dishes/kelewele.jpg"
+            alt="Kelewele, spiced fried plantain, made with Efamy seasoning"
+            fill
+            sizes="(min-width: 1024px) 38vw, 100vw"
+            className="object-cover"
           />
           {/* Feathers the seam so the panel reads as part of the page. */}
           <span
