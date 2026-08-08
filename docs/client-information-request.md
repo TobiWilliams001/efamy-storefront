@@ -23,11 +23,25 @@ The shop cannot take an order until these exist.
 ### Delivery
 
 - [ ] **What does delivery cost?** A flat rate, or by weight or basket value?
-- [ ] **How long does it take?** For example "2 to 3 working days".
+- [ ] **How long does it take?** The payment page has a slot for "arrives in
+      2 to 4 working days" and it is currently left blank, because a delivery
+      window nobody has agreed to is a promise the business has to keep.
 - [ ] **Is there a free delivery threshold?** For example free over £30. Very
       effective at increasing order size, but only if it is real.
 - [ ] **Which countries?** UK only, or Ireland and Europe as well?
 - [ ] **How are orders sent?** Royal Mail, courier, something else?
+
+### Two small promises the site would like to make
+
+Both are things customers look for, and both are currently written vaguely
+because guessing them would be inventing a commitment.
+
+- [ ] **How quickly do you reply to messages?** The contact page says only that
+      you read every message. "We reply within two working days" is far more
+      reassuring, if it is true.
+- [ ] **Which days do you pack and post orders?** The order confirmation walks
+      the customer through what happens next but cannot say when, so it says
+      "we will let you know when it leaves us".
 
 ### Legal pages
 
