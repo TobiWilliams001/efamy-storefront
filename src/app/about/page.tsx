@@ -15,7 +15,7 @@ import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `${siteConfig.legalName} is a premium Ghanaian food brand, proudly made in the UK, bringing authentic flavours, trusted quality and traditional recipes.`,
+  description: `${siteConfig.legalName} has been making Ghanaian chilli sauces and seasonings in Kettering since 2008. Real meat, poultry, beans and fish. No colours, additives or preservatives.`,
   alternates: { canonical: routes.about },
 };
 
@@ -27,8 +27,8 @@ export default async function AboutPage() {
       <PageHeader
         tone="ink"
         eyebrow="About Efamy"
-        title="A premium Ghanaian food brand, proudly made in the UK."
-        description="Efamy brings authentic Ghanaian flavours, trusted quality and traditional recipes to modern kitchens. These are the jars that sit on the table at every meal, made here in Britain."
+        title="It began with one batch, at the end of 2008."
+        description="Ghanaian chilli sauces and seasonings, made in Kettering ever since. The same recipes, the same short ingredient lists, and no shortcuts we would not take at home."
       />
 
       <Container className="mt-14 lg:mt-20">
@@ -49,18 +49,19 @@ export default async function AboutPage() {
           <div>
             <p className="text-lg text-pretty text-muted-foreground">
               On 30 December 2008 we made our first batch of chilli sauce and
-              sold it amongst friends and family. The response to that first
-              production gave us the green light to carry on.
+              sold it to friends and family. They came back for more, which was
+              all the encouragement we needed.
             </p>
             <p className="mt-5 text-pretty text-muted-foreground">
-              Two years later, by popular request, came the All Purpose
-              Seasoning Mix, and Coat &amp; Cook followed shortly after. In
-              December 2015 we made our first Kelewele Seasoning.
+              The seasonings came from the same place. Customers kept asking for
+              the blend we cooked with, so two years later we jarred it as the
+              All Purpose Seasoning Mix. Coat &amp; Cook followed, and in
+              December 2015 came the first Kelewele Seasoning.
             </p>
             <p className="mt-5 text-pretty text-muted-foreground">
-              We try to make our products as authentic as possible and easy to
-              use, and we keep exploring how to make them better while holding
-              the same quality.
+              Everything is still made to those recipes. We keep looking for
+              ways to make them better, and none of them involve making them
+              cheaper.
             </p>
           </div>
 
@@ -72,9 +73,9 @@ export default async function AboutPage() {
               are mainly vegetable oil and extra virgin olive oil.
             </p>
             <p className="mt-5 text-pretty text-muted-foreground">
-              No colours, additives or preservatives added. Use them as a
-              condiment with rice, chips, pasta or couscous, stir them through a
-              salad, or take them to a barbecue.
+              No colours, additives or preservatives. Spoon them over rice,
+              chips, pasta or couscous, stir them through a salad, or take a jar
+              to a barbecue and watch it disappear.
             </p>
           </div>
 
@@ -91,7 +92,7 @@ export default async function AboutPage() {
             </p>
           </div>
 
-          <h2 className="text-2xl sm:text-xl">Mild and hot</h2>
+          <h2 className="text-2xl sm:text-xl">On heat</h2>
           <div>
             <p className="text-lg text-pretty text-muted-foreground">
               Heat is a preference, not a test. Where a sauce comes in more than
@@ -107,9 +108,10 @@ export default async function AboutPage() {
           <h2 className="text-2xl sm:text-xl">Where to find us</h2>
           <div>
             <p className="text-lg text-pretty text-muted-foreground">
-              You can order the full range directly from this site. We also
-              supply retailers, so if you stock food and would like to carry
-              Efamy, we would like to hear from you.
+              Order the full range directly from this site, or find us on the
+              shelves of independent grocers across the Midlands, Essex,
+              Berkshire and Buckinghamshire. If you run a shop and would like to
+              carry Efamy, we would like to hear from you.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Button asChild size="xl" variant="accent">
