@@ -136,12 +136,14 @@ export default async function ProductPage({
 
             <ul className="mt-7 space-y-2 text-sm text-muted-foreground">
               {[
-                "Authentic Ghanaian recipe",
-                "Proudly made in the UK",
-                "No artificial preservatives",
+                "Made by hand in Kettering, as it has been since 2008",
+                "Secure payment by card, Apple Pay or Google Pay",
               ].map((reason) => (
-                <li key={reason} className="flex items-center gap-2">
-                  <Check aria-hidden="true" className="size-4 text-sage-ink" />
+                <li key={reason} className="flex items-start gap-2">
+                  <Check
+                    aria-hidden="true"
+                    className="mt-0.5 size-4 shrink-0 text-sage-ink"
+                  />
                   {reason}
                 </li>
               ))}
@@ -167,7 +169,7 @@ export default async function ProductPage({
         products={related}
         surface="muted"
         action={{
-          label: "View category",
+          label: `Shop ${product.category.name.toLowerCase()}`,
           href: routes.category(product.category.slug),
         }}
       />
