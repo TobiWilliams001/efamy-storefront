@@ -39,7 +39,7 @@ export function SiteHeader() {
       >
         <Container>
           <div className="relative flex h-16 items-center justify-between gap-6 lg:h-20">
-            <Logo variant={onInk ? "light" : "dark"} />
+            <Logo eager variant={onInk ? "light" : "dark"} />
 
             <nav
               aria-label="Main"

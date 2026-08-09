@@ -13,8 +13,11 @@ export function Logo({
   className,
   variant = "dark",
   imageClassName = "h-12 w-auto lg:h-14",
+  /** Header only. The footer copy is below the fold and must not preload. */
+  eager = false,
 }: {
   className?: string;
+  eager?: boolean;
   /** "dark" for ink on light, "light" for the maroon footer. */
   variant?: "dark" | "light";
   /** Height utilities; the wordmark carries whitespace so it needs headroom. */
@@ -34,7 +37,8 @@ export function Logo({
           alt=""
           width={asset.width}
           height={asset.height}
-          priority
+          loading={eager ? "eager" : "lazy"}
+          fetchPriority={eager ? "high" : undefined}
           className={imageClassName}
         />
       ) : (
