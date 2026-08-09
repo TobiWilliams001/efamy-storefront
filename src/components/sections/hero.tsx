@@ -61,10 +61,10 @@ export function Hero({
       <Container>
         <div
           className={cn(
-            "flex flex-col justify-center pt-36 pb-20 lg:pt-44",
+            "flex flex-col justify-center pt-28 pb-14 sm:pt-32 sm:pb-20 lg:pt-44",
             size === "full"
-              ? "min-h-140 lg:min-h-165"
-              : "min-h-100 lg:min-h-120",
+              ? "min-h-[30rem] sm:min-h-140 lg:min-h-165"
+              : "min-h-[22rem] sm:min-h-100 lg:min-h-120",
           )}
         >
           <div className="max-w-xl">
@@ -80,20 +80,20 @@ export function Hero({
           </div>
 
           {showSignals ? (
-            <ul className="mt-14 flex flex-wrap gap-x-8 gap-y-6 sm:gap-x-12">
+            <ul className="mt-10 grid grid-cols-4 gap-x-2 gap-y-6 sm:mt-14 sm:flex sm:flex-wrap sm:gap-x-12">
               {signals.map(({ icon: Icon, label }) => (
                 <li
                   key={label}
-                  className="flex w-20 flex-col items-center gap-2 text-center sm:w-24"
+                  className="flex flex-col items-center gap-2 text-center sm:w-24"
                 >
-                  <span className="flex size-11 items-center justify-center rounded-full border border-gold/50">
+                  <span className="flex size-10 items-center justify-center rounded-full border border-gold/50 sm:size-11">
                     <Icon
                       aria-hidden="true"
                       className="size-5 text-gold"
                       strokeWidth={1.5}
                     />
                   </span>
-                  <span className="text-xs text-balance text-white/75">
+                  <span className="text-[0.6875rem] leading-tight text-balance text-white/75 sm:text-xs">
                     {label}
                   </span>
                 </li>
