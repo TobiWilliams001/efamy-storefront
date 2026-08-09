@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+import { useAddedToBasket } from "@/components/ui/toast";
 import { useCart } from "@/components/cart/cart-provider";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
@@ -13,6 +14,7 @@ import { inStock, type ProductSummary } from "@/types/product";
  */
 export function CardAddToCart({ product }: { product: ProductSummary }) {
   const { add } = useCart();
+  const added = useAddedToBasket();
   const available = inStock(product);
 
   if (!available) {
@@ -36,7 +38,10 @@ export function CardAddToCart({ product }: { product: ProductSummary }) {
       size="lg"
       variant="accent"
       className="w-full"
-      onClick={() => add(product, product.variants[0], 1)}
+      onClick={() => {
+        add(product, product.variants[0], 1);
+        added(product.name);
+      }}
     >
       Add to basket
     </Button>

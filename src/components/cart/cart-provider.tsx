@@ -181,10 +181,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       ready: state.ready,
       isOpen,
       setOpen,
-      add: (product, variant, quantity = 1) => {
-        dispatch({ type: "add", product, variant, quantity });
-        setOpen(true);
-      },
+      add: (product, variant, quantity = 1) =>
+        dispatch({ type: "add", product, variant, quantity }),
       setQuantity: (id, quantity) =>
         dispatch({ type: "setQuantity", id, quantity }),
       remove: (id) => dispatch({ type: "remove", id }),

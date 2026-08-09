@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 
+import { useAddedToBasket } from "@/components/ui/toast";
 import { useCart } from "@/components/cart/cart-provider";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format";
@@ -11,6 +12,7 @@ import type { Product } from "@/types/product";
 
 export function AddToCart({ product }: { product: Product }) {
   const { add } = useCart();
+  const added = useAddedToBasket();
   const [sizeIndex, setSizeIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
@@ -91,6 +93,7 @@ export function AddToCart({ product }: { product: Product }) {
           disabled={!variant.inStock}
           onClick={() => {
             add(product, variant, quantity);
+            added(product.name);
             setQuantity(1);
           }}
           className="w-full sm:w-auto"

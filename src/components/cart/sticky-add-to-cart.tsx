@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
+import { useAddedToBasket } from "@/components/ui/toast";
 import { useCart } from "@/components/cart/cart-provider";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format";
@@ -16,6 +17,7 @@ import { lowestPrice, type Product } from "@/types/product";
  */
 export function StickyAddToCart({ product }: { product: Product }) {
   const { add, setOpen } = useCart();
+  const added = useAddedToBasket();
   const [visible, setVisible] = useState(false);
   const sentinel = useRef<HTMLDivElement>(null);
 
@@ -70,6 +72,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
                 return;
               }
               add(product, variant, 1);
+              added(product.name);
               setOpen(true);
             }}
           >
