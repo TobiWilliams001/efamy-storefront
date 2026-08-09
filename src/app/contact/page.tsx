@@ -68,7 +68,7 @@ export default function ContactPage() {
                     <li>
                       <a
                         href={`tel:${phone.replace(/\s/g, "")}`}
-                        className="flex items-start gap-3 underline-offset-4 hover:underline"
+                        className="flex min-h-11 items-center gap-3 underline-offset-4 hover:underline sm:min-h-0 sm:items-start"
                       >
                         <Phone
                           aria-hidden="true"
@@ -81,7 +81,7 @@ export default function ContactPage() {
                   <li>
                     <a
                       href={`mailto:${email}`}
-                      className="flex items-start gap-3 underline-offset-4 hover:underline"
+                      className="flex min-h-11 items-center gap-3 underline-offset-4 hover:underline sm:min-h-0 sm:items-start"
                     >
                       <Mail
                         aria-hidden="true"
@@ -117,7 +117,7 @@ export default function ContactPage() {
                     href={`https://wa.me/${whatsapp}`}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="mt-7 inline-flex size-10 items-center justify-center rounded-full bg-brand text-white transition-colors hover:bg-brand-hover"
+                    className="mt-7 inline-flex size-11 items-center justify-center rounded-full bg-brand text-white transition-colors hover:bg-brand-hover"
                   >
                     <MessageCircle aria-hidden="true" className="size-5" />
                     <span className="sr-only">Message us on WhatsApp</span>
@@ -141,7 +141,7 @@ export default function ContactPage() {
               </p>
               <Link
                 href={routes.stockists}
-                className="mt-4 inline-block text-sm underline underline-offset-4"
+                className="mt-4 inline-flex min-h-11 items-center text-sm underline underline-offset-4 sm:min-h-0"
               >
                 Stockists &amp; wholesale
               </Link>

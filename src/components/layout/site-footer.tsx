@@ -33,7 +33,7 @@ export function SiteFooter() {
             </p>
             <a
               href={`mailto:${siteConfig.contact.email}`}
-              className="mt-6 inline-flex items-center gap-2 text-sm text-ink-muted transition-colors hover:text-ink-foreground"
+              className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm text-ink-muted transition-colors hover:text-ink-foreground sm:min-h-0"
             >
               <Mail className="size-4 text-gold" aria-hidden="true" />
               {siteConfig.contact.email}
@@ -46,7 +46,7 @@ export function SiteFooter() {
                       href={siteConfig.social[key]}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="text-sm text-ink-muted transition-colors hover:text-ink-foreground"
+                      className="inline-flex min-h-11 items-center text-sm text-ink-muted transition-colors hover:text-ink-foreground sm:min-h-0"
                     >
                       {label}
                     </a>
@@ -62,12 +62,12 @@ export function SiteFooter() {
                 <h2 className="display-title text-xs tracking-[0.14em] text-gold">
                   {group.title}
                 </h2>
-                <ul className="mt-4 space-y-3">
+                <ul className="mt-2 sm:mt-4 sm:space-y-3">
                   {group.items.map((item) => (
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        className="text-sm text-ink-muted transition-colors hover:text-ink-foreground"
+                        className="flex min-h-11 items-center text-sm text-ink-muted transition-colors hover:text-ink-foreground sm:block sm:min-h-0"
                       >
                         {item.label}
                       </Link>
