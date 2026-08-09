@@ -155,6 +155,60 @@ finished work.
 **Icons** — Lucide, outline only, 1.5–1.75 stroke, `size-4` inline and `size-5`
 standalone. Decorative icons are `aria-hidden`.
 
+## Feedback and state
+
+**Toast** — `ToastProvider` in the root layout, `useToast()` / `useAddedToBasket()`
+anywhere below it. One toast at a time; a stack of confirmations is noise, not
+feedback. Auto-dismisses after 5s, manual close, `aria-live="polite"` so it is
+announced without stealing focus. Sits at `bottom-20` on mobile so it clears the
+sticky buy bar it is confirming.
+
+Adding to the basket fires a toast rather than opening the drawer. The drawer
+was a heavy interruption on a phone for an action the customer already
+understood; it still opens when the basket icon is tapped deliberately.
+
+**Button loading** — `<Button loading>` renders a spinner, sets `aria-busy` and
+disables the button. Ignored when `asChild`, because Slot requires exactly one
+child and injecting a spinner breaks that contract at prerender.
+
+**Skeletons** — `Skeleton` and `ProductCardSkeleton` for streamed product grids.
+
+## Mobile
+
+Everything is built mobile-first and verified by measurement rather than by eye,
+using a headless Chrome pass at 390×844.
+
+| Rule                 | How it is met                                                               |
+| -------------------- | --------------------------------------------------------------------------- |
+| 44px touch targets   | `lg`, `default`, `icon` and `icon-lg` are 44px below `sm:`, denser above    |
+| No horizontal scroll | `documentElement.scrollWidth` is exactly 390 on every route                 |
+| Hero height          | 580px of an 844px viewport, so the next section is visible                  |
+| Filters              | Heat and diet collapse behind a `Filters` disclosure so products come first |
+| Footer               | Navigation groups are an accordion below `sm:`, columns above               |
+
+Disclosures use native `<details>` rather than JavaScript, so filtering and
+navigation work without it. Where a mobile and desktop variant differ too much
+to share markup, both are rendered and one is `hidden` — `display: none` removes
+it from the accessibility tree, so nothing is announced twice.
+
+Card titles are deliberately small; each card stretches its link across the
+whole card with `after:absolute after:inset-0`, so the tap target is the card.
+
+## Deliberately not built
+
+Named so nobody rebuilds them by accident:
+
+- **Ratings and review components** — Efamy has no reviews. The slots exist; they
+  render nothing until there is something true to show
+- **Breadcrumbs** — removed at the client's request. `BreadcrumbList` structured
+  data can still ship invisibly
+- **Pagination** — twelve products. Use **Load more** over infinite scroll if the
+  range passes ~40
+- **Bottom tab bar** — competes with the sticky add-to-cart for the same thumb
+  zone on the page that matters most
+- **Modals** — no use case. Popups were ruled out with the client
+- **Free-shipping progress bar** — blocked on a confirmed delivery threshold
+
 ## Accessibility
 
 Every foreground/background pair meets **WCAG AA**, verified by measuring rather
