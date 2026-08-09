@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import { Loader2 } from "lucide-react";
 import { Slot } from "radix-ui";
 
 import { cn } from "@/lib/utils";
@@ -54,21 +55,52 @@ function Button({
   variant = "default",
   size = "default",
   asChild = false,
+  loading = false,
+  children,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
+    /** Shows a spinner and blocks further clicks. Ignored when `asChild`. */
+    loading?: boolean;
   }) {
   const Comp = asChild ? Slot.Root : "button";
+
+  /*
+   * `asChild` renders someone else's element — usually a link — so a spinner
+   * cannot be injected without breaking the single-child contract Slot needs.
+   */
+  const busy = loading && !asChild;
 
   return (
     <Comp
       data-slot="button"
       data-variant={variant}
       data-size={size}
+      aria-busy={busy || undefined}
+      disabled={busy || props.disabled}
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-    />
+    >
+      {/*
+       * Slot requires exactly one child, so `asChild` passes children straight
+       * through — wrapping them in a fragment with a nullable sibling makes it
+       * an array and Slot throws at prerender.
+       */}
+      {asChild ? (
+        children
+      ) : (
+        <>
+          {busy ? (
+            <Loader2
+              aria-hidden="true"
+              className="animate-spin motion-reduce:animate-none"
+            />
+          ) : null}
+          {children}
+        </>
+      )}
+    </Comp>
   );
 }
 

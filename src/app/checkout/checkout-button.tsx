@@ -55,7 +55,7 @@ export function CheckoutButton() {
         size="xl"
         variant="accent"
         onClick={onClick}
-        disabled={pending}
+        loading={pending}
         className="w-full"
       >
         {pending ? "Taking you to Stripe…" : "Continue to secure payment"}

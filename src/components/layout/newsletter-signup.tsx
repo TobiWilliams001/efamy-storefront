@@ -57,7 +57,7 @@ export function NewsletterSignup() {
         type="submit"
         size="xl"
         variant="accent"
-        disabled={pending}
+        loading={pending}
         className="mt-3 w-full"
       >
         {pending ? "Subscribing…" : "Subscribe"}
