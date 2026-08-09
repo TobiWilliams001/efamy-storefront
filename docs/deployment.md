@@ -67,6 +67,56 @@ After adding the domain:
    sitemap and social previews keep pointing at the old host
 2. Add the domain to Sanity CORS (below)
 
+## Environment variables on Vercel
+
+Set in **Settings → Environment Variables**. `.env.local` is gitignored and
+never leaves your machine, so anything missing here is simply undefined in the
+deployed app.
+
+| Variable                        | Development | Preview        | Production                    |
+| ------------------------------- | ----------- | -------------- | ----------------------------- |
+| `NEXT_PUBLIC_SITE_URL`          | localhost   | preview URL    | `https://efamys.co.uk`        |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | ✓           | ✓              | ✓                             |
+| `NEXT_PUBLIC_SANITY_DATASET`    | ✓           | ✓              | ✓                             |
+| `STRIPE_SECRET_KEY`             | `sk_test_`  | `sk_test_`     | `sk_live_` **only when live** |
+| `STRIPE_WEBHOOK_SECRET`         | CLI value   | endpoint value | endpoint value                |
+
+### Do not put test keys in Production
+
+With test keys on the public site the checkout looks completely live, but:
+
+- a real customer entering a real card is **declined** — test mode only accepts
+  test card numbers
+- anyone who knows `4242 4242 4242 4242` can create fake orders in the dashboard
+
+Both are worse than the honest fallback the site shows with no key set: _"Card
+payment is not switched on yet. Email info@efamys.co.uk and we will take your
+order."_ Leave Production without Stripe keys until the account is activated.
+
+### The webhook secret is per endpoint
+
+`STRIPE_WEBHOOK_SECRET` is **not** one value copied everywhere. Each endpoint
+has its own:
+
+- **Local:** printed by `stripe listen --forward-to localhost:3000/api/stripe/webhook`
+- **Deployed:** Stripe dashboard → Developers → Webhooks → add an endpoint at
+  `https://<your-domain>/api/stripe/webhook`, subscribe to
+  `checkout.session.completed`, then copy that endpoint's signing secret
+
+Using the wrong one fails signature verification, and the route correctly
+returns 400 rather than trusting the payload.
+
+### Before switching Production to live keys
+
+1. Efamy completes Stripe onboarding — the account currently has
+   `charges_enabled: false` and cannot take a real payment
+2. Real delivery rates in `src/config/delivery.ts`, with `provisional: false`.
+   `assertDeliveryIsReal` throws on a `sk_live_` key while that flag is set, so
+   nobody can be charged invented postage
+3. Add the live webhook endpoint and its signing secret
+4. Turn on Stripe receipt emails: Settings → Customer emails. The confirmation
+   page tells the customer a receipt has been sent
+
 ## Studio
 
 ```bash
