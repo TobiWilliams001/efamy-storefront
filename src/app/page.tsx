@@ -30,7 +30,6 @@ export default async function HomePage() {
         description="The jars we would hand you first."
         products={featured}
         action={{ label: "View all", href: routes.shop }}
-        eagerCount={2}
       />
       <MealPairings />
       <HeatGuide />

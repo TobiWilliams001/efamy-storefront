@@ -22,6 +22,12 @@ export function ProductShowcase({
   products,
   action,
   surface = "default",
+  /*
+   * Zero by default. On the home page every product row sits below a hero that
+   * fills most of a phone screen, so eager-loading cards only competes with the
+   * hero for LCP bandwidth. The shop pages set it, because there the products
+   * are the first thing on screen.
+   */
   eagerCount = 0,
 }: ProductShowcaseProps) {
   if (products.length === 0) {
