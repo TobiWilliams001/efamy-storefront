@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
+import { ChevronDown, Mail } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { NewsletterSignup } from "@/components/layout/newsletter-signup";
@@ -56,18 +56,57 @@ export function SiteFooter() {
             ) : null}
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+          {/*
+           * Accordion on a phone, columns from sm up. Each link is a 44px
+           * target, which made the open footer roughly 600px tall on mobile.
+           * `details` needs no JavaScript; only one branch is ever displayed,
+           * so the hidden copy stays out of the accessibility tree.
+           */}
+          <div className="sm:hidden">
+            {footerNav.map((group) => (
+              <details
+                key={group.title}
+                className="group border-b border-white/10 first:border-t"
+              >
+                <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between py-2">
+                  <span className="display-title text-xs tracking-[0.14em] text-gold">
+                    {group.title}
+                  </span>
+                  <ChevronDown
+                    aria-hidden="true"
+                    className="size-4 text-ink-muted transition-transform duration-200 group-open:rotate-180"
+                  />
+                </summary>
+                <nav aria-label={group.title} className="pb-2">
+                  <ul>
+                    {group.items.map((item) => (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          className="flex min-h-11 items-center text-sm text-ink-muted transition-colors hover:text-ink-foreground"
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </details>
+            ))}
+          </div>
+
+          <div className="hidden gap-8 sm:grid sm:grid-cols-3">
             {footerNav.map((group) => (
               <nav key={group.title} aria-label={group.title}>
                 <h2 className="display-title text-xs tracking-[0.14em] text-gold">
                   {group.title}
                 </h2>
-                <ul className="mt-2 sm:mt-4 sm:space-y-3">
+                <ul className="mt-4 space-y-3">
                   {group.items.map((item) => (
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        className="flex min-h-11 items-center text-sm text-ink-muted transition-colors hover:text-ink-foreground sm:block sm:min-h-0"
+                        className="text-sm text-ink-muted transition-colors hover:text-ink-foreground"
                       >
                         {item.label}
                       </Link>
