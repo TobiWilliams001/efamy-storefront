@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Clock, Mail, TriangleAlert } from "lucide-react";
 
 import { ClearCartOnMount } from "@/app/order/confirmed/clear-cart";
+import { TrackPurchase } from "@/app/order/confirmed/track-purchase";
 import { PageHeader } from "@/components/layout/page-header";
 import { Rule } from "@/components/layout/rule";
 import { Section } from "@/components/layout/section";
@@ -38,9 +39,10 @@ export default async function OrderConfirmedPage({
   const { session_id: sessionId } = await searchParams;
 
   // Stripe is asked directly. Landing on this URL is not evidence of anything.
-  const status = await confirmOrder(
+  const order = await confirmOrder(
     typeof sessionId === "string" ? sessionId : undefined,
   );
+  const status = order.status;
 
   if (status !== "paid") {
     return (
@@ -107,8 +109,16 @@ export default async function OrderConfirmedPage({
 
   return (
     <>
-      {/* Only once Stripe has confirmed payment. */}
+      {/* Both only once Stripe has confirmed payment. */}
       <ClearCartOnMount />
+      {order.transactionId ? (
+        <TrackPurchase
+          transactionId={order.transactionId}
+          value={order.value ?? 0}
+          currency={order.currency ?? "GBP"}
+          shipping={order.shipping ?? 0}
+        />
+      ) : null}
 
       <PageHeader eyebrow="Thank you" title="Your order is in." />
 
