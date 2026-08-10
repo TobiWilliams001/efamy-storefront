@@ -38,8 +38,8 @@ export default async function HomePage() {
       <Testimonials />
       <RecipeInspiration />
       <ProductShowcase
-        eyebrow="Best sellers"
-        title="What keeps selling out"
+        eyebrow="Cupboard staples"
+        title="The jars that earn their shelf"
         products={bestSellers}
         action={{ label: "View all", href: routes.shop }}
         surface="muted"

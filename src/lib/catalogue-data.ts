@@ -335,6 +335,12 @@ export const featuredSlugs = [
   "fish-chilli-sauce-hot",
 ];
 
+/*
+ * An editorial selection, not sales data — nothing has been sold online yet, so
+ * "best seller" would be a claim we cannot support. Mr Emmanuel knows what
+ * moves in the shops; once he confirms it, rename this and the home page
+ * section together.
+ */
 export const bestSellerSlugs = [
   "all-purpose-seasoning-mix",
   "beans-chilli-sauce-mild",
