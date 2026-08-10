@@ -108,3 +108,23 @@ export function faqSchema(faqs: Faq[]) {
     })),
   };
 }
+
+/**
+ * Breadcrumbs for search engines only.
+ *
+ * The client asked for the visible "Home / Shop" trail to be removed from every
+ * page, and that stands. This gives Google the hierarchy it uses to build the
+ * trail shown in results without putting anything back on screen.
+ */
+export function breadcrumbSchema(trail: Array<{ name: string; path: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((crumb, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: crumb.name,
+      item: new URL(crumb.path, siteConfig.url).toString(),
+    })),
+  };
+}

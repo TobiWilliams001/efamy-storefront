@@ -18,7 +18,11 @@ import {
 } from "@/lib/catalogue";
 import { formatPrice } from "@/lib/format";
 import { lowestPrice } from "@/types/product";
-import { productSchema, serialiseJsonLd } from "@/lib/structured-data";
+import {
+  breadcrumbSchema,
+  productSchema,
+  serialiseJsonLd,
+} from "@/lib/structured-data";
 import { routes } from "@/lib/routes";
 
 export async function generateStaticParams() {
@@ -63,6 +67,22 @@ export default async function ProductPage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serialiseJsonLd(
+            breadcrumbSchema([
+              { name: "Home", path: routes.home },
+              { name: "Shop", path: routes.shop },
+              {
+                name: product.category.name,
+                path: routes.category(product.category.slug),
+              },
+              { name: product.name, path: routes.product(product.slug) },
+            ]),
+          ),
+        }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
