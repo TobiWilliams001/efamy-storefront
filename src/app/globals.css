@@ -144,6 +144,31 @@
   }
 }
 
+/*
+ * The meal ribbon. A transform animation rather than a scrolling container:
+ * a full-width horizontal scroller competes with vertical swipes on touch,
+ * which is how it ends up feeling like the page will not scroll.
+ */
+@keyframes efamy-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@utility marquee-track {
+  animation: efamy-marquee 46s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
