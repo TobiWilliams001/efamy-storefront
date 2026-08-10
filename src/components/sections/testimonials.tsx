@@ -1,16 +1,16 @@
 import { Quote } from "lucide-react";
 
 import { Section, SectionHeader } from "@/components/layout/section";
-import { testimonials } from "@/lib/testimonials";
+import { exampleTestimonials, testimonials } from "@/lib/testimonials";
 import { cn } from "@/lib/utils";
 
 /**
- * Where customer quotes go once Efamy has collected them.
+ * Customer quotes.
  *
- * Until then this shows the finished layout filled with visible placeholders,
- * so the shape is agreed and it is obvious what is still owed. The placeholders
- * are deliberately not written as quotes — an invented testimonial that ships
- * by accident is worse than an empty section.
+ * Falls back to the example set while no real quotes exist, and tags every one
+ * of them "Example" so the design can be reviewed without anything reading as
+ * social proof Efamy has not earned. The moment `testimonials` has entries the
+ * examples disappear on their own.
  */
 export function Testimonials({
   title = "What people say",
@@ -19,60 +19,52 @@ export function Testimonials({
   title?: string;
   description?: string;
 }) {
-  const showing = testimonials.slice(0, 3);
-  const slots = showing.length > 0 ? showing.length : 3;
+  const real = testimonials.slice(0, 3);
+  const showing = real.length > 0 ? real : exampleTestimonials.slice(0, 3);
+  const isExample = real.length === 0;
+
+  if (showing.length === 0) return null;
 
   return (
     <Section surface="muted">
       <SectionHeader align="center" title={title} description={description} />
 
       <ul className="grid gap-6 sm:grid-cols-3 lg:gap-8">
-        {Array.from({ length: slots }, (_, index) => {
-          const entry = showing[index];
+        {showing.map((entry) => (
+          <li
+            key={entry.name + entry.quote.slice(0, 20)}
+            className={cn(
+              "relative flex flex-col rounded-lg bg-card p-7 shadow-card sm:p-8",
+              isExample && "border border-dashed border-gold/60",
+            )}
+          >
+            {isExample ? (
+              <span className="absolute top-4 right-4 rounded-full bg-gold/15 px-2 py-0.5 text-[0.625rem] font-semibold tracking-[0.1em] text-gold-ink uppercase">
+                Example
+              </span>
+            ) : null}
 
-          return (
-            <li
-              key={entry?.name ?? `placeholder-${index}`}
-              className={cn(
-                "flex flex-col rounded-lg p-7 sm:p-8",
-                entry
-                  ? "bg-card shadow-card"
-                  : "border border-dashed border-gold/50 bg-transparent",
-              )}
-            >
-              <Quote
-                aria-hidden="true"
-                className={cn(
-                  "size-6 shrink-0",
-                  entry ? "text-gold" : "text-gold/60",
-                )}
-                strokeWidth={1.5}
-              />
+            <Quote
+              aria-hidden="true"
+              className="size-6 shrink-0 text-gold"
+              strokeWidth={1.5}
+            />
 
-              {entry ? (
-                <>
-                  <blockquote className="mt-5 flex-1 text-pretty">
-                    {entry.quote}
-                  </blockquote>
-                  <p className="mt-6 text-sm font-medium">
-                    {entry.name}
-                    {entry.location ? (
-                      <span className="text-muted-foreground">
-                        {" "}
-                        · {entry.location}
-                      </span>
-                    ) : null}
-                  </p>
-                </>
-              ) : (
-                <p className="mt-5 flex-1 text-sm text-pretty text-gold-ink">
-                  Customer quote — waiting on a real one. Needs the
-                  customer&apos;s own words, a first name and a town.
-                </p>
-              )}
-            </li>
-          );
-        })}
+            <blockquote className="mt-5 flex-1 text-pretty">
+              {entry.quote}
+            </blockquote>
+
+            <p className="mt-6 text-sm font-medium">
+              {entry.name}
+              {entry.location ? (
+                <span className="text-muted-foreground">
+                  {" "}
+                  · {entry.location}
+                </span>
+              ) : null}
+            </p>
+          </li>
+        ))}
       </ul>
     </Section>
   );
