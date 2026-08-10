@@ -9,7 +9,6 @@ import { Section, SectionHeader } from "@/components/layout/section";
 import { CallToAction } from "@/components/sections/call-to-action";
 import { WhyEfamy } from "@/components/sections/why-efamy";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
 import { getCategories } from "@/lib/catalogue";
 import { routes } from "@/lib/routes";
 
