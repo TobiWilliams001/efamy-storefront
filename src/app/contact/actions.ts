@@ -2,6 +2,7 @@
 
 import { siteConfig } from "@/config/site";
 import { contactSchema, type ContactInput } from "@/lib/contact-schema";
+import { sendEmail } from "@/lib/email";
 
 export type ContactResult =
   { status: "success" } | { status: "error"; message: string };
@@ -25,10 +26,34 @@ export async function submitContact(
     return { status: "success" };
   }
 
-  // Sending is wired up once RESEND_API_KEY exists; until then the customer
-  // gets the address rather than an explanation of our plumbing.
-  return {
-    status: "error",
-    message: `Please email us at ${siteConfig.contact.email} and we will come back to you.`,
-  };
+  const { name, email, topic, message } = parsed.data;
+
+  const result = await sendEmail({
+    subject: `${topic} — ${name}`,
+    text: [
+      `${topic} from the website`,
+      "",
+      `From: ${name} <${email}>`,
+      "",
+      message,
+    ].join("\n"),
+    // Hitting reply answers the customer directly.
+    replyTo: email,
+  });
+
+  if (!result.sent) {
+    console.error("Contact message not sent:", result.reason, {
+      name,
+      email,
+      topic,
+    });
+
+    // The customer gets a route that works, not an explanation of our plumbing.
+    return {
+      status: "error",
+      message: `Please email us at ${siteConfig.contact.email} and we will come back to you.`,
+    };
+  }
+
+  return { status: "success" };
 }
