@@ -227,6 +227,12 @@ until there are real ratings behind them.
 
 Not information, but choices only the business can make.
 
+- [ ] **Which products actually sell best?** The home page has a section for
+      them. Nothing has been sold online yet, so it currently shows an editorial
+      pick titled "Cupboard staples" rather than claiming sales figures we do
+      not have. Fifteen years of trade means you know the real answer — tell us
+      the top four and it becomes a genuine best-sellers row.
+
 - [ ] **Subscriptions?** Chilli sauce is a repeat purchase, so a "subscribe and
       save 10%" option is a strong fit. It changes the checkout, so it is worth
       deciding early.
