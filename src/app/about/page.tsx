@@ -15,7 +15,7 @@ import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `${siteConfig.legalName} has been making Ghanaian chilli sauces and seasonings in Kettering since 2008. Real meat, poultry, beans and fish. No colours, additives or preservatives.`,
+  description: `Ghanaian chilli sauces and seasonings, made in Kettering since 2008. Real meat, poultry, beans and fish, with no colours or preservatives.`,
   alternates: { canonical: routes.about },
 };
 
