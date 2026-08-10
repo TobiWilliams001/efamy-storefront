@@ -84,11 +84,13 @@ photos.
 - [ ] Contact details filled in
 - [ ] Prices double-checked against the client's price list
 - [ ] Allergens verified against the physical jars
-- [ ] **Delete `exampleTestimonials` from `src/lib/testimonials.ts`.** Three
-      placeholder quotes render on the home and product pages while no real ones
-      exist. They carry a visible "Example" tag, so nothing is passed off as a
-      genuine review — but they must not survive launch. Adding real entries to
-      `testimonials` hides them automatically
+- [ ] **Real customer quotes in `src/lib/testimonials.ts`.** Three placeholder
+      quotes exist for design review. They render in development, and on a
+      deployed site only when `NEXT_PUBLIC_SHOW_EXAMPLE_REVIEWS=true`, so a
+      Production build without that flag shows nothing rather than something
+      invented. Never set that flag in Production: publishing fabricated reviews
+      has been illegal in the UK since the DMCC Act 2024. Adding real entries to
+      `testimonials` replaces them automatically
 - [ ] Test a real order end to end
 - [ ] Error monitoring
 - [ ] Google Search Console, and the sitemap submitted

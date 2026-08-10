@@ -40,8 +40,11 @@ export function testimonialsFor(productSlug: string): Testimonial[] {
  * and barbecues — so the real quotes should sound like these rather than the
  * other way round.
  *
- * DELETE THIS ARRAY BEFORE LAUNCH. It is on the launch checklist in
- * docs/handover.md.
+ * These render in development, and on a deployed site only when
+ * NEXT_PUBLIC_SHOW_EXAMPLE_REVIEWS is explicitly set to "true". A production
+ * build with that flag unset shows nothing, so they cannot reach a customer by
+ * being forgotten — publishing invented reviews has been illegal in the UK
+ * since the DMCC Act 2024, so a checklist item alone is not enough of a guard.
  */
 export const exampleTestimonials: Testimonial[] = [
   {
@@ -63,3 +66,14 @@ export const exampleTestimonials: Testimonial[] = [
     location: "Milton Keynes",
   },
 ];
+
+/**
+ * True when the placeholder quotes may be shown. Development always; anywhere
+ * else only on an explicit opt-in.
+ */
+export function showExampleTestimonials(): boolean {
+  return (
+    process.env.NODE_ENV === "development" ||
+    process.env.NEXT_PUBLIC_SHOW_EXAMPLE_REVIEWS === "true"
+  );
+}

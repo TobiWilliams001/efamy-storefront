@@ -1,16 +1,17 @@
-import { Quote } from "lucide-react";
-
 import { Section, SectionHeader } from "@/components/layout/section";
-import { exampleTestimonials, testimonials } from "@/lib/testimonials";
-import { cn } from "@/lib/utils";
+import {
+  exampleTestimonials,
+  showExampleTestimonials,
+  testimonials,
+} from "@/lib/testimonials";
 
 /**
  * Customer quotes.
  *
- * Falls back to the example set while no real quotes exist, and tags every one
- * of them "Example" so the design can be reviewed without anything reading as
- * social proof Efamy has not earned. The moment `testimonials` has entries the
- * examples disappear on their own.
+ * Falls back to the placeholder set while no real quotes exist, and only where
+ * `showExampleTestimonials` allows it — a production build renders nothing
+ * rather than anything invented. Adding entries to `testimonials` takes over
+ * automatically.
  */
 export function Testimonials({
   title = "What people say",
@@ -20,8 +21,12 @@ export function Testimonials({
   description?: string;
 }) {
   const real = testimonials.slice(0, 3);
-  const showing = real.length > 0 ? real : exampleTestimonials.slice(0, 3);
-  const isExample = real.length === 0;
+  const showing =
+    real.length > 0
+      ? real
+      : showExampleTestimonials()
+        ? exampleTestimonials.slice(0, 3)
+        : [];
 
   if (showing.length === 0) return null;
 
@@ -32,37 +37,44 @@ export function Testimonials({
       <ul className="grid gap-6 sm:grid-cols-3 lg:gap-8">
         {showing.map((entry) => (
           <li
-            key={entry.name + entry.quote.slice(0, 20)}
-            className={cn(
-              "relative flex flex-col rounded-lg bg-card p-7 shadow-card sm:p-8",
-              isExample && "border border-dashed border-gold/60",
-            )}
+            key={entry.name + entry.quote.slice(0, 24)}
+            className="relative flex flex-col overflow-hidden rounded-lg bg-card px-7 pt-12 pb-8 shadow-card sm:px-8"
           >
-            {isExample ? (
-              <span className="absolute top-4 right-4 rounded-full bg-gold/15 px-2 py-0.5 text-[0.625rem] font-semibold tracking-[0.1em] text-gold-ink uppercase">
-                Example
-              </span>
-            ) : null}
-
-            <Quote
+            {/*
+             * A typographic quote mark rather than an icon: it sits behind the
+             * text as a piece of the layout, which reads as editorial instead
+             * of decorated.
+             */}
+            <span
               aria-hidden="true"
-              className="size-6 shrink-0 text-gold"
-              strokeWidth={1.5}
-            />
+              className="pointer-events-none absolute -top-4 left-5 font-heading text-[7rem] leading-none text-gold/20 select-none"
+            >
+              &ldquo;
+            </span>
 
-            <blockquote className="mt-5 flex-1 text-pretty">
+            <blockquote className="relative flex-1 font-heading text-lg leading-relaxed text-pretty">
               {entry.quote}
             </blockquote>
 
-            <p className="mt-6 text-sm font-medium">
-              {entry.name}
-              {entry.location ? (
-                <span className="text-muted-foreground">
-                  {" "}
-                  · {entry.location}
-                </span>
-              ) : null}
-            </p>
+            <div className="mt-7 flex items-center gap-3 border-t border-neutral-200/80 pt-5">
+              <span
+                aria-hidden="true"
+                className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gold/15 font-heading text-base text-gold-ink"
+              >
+                {entry.name.charAt(0)}
+              </span>
+              <p className="text-sm leading-tight">
+                <span className="font-medium">{entry.name}</span>
+                {entry.location ? (
+                  <>
+                    <br />
+                    <span className="text-muted-foreground">
+                      {entry.location}
+                    </span>
+                  </>
+                ) : null}
+              </p>
+            </div>
           </li>
         ))}
       </ul>
