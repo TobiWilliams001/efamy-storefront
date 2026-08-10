@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 
+import { toMajorUnits, track } from "@/lib/analytics";
 import type { Product, ProductVariant } from "@/types/product";
 
 /** All the cart needs to build a line, so cards can add without a full product. */
@@ -181,8 +182,23 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       ready: state.ready,
       isOpen,
       setOpen,
-      add: (product, variant, quantity = 1) =>
-        dispatch({ type: "add", product, variant, quantity }),
+      add: (product, variant, quantity = 1) => {
+        dispatch({ type: "add", product, variant, quantity });
+        // Fired here, not in the reducer, which stays pure.
+        track("add_to_cart", {
+          currency: "GBP",
+          value: toMajorUnits(variant.price * quantity),
+          items: [
+            {
+              item_id: product.id,
+              item_name: product.name,
+              item_variant: variant.size,
+              price: toMajorUnits(variant.price),
+              quantity,
+            },
+          ],
+        });
+      },
       setQuantity: (id, quantity) =>
         dispatch({ type: "setQuantity", id, quantity }),
       remove: (id) => dispatch({ type: "remove", id }),

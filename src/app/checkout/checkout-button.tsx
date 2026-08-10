@@ -6,6 +6,7 @@ import { TriangleAlert } from "lucide-react";
 
 import { startCheckout } from "@/app/checkout/actions";
 import { useCart } from "@/components/cart/cart-provider";
+import { toMajorUnits, track } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 
@@ -17,6 +18,20 @@ export function CheckoutButton() {
   async function onClick() {
     setPending(true);
     setError(null);
+
+    track("begin_checkout", {
+      currency: "GBP",
+      value: toMajorUnits(
+        lines.reduce((sum, line) => sum + line.price * line.quantity, 0),
+      ),
+      items: lines.map((line) => ({
+        item_id: line.productId,
+        item_name: line.name,
+        item_variant: line.size,
+        price: toMajorUnits(line.price),
+        quantity: line.quantity,
+      })),
+    });
 
     /*
      * Only what we are allowed to send: what and how many. Prices are looked up
