@@ -336,10 +336,10 @@ export const featuredSlugs = [
 ];
 
 /*
- * An editorial selection, not sales data — nothing has been sold online yet, so
- * "best seller" would be a claim we cannot support. Mr Emmanuel knows what
- * moves in the shops; once he confirms it, rename this and the home page
- * section together.
+ * Shown on the home page as "Best sellers". Efamy has sold through shops since
+ * 2008, so the label is grounded in real trade — but this particular four is a
+ * stand-in until Mr Emmanuel confirms which actually move fastest. Swap the
+ * slugs when he does; no other change is needed.
  */
 export const bestSellerSlugs = [
   "all-purpose-seasoning-mix",
