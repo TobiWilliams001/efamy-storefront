@@ -202,9 +202,19 @@ See `photography-brief.md` for the full shot list. In short:
       well-known dishes, marked as drafts. Efamy's own would be far better.
 - [x] **The founder's story** — taken from the old website. The About page now
       opens with the first production on 30 December 2008.
-- [ ] **Customer reviews or testimonials.** Fifteen years of customers is real
-      social proof, and there is none on the site. Even six quotes with first
-      names would change how the pages read.
+- [ ] **Customer reviews.** The slots are now built and on the site — one band
+      on the home page, one on every product page — showing a dashed
+      placeholder until real quotes arrive. Six would fill both.
+
+      For each, we need: **the customer's own words, a first name, and a town.**
+          Please do not tidy the phrasing — the plain wording is what makes a quote
+          read as real. If a quote is about a particular jar, say which, and it will
+          show on that product's page.
+
+          Nothing is invented here and nothing will be. Star ratings stay off the
+          site until there are real ratings behind them: rating markup without them
+          is what Google issues manual penalties for.
+
 - [x] **A stockist list** — nine shops taken from the old website, across
       Berkshire, Essex, Northamptonshire, Bedfordshire and Buckinghamshire.
 - [ ] **The London stockists.** The old website had a London section that we
