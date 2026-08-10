@@ -6,6 +6,7 @@ import { HomeHero } from "@/components/sections/hero";
 import { RecipeInspiration } from "@/components/sections/recipe-inspiration";
 import { ProductShowcase } from "@/components/sections/product-showcase";
 import { Statement } from "@/components/sections/statement";
+import { Testimonials } from "@/components/sections/testimonials";
 import {
   getBestSellers,
   getCategories,
@@ -34,6 +35,7 @@ export default async function HomePage() {
       <MealPairings />
       <HeatGuide />
       <Statement />
+      <Testimonials />
       <RecipeInspiration />
       <ProductShowcase
         eyebrow="Best sellers"

@@ -9,6 +9,7 @@ import { HeatBadge } from "@/components/commerce/heat-badge";
 import { ProductDetails } from "@/components/commerce/product-details";
 import { ProductGallery } from "@/components/commerce/product-gallery";
 import { ProductShowcase } from "@/components/sections/product-showcase";
+import { Testimonials } from "@/components/sections/testimonials";
 import { Section } from "@/components/layout/section";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -183,6 +184,11 @@ export default async function ProductPage({
           <ProductDetails product={product} />
         </div>
       </Section>
+
+      <Testimonials
+        title="What people say"
+        description="Reviews from customers who have cooked with this jar."
+      />
 
       <ProductShowcase
         title={`More ${product.category.name.toLowerCase()}`}
