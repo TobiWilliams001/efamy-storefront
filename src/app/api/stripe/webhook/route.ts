@@ -50,7 +50,23 @@ export async function POST(request: Request) {
     // `complete` plus `paid` is the only combination that means money moved.
     if (session.status === "complete" && session.payment_status === "paid") {
       try {
-        await notifyOrder(session);
+        /*
+         * The webhook payload omits line items and the packing list wants them,
+         * but the notification must not depend on a second API call succeeding.
+         * If the expand fails we send what the payload already gave us — an
+         * email without an itemised list still tells Efamy an order exists.
+         */
+        let full = session;
+
+        try {
+          full = await getStripe().checkout.sessions.retrieve(session.id, {
+            expand: ["line_items"],
+          });
+        } catch (error) {
+          console.error("Could not expand line items for", session.id, error);
+        }
+
+        await notifyOrder(full);
       } catch (error) {
         /*
          * A failed email must never lose an order. Stripe holds the record, so
