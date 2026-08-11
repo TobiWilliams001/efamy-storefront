@@ -4,6 +4,26 @@ import Stripe from "stripe";
 const notifyOrder = vi.hoisted(() => vi.fn());
 vi.mock("@/lib/order-email", () => ({ notifyOrder }));
 
+/*
+ * The route retrieves and updates the session, so the Stripe client is stubbed
+ * to keep these tests hermetic. Signature verification still runs for real —
+ * that is the part worth proving.
+ */
+const retrieve = vi.hoisted(() => vi.fn());
+const update = vi.hoisted(() => vi.fn());
+
+vi.mock("@/lib/stripe", async () => {
+  const { default: RealStripe } = await import("stripe");
+  const real = new RealStripe("sk_test_not_used_for_signature_checks");
+
+  return {
+    getStripe: () => ({
+      webhooks: real.webhooks,
+      checkout: { sessions: { retrieve, update } },
+    }),
+  };
+});
+
 const SECRET = "whsec_test_secret_for_signature_verification";
 
 process.env.STRIPE_SECRET_KEY = "sk_test_not_used_for_signature_checks";
@@ -46,6 +66,16 @@ function signed(payload: string) {
 
 beforeEach(() => {
   notifyOrder.mockReset();
+  update.mockReset();
+  retrieve.mockReset();
+  // By default the session comes back with no notification flag set.
+  retrieve.mockImplementation(async (id: string) => ({
+    id,
+    status: "complete",
+    payment_status: "paid",
+    amount_total: 820,
+    metadata: {},
+  }));
 });
 
 describe("stripe webhook", () => {
@@ -120,6 +150,44 @@ describe("stripe webhook", () => {
 
     const response = await POST(signed(event("evt_email_fails")));
 
+    expect(response.status).toBe(200);
+  });
+
+  it("does not email twice when Stripe has already recorded the notification", async () => {
+    // A redelivery landing on a cold instance: the in-memory cache is empty,
+    // so only the flag on the session can prevent a second email.
+    retrieve.mockResolvedValueOnce({
+      id: "cs_test_123",
+      status: "complete",
+      payment_status: "paid",
+      metadata: { efamy_notified: "1" },
+    });
+
+    const response = await POST(signed(event("evt_cold_instance")));
+
+    expect(await response.json()).toMatchObject({ duplicate: true });
+    expect(notifyOrder).not.toHaveBeenCalled();
+  });
+
+  it("records the notification on the session after sending", async () => {
+    await POST(signed(event("evt_marks_flag")));
+
+    expect(notifyOrder).toHaveBeenCalledTimes(1);
+    expect(update).toHaveBeenCalledWith(
+      "cs_test_123",
+      expect.objectContaining({
+        metadata: expect.objectContaining({ efamy_notified: "1" }),
+      }),
+    );
+  });
+
+  it("still delivers the order when the flag cannot be written", async () => {
+    update.mockRejectedValueOnce(new Error("stripe unavailable"));
+
+    const response = await POST(signed(event("evt_flag_fails")));
+
+    // A duplicate email is a smaller failure than an order nobody hears about.
+    expect(notifyOrder).toHaveBeenCalledTimes(1);
     expect(response.status).toBe(200);
   });
 });

@@ -9,8 +9,15 @@ import { notifyOrder } from "@/lib/order-email";
  * paying and never reach it at all.
  */
 
-/** Event ids already handled, so redeliveries are ignored. */
+/**
+ * Fast path for a redelivery landing on the same warm instance. It is only a
+ * cache — serverless gives every instance its own memory, so the durable check
+ * is the `efamy_notified` flag written onto the Stripe session below.
+ */
 const seen = new Set<string>();
+
+/** Stripe session metadata key marking that Efamy has been told about an order. */
+const NOTIFIED = "efamy_notified";
 
 export async function POST(request: Request) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -66,7 +73,28 @@ export async function POST(request: Request) {
           console.error("Could not expand line items for", session.id, error);
         }
 
+        /*
+         * Durable, cross-instance idempotency. Stripe is already the order
+         * book, so it doubles as the store that remembers whether this order
+         * was announced — no database, no extra service to own.
+         *
+         * Checked after the expand so we read the freshest metadata, and
+         * written after the send: a duplicate email is a far smaller failure
+         * than an order nobody hears about.
+         */
+        if (full.metadata?.[NOTIFIED] === "1") {
+          return Response.json({ received: true, duplicate: true });
+        }
+
         await notifyOrder(full);
+
+        try {
+          await getStripe().checkout.sessions.update(session.id, {
+            metadata: { ...(full.metadata ?? {}), [NOTIFIED]: "1" },
+          });
+        } catch (error) {
+          console.error("Could not mark order notified", session.id, error);
+        }
       } catch (error) {
         /*
          * A failed email must never lose an order. Stripe holds the record, so
