@@ -11,11 +11,12 @@ import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { getProductBySlug } from "@/lib/catalogue";
 import { productAccent } from "@/lib/product-accent";
-import { getRecipe, recipes } from "@/lib/recipes";
+import { getRecipe, getRecipes } from "@/lib/catalogue";
 import { routes } from "@/lib/routes";
 import { recipeSchema, serialiseJsonLd } from "@/lib/structured-data";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const recipes = await getRecipes();
   return recipes.map((recipe) => ({ slug: recipe.slug }));
 }
 
@@ -23,7 +24,7 @@ export async function generateMetadata({
   params,
 }: PageProps<"/recipes/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const recipe = getRecipe(slug);
+  const recipe = await getRecipe(slug);
 
   if (!recipe) return {};
 
@@ -44,14 +45,14 @@ export default async function RecipePage({
   params,
 }: PageProps<"/recipes/[slug]">) {
   const { slug } = await params;
-  const recipe = getRecipe(slug);
+  const recipe = await getRecipe(slug);
 
   if (!recipe) {
     notFound();
   }
 
   const product = await getProductBySlug(recipe.productSlug);
-  const others = recipes
+  const others = (await getRecipes())
     .filter((entry) => entry.slug !== recipe.slug)
     .slice(0, 3);
   const total = recipe.prepMinutes + recipe.cookMinutes;

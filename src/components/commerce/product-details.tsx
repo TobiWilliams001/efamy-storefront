@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { FaqList } from "@/components/common/faq-list";
 import { productFaqs } from "@/lib/faqs";
-import { recipesForProduct } from "@/lib/recipes";
+import { getRecipesForProduct } from "@/lib/catalogue";
 import { routes } from "@/lib/routes";
 import type { Product } from "@/types/product";
 
@@ -21,8 +21,8 @@ function Block({
   );
 }
 
-export function ProductDetails({ product }: { product: Product }) {
-  const relatedRecipes = recipesForProduct(product.slug);
+export async function ProductDetails({ product }: { product: Product }) {
+  const relatedRecipes = await getRecipesForProduct(product.slug);
   const hasLabelInfo =
     product.ingredients || product.allergens || product.nutrition;
 

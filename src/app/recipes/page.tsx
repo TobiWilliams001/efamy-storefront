@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { RecipeCard } from "@/components/commerce/recipe-card";
 import { PageHeader } from "@/components/layout/page-header";
 import { Section } from "@/components/layout/section";
-import { recipes } from "@/lib/recipes";
+import { getRecipes } from "@/lib/catalogue";
 import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
@@ -13,7 +13,9 @@ export const metadata: Metadata = {
   alternates: { canonical: routes.recipes },
 };
 
-export default function RecipesPage() {
+export default async function RecipesPage() {
+  const recipes = await getRecipes();
+
   return (
     <>
       <PageHeader

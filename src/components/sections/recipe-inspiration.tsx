@@ -3,10 +3,12 @@ import Link from "next/link";
 import { RecipeCard } from "@/components/commerce/recipe-card";
 import { Section, SectionHeader } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
-import { recipes } from "@/lib/recipes";
+import { getRecipes } from "@/lib/catalogue";
 import { routes } from "@/lib/routes";
 
-export function RecipeInspiration() {
+export async function RecipeInspiration() {
+  const recipes = await getRecipes();
+
   return (
     <Section>
       <SectionHeader
