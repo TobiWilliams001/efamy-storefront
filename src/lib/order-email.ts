@@ -57,7 +57,15 @@ export async function notifyOrder(session: Stripe.Checkout.Session) {
       .map((l) => `  ${l}`)
       .join("\n"),
     "",
-    `Stripe reference: ${session.id}`,
+    "REFERENCES",
+    `  Checkout session: ${session.id}`,
+    // The payment intent is what a refund, dispute or chargeback is filed
+    // against, so it belongs in the record Efamy actually keeps.
+    `  Payment: ${
+      typeof session.payment_intent === "string"
+        ? session.payment_intent
+        : (session.payment_intent?.id ?? "not available")
+    }`,
   ].join("\n");
 
   const result = await sendEmail({
