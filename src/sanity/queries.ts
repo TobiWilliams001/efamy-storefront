@@ -36,6 +36,31 @@ const PRODUCT_FIELDS = `
 
 const ORDER_BY = `order(coalesce(order, 9999) asc, name asc)`;
 
+const RECIPE_FIELDS = `
+  title,
+  "slug": slug.current,
+  summary,
+  serves,
+  prepMinutes,
+  cookMinutes,
+  ingredients,
+  method,
+  "productSlug": product->slug.current,
+  image{${IMAGE_FIELDS}}
+`;
+
+export const RECIPES_QUERY = defineQuery(`
+  *[_type == "recipe" && defined(slug.current)] | order(title asc) {
+    ${RECIPE_FIELDS}
+  }
+`);
+
+export const RECIPE_BY_SLUG_QUERY = defineQuery(`
+  *[_type == "recipe" && slug.current == $slug][0] {
+    ${RECIPE_FIELDS}
+  }
+`);
+
 export const PRODUCTS_QUERY = defineQuery(
   `*[_type == "product" && defined(slug.current)] | ${ORDER_BY}{${PRODUCT_FIELDS}}`,
 );

@@ -4,8 +4,10 @@ import {
   featuredSlugs,
   products as staticProducts,
 } from "@/lib/catalogue-data";
+import { recipes as staticRecipes, type Recipe } from "@/lib/recipes";
 import { getSanityClient } from "@/sanity/client";
 import { mapCategory, mapProduct } from "@/sanity/map";
+import { mapRecipe } from "@/sanity/map-recipe";
 import {
   BEST_SELLERS_QUERY,
   CATEGORIES_QUERY,
@@ -13,6 +15,8 @@ import {
   FEATURED_PRODUCTS_QUERY,
   PRODUCT_BY_SLUG_QUERY,
   PRODUCTS_QUERY,
+  RECIPE_BY_SLUG_QUERY,
+  RECIPES_QUERY,
 } from "@/sanity/queries";
 import type { Product, ProductCategory } from "@/types/product";
 
@@ -132,4 +136,35 @@ export async function getRelatedProducts(
         candidate.category.slug === product.category.slug,
     )
     .slice(0, limit);
+}
+
+/*
+ * Recipes follow the same rule as products: Sanity when it answers, the bundled
+ * set when it does not. The static six are drafts and are meant to be replaced
+ * from the Studio — once real recipes exist there, these stop being reachable.
+ */
+export async function getRecipes(): Promise<Recipe[]> {
+  const raw = await fetchFromSanity<Record<string, unknown>[]>(RECIPES_QUERY);
+  const mapped = raw
+    ?.map(mapRecipe)
+    .filter((entry): entry is Recipe => entry !== null);
+
+  return mapped && mapped.length > 0 ? mapped : staticRecipes;
+}
+
+export async function getRecipe(slug: string): Promise<Recipe | undefined> {
+  const raw = await fetchFromSanity<Record<string, unknown>>(
+    RECIPE_BY_SLUG_QUERY,
+    { slug },
+  );
+  const mapped = raw ? mapRecipe(raw) : null;
+
+  return mapped ?? staticRecipes.find((recipe) => recipe.slug === slug);
+}
+
+export async function getRecipesForProduct(
+  productSlug: string,
+): Promise<Recipe[]> {
+  const all = await getRecipes();
+  return all.filter((recipe) => recipe.productSlug === productSlug);
 }
