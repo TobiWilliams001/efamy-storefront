@@ -44,15 +44,43 @@ payment bugs.
 15. **Design for recovery.** Failed payments, abandoned baskets and dropped
     connections need clear messaging and a safe retry.
 
-## Order states
+## Payment state, and the fulfilment state we do not keep
+
+**Only payment state exists in this application, and only in Stripe.**
 
 ```
-Draft → Pending Payment → Paid → Processing → Shipped → Completed
-                            ↘ Cancelled
-                            ↘ Refunded
+Stripe:  unpaid → paid → (refunded / disputed)
+Efamy:   an email arrives, the jar gets packed and posted
 ```
 
-Payment status and fulfilment status are tracked separately.
+Nothing tracks packing, posting or completion. There is no order record, by
+design — Stripe is the order book, so the business has no database to pay for,
+back up, or depend on a contractor for.
+
+The consequence, stated plainly: **the site cannot answer "has this order
+shipped?"** Nobody can look up an order and see where it is. For a business
+packing a handful of orders a day from one address, an email per order and the
+Stripe dashboard is a fair trade. It stops being fair somewhere around the point
+where orders outpace what one person can hold in their head.
+
+`confirmPayment` in `src/lib/payment-status.ts` returns a `PaymentStatus`, named
+for exactly what it is. It is deliberately not called order status: a type named
+for the order invites the next engineer to read fulfilment into a value that
+only ever means "Stripe took the money".
+
+### What adding fulfilment would take
+
+Not a rewrite. The pieces are already separable:
+
+1. Somewhere to keep an order record — Sanity could hold it, or Stripe session
+   metadata for a very small operation
+2. A `fulfilment` field distinct from payment: `processing → packed → shipped`
+3. A page for Mr Emmanuel to move an order along, and an email to the customer
+   when it ships
+
+Until then, the site never claims an order has shipped. The confirmation page
+shows what happens next as a sequence, not as live status, and only the first
+step — payment — is marked done.
 
 ## Checkout experience
 
