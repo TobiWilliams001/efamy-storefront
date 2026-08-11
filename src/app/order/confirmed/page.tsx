@@ -9,7 +9,7 @@ import { Rule } from "@/components/layout/rule";
 import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
-import { confirmOrder } from "@/lib/order-status";
+import { confirmPayment } from "@/lib/payment-status";
 import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
@@ -39,10 +39,10 @@ export default async function OrderConfirmedPage({
   const { session_id: sessionId } = await searchParams;
 
   // Stripe is asked directly. Landing on this URL is not evidence of anything.
-  const order = await confirmOrder(
+  const payment = await confirmPayment(
     typeof sessionId === "string" ? sessionId : undefined,
   );
-  const status = order.status;
+  const status = payment.status;
 
   if (status !== "paid") {
     return (
@@ -111,12 +111,12 @@ export default async function OrderConfirmedPage({
     <>
       {/* Both only once Stripe has confirmed payment. */}
       <ClearCartOnMount />
-      {order.transactionId ? (
+      {payment.transactionId ? (
         <TrackPurchase
-          transactionId={order.transactionId}
-          value={order.value ?? 0}
-          currency={order.currency ?? "GBP"}
-          shipping={order.shipping ?? 0}
+          transactionId={payment.transactionId}
+          value={payment.value ?? 0}
+          currency={payment.currency ?? "GBP"}
+          shipping={payment.shipping ?? 0}
         />
       ) : null}
 

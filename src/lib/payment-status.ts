@@ -2,11 +2,16 @@ import "server-only";
 
 import { getStripe } from "@/lib/stripe";
 
-export type OrderStatus = "paid" | "pending" | "unknown";
+/**
+ * What Stripe knows: whether money moved. Deliberately *not* called order
+ * status — this application does not track fulfilment, and a type named for the
+ * order would invite someone to read packing or shipping state into it.
+ */
+export type PaymentStatus = "paid" | "pending" | "unknown";
 
 /** Enough to report the sale to analytics, and nothing more. */
-export type ConfirmedOrder = {
-  status: OrderStatus;
+export type ConfirmedPayment = {
+  status: PaymentStatus;
   transactionId?: string;
   /** Major units, as GA4 expects. */
   value?: number;
@@ -27,9 +32,9 @@ export type ConfirmedOrder = {
  * "pending" covers slower payment methods that settle after the redirect, where
  * the honest answer is that we are still waiting rather than that it failed.
  */
-export async function confirmOrder(
+export async function confirmPayment(
   sessionId: string | undefined,
-): Promise<ConfirmedOrder> {
+): Promise<ConfirmedPayment> {
   if (!sessionId || !sessionId.startsWith("cs_")) return { status: "unknown" };
   if (!process.env.STRIPE_SECRET_KEY) return { status: "unknown" };
 
