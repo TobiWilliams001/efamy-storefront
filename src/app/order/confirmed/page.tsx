@@ -155,7 +155,7 @@ export default async function OrderConfirmedPage({
                   aria-hidden="true"
                   className={
                     index === 0
-                      ? "flex size-8 shrink-0 items-center justify-center rounded-full bg-sage/20 text-sm font-semibold text-sage-ink"
+                      ? "flex size-8 shrink-0 items-center justify-center rounded-full bg-success-bg text-sm font-semibold text-success"
                       : "flex size-8 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-sm font-semibold text-muted-foreground"
                   }
                 >

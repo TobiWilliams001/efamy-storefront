@@ -163,7 +163,7 @@ export default async function ProductPage({
                 <li key={reason} className="flex items-start gap-2">
                   <Check
                     aria-hidden="true"
-                    className="mt-0.5 size-4 shrink-0 text-sage-ink"
+                    className="mt-0.5 size-4 shrink-0 text-success"
                   />
                   {reason}
                 </li>

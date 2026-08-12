@@ -31,7 +31,7 @@ export default function CheckoutPage() {
           <p className="mt-5 flex items-start gap-2 text-sm text-pretty text-muted-foreground">
             <ShieldCheck
               aria-hidden="true"
-              className="mt-0.5 size-4 shrink-0 text-sage-ink"
+              className="mt-0.5 size-4 shrink-0 text-success"
             />
             Your card details are entered securely on Stripe. Efamy never sees
             or stores your card details.

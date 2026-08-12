@@ -15,6 +15,8 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -111,6 +113,14 @@
   --sage-ink: #66794e;
 
   --destructive: #a01f1f;
+
+  /*
+   * Success is its own token rather than borrowed from --sage. Sage is the
+   * dietary-badge colour; reusing it made a confirmation semantically a
+   * "suitable for vegans" chip. Same family, separate meaning.
+   */
+  --success: #4f6b3a;
+  --success-bg: #eef3e8;
 
   --border: #e5e0d8;
   --input: #d5cec3;

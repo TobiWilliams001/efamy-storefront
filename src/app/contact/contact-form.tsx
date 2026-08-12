@@ -52,7 +52,7 @@ export function ContactForm() {
       >
         <CheckCircle2
           aria-hidden="true"
-          className="mt-0.5 size-5 shrink-0 text-sage-ink"
+          className="mt-0.5 size-5 shrink-0 text-success"
         />
         <div>
           <p className="font-medium">Thanks, your message is on its way.</p>
