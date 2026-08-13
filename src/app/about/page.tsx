@@ -201,7 +201,7 @@ export default async function AboutPage() {
         <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8">
           {categories.map((category) => (
             <li key={category.id} className="flex">
-              <CategoryCard category={category} className="w-full" />
+              <CategoryCard category={category} className="aspect-4/3 w-full" />
             </li>
           ))}
         </ul>

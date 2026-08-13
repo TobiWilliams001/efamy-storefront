@@ -174,7 +174,11 @@ export default function DesignSystemPage() {
         <SectionHeader as="h2" title="Category cards" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {categories.map((item) => (
-            <CategoryCard key={item.id} category={item} />
+            <CategoryCard
+              key={item.id}
+              category={item}
+              className="aspect-4/3"
+            />
           ))}
         </div>
       </Section>

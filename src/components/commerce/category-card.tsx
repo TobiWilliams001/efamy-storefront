@@ -25,7 +25,7 @@ export function CategoryCard({
   return (
     <article
       className={cn(
-        "group relative isolate flex aspect-4/3 overflow-hidden rounded-lg bg-white shadow-card transition-shadow duration-200 focus-within:ring-2 focus-within:ring-ring hover:shadow-card-hover",
+        "group relative isolate flex size-full overflow-hidden rounded-lg bg-white shadow-card transition-shadow duration-200 focus-within:ring-2 focus-within:ring-ring hover:shadow-card-hover",
         className,
       )}
     >
