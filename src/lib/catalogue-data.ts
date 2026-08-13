@@ -300,9 +300,9 @@ export const products: Product[] = [
     slug: "coat-and-cook",
     name: "Coat & Cook",
     variants: single("250g", 350),
-    summary: "A crisp coating for chicken, fish, meat and vegetables.",
+    summary: "A crisp coating for grilling chicken, beef and salmon.",
     description:
-      "Coat & Cook gives a crispy coating with no artificial preservatives. Store in a cool, dry place and keep the container sealed after use.",
+      "Coat the meat or fish and cook it — that is the whole method. Made for grilling chicken, beef and salmon, and just as good frying or thickening a sauce.\n\nWheat flour, maize starch, garlic, onion, spices and herbs. No artificial preservatives.\n\nMade in Kettering to the recipe we started with in 2008.",
     ingredients: [
       "Wheat Flour",
       "Maize Starch",
