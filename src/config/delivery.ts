@@ -46,8 +46,8 @@ export function deliveryCost(subtotal: number): number {
  * once a live key is in play — which is the moment a wrong rate stops being a
  * placeholder and starts being money out of the business's pocket.
  */
-export function assertDeliveryIsReal(stripeKey: string): void {
-  if (delivery.provisional && stripeKey.startsWith("sk_live_")) {
+export function assertDeliveryIsReal(live: boolean): void {
+  if (delivery.provisional && live) {
     throw new Error(
       "Delivery rates in src/config/delivery.ts are still the provisional placeholders. " +
         "Set the real rates and flip `provisional` to false before taking live payments.",

@@ -33,3 +33,12 @@ export function getStripe(): Stripe {
 export function paymentsEnabled(): boolean {
   return Boolean(process.env.STRIPE_SECRET_KEY);
 }
+
+/**
+ * True when real money can move. Callers that need to behave differently in
+ * live mode ask this rather than reading the key themselves, so the secret
+ * stays inside this module.
+ */
+export function isLiveMode(): boolean {
+  return process.env.STRIPE_SECRET_KEY?.startsWith("sk_live_") ?? false;
+}

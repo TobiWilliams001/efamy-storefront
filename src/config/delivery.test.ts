@@ -35,17 +35,17 @@ describe("deliveryCost", () => {
 
 describe("assertDeliveryIsReal", () => {
   it("allows placeholder rates in test mode, which is what test mode is for", () => {
-    expect(() => assertDeliveryIsReal("sk_test_abc123")).not.toThrow();
+    expect(() => assertDeliveryIsReal(false)).not.toThrow();
   });
 
   it("refuses to charge a live card at rates nobody has confirmed", () => {
-    expect(() => assertDeliveryIsReal("sk_live_abc123")).toThrow(
+    expect(() => assertDeliveryIsReal(true)).toThrow(
       /provisional placeholders/i,
     );
   });
 
   it("names the file to edit, so the error is actionable", () => {
-    expect(() => assertDeliveryIsReal("sk_live_abc123")).toThrow(
+    expect(() => assertDeliveryIsReal(true)).toThrow(
       /src\/config\/delivery\.ts/,
     );
   });

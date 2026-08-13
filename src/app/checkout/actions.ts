@@ -9,7 +9,7 @@ import {
   deliveryCost,
 } from "@/config/delivery";
 import { MAX_LINE_QUANTITY, priceBasket } from "@/lib/pricing";
-import { getStripe } from "@/lib/stripe";
+import { getStripe, isLiveMode, paymentsEnabled } from "@/lib/stripe";
 
 const schema = z.object({
   lines: z
@@ -54,16 +54,14 @@ export async function startCheckout(input: unknown): Promise<CheckoutResult> {
     };
   }
 
-  const secretKey = process.env.STRIPE_SECRET_KEY;
-
-  if (!secretKey) {
+  if (!paymentsEnabled()) {
     return {
       status: "error",
       message: `Card payment is not switched on yet. Email ${siteConfig.contact.email} and we will take your order.`,
     };
   }
 
-  assertDeliveryIsReal(secretKey);
+  assertDeliveryIsReal(isLiveMode());
 
   const shipping = deliveryCost(priced.subtotal);
   const stripe = getStripe();
