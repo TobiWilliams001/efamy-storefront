@@ -129,13 +129,21 @@ legal matter.
 These are on the price list with no photograph or details, so they are not on
 the site:
 
-- [ ] **Goat Chilli Sauce** — photo, description, heat levels
-- [ ] **Turkey Chilli Sauce** — photo, description, heat levels
-- [ ] **Chilli Oils — seven of them.** The old website lists Beans, Beef,
-      Chicken, Fish, Goat, Pork and Turkey chilli oils in 300ml. That is a
-      whole product line the shop does not sell today. Needed: **a photograph
-      of each bottle** and the retail price. The trade list shows £2.99, which
-      looks like it may be per bottle at trade rather than retail
+**Coat & Cook, All Purpose Seasoning and Kelewele Seasoning are already on the
+site**, with ingredients and allergens transcribed from the Coat & Cook jar.
+
+Against the range on your own product sheet, nine items are still missing —
+every one of them for the same reason: **no photograph**.
+
+- [ ] **Goat Chilli Sauce** — photo, and which strengths you make
+- [ ] **Turkey Chilli Sauce** — photo, and which strengths you make
+- [ ] **The seven chilli oils** — Beans, Beef, Chicken, Fish, Goat, Pork and
+      Turkey, 300ml. A whole product line the shop cannot sell. Needed: one
+      photograph of each bottle and the retail price. The trade list shows
+      £2.99, which looks like a per-bottle trade price rather than retail
+
+Send a photograph of any of these and it can be on the shop the same day —
+everything else about them is already known.
 
 ---
 
