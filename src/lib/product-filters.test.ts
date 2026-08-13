@@ -147,3 +147,52 @@ describe("buildQuery", () => {
     ).toBe("");
   });
 });
+
+describe("price bands", () => {
+  const base = { sort: "featured" as const };
+  const range = [
+    product("cheap", { prices: [275, 1150] }),
+    product("mid", { prices: [650] }),
+    product("dear", { prices: [1250] }),
+  ];
+
+  it("matches on any size, so a multi-size product appears in every band it spans", () => {
+    // "cheap" runs £2.75 to £11.50, so it belongs in the top band as well.
+    expect(
+      applyFilters(range, { ...base, price: "under-5" }).map((p) => p.slug),
+    ).toEqual(["cheap"]);
+    expect(
+      applyFilters(range, { ...base, price: "over-10" }).map((p) => p.slug),
+    ).toEqual(["cheap", "dear"]);
+  });
+
+  it("treats the upper bound as exclusive so bands never overlap", () => {
+    const onBoundary = [product("exactly-five", { prices: [500] })];
+    expect(
+      applyFilters(onBoundary, { ...base, price: "under-5" }),
+    ).toHaveLength(0);
+    expect(applyFilters(onBoundary, { ...base, price: "5-10" })).toHaveLength(
+      1,
+    );
+  });
+
+  it("excludes a product with no size in the band", () => {
+    // "mid" is a single £6.50 size, so it is absent from both outer bands.
+    expect(
+      applyFilters(range, { ...base, price: "under-5" }),
+    ).not.toContainEqual(expect.objectContaining({ slug: "mid" }));
+    expect(
+      applyFilters(range, { ...base, price: "5-10" }).map((p) => p.slug),
+    ).toContain("mid");
+  });
+
+  it("ignores a price band that is not real", () => {
+    expect(parseFilters({ price: "free" }).price).toBeUndefined();
+  });
+
+  it("keeps the band in the query string", () => {
+    expect(buildQuery({ sort: "featured" }, { price: "5-10" })).toBe(
+      "?price=5-10",
+    );
+  });
+});

@@ -6,6 +6,7 @@ import {
   buildQuery,
   dietaryOptions,
   heatOptions,
+  priceOptions,
   type ProductFilters,
 } from "@/lib/product-filters";
 import { cn } from "@/lib/utils";
@@ -50,7 +51,9 @@ export function ShopFilters({
   showCategories = true,
   count,
 }: ShopFiltersProps) {
-  const activeCount = [filters.heat, filters.dietary].filter(Boolean).length;
+  const activeCount = [filters.heat, filters.dietary, filters.price].filter(
+    Boolean,
+  ).length;
 
   return (
     <div className="mb-12">
@@ -103,6 +106,7 @@ export function ShopFilters({
 
           <div className="mt-4 space-y-4">
             <HeatFilters filters={filters} />
+            <PriceFilters filters={filters} />
             <DietFilters filters={filters} />
           </div>
         </details>
@@ -126,6 +130,7 @@ export function ShopFilters({
         )}
       >
         <HeatFilters filters={filters} />
+        <PriceFilters filters={filters} />
         <DietFilters filters={filters} />
 
         <div className="flex items-center gap-5">
@@ -135,6 +140,31 @@ export function ShopFilters({
           <SortSelect value={filters.sort} />
         </div>
       </div>
+    </div>
+  );
+}
+
+function PriceFilters({ filters }: { filters: ProductFilters }) {
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <span className="mr-1 text-sm text-muted-foreground">Price</span>
+      <FilterChip
+        size="sm"
+        href={buildQuery(filters, { price: undefined })}
+        active={!filters.price}
+      >
+        Any
+      </FilterChip>
+      {priceOptions.map((option) => (
+        <FilterChip
+          key={option.value}
+          size="sm"
+          href={buildQuery(filters, { price: option.value })}
+          active={filters.price === option.value}
+        >
+          {option.label}
+        </FilterChip>
+      ))}
     </div>
   );
 }
