@@ -179,10 +179,6 @@ export function getRecipe(slug: string): Recipe | undefined {
   return recipes.find((recipe) => recipe.slug === slug);
 }
 
-export function recipesForProduct(productSlug: string): Recipe[] {
-  return recipes.filter((recipe) => recipe.productSlug === productSlug);
-}
-
 /** Minutes to the ISO 8601 duration schema.org expects. */
 export function isoDuration(minutes: number): string {
   return `PT${minutes}M`;

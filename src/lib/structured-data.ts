@@ -2,6 +2,7 @@ import { siteConfig } from "@/config/site";
 import { absoluteUrl } from "@/lib/format";
 import { routes } from "@/lib/routes";
 import type { Faq } from "@/lib/faqs";
+import { isoDuration } from "@/lib/recipes";
 import { inStock, type Product } from "@/types/product";
 
 /**
@@ -55,9 +56,9 @@ export function recipeSchema(recipe: {
     url: absoluteUrl(routes.recipe(recipe.slug)),
     ...(recipe.image ? { image: absoluteUrl(recipe.image) } : {}),
     recipeYield: `${recipe.serves} servings`,
-    prepTime: `PT${recipe.prepMinutes}M`,
-    cookTime: `PT${recipe.cookMinutes}M`,
-    totalTime: `PT${recipe.prepMinutes + recipe.cookMinutes}M`,
+    prepTime: isoDuration(recipe.prepMinutes),
+    cookTime: isoDuration(recipe.cookMinutes),
+    totalTime: isoDuration(recipe.prepMinutes + recipe.cookMinutes),
     recipeCuisine: "Ghanaian",
     recipeIngredient: recipe.ingredients,
     recipeInstructions: recipe.method.map((step, index) => ({

@@ -4,6 +4,8 @@ const retrieve = vi.hoisted(() => vi.fn());
 
 vi.mock("@/lib/stripe", () => ({
   getStripe: () => ({ checkout: { sessions: { retrieve } } }),
+  // Mirrors the real implementation so the unconfigured case still exercises it.
+  paymentsEnabled: () => Boolean(process.env.STRIPE_SECRET_KEY),
 }));
 
 import { confirmPayment } from "@/lib/payment-status";

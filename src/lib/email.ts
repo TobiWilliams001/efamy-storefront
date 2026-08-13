@@ -18,10 +18,6 @@ function getResend(): Resend | undefined {
   return client;
 }
 
-export function emailEnabled(): boolean {
-  return Boolean(process.env.RESEND_API_KEY);
-}
-
 /**
  * Who mail comes from. Must sit on a domain verified in Resend or every send is
  * rejected. Defaults to Resend's shared sending domain so the plumbing can be

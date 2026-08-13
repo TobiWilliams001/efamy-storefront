@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getStripe } from "@/lib/stripe";
+import { getStripe, paymentsEnabled } from "@/lib/stripe";
 
 /**
  * What Stripe knows: whether money moved. Deliberately *not* called order
@@ -36,7 +36,7 @@ export async function confirmPayment(
   sessionId: string | undefined,
 ): Promise<ConfirmedPayment> {
   if (!sessionId || !sessionId.startsWith("cs_")) return { status: "unknown" };
-  if (!process.env.STRIPE_SECRET_KEY) return { status: "unknown" };
+  if (!paymentsEnabled()) return { status: "unknown" };
 
   try {
     const session = await getStripe().checkout.sessions.retrieve(sessionId);
