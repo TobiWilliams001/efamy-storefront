@@ -46,3 +46,8 @@ next-env.d.ts
 
 # Stock comps awaiting a licence. Never commit or serve these.
 unlicensed-assets/
+
+# Unsorted image drops. Files are renamed into public/products, public/dishes
+# etc. once identified; the originals should not ship in every deploy.
+/public/ChatGPT Image*
+/public/WhatsApp Image*
