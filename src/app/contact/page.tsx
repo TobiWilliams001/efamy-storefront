@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   const { email, phone, whatsapp, hours } = siteConfig.contact;
-  const { line1, town, postcode } = siteConfig.address;
+  const { line1, line2, town, postcode } = siteConfig.address;
 
   return (
     <>
@@ -100,6 +100,12 @@ export default function ContactPage() {
                       <br />
                       {line1}
                       <br />
+                      {line2 ? (
+                        <>
+                          {line2}
+                          <br />
+                        </>
+                      ) : null}
                       {town} {postcode}
                     </address>
                   </li>

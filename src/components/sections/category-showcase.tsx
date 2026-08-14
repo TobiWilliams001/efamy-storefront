@@ -116,7 +116,7 @@ export function CategoryShowcase({
         <LinkTile
           href={routes.about}
           title="Our story"
-          description="Made in Kettering since 2008."
+          description="Made in Corby since 2008."
           icon={Sprout}
           tone="ink"
         />

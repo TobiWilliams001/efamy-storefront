@@ -21,7 +21,7 @@ const reasons = [
     icon: MapPin,
     title: "Made in the UK",
     description:
-      "Produced in Kettering to the same recipes we started with in 2008, and shipped from here.",
+      "Produced in Corby to the same recipes we started with in 2008, and shipped from here.",
   },
   {
     icon: Flame,

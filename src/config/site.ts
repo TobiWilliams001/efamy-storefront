@@ -7,6 +7,8 @@ type LogoAsset = { src: string; width: number; height: number };
 export type SiteConfig = {
   name: string;
   legalName: string;
+  companyNumber: string;
+  vatNumber: string;
   tagline: string;
   description: string;
   url: string;
@@ -26,6 +28,7 @@ export type SiteConfig = {
   };
   address: {
     line1: string;
+    line2?: string;
     town: string;
     postcode: string;
     country: string;
@@ -43,6 +46,8 @@ export type SiteConfig = {
 export const siteConfig: SiteConfig = {
   name: "Efamy",
   legalName: "Efamy Food Products",
+  companyNumber: "05456159",
+  vatNumber: "GB 868 6926 53",
   tagline: "Authentic Ghanaian flavours, crafted in the UK",
   description:
     "Efamy is a premium Ghanaian food brand, proudly made in the UK, bringing authentic flavours, trusted quality and traditional recipes to modern kitchens.",
@@ -60,9 +65,10 @@ export const siteConfig: SiteConfig = {
     hours: "Monday to Friday, 9am to 5pm",
   },
   address: {
-    line1: "17 Athelstan Road",
-    town: "Kettering",
-    postcode: "NN16 0NB",
+    line1: "Corby Business Centre",
+    line2: "Eismann Way",
+    town: "Corby",
+    postcode: "NN17 5ZB",
     country: "United Kingdom",
   },
   social: {

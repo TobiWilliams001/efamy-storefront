@@ -14,7 +14,7 @@ import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `Ghanaian chilli sauces and seasonings, made in Kettering since 2008. Real meat, poultry, beans and fish, with no colours or preservatives.`,
+  description: `Ghanaian chilli sauces and seasonings, made in Corby since 2008. Real meat, poultry, beans and fish, with no colours or preservatives.`,
   alternates: { canonical: routes.about },
 };
 
@@ -23,7 +23,7 @@ const milestones = [
     year: "2008",
     title: "The first batch",
     description:
-      "On 30 December we made our first chilli sauce and sold it to friends and family. They came back for more, which was all the encouragement we needed.",
+      "On 30 December we made our first chilli sauce in Kettering and sold it to friends and family. They came back for more, which was all the encouragement we needed.",
   },
   {
     year: "2010",
@@ -68,7 +68,7 @@ export default async function AboutPage() {
             <span className="text-gold">one batch, in 2008.</span>
           </>
         }
-        description="Ghanaian chilli sauces and seasonings, made in Kettering ever since. The same recipes, the same short ingredient lists, and no shortcuts we would not take at home."
+        description="Ghanaian chilli sauces and seasonings, made in Corby ever since. The same recipes, the same short ingredient lists, and no shortcuts we would not take at home."
       />
 
       <Section>

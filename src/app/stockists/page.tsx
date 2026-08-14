@@ -75,8 +75,8 @@ export default function StockistsPage() {
             <h2 className="mt-5 font-heading text-2xl">Find us in store</h2>
             {stockists.length > 0 ? (
               <p className="mt-3 text-pretty text-muted-foreground">
-                Independent grocers who stock Efamy. Stock varies from shop to
-                shop, so it is worth ringing ahead for a particular jar.
+                Independent grocers who stock Efamy products. Stock varies from
+                shop to shop, so it is worth ringing ahead for a particular jar.
               </p>
             ) : null}
 

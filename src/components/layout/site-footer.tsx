@@ -129,9 +129,20 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <p className="mt-12 border-t border-white/10 pt-6 text-center text-sm text-ink-muted">
-          © {year} {siteConfig.legalName}. All rights reserved.
-        </p>
+        <div className="mt-12 space-y-1.5 border-t border-white/10 pt-6 text-center text-sm text-ink-muted">
+          <address className="not-italic">
+            {siteConfig.legalName}, {siteConfig.address.line1},{" "}
+            {siteConfig.address.line2 ? `${siteConfig.address.line2}, ` : ""}
+            {siteConfig.address.town}, {siteConfig.address.postcode}
+          </address>
+          <p data-numeric>
+            Company registration {siteConfig.companyNumber} · VAT registration{" "}
+            {siteConfig.vatNumber}
+          </p>
+          <p>
+            © {year} {siteConfig.legalName}. All rights reserved.
+          </p>
+        </div>
       </Container>
     </footer>
   );

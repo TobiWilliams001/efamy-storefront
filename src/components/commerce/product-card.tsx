@@ -56,7 +56,7 @@ export function ProductCard({
       )}
     >
       {/* Square so the landscape case shots keep their scale beside the jars. */}
-      <div className="relative aspect-square overflow-hidden bg-[radial-gradient(ellipse_at_50%_38%,#FFFFFF_0%,#F7F2E9_58%,#EBE3D6_100%)]">
+      <div className="relative aspect-square overflow-hidden bg-white">
         {/* The pool of shadow the jar stands in. */}
         <span
           aria-hidden="true"

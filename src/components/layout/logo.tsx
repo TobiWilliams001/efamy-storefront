@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 export function Logo({
   className,
   variant = "dark",
-  imageClassName = "h-12 w-auto lg:h-14",
+  imageClassName = "h-14 w-auto lg:h-16",
   /** Header only. The footer copy is below the fold and must not preload. */
   eager = false,
 }: {

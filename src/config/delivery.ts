@@ -8,12 +8,15 @@
  * and the guard lets go.
  */
 export const delivery = {
-  provisional: true,
+  provisional: false,
 
-  /** Pence. */
-  standardRate: 495,
-  /** Pence. Basket total at or above which delivery is free. null disables it. */
-  freeOverSubtotal: 4000,
+  /** Pence. Efamy's rate, held flat while the shop finds its feet. */
+  standardRate: 399,
+  /**
+   * Pence. Basket total at or above which delivery is free. Null because no
+   * threshold has been agreed — inventing one commits the business to it.
+   */
+  freeOverSubtotal: null as number | null,
 
   label: "Standard UK delivery",
   /*
@@ -28,13 +31,11 @@ export const delivery = {
   countries: ["GB"] as const,
 } as const;
 
-export function deliveryCost(subtotal: number): number {
-  if (
-    delivery.freeOverSubtotal !== null &&
-    subtotal >= delivery.freeOverSubtotal
-  ) {
-    return 0;
-  }
+export function deliveryCost(
+  subtotal: number,
+  freeOver: number | null = delivery.freeOverSubtotal,
+): number {
+  if (freeOver !== null && subtotal >= freeOver) return 0;
 
   return delivery.standardRate;
 }
@@ -46,8 +47,11 @@ export function deliveryCost(subtotal: number): number {
  * once a live key is in play — which is the moment a wrong rate stops being a
  * placeholder and starts being money out of the business's pocket.
  */
-export function assertDeliveryIsReal(live: boolean): void {
-  if (delivery.provisional && live) {
+export function assertDeliveryIsReal(
+  live: boolean,
+  provisional: boolean = delivery.provisional,
+): void {
+  if (provisional && live) {
     throw new Error(
       "Delivery rates in src/config/delivery.ts are still the provisional placeholders. " +
         "Set the real rates and flip `provisional` to false before taking live payments.",

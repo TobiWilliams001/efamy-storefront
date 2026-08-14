@@ -157,7 +157,7 @@ export default async function ProductPage({
 
             <ul className="mt-7 space-y-2 text-sm text-muted-foreground">
               {[
-                "Made by hand in Kettering, as it has been since 2008",
+                "Made by hand in Corby, as it has been since 2008",
                 "Secure payment by card, Apple Pay or Google Pay",
               ].map((reason) => (
                 <li key={reason} className="flex items-start gap-2">

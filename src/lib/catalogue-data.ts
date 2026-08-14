@@ -44,7 +44,7 @@ export const categories: ProductCategory[] = [
     description:
       "Chilli sauces in beans, beef, chicken, fish and pork, with real meat and fish chunks you can see.",
     image: {
-      url: "/products/cutout/chicken-chilli-sauce-hot-250g.png",
+      url: "/products/cutout/chicken-chilli-sauce-hot.png",
       alt: "Jar of Efamy chicken chilli sauce, hot",
       width: 631,
       height: 900,
@@ -81,7 +81,7 @@ export const products: Product[] = [
     summary:
       "Red kidney beans and green lentils in a gentle chilli sauce. Vegan.",
     description:
-      "Red kidney beans and green lentils in a chilli sauce built on fresh ginger, garlic and onions. Mild, so the flavour comes through before the heat does.\n\nSpoon it over rice, stir it through pasta or couscous, or serve it alongside grilled vegetables. It is substantial enough to be the meal rather than the thing beside it.\n\nMade in Kettering to the recipe we started with in 2008. No colours, additives or preservatives.",
+      "Red kidney beans and green lentils in a chilli sauce built on fresh ginger, garlic and onions. Mild, so the flavour comes through before the heat does.\n\nSpoon it over rice, stir it through pasta or couscous, or serve it alongside grilled vegetables. It is substantial enough to be the meal rather than the thing beside it.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     heat: "mild",
     dietary: ["Suitable for vegetarians", "Suitable for vegans"],
     image: {
@@ -101,7 +101,7 @@ export const products: Product[] = [
     variants: MEAT(),
     summary: "Chunks of real beef in a gentler chilli sauce.",
     description:
-      "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the mild strength carries the same recipe as our hot jar with less chilli.\n\nThe one for a table where tastes differ. Good with rice and stew, jollof, or a plate of chips.\n\nMade in Kettering to the recipe we started with in 2008. No colours, additives or preservatives.",
+      "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the mild strength carries the same recipe as our hot jar with less chilli.\n\nThe one for a table where tastes differ. Good with rice and stew, jollof, or a plate of chips.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     heat: "mild",
     image: {
       url: "/products/cutout/beef-chilli-sauce-mild.png",
@@ -124,12 +124,12 @@ export const products: Product[] = [
     variants: MEAT(),
     summary: "Chunks of real beef in a chilli sauce with a proper kick.",
     description:
-      "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the hot strength is for cooks who already reach for chilli.\n\nSpoon it over rice, take it to a barbecue, or use it to lift a plate of chips or couscous.\n\nMade in Kettering to the recipe we started with in 2008. No colours, additives or preservatives.",
+      "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the hot strength is for cooks who already reach for chilli.\n\nSpoon it over rice, take it to a barbecue, or use it to lift a plate of chips or couscous.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     heat: "hot",
     dietary: ["No artificial preservatives"],
     image: {
-      url: "/products/cutout/beef-chilli-sauce-hot-250g.png",
-      alt: "Jar of Efamy beef chilli sauce, hot, 250g",
+      url: "/products/cutout/beef-chilli-sauce-hot.png",
+      alt: "Jar of Efamy beef chilli sauce, hot",
       width: 728,
       height: 900,
     },
@@ -152,12 +152,12 @@ export const products: Product[] = [
     variants: MEAT(),
     summary: "Chunks of real chicken in a chilli sauce with a proper kick.",
     description:
-      "Real chicken in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions. The hot strength is for people who already cook with chilli.\n\nSpoon it over rice, stir it through pasta, or serve it with fried plantain and yam.\n\nMade in Kettering to the recipe we started with in 2008. No colours, additives or preservatives.",
+      "Real chicken in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions. The hot strength is for people who already cook with chilli.\n\nSpoon it over rice, stir it through pasta, or serve it with fried plantain and yam.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     heat: "hot",
     dietary: ["No artificial preservatives"],
     image: {
-      url: "/products/cutout/chicken-chilli-sauce-hot-250g.png",
-      alt: "Jar of Efamy chicken chilli sauce, hot, 250g",
+      url: "/products/cutout/chicken-chilli-sauce-hot.png",
+      alt: "Jar of Efamy chicken chilli sauce, hot",
       width: 631,
       height: 900,
     },
@@ -180,7 +180,7 @@ export const products: Product[] = [
     variants: MEAT(),
     summary: "Chunks of real fish in a gentler chilli sauce.",
     description:
-      "Made mainly with barracuda, in pieces you can see rather than a smooth paste. Fresh ginger, garlic and onions carry it, and the mild strength lets the fish come through first.\n\nThe jar for kenkey and fish, for rice, or for a salad that needs something with backbone.\n\nMade in Kettering to the recipe we started with in 2008. No colours, additives or preservatives.",
+      "Made mainly with barracuda, in pieces you can see rather than a smooth paste. Fresh ginger, garlic and onions carry it, and the mild strength lets the fish come through first.\n\nThe jar for kenkey and fish, for rice, or for a salad that needs something with backbone.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     heat: "mild",
     allergens: ["Fish"],
     image: {
@@ -200,7 +200,7 @@ export const products: Product[] = [
     variants: MEAT(),
     summary: "Chunks of real fish in a chilli sauce with a proper kick.",
     description:
-      "Made mainly with barracuda, in pieces you can see rather than a smooth paste. Fresh ginger, garlic and onions carry it, and the hot strength stands up to a full plate.\n\nThe jar for kenkey and fish, for waakye, or for rice that needs waking up.\n\nMade in Kettering to the recipe we started with in 2008. No colours, additives or preservatives.",
+      "Made mainly with barracuda, in pieces you can see rather than a smooth paste. Fresh ginger, garlic and onions carry it, and the hot strength stands up to a full plate.\n\nThe jar for kenkey and fish, for waakye, or for rice that needs waking up.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     heat: "hot",
     allergens: ["Fish"],
     image: {
@@ -228,7 +228,7 @@ export const products: Product[] = [
     variants: MEAT(),
     summary: "Chunks of real pork in a chilli sauce with a proper kick.",
     description:
-      "Real pork in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions. The hot strength is for people who already cook with chilli.\n\nGood over rice, with chips, or taken to a barbecue where it tends not to come home again.\n\nMade in Kettering to the recipe we started with in 2008. No colours, additives or preservatives.",
+      "Real pork in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions. The hot strength is for people who already cook with chilli.\n\nGood over rice, with chips, or taken to a barbecue where it tends not to come home again.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     heat: "hot",
     ingredients: [
       "Onions",
@@ -281,10 +281,10 @@ export const products: Product[] = [
     id: "kelewele-seasoning-mix",
     slug: "kelewele-seasoning-mix",
     name: "Kelewele Seasoning Mix",
-    variants: single("300g", 325),
-    summary: "The spice blend for kelewele, spiced fried plantain.",
+    variants: single("150g", 325),
+    summary: "The spice blend for kelewele, and for barbecues and kebabs.",
     description:
-      "A seasoning mix for making kelewele, Ghanaian spiced fried plantain.",
+      "Spices, negro pepper, chilli powder and crushed chilli peppers — the blend we first made in December 2015.\n\nIts home is kelewele, spiced fried plantain, but it earns its place at a barbecue and on kebabs just as easily.\n\nMade in Corby. No colours, additives or preservatives.",
     image: {
       url: "/products/cutout/kelewele-seasoning-mix.png",
       alt: "Bottles of Efamy kelewele seasoning mix with red caps",
@@ -302,7 +302,7 @@ export const products: Product[] = [
     variants: single("250g", 350),
     summary: "A crisp coating for grilling chicken, beef and salmon.",
     description:
-      "Coat the meat or fish and cook it — that is the whole method. Made for grilling chicken, beef and salmon, and just as good frying or thickening a sauce.\n\nWheat flour, maize starch, garlic, onion, spices and herbs. No artificial preservatives.\n\nMade in Kettering to the recipe we started with in 2008.",
+      "Coat the meat or fish and cook it — that is the whole method. Made for grilling chicken, beef and salmon, and just as good frying or thickening a sauce.\n\nWheat flour, maize starch, garlic, onion, spices and herbs. No artificial preservatives.\n\nMade in Corby to the recipe we started with in 2008.",
     ingredients: [
       "Wheat Flour",
       "Maize Starch",

@@ -117,7 +117,7 @@ export function HomeHero() {
           <span className="text-gold">Made with love.</span>
         </>
       }
-      description="Ghanaian chilli sauces and seasonings, made in the UK since 2008. Real meat, poultry, beans and fish — never a smooth paste."
+      description="Ghanaian chilli sauces and seasonings, made in Corby since 2008. Real meat, poultry, beans and fish — never a smooth paste."
     >
       <Button asChild size="xl" variant="accent">
         <Link href={routes.shop}>Shop now</Link>
