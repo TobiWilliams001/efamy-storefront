@@ -2,7 +2,7 @@ import "server-only";
 
 import type Stripe from "stripe";
 
-import { sendEmail } from "@/lib/email";
+import { orderInbox, sendEmail } from "@/lib/email";
 
 function money(amount: number | null | undefined): string {
   return amount == null ? "—" : `£${(amount / 100).toFixed(2)}`;
@@ -69,6 +69,7 @@ export async function notifyOrder(session: Stripe.Checkout.Session) {
   ].join("\n");
 
   const result = await sendEmail({
+    to: orderInbox(),
     subject: `New Efamy order — ${money(session.amount_total)}`,
     text: body,
     // Replying goes straight to the customer.

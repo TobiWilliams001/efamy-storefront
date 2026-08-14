@@ -27,6 +27,17 @@ function sender(): string {
   return process.env.EMAIL_FROM ?? "Efamy <onboarding@resend.dev>";
 }
 
+/**
+ * Where order notifications land.
+ *
+ * Deliberately separate from the address printed on the site: the public one is
+ * whatever customers should write to, which may not exist as a mailbox yet, and
+ * an order must never be sent to an inbox nobody reads.
+ */
+export function orderInbox(): string {
+  return process.env.ORDER_EMAIL_TO ?? siteConfig.contact.email;
+}
+
 export type SendResult = { sent: boolean; reason?: string };
 
 /**
