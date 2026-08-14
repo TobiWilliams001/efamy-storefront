@@ -17,6 +17,7 @@ const schema = z.object({
       z.object({
         slug: z.string().min(1).max(200),
         size: z.string().min(1).max(50),
+        heat: z.string().max(20).optional(),
         quantity: z.number().int().min(1).max(MAX_LINE_QUANTITY),
       }),
     )

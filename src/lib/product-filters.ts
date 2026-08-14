@@ -102,7 +102,10 @@ export function applyFilters(
     if (filters.category && product.category.slug !== filters.category) {
       return false;
     }
-    if (filters.heat && product.heat !== filters.heat) {
+    if (
+      filters.heat &&
+      !product.variants.some((variant) => variant.heat === filters.heat)
+    ) {
       return false;
     }
     if (filters.dietary) {

@@ -18,7 +18,7 @@ import {
   getRelatedProducts,
 } from "@/lib/catalogue";
 import { formatPrice } from "@/lib/format";
-import { lowestPrice } from "@/types/product";
+import { heatLevels, lowestPrice } from "@/types/product";
 import {
   breadcrumbSchema,
   productSchema,
@@ -118,7 +118,9 @@ export default async function ProductPage({
             </div>
 
             <div className="mt-5 flex flex-wrap items-center gap-2">
-              {product.heat ? <HeatBadge heat={product.heat} /> : null}
+              {heatLevels(product).map((level) => (
+                <HeatBadge key={level} heat={level} />
+              ))}
               {product.dietary?.map((claim) => (
                 <span
                   key={claim}

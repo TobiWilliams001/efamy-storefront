@@ -7,12 +7,14 @@ import { getProductBySlug } from "@/lib/catalogue";
 export type RequestedLine = {
   slug: string;
   size: string;
+  heat?: string;
   quantity: number;
 };
 
 export type PricedLine = {
   slug: string;
   size: string;
+  heat?: string;
   quantity: number;
   name: string;
   /** Pence, from the catalogue as it stands right now. */
@@ -76,7 +78,12 @@ export async function priceBasket(
       };
     }
 
-    const variant = product.variants.find((v) => v.size === line.size);
+    // Size and strength together identify the jar.
+    const variant = product.variants.find(
+      (v) =>
+        v.size === line.size &&
+        (v.heat ?? undefined) === (line.heat ?? undefined),
+    );
 
     if (!variant) {
       return {
@@ -95,8 +102,11 @@ export async function priceBasket(
     lines.push({
       slug: product.slug,
       size: variant.size,
+      heat: variant.heat,
       quantity: line.quantity,
-      name: `${product.name} — ${variant.size}`,
+      name: [product.name, variant.heat, variant.size]
+        .filter(Boolean)
+        .join(" — "),
       unitPrice: variant.price,
       lineTotal: variant.price * line.quantity,
       imageUrl: product.image?.url,

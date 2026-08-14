@@ -41,6 +41,7 @@ export function CheckoutButton() {
       lines: lines.map((line) => ({
         slug: line.slug,
         size: line.size,
+        heat: line.heat,
         quantity: line.quantity,
       })),
     });

@@ -75,10 +75,16 @@ describe("mapProduct", () => {
     expect(product!.nutrition).toBeUndefined();
   });
 
-  it("keeps known heat levels and drops anything else", () => {
-    expect(mapProduct({ ...valid, heat: "scorching" })!.heat).toBeUndefined();
-    expect(mapProduct({ ...valid, heat: "mild" })!.heat).toBe("mild");
-    expect(mapProduct({ ...valid, heat: "extra-hot" })!.heat).toBe("extra-hot");
+  it("keeps known heat levels on a variant and drops anything else", () => {
+    const withHeat = (heat: unknown) =>
+      mapProduct({
+        ...valid,
+        variants: [{ size: "175g", heat, price: 325, inStock: true }],
+      })!.variants[0].heat;
+
+    expect(withHeat("scorching")).toBeUndefined();
+    expect(withHeat("mild")).toBe("mild");
+    expect(withHeat("extra-hot")).toBe("extra-hot");
   });
 
   it("skips additional images that are incomplete", () => {

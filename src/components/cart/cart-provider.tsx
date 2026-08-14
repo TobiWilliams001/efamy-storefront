@@ -10,7 +10,7 @@ import {
 } from "react";
 
 import { toMajorUnits, track } from "@/lib/analytics";
-import type { Product, ProductVariant } from "@/types/product";
+import type { Heat, Product, ProductVariant } from "@/types/product";
 
 /** All the cart needs to build a line, so cards can add without a full product. */
 export type AddableProduct = Pick<Product, "id" | "slug" | "name" | "image">;
@@ -25,6 +25,8 @@ export type CartLine = {
   slug: string;
   name: string;
   size: string;
+  /** Absent for products sold in one strength. */
+  heat?: Heat;
   /** Snapshot in pence. Checkout must re-price server-side before charging. */
   price: number;
   imageUrl: string;
@@ -32,8 +34,12 @@ export type CartLine = {
   quantity: number;
 };
 
-export function lineId(productId: string, size: string): string {
-  return `${productId}:${size}`;
+/**
+ * Size alone is not enough now a jar comes in more than one strength: Beef Hot
+ * 250g and Beef Mild 250g are different products to the person buying them.
+ */
+export function lineId(productId: string, size: string, heat?: Heat): string {
+  return heat ? `${productId}:${size}:${heat}` : `${productId}:${size}`;
 }
 
 export type CartState = { lines: CartLine[]; ready: boolean };
@@ -60,7 +66,11 @@ export function reducer(state: CartState, action: CartAction): CartState {
       return { lines: action.lines, ready: true };
 
     case "add": {
-      const id = lineId(action.product.id, action.variant.size);
+      const id = lineId(
+        action.product.id,
+        action.variant.size,
+        action.variant.heat,
+      );
       const existing = state.lines.find((line) => line.id === id);
 
       if (existing) {
@@ -84,6 +94,7 @@ export function reducer(state: CartState, action: CartAction): CartState {
             slug: action.product.slug,
             name: action.product.name,
             size: action.variant.size,
+            heat: action.variant.heat,
             price: action.variant.price,
             imageUrl: action.product.image.url,
             imageAlt: action.product.image.alt,
@@ -192,7 +203,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             {
               item_id: product.id,
               item_name: product.name,
-              item_variant: variant.size,
+              item_variant: [variant.size, variant.heat]
+                .filter(Boolean)
+                .join(" "),
               price: toMajorUnits(variant.price),
               quantity,
             },

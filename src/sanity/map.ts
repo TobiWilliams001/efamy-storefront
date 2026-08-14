@@ -40,6 +40,7 @@ export function mapProduct(raw: Record<string, unknown>): Product | null {
     ? (raw.variants as Record<string, unknown>[])
         .map((entry) => ({
           size: String(entry.size ?? ""),
+          heat: isHeat(entry.heat) ? entry.heat : undefined,
           price: Number(entry.price ?? 0),
           compareAtPrice:
             typeof entry.compareAtPrice === "number"
@@ -67,7 +68,6 @@ export function mapProduct(raw: Record<string, unknown>): Product | null {
     summary: String(raw.summary ?? ""),
     description: String(raw.description ?? ""),
     variants,
-    heat: isHeat(raw.heat) ? raw.heat : undefined,
     ingredients: list(raw.ingredients),
     allergens: list(raw.allergens),
     dietary: list(raw.dietary),

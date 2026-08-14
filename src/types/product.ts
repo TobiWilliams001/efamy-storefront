@@ -23,17 +23,40 @@ export type ProductCategory = {
 };
 
 /**
- * One purchasable size of a product. Sauces come in four, seasonings in one.
- * Price lives here, never on the product, because it differs per size.
+ * One purchasable jar. A sauce is one product with a variant per strength and
+ * size, because that is how a customer shops: they want beef chilli sauce, then
+ * decide how hot and how much.
+ *
+ * Size and heat together identify the variant. Price lives here, never on the
+ * product, because it differs per size.
  */
 export type ProductVariant = {
-  /** Net weight as printed on the jar, e.g. "250g". Identifies the variant. */
+  /** Net weight as printed on the jar, e.g. "250g". */
   size: string;
+  /** Absent on products sold in a single strength, such as the seasonings. */
+  heat?: Heat;
   /** Minor units (pence). Format with `formatPrice()`. */
   price: number;
   compareAtPrice?: number;
   inStock: boolean;
 };
+
+/** The strengths a product is actually sold in, in label order. */
+export function heatLevels(product: { variants: ProductVariant[] }): Heat[] {
+  const order: Heat[] = ["mild", "hot", "extra-hot"];
+  const found = new Set(
+    product.variants.map((variant) => variant.heat).filter(Boolean) as Heat[],
+  );
+  return order.filter((level) => found.has(level));
+}
+
+/** The sizes available at a given strength, smallest first. */
+export function sizesFor(
+  product: { variants: ProductVariant[] },
+  heat: Heat | undefined,
+): ProductVariant[] {
+  return product.variants.filter((variant) => variant.heat === heat);
+}
 
 export type Product = {
   id: string;
@@ -43,7 +66,6 @@ export type Product = {
   description: string;
   /** Ordered smallest to largest. Always at least one. */
   variants: ProductVariant[];
-  heat?: Heat;
   /** Transcribed from the label. Legally required, so never guess these. */
   ingredients?: string[];
   allergens?: string[];
@@ -71,7 +93,6 @@ export type ProductSummary = Pick<
   | "name"
   | "summary"
   | "variants"
-  | "heat"
   | "image"
   | "category"
   | "dietary"

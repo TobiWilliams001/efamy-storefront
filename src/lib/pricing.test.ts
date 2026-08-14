@@ -92,3 +92,55 @@ describe("priceBasket", () => {
     expect(result.ok).toBe(false);
   });
 });
+
+describe("strength is part of the identity", () => {
+  const twoStrengths = product("beef", {
+    variants: [
+      { size: "175g", heat: "mild", price: 325, inStock: true },
+      { size: "175g", heat: "hot", price: 325, inStock: true },
+    ],
+  });
+
+  it("prices the strength that was asked for", async () => {
+    getProductBySlug.mockResolvedValue(twoStrengths);
+
+    const result = await priceBasket([
+      { slug: "beef", size: "175g", heat: "hot", quantity: 1 },
+    ]);
+
+    expect(result).toMatchObject({ ok: true });
+    if (result.ok) expect(result.lines[0].heat).toBe("hot");
+  });
+
+  it("names the jar so the Stripe line says which one it is", async () => {
+    getProductBySlug.mockResolvedValue(twoStrengths);
+
+    const result = await priceBasket([
+      { slug: "beef", size: "175g", heat: "mild", quantity: 1 },
+    ]);
+
+    if (result.ok) expect(result.lines[0].name).toBe("beef — mild — 175g");
+  });
+
+  it("refuses a strength the jar is not sold in", async () => {
+    getProductBySlug.mockResolvedValue(twoStrengths);
+
+    expect(
+      await priceBasket([
+        { slug: "beef", size: "175g", heat: "extra-hot", quantity: 1 },
+      ]),
+    ).toMatchObject({ ok: false, failure: { reason: "unknown-size" } });
+  });
+
+  it("still matches a product sold in one strength when none is sent", async () => {
+    getProductBySlug.mockResolvedValue(
+      product("mix", {
+        variants: [{ size: "300g", price: 475, inStock: true }],
+      }),
+    );
+
+    expect(
+      await priceBasket([{ slug: "mix", size: "300g", quantity: 1 }]),
+    ).toMatchObject({ ok: true });
+  });
+});

@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
 
 import { applyFilters, buildQuery, parseFilters } from "@/lib/product-filters";
-import type { Product } from "@/types/product";
+import type { Heat, Product } from "@/types/product";
 
 function product(
   slug: string,
-  overrides: Partial<Product> & { prices: number[] },
+  overrides: Partial<Product> & { prices: number[]; heat?: Heat },
 ): Product {
-  const { prices, ...rest } = overrides;
+  const { prices, heat, ...rest } = overrides;
   return {
     id: slug,
     slug,
@@ -16,6 +16,7 @@ function product(
     description: "",
     variants: prices.map((price, index) => ({
       size: `${index}g`,
+      heat,
       price,
       inStock: true,
     })),

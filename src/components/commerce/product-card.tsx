@@ -10,6 +10,7 @@ import { routes } from "@/lib/routes";
 import { heatLabels } from "@/components/commerce/heat-badge";
 import { cn } from "@/lib/utils";
 import {
+  heatLevels,
   inStock as anyInStock,
   lowestPrice,
   type ProductSummary,
@@ -31,7 +32,7 @@ export function ProductCard({
   sizes = DEFAULT_SIZES,
   className,
 }: ProductCardProps) {
-  const { image, heat, isNew, isBestSeller, bundleItems, variants } = product;
+  const { image, isNew, isBestSeller, bundleItems, variants } = product;
   const inStock = anyInStock(product);
   const price = lowestPrice(product);
   const cheapest = variants.find((variant) => variant.price === price);
@@ -39,14 +40,9 @@ export function ProductCard({
     cheapest?.compareAtPrice !== undefined && cheapest.compareAtPrice > price;
   const hasSizeChoice = variants.length > 1;
 
-  /*
-   * Product names carry the strength ("Beef Chilli Sauce, Hot") because that is
-   * what is printed on the jar, but the card shows it on its own coloured line
-   * below. Strip the suffix so it is not said twice.
-   */
-  const name = heat
-    ? product.name.replace(new RegExp(`,\\s*${heatLabels[heat]}$`, "i"), "")
-    : product.name;
+  /* One card per flavour, so the card says which strengths it comes in. */
+  const strengths = heatLevels(product);
+  const name = product.name;
 
   return (
     <Card
@@ -108,14 +104,9 @@ export function ProductCard({
             {name}
           </Link>
         </h3>
-        {heat ? (
-          <p
-            className={cn(
-              "mt-1 text-sm font-medium",
-              heat === "mild" ? "text-sage-ink" : "text-brand",
-            )}
-          >
-            {heatLabels[heat]}
+        {strengths.length > 0 ? (
+          <p className="mt-1 text-sm font-medium text-brand">
+            {strengths.map((level) => heatLabels[level]).join(" · ")}
           </p>
         ) : null}
 

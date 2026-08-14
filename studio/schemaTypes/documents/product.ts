@@ -45,12 +45,27 @@ export const product = defineType({
       title: 'Sizes and prices',
       type: 'array',
       group: 'details',
-      description: 'One entry per size on sale. Sauces have four, seasonings usually one.',
+      description:
+        'One entry per jar on sale. A sauce made mild and hot has an entry for each size at each strength.',
       of: [
         defineArrayMember({
           type: 'object',
           name: 'variant',
           fields: [
+            defineField({
+              name: 'heat',
+              title: 'Strength',
+              type: 'string',
+              description: 'Leave empty for products sold in one strength, such as the seasonings.',
+              options: {
+                list: [
+                  {title: 'Mild', value: 'mild'},
+                  {title: 'Hot', value: 'hot'},
+                  {title: 'Extra hot', value: 'extra-hot'},
+                ],
+                layout: 'radio',
+              },
+            }),
             defineField({
               name: 'size',
               title: 'Net weight',
@@ -98,21 +113,6 @@ export const product = defineType({
       group: 'details',
       to: [{type: 'productCategory'}],
       validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'heat',
-      type: 'string',
-      group: 'details',
-      description:
-        'Match the strength printed on the jar. Leave empty for products with no heat rating.',
-      options: {
-        list: [
-          {title: 'Mild', value: 'mild'},
-          {title: 'Hot', value: 'hot'},
-          {title: 'Extra hot', value: 'extra-hot'},
-        ],
-        layout: 'radio',
-      },
     }),
     defineField({
       name: 'image',

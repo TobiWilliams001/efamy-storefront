@@ -1,4 +1,9 @@
-import type { Product, ProductCategory, ProductVariant } from "@/types/product";
+import type {
+  Heat,
+  Product,
+  ProductCategory,
+  ProductVariant,
+} from "@/types/product";
 
 /**
  * Prices come from the client's price list (singles only; 6/12/24-packs are
@@ -14,23 +19,29 @@ const STORAGE_SAUCE =
 const STORAGE_DRY =
   "Store in a cool, dry place. Keep the container sealed after use.";
 
-/** Sauce sizes and prices in pence, keyed by the protein on the price list. */
-function sauceVariants(
+/**
+ * Four sizes at one strength. A sauce sold mild and hot gets two calls, so the
+ * customer picks the flavour first and the strength second.
+ *
+ * Price does not vary by strength — the same recipe, more or less chilli.
+ */
+function sauceSizes(
+  heat: Heat,
   p175: number,
   p250: number,
   p500: number,
   p800: number,
 ): ProductVariant[] {
   return [
-    { size: "175g", price: p175, inStock: true },
-    { size: "250g", price: p250, inStock: true },
-    { size: "500g", price: p500, inStock: true },
-    { size: "800g", price: p800, inStock: true },
+    { size: "175g", heat, price: p175, inStock: true },
+    { size: "250g", heat, price: p250, inStock: true },
+    { size: "500g", heat, price: p500, inStock: true },
+    { size: "800g", heat, price: p800, inStock: true },
   ];
 }
 
-const BEANS = () => sauceVariants(275, 425, 825, 1150);
-const MEAT = () => sauceVariants(325, 475, 875, 1250);
+const BEANS = (heat: Heat) => sauceSizes(heat, 275, 425, 825, 1150);
+const MEAT = (heat: Heat) => sauceSizes(heat, 325, 475, 875, 1250);
 
 function single(size: string, price: number): ProductVariant[] {
   return [{ size, price, inStock: true }];
@@ -74,19 +85,18 @@ const category = {
 
 export const products: Product[] = [
   {
-    id: "beans-chilli-sauce-mild",
-    slug: "beans-chilli-sauce-mild",
-    name: "Beans Chilli Sauce, Mild",
-    variants: BEANS(),
+    id: "beans-chilli-sauce",
+    slug: "beans-chilli-sauce",
+    name: "Beans Chilli Sauce",
+    variants: BEANS("mild"),
     summary:
       "Red kidney beans and green lentils in a gentle chilli sauce. Vegan.",
     description:
       "Red kidney beans and green lentils in a chilli sauce built on fresh ginger, garlic and onions. Mild, so the flavour comes through before the heat does.\n\nSpoon it over rice, stir it through pasta or couscous, or serve it alongside grilled vegetables. It is substantial enough to be the meal rather than the thing beside it.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
-    heat: "mild",
     dietary: ["Suitable for vegetarians", "Suitable for vegans"],
     image: {
       url: "/products/cutout/beans-chilli-sauce-mild.png",
-      alt: "Jar of Efamy beans chilli sauce, mild, with a dark green label",
+      alt: "Jar of Efamy beans chilli sauce with a dark green label",
       width: 720,
       height: 900,
     },
@@ -95,141 +105,71 @@ export const products: Product[] = [
     category: category.sauces,
   },
   {
-    id: "beef-chilli-sauce-mild",
-    slug: "beef-chilli-sauce-mild",
-    name: "Beef Chilli Sauce, Mild",
-    variants: MEAT(),
-    summary: "Chunks of real beef in a gentler chilli sauce.",
+    id: "beef-chilli-sauce",
+    slug: "beef-chilli-sauce",
+    name: "Beef Chilli Sauce",
+    variants: [...MEAT("mild"), ...MEAT("hot")],
+    summary: "Chunks of real beef, in mild or hot.",
     description:
-      "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the mild strength carries the same recipe as our hot jar with less chilli.\n\nThe one for a table where tastes differ. Good with rice and stew, jollof, or a plate of chips.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
-    heat: "mild",
-    image: {
-      url: "/products/cutout/beef-chilli-sauce-mild.png",
-      alt: "Jar of Efamy beef chilli sauce, mild, with a burgundy label",
-      width: 675,
-      height: 900,
-    },
-    storage: STORAGE_SAUCE,
-    servingSuggestions: [
-      "Rice dishes",
-      "Yam or plantain",
-      "Sandwiches and wraps",
-    ],
-    category: category.sauces,
-  },
-  {
-    id: "beef-chilli-sauce-hot",
-    slug: "beef-chilli-sauce-hot",
-    name: "Beef Chilli Sauce, Hot",
-    variants: MEAT(),
-    summary: "Chunks of real beef in a chilli sauce with a proper kick.",
-    description:
-      "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the hot strength is for cooks who already reach for chilli.\n\nSpoon it over rice, take it to a barbecue, or use it to lift a plate of chips or couscous.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
-    heat: "hot",
+      "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the same recipe carries both strengths — mild simply has less chilli.\n\nSpoon it over rice and stew, stir it through jollof, or take a jar to a barbecue.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     dietary: ["No artificial preservatives"],
     image: {
       url: "/products/cutout/beef-chilli-sauce-hot.png",
-      alt: "Jar of Efamy beef chilli sauce, hot",
-      width: 728,
+      alt: "Jar of Efamy beef chilli sauce with a burgundy label",
+      width: 700,
       height: 900,
     },
-    images: [
-      {
-        url: "/products/cutout/beef-chilli-sauce-hot.png",
-        alt: "Square jar of Efamy beef chilli sauce, hot",
-        width: 675,
-        height: 900,
-      },
-    ],
     storage: STORAGE_SAUCE,
-    servingSuggestions: ["Jollof rice", "Grilled meat", "Eggs on toast"],
+    servingSuggestions: ["Rice and stew", "Jollof", "Chips"],
     category: category.sauces,
   },
   {
-    id: "chicken-chilli-sauce-hot",
-    slug: "chicken-chilli-sauce-hot",
-    name: "Chicken Chilli Sauce, Hot",
-    variants: MEAT(),
+    id: "chicken-chilli-sauce",
+    slug: "chicken-chilli-sauce",
+    name: "Chicken Chilli Sauce",
+    variants: MEAT("hot"),
     summary: "Chunks of real chicken in a chilli sauce with a proper kick.",
     description:
-      "Real chicken in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions. The hot strength is for people who already cook with chilli.\n\nSpoon it over rice, stir it through pasta, or serve it with fried plantain and yam.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
-    heat: "hot",
+      "Real chicken in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions.\n\nSpoon it over rice, stir it through pasta, or serve it with fried plantain and yam.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     dietary: ["No artificial preservatives"],
     image: {
       url: "/products/cutout/chicken-chilli-sauce-hot.png",
-      alt: "Jar of Efamy chicken chilli sauce, hot",
-      width: 631,
-      height: 900,
-    },
-    images: [
-      {
-        url: "/products/cutout/chicken-chilli-sauce-hot.png",
-        alt: "Square jar of Efamy chicken chilli sauce, hot",
-        width: 767,
-        height: 900,
-      },
-    ],
-    storage: STORAGE_SAUCE,
-    servingSuggestions: ["Rice and chicken", "Wraps", "Fried plantain"],
-    category: category.sauces,
-  },
-  {
-    id: "fish-chilli-sauce-mild",
-    slug: "fish-chilli-sauce-mild",
-    name: "Fish Chilli Sauce, Mild",
-    variants: MEAT(),
-    summary: "Chunks of real fish in a gentler chilli sauce.",
-    description:
-      "Made mainly with barracuda, in pieces you can see rather than a smooth paste. Fresh ginger, garlic and onions carry it, and the mild strength lets the fish come through first.\n\nThe jar for kenkey and fish, for rice, or for a salad that needs something with backbone.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
-    heat: "mild",
-    allergens: ["Fish"],
-    image: {
-      url: "/products/cutout/fish-chilli-sauce-mild.png",
-      alt: "Jar of Efamy fish chilli sauce, mild, with a green label",
-      width: 675,
+      alt: "Jar of Efamy chicken chilli sauce with an orange label",
+      width: 700,
       height: 900,
     },
     storage: STORAGE_SAUCE,
-    servingSuggestions: ["Boiled yam", "Rice", "Grilled fish"],
+    servingSuggestions: ["Rice", "Fried plantain", "Yam"],
     category: category.sauces,
   },
   {
-    id: "fish-chilli-sauce-hot",
-    slug: "fish-chilli-sauce-hot",
-    name: "Fish Chilli Sauce, Hot",
-    variants: MEAT(),
-    summary: "Chunks of real fish in a chilli sauce with a proper kick.",
+    id: "fish-chilli-sauce",
+    slug: "fish-chilli-sauce",
+    name: "Fish Chilli Sauce",
+    variants: [...MEAT("mild"), ...MEAT("hot")],
+    summary: "Chunks of real fish, in mild or hot.",
     description:
-      "Made mainly with barracuda, in pieces you can see rather than a smooth paste. Fresh ginger, garlic and onions carry it, and the hot strength stands up to a full plate.\n\nThe jar for kenkey and fish, for waakye, or for rice that needs waking up.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
-    heat: "hot",
+      "Made mainly with barracuda, in pieces you can see rather than a smooth paste. Fresh ginger, garlic and onions carry it, and the same recipe carries both strengths.\n\nThe jar for kenkey and fish, for waakye, or for rice that needs waking up.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     allergens: ["Fish"],
+    dietary: ["No artificial preservatives"],
     image: {
       url: "/products/cutout/fish-chilli-sauce-hot.png",
-      alt: "Square jar of Efamy fish chilli sauce, hot, with a green label",
-      width: 675,
+      alt: "Jar of Efamy fish chilli sauce with a green label",
+      width: 700,
       height: 900,
     },
-    images: [
-      {
-        url: "/products/cutout/fish-chilli-sauce-hot-large.png",
-        alt: "Large jar of Efamy fish chilli sauce, hot",
-        width: 675,
-        height: 900,
-      },
-    ],
     storage: STORAGE_SAUCE,
-    servingSuggestions: ["Boiled yam", "Kenkey", "Grilled fish"],
+    servingSuggestions: ["Kenkey", "Waakye", "Rice"],
     category: category.sauces,
   },
   {
-    id: "pork-chilli-sauce-hot",
-    slug: "pork-chilli-sauce-hot",
-    name: "Pork Chilli Sauce, Hot",
-    variants: MEAT(),
+    id: "pork-chilli-sauce",
+    slug: "pork-chilli-sauce",
+    name: "Pork Chilli Sauce",
+    variants: MEAT("hot"),
     summary: "Chunks of real pork in a chilli sauce with a proper kick.",
     description:
-      "Real pork in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions. The hot strength is for people who already cook with chilli.\n\nGood over rice, with chips, or taken to a barbecue where it tends not to come home again.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
-    heat: "hot",
+      "Real pork in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions.\n\nGood over rice, with chips, or taken to a barbecue where it tends not to come home again.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     ingredients: [
       "Onions",
       "Pork",
@@ -242,7 +182,7 @@ export const products: Product[] = [
     dietary: ["No artificial preservatives"],
     image: {
       url: "/products/cutout/pork-chilli-sauce-hot.png",
-      alt: "Jar of Efamy pork chilli sauce, hot, with a pink label",
+      alt: "Jar of Efamy pork chilli sauce with a pink label",
       width: 793,
       height: 900,
     },
@@ -329,10 +269,10 @@ export const products: Product[] = [
 ];
 
 export const featuredSlugs = [
-  "chicken-chilli-sauce-hot",
-  "beef-chilli-sauce-hot",
-  "pork-chilli-sauce-hot",
-  "fish-chilli-sauce-hot",
+  "chicken-chilli-sauce",
+  "beef-chilli-sauce",
+  "pork-chilli-sauce",
+  "fish-chilli-sauce",
 ];
 
 /*
@@ -343,7 +283,7 @@ export const featuredSlugs = [
  */
 export const bestSellerSlugs = [
   "all-purpose-seasoning-mix",
-  "beans-chilli-sauce-mild",
+  "beans-chilli-sauce",
   "kelewele-seasoning-mix",
   "coat-and-cook",
 ];
