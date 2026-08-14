@@ -246,10 +246,10 @@ Not information, but choices only the business can make.
       deciding early.
 - [ ] **Multipacks or gift sets for customers?** The site supports them. Which
       sets, and at what price?
-- [ ] **Who holds the `efamys.co.uk` domain?** You already own it and the new
+- [ ] **Who holds the `efamy.co.uk` domain?** You already own it and the new
       site will use it, so nothing needs buying. We just need the login for
       wherever it is registered, so the new site can be pointed at it. That
       account should be in the business's name — it controls both the website
-      and the `info@efamys.co.uk` email.
+      and the `info@efamy.co.uk` email.
       This also fixes a real problem: some UK mobile networks block the
       temporary web address entirely, so the site is unreachable on them.

@@ -41,10 +41,11 @@ Instant, no rebuild. Do this first when production is broken, then diagnose.
 
 ### The domain
 
-Efamy already owns and uses **`efamys.co.uk`**. This site replaces what sits
-there today, so there is no domain to buy — only DNS to repoint.
+Efamy is moving to **`efamy.co.uk`**. The old site sat on `efamys.co.uk` (with
+an s), which is being retired — so anything still pointing at the old domain,
+including email addresses, needs moving before it is dropped.
 
-Vercel → Settings → Domains. Add `efamys.co.uk` and `www.efamys.co.uk`, then
+Vercel → Settings → Domains. Add `efamy.co.uk` and `www.efamy.co.uk`, then
 follow the DNS instructions at whoever the domain is registered with.
 
 Two things to sort out before switching the DNS over:
@@ -52,9 +53,12 @@ Two things to sort out before switching the DNS over:
 - **Find out where the domain is registered and who controls it.** Access to
   that account is as important as the Vercel and Sanity logins, and it belongs
   in the business's own name.
-- **`info@efamys.co.uk` runs on this domain.** Changing the wrong DNS record
-  takes the email down with the website. Only the A and CNAME records that
-  point at the web host should change; leave the MX records alone.
+- **Email runs on this domain too.** Changing the wrong DNS record takes the
+  mail down with the website. Only the A and CNAME records that point at the
+  web host should change; leave the MX records alone.
+- **Resend already has `efamy.co.uk` verified** — DKIM and SPF are green. If
+  you touch SPF for anything else, merge it into the one record rather than
+  adding a second; two SPF records on a domain is a permanent failure.
 
 Do this before launch. Some UK mobile networks block `*.vercel.app` wholesale
 because it is heavily used for phishing, so on those carriers the site is
@@ -63,7 +67,7 @@ project.
 
 After adding the domain:
 
-1. Set `NEXT_PUBLIC_SITE_URL` to `https://efamys.co.uk` and redeploy, or the
+1. Set `NEXT_PUBLIC_SITE_URL` to `https://efamy.co.uk` and redeploy, or the
    sitemap and social previews keep pointing at the old host
 2. Add the domain to Sanity CORS (below)
 
@@ -75,7 +79,7 @@ deployed app.
 
 | Variable                        | Development | Preview        | Production                    |
 | ------------------------------- | ----------- | -------------- | ----------------------------- |
-| `NEXT_PUBLIC_SITE_URL`          | localhost   | preview URL    | `https://efamys.co.uk`        |
+| `NEXT_PUBLIC_SITE_URL`          | localhost   | preview URL    | `https://efamy.co.uk`         |
 | `NEXT_PUBLIC_SANITY_PROJECT_ID` | ✓           | ✓              | ✓                             |
 | `NEXT_PUBLIC_SANITY_DATASET`    | ✓           | ✓              | ✓                             |
 | `STRIPE_SECRET_KEY`             | `sk_test_`  | `sk_test_`     | `sk_live_` **only when live** |
@@ -90,7 +94,7 @@ With test keys on the public site the checkout looks completely live, but:
 - anyone who knows `4242 4242 4242 4242` can create fake orders in the dashboard
 
 Both are worse than the honest fallback the site shows with no key set: _"Card
-payment is not switched on yet. Email info@efamys.co.uk and we will take your
+payment is not switched on yet. Email info@efamy.co.uk and we will take your
 order."_ Leave Production without Stripe keys until the account is activated.
 
 ### The webhook secret is per endpoint

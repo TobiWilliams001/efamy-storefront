@@ -55,8 +55,8 @@ Efamy's decision, not a default.
 ### Uptime monitoring — the real gap
 
 Nothing would notice if the site went down at 3am. A free UptimeRobot or Better
-Stack check on `https://efamys.co.uk` every 5 minutes, alerting
-`info@efamys.co.uk`, is ten minutes of setup.
+Stack check on `https://efamy.co.uk` every 5 minutes, alerting
+`info@efamy.co.uk`, is ten minutes of setup.
 
 Worth checking a real URL rather than the homepage alone — a working homepage
 with a broken checkout looks fine to a naive monitor.
