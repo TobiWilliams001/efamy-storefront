@@ -22,7 +22,7 @@ export function Statement() {
             <Rule className="mt-5 justify-start" />
             <p className="mt-7 text-lg text-pretty text-ink-muted">
               Good food is what brings everyone to the table. We have been
-              making ours in Corby since 2008 — Ghanaian chilli sauces and
+              making ours in Corby since 2008. Ghanaian chilli sauces and
               seasonings, to the recipes we grew up with.
             </p>
             <p className="mt-5 text-pretty text-ink-muted">

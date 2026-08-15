@@ -111,7 +111,7 @@ export const products: Product[] = [
     variants: [...MEAT("mild"), ...MEAT("hot")],
     summary: "Chunks of real beef, in mild or hot.",
     description:
-      "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the same recipe carries both strengths — mild simply has less chilli.\n\nSpoon it over rice and stew, stir it through jollof, or take a jar to a barbecue.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
+      "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the same recipe carries both strengths. Mild simply has less chilli.\n\nSpoon it over rice and stew, stir it through jollof, or take a jar to a barbecue.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     dietary: ["No artificial preservatives"],
     image: {
       url: "/products/cutout/beef-chilli-sauce-hot.png",
@@ -224,7 +224,7 @@ export const products: Product[] = [
     variants: single("150g", 325),
     summary: "The spice blend for kelewele, and for barbecues and kebabs.",
     description:
-      "Spices, negro pepper, chilli powder and crushed chilli peppers — the blend we first made in December 2015.\n\nIts home is kelewele, spiced fried plantain, but it earns its place at a barbecue and on kebabs just as easily.\n\nMade in Corby. No colours, additives or preservatives.",
+      "Spices, negro pepper, chilli powder and crushed chilli peppers, the blend we first made in December 2015.\n\nIts home is kelewele, spiced fried plantain, but it earns its place at a barbecue and on kebabs just as easily.\n\nMade in Corby. No colours, additives or preservatives.",
     image: {
       url: "/products/cutout/kelewele-seasoning-mix.png",
       alt: "Bottle of Efamy kelewele seasoning mix",
@@ -242,7 +242,7 @@ export const products: Product[] = [
     variants: single("250g", 350),
     summary: "A crisp coating for grilling chicken, beef and salmon.",
     description:
-      "Coat the meat or fish and cook it — that is the whole method. Made for grilling chicken, beef and salmon, and just as good frying or thickening a sauce.\n\nWheat flour, maize starch, garlic, onion, spices and herbs. No artificial preservatives.\n\nMade in Corby to the recipe we started with in 2008.",
+      "Coat the meat or fish and cook it. That is the whole method. Made for grilling chicken, beef and salmon, and just as good frying or thickening a sauce.\n\nWheat flour, maize starch, garlic, onion, spices and herbs. No artificial preservatives.\n\nMade in Corby to the recipe we started with in 2008.",
     ingredients: [
       "Wheat Flour",
       "Maize Starch",

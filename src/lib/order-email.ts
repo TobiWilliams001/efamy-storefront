@@ -5,7 +5,7 @@ import type Stripe from "stripe";
 import { orderInbox, sendEmail } from "@/lib/email";
 
 function money(amount: number | null | undefined): string {
-  return amount == null ? "—" : `£${(amount / 100).toFixed(2)}`;
+  return amount == null ? "not given" : `£${(amount / 100).toFixed(2)}`;
 }
 
 function addressLines(session: Stripe.Checkout.Session): string {
@@ -33,12 +33,12 @@ export async function notifyOrder(session: Stripe.Checkout.Session) {
     session.line_items?.data
       .map(
         (line) =>
-          `  ${line.quantity} × ${line.description} — ${money(line.amount_total)}`,
+          `  ${line.quantity} x ${line.description}  ${money(line.amount_total)}`,
       )
       .join("\n") ?? "  (expand line_items on the session to list these)";
 
   const body = [
-    `New order — ${money(session.amount_total)}`,
+    `New order, ${money(session.amount_total)}`,
     "",
     "ITEMS",
     items,
@@ -70,7 +70,7 @@ export async function notifyOrder(session: Stripe.Checkout.Session) {
 
   const result = await sendEmail({
     to: orderInbox(),
-    subject: `New Efamy order — ${money(session.amount_total)}`,
+    subject: `New Efamy order, ${money(session.amount_total)}`,
     text: body,
     // Replying goes straight to the customer.
     replyTo: customer?.email ?? undefined,

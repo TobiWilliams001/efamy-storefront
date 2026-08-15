@@ -119,7 +119,7 @@ describe("strength is part of the identity", () => {
       { slug: "beef", size: "175g", heat: "mild", quantity: 1 },
     ]);
 
-    if (result.ok) expect(result.lines[0].name).toBe("beef — mild — 175g");
+    if (result.ok) expect(result.lines[0].name).toBe("beef, mild, 175g");
   });
 
   it("refuses a strength the jar is not sold in", async () => {

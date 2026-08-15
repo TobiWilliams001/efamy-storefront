@@ -106,7 +106,7 @@ export async function priceBasket(
       quantity: line.quantity,
       name: [product.name, variant.heat, variant.size]
         .filter(Boolean)
-        .join(" — "),
+        .join(", "),
       unitPrice: variant.price,
       lineTotal: variant.price * line.quantity,
       imageUrl: product.image?.url,

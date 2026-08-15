@@ -35,7 +35,7 @@ const milestones = [
     year: "2015",
     title: "Kelewele Seasoning",
     description:
-      "In December we made our first Kelewele Seasoning — spices, negro pepper, chilli powder and crushed chilli peppers for spiced fried plantain.",
+      "In December we made our first Kelewele Seasoning: spices, negro pepper, chilli powder and crushed chilli peppers for spiced fried plantain.",
   },
 ];
 
@@ -125,7 +125,7 @@ export default async function AboutPage() {
             <h3 className="mt-5 font-heading text-2xl">Our chilli sauces</h3>
             <Rule className="mt-4 justify-start" />
             <p className="mt-6 text-pretty text-muted-foreground">
-              Seven flavours made from real meat, poultry, beans and fish — and
+              Seven flavours made from real meat, poultry, beans and fish, and
               you can see it. Our sauces carry chunks rather than a smooth
               paste. Fresh ginger, garlic and onions are the main ingredients,
               and the oils are vegetable oil and extra virgin olive oil.
