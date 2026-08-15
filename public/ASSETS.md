@@ -26,6 +26,48 @@ logos/            The wordmark, light and dark.
 Originals and superseded files live in `assets/` at the repo root, outside
 `public/`, so they are kept without being deployed.
 
+## The unsorted drop in `public/` root
+
+Twenty-four files sit unrenamed in `public/` root, gitignored by the
+`ChatGPT Image*` and `WhatsApp Image*` rules. They are not deployed, and a fresh
+clone will not have them. **Both sets are photographs of real Efamy jars.**
+
+- **`WhatsApp Image *.jpeg`** — the client's own photographs, sent over
+  WhatsApp. These are the source material.
+- **`ChatGPT Image *.png`** — the same real jars with the background removed.
+  The filename is misleading: the tool was used to cut out a photograph, not to
+  generate food. Nothing on this site is an invented product image, and nothing
+  should be.
+
+Files move into `products/cutout/` under their product slug once the label has
+been read and matched to a product.
+
+### Reading the labels
+
+The label text is the only reliable way to tell these apart — several jars
+differ only in a word on the front. The chilli oils and the Goat sauce were
+identified by OCR, not by eye:
+
+```bash
+python3 -m venv ocr && ocr/bin/pip install pyobjc-framework-Vision   # ~30s
+ocr/bin/python ocr.py "public/WhatsApp Image ....jpeg"               # macOS Vision
+```
+
+Build it in a scratch directory, not in the repo. Any OCR that reads a
+photograph will do; the point is to read the label rather than guess from
+colour.
+
+### When OCR fails, look
+
+`products/cutout/turkey-chilli-sauce.png` was matched on lid and label colour
+alone, because OCR could not read the flavour off the decorative script. It has
+since been **confirmed correct by eye**: the label reads "Turkey Chilli Sauce"
+over "Hot", which matches the single hot variant in the catalogue.
+
+The lesson is that the script defeats OCR but not a person. Where OCR returns
+nothing, open the image and read it before filing the file — never fall back to
+matching on colour, which is a guess dressed up as a match.
+
 Filenames are referenced directly from `src/lib/catalogue-data.ts`. Renaming a
 file without updating that file breaks the image.
 
