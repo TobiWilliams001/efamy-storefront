@@ -20,6 +20,15 @@ The shop cannot take an order until these exist.
       details. This cannot be set up by anyone else — it needs the company
       details, a bank account and ID verification.
 
+### One photograph still missing
+
+- [ ] **A single jar of All Purpose Seasoning Mix.** Every other product shows
+      one jar; All Purpose shows a tray of about eight, which is the only
+      photograph we have of it. Next to the sauces it looks like a different
+      kind of listing. The other image on file is a "Free Sample" pouch, which
+      is a different pack and would mislead. A phone photo of one jar on a plain
+      surface is enough.
+
 ### Catering sizes
 
 Efamy supplies restaurants in **3kg buckets** of Kelewele Seasoning, All Purpose
