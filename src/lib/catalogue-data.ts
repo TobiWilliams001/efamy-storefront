@@ -227,9 +227,9 @@ export const products: Product[] = [
       "Spices, negro pepper, chilli powder and crushed chilli peppers — the blend we first made in December 2015.\n\nIts home is kelewele, spiced fried plantain, but it earns its place at a barbecue and on kebabs just as easily.\n\nMade in Corby. No colours, additives or preservatives.",
     image: {
       url: "/products/cutout/kelewele-seasoning-mix.png",
-      alt: "Bottles of Efamy kelewele seasoning mix with red caps",
-      width: 900,
-      height: 506,
+      alt: "Bottle of Efamy kelewele seasoning mix",
+      width: 1254,
+      height: 1254,
     },
     storage: STORAGE_DRY,
     servingSuggestions: ["Spiced fried plantain"],
