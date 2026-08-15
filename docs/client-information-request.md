@@ -20,6 +20,17 @@ The shop cannot take an order until these exist.
       details. This cannot be set up by anyone else — it needs the company
       details, a bank account and ID verification.
 
+### Catering sizes
+
+Efamy supplies restaurants in **3kg buckets** of Kelewele Seasoning, All Purpose
+Seasoning and Coat & Cook. These are not on the shop, because trade pricing does
+not belong on a retail site.
+
+- [ ] **Should catering buckets be buyable online, or an enquiry?** An enquiry
+      is the safer default: trade buyers usually want an invoice and a delivery
+      arrangement rather than a card checkout.
+- [ ] **If buyable, what is the retail price of each 3kg bucket?**
+
 ### Delivery
 
 - [ ] **What does delivery cost?** A flat rate, or by weight or basket value?
