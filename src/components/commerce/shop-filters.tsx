@@ -58,7 +58,7 @@ export function ShopFilters({
   return (
     <div className="mb-12">
       {showCategories ? (
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap gap-3">
           <FilterChip
             href={buildQuery(filters, { category: undefined })}
             active={!filters.category}
@@ -123,18 +123,28 @@ export function ShopFilters({
         </div>
       </div>
 
+      {/*
+       * The three groups wrap as whole groups rather than as loose chips: each
+       * is nowrap on desktop, so a narrow viewport drops "Diet" onto its own
+       * line instead of stranding "Extra hot" under "Heat".
+       */}
       <div
         className={cn(
-          "hidden items-center justify-between gap-5 sm:flex",
+          "hidden items-start justify-between gap-6 sm:flex",
           showCategories && "mt-8",
         )}
       >
-        <HeatFilters filters={filters} />
-        <PriceFilters filters={filters} />
-        <DietFilters filters={filters} />
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+          <HeatFilters filters={filters} />
+          <PriceFilters filters={filters} />
+          <DietFilters filters={filters} />
+        </div>
 
-        <div className="flex items-center gap-5">
-          <p data-numeric className="text-sm text-muted-foreground">
+        <div className="flex shrink-0 items-center gap-5">
+          <p
+            data-numeric
+            className="text-sm whitespace-nowrap text-muted-foreground"
+          >
             {count} {count === 1 ? "product" : "products"}
           </p>
           <SortSelect value={filters.sort} />
@@ -144,16 +154,25 @@ export function ShopFilters({
   );
 }
 
+/*
+ * The reset chip carries the group's name — "All prices" rather than a bare
+ * "Any" under a grey "Price" caption. Three chips all reading "Any" told the
+ * customer nothing about which one they were about to press, and dropping the
+ * captions buys back the width the row needs to stay on one line.
+ */
 function PriceFilters({ filters }: { filters: ProductFilters }) {
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="mr-1 text-sm text-muted-foreground">Price</span>
+    <div
+      role="group"
+      aria-label="Price"
+      className="flex flex-wrap items-center gap-2 sm:flex-nowrap"
+    >
       <FilterChip
         size="sm"
         href={buildQuery(filters, { price: undefined })}
         active={!filters.price}
       >
-        Any
+        All prices
       </FilterChip>
       {priceOptions.map((option) => (
         <FilterChip
@@ -171,14 +190,17 @@ function PriceFilters({ filters }: { filters: ProductFilters }) {
 
 function HeatFilters({ filters }: { filters: ProductFilters }) {
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="mr-1 text-sm text-muted-foreground">Heat</span>
+    <div
+      role="group"
+      aria-label="Heat"
+      className="flex flex-wrap items-center gap-2 sm:flex-nowrap"
+    >
       <FilterChip
         size="sm"
         href={buildQuery(filters, { heat: undefined })}
         active={!filters.heat}
       >
-        Any
+        All heats
       </FilterChip>
       {heatOptions.map((option) => (
         <FilterChip
@@ -196,14 +218,17 @@ function HeatFilters({ filters }: { filters: ProductFilters }) {
 
 function DietFilters({ filters }: { filters: ProductFilters }) {
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="mr-1 text-sm text-muted-foreground">Diet</span>
+    <div
+      role="group"
+      aria-label="Diet"
+      className="flex flex-wrap items-center gap-2 sm:flex-nowrap"
+    >
       <FilterChip
         size="sm"
         href={buildQuery(filters, { dietary: undefined })}
         active={!filters.dietary}
       >
-        Any
+        All diets
       </FilterChip>
       {dietaryOptions.map((option) => (
         <FilterChip
