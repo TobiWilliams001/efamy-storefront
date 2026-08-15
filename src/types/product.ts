@@ -35,6 +35,11 @@ export type ProductVariant = {
   size: string;
   /** Absent on products sold in a single strength, such as the seasonings. */
   heat?: Heat;
+  /**
+   * The jar for this strength, where the label differs. Falls back to the
+   * product image, so only strengths with their own photograph need one.
+   */
+  image?: ProductImage;
   /** Minor units (pence). Format with `formatPrice()`. */
   price: number;
   compareAtPrice?: number;

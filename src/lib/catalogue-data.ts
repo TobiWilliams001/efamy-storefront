@@ -2,6 +2,7 @@ import type {
   Heat,
   Product,
   ProductCategory,
+  ProductImage,
   ProductVariant,
 } from "@/types/product";
 
@@ -31,17 +32,30 @@ function sauceSizes(
   p250: number,
   p500: number,
   p800: number,
+  image?: ProductImage,
 ): ProductVariant[] {
   return [
-    { size: "175g", heat, price: p175, inStock: true },
-    { size: "250g", heat, price: p250, inStock: true },
-    { size: "500g", heat, price: p500, inStock: true },
-    { size: "800g", heat, price: p800, inStock: true },
+    { size: "175g", heat, price: p175, inStock: true, image },
+    { size: "250g", heat, price: p250, inStock: true, image },
+    { size: "500g", heat, price: p500, inStock: true, image },
+    { size: "800g", heat, price: p800, inStock: true, image },
   ];
 }
 
-const BEANS = (heat: Heat) => sauceSizes(heat, 275, 425, 825, 1150);
-const MEAT = (heat: Heat) => sauceSizes(heat, 325, 475, 875, 1250);
+/** A jar photographed for one strength, where mild and hot look different. */
+function jar(
+  file: string,
+  alt: string,
+  width = 700,
+  height = 900,
+): ProductImage {
+  return { url: `/products/cutout/${file}.png`, alt, width, height };
+}
+
+const BEANS = (heat: Heat, image?: ProductImage) =>
+  sauceSizes(heat, 275, 425, 825, 1150, image);
+const MEAT = (heat: Heat, image?: ProductImage) =>
+  sauceSizes(heat, 325, 475, 875, 1250, image);
 
 function single(size: string, price: number): ProductVariant[] {
   return [{ size, price, inStock: true }];
@@ -108,7 +122,24 @@ export const products: Product[] = [
     id: "beef-chilli-sauce",
     slug: "beef-chilli-sauce",
     name: "Beef Chilli Sauce",
-    variants: [...MEAT("mild"), ...MEAT("hot")],
+    variants: [
+      ...MEAT(
+        "mild",
+        jar(
+          "beef-chilli-sauce-mild",
+          "Jar of Efamy beef chilli sauce, mild",
+          675,
+        ),
+      ),
+      ...MEAT(
+        "hot",
+        jar(
+          "beef-chilli-sauce-hot",
+          "Jar of Efamy beef chilli sauce, hot",
+          675,
+        ),
+      ),
+    ],
     summary: "Chunks of real beef, in mild or hot.",
     description:
       "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the same recipe carries both strengths. Mild simply has less chilli.\n\nSpoon it over rice and stew, stir it through jollof, or take a jar to a barbecue.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
@@ -146,7 +177,24 @@ export const products: Product[] = [
     id: "fish-chilli-sauce",
     slug: "fish-chilli-sauce",
     name: "Fish Chilli Sauce",
-    variants: [...MEAT("mild"), ...MEAT("hot")],
+    variants: [
+      ...MEAT(
+        "mild",
+        jar(
+          "fish-chilli-sauce-mild",
+          "Jar of Efamy fish chilli sauce, mild",
+          675,
+        ),
+      ),
+      ...MEAT(
+        "hot",
+        jar(
+          "fish-chilli-sauce-hot",
+          "Jar of Efamy fish chilli sauce, hot",
+          675,
+        ),
+      ),
+    ],
     summary: "Chunks of real fish, in mild or hot.",
     description:
       "Made mainly with barracuda, in pieces you can see rather than a smooth paste. Fresh ginger, garlic and onions carry it, and the same recipe carries both strengths.\n\nThe jar for kenkey and fish, for waakye, or for rice that needs waking up.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",

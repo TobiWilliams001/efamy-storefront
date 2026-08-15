@@ -4,22 +4,21 @@ import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 
 import { heatLabels } from "@/components/commerce/heat-badge";
+import { useSelectedVariant } from "@/components/commerce/selected-variant";
 import { useAddedToBasket } from "@/components/ui/toast";
 import { useCart } from "@/components/cart/cart-provider";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import { heatLevels, sizesFor, type Heat, type Product } from "@/types/product";
+import { heatLevels, sizesFor, type Product } from "@/types/product";
 
 export function AddToCart({ product }: { product: Product }) {
   const { add } = useCart();
   const added = useAddedToBasket();
 
   const strengths = heatLevels(product);
-  const [heat, setHeat] = useState<Heat | undefined>(strengths[0]);
-  const [size, setSize] = useState<string | undefined>(
-    sizesFor(product, strengths[0])[0]?.size,
-  );
+  // Shared with the gallery, so choosing a strength also changes the jar shown.
+  const { heat, size, setHeat, setSize } = useSelectedVariant();
   const [quantity, setQuantity] = useState(1);
 
   /*
