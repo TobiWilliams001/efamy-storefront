@@ -66,8 +66,8 @@ export default async function OrderConfirmedPage({
                   Your payment is still being confirmed.
                 </p>
                 <p className="mt-4 text-pretty text-muted-foreground">
-                  This usually takes a moment. Refresh this page shortly — and
-                  if you have been charged, your order is safe. Nothing is lost.
+                  This usually takes a moment. Refresh this page shortly. If you
+                  have been charged, your order is safe. Nothing is lost.
                 </p>
               </>
             ) : (

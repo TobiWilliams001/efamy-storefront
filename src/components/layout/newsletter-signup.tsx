@@ -26,7 +26,7 @@ export function NewsletterSignup() {
   if (done) {
     return (
       <p role="status" className="text-sm text-ink-muted">
-        Thank you — we will be in touch.
+        Thank you. We will be in touch.
       </p>
     );
   }

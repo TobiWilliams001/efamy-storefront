@@ -29,7 +29,7 @@ export async function submitContact(
   const { name, email, topic, message } = parsed.data;
 
   const result = await sendEmail({
-    subject: `${topic} — ${name}`,
+    subject: `${topic}: ${name}`,
     text: [
       `${topic} from the website`,
       "",
