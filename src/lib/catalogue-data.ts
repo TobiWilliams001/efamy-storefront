@@ -90,11 +90,26 @@ export const categories: ProductCategory[] = [
     },
     productCount: 3,
   },
+  {
+    id: "cat-chilli-oils",
+    slug: "chilli-oils",
+    name: "Chilli Oils",
+    description:
+      "The same seven flavours, poured. A spoonful over anything already cooked.",
+    image: {
+      url: "/products/oils/beef-chilli-oil.png",
+      alt: "Bottle of Efamy beef flavoured chilli oil",
+      width: 1086,
+      height: 1448,
+    },
+    productCount: 7,
+  },
 ];
 
 const category = {
   sauces: { slug: "chilli-sauces", name: "Chilli Sauces" },
   seasonings: { slug: "seasonings", name: "Seasonings" },
+  oils: { slug: "chilli-oils", name: "Chilli Oils" },
 } as const;
 
 export const products: Product[] = [
@@ -237,6 +252,171 @@ export const products: Product[] = [
     storage: STORAGE_SAUCE,
     servingSuggestions: ["Rice", "Fried plantain", "Grilled pork"],
     category: category.sauces,
+  },
+  {
+    id: "goat-chilli-sauce",
+    slug: "goat-chilli-sauce",
+    name: "Goat Chilli Sauce",
+    variants: MEAT("hot"),
+    summary: "Chunks of real goat in a chilli sauce with a proper kick.",
+    description:
+      "Real goat in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions.\n\nThe one to reach for with rice, with yam, or alongside a plate of kenkey.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
+    dietary: ["No artificial preservatives"],
+    image: {
+      url: "/products/cutout/goat-chilli-sauce.png",
+      alt: "Jar of Efamy goat chilli sauce",
+      width: 1254,
+      height: 1254,
+    },
+    storage: STORAGE_SAUCE,
+    servingSuggestions: ["Rice", "Yam", "Kenkey"],
+    category: category.sauces,
+  },
+  {
+    id: "turkey-chilli-sauce",
+    slug: "turkey-chilli-sauce",
+    name: "Turkey Chilli Sauce",
+    variants: MEAT("hot"),
+    summary: "Chunks of real turkey in a chilli sauce with a proper kick.",
+    description:
+      "Real turkey in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions.\n\nGood over rice, folded through pasta, or spooned onto chips.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
+    dietary: ["No artificial preservatives"],
+    image: {
+      url: "/products/cutout/turkey-chilli-sauce.png",
+      alt: "Jar of Efamy turkey chilli sauce",
+      width: 1254,
+      height: 1254,
+    },
+    storage: STORAGE_SAUCE,
+    servingSuggestions: ["Rice", "Pasta", "Chips"],
+    category: category.sauces,
+  },
+  {
+    id: "beans-chilli-oil",
+    slug: "beans-chilli-oil",
+    name: "Beans Chilli Oil",
+    variants: single("200ml", 199),
+    summary: "Beans flavoured, and suitable for vegetarians.",
+    description:
+      "Chilli oil with the flavour of our beans sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
+    dietary: ["Suitable for vegetarians", "No artificial preservatives"],
+    image: {
+      url: "/products/oils/beans-chilli-oil.png",
+      alt: "Bottle of Efamy beans flavoured chilli oil",
+      width: 1086,
+      height: 1448,
+    },
+    storage: STORAGE_DRY,
+    category: category.oils,
+  },
+  {
+    id: "beef-chilli-oil",
+    slug: "beef-chilli-oil",
+    name: "Beef Chilli Oil",
+    variants: single("200ml", 199),
+    summary: "Beef flavoured, for anything off the grill.",
+    description:
+      "Chilli oil with the flavour of our beef sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
+    dietary: ["No artificial preservatives"],
+    image: {
+      url: "/products/oils/beef-chilli-oil.png",
+      alt: "Bottle of Efamy beef flavoured chilli oil",
+      width: 1086,
+      height: 1448,
+    },
+    storage: STORAGE_DRY,
+    category: category.oils,
+  },
+  {
+    id: "chicken-chilli-oil",
+    slug: "chicken-chilli-oil",
+    name: "Chicken Chilli Oil",
+    variants: single("200ml", 199),
+    summary: "Chicken flavoured, for rice, chips and roast dinners.",
+    description:
+      "Chilli oil with the flavour of our chicken sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
+    dietary: ["No artificial preservatives"],
+    image: {
+      url: "/products/oils/chicken-chilli-oil.png",
+      alt: "Bottle of Efamy chicken flavoured chilli oil",
+      width: 1086,
+      height: 1448,
+    },
+    storage: STORAGE_DRY,
+    category: category.oils,
+  },
+  {
+    id: "fish-chilli-oil",
+    slug: "fish-chilli-oil",
+    name: "Fish Chilli Oil",
+    variants: single("200ml", 199),
+    summary: "Fish flavoured, for kenkey, grilled fish and salads.",
+    description:
+      "Chilli oil with the flavour of our fish sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
+    allergens: ["Fish"],
+    dietary: ["No artificial preservatives"],
+    image: {
+      url: "/products/oils/fish-chilli-oil.png",
+      alt: "Bottle of Efamy fish flavoured chilli oil",
+      width: 1086,
+      height: 1448,
+    },
+    storage: STORAGE_DRY,
+    category: category.oils,
+  },
+  {
+    id: "goat-chilli-oil",
+    slug: "goat-chilli-oil",
+    name: "Goat Chilli Oil",
+    variants: single("200ml", 199),
+    summary: "Goat flavoured, for yam, rice and stews.",
+    description:
+      "Chilli oil with the flavour of our goat sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
+    dietary: ["No artificial preservatives"],
+    image: {
+      url: "/products/oils/goat-chilli-oil.png",
+      alt: "Bottle of Efamy goat flavoured chilli oil",
+      width: 1086,
+      height: 1448,
+    },
+    storage: STORAGE_DRY,
+    category: category.oils,
+  },
+  {
+    id: "pork-chilli-oil",
+    slug: "pork-chilli-oil",
+    name: "Pork Chilli Oil",
+    variants: single("200ml", 199),
+    summary: "Pork flavoured, for barbecues and fried plantain.",
+    description:
+      "Chilli oil with the flavour of our pork sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
+    dietary: ["No artificial preservatives"],
+    image: {
+      url: "/products/oils/pork-chilli-oil.png",
+      alt: "Bottle of Efamy pork flavoured chilli oil",
+      width: 1086,
+      height: 1448,
+    },
+    storage: STORAGE_DRY,
+    category: category.oils,
+  },
+  {
+    id: "turkey-chilli-oil",
+    slug: "turkey-chilli-oil",
+    name: "Turkey Chilli Oil",
+    variants: single("200ml", 199),
+    summary: "Turkey flavoured, for pasta, rice and roast dinners.",
+    description:
+      "Chilli oil with the flavour of our turkey sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
+    dietary: ["No artificial preservatives"],
+    image: {
+      url: "/products/oils/turkey-chilli-oil.png",
+      alt: "Bottle of Efamy turkey flavoured chilli oil",
+      width: 1086,
+      height: 1448,
+    },
+    storage: STORAGE_DRY,
+    category: category.oils,
   },
   {
     id: "all-purpose-seasoning-mix",
