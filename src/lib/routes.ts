@@ -1,7 +1,8 @@
 export const routes = {
   home: "/",
   shop: "/shop",
-  category: (slug: string) => `/shop/${slug}`,
+  /** The shop with a category filter applied, not a page of its own. */
+  category: (slug: string) => `/shop?category=${slug}`,
   product: (slug: string) => `/products/${slug}`,
   recipes: "/recipes",
   recipe: (slug: string) => `/recipes/${slug}`,
