@@ -53,6 +53,42 @@ export const sortOptions = [
 
 export type SortOption = (typeof sortOptions)[number]["value"];
 
+/**
+ * The options worth offering, given what is actually in the catalogue.
+ *
+ * A chip that matches nothing is worse than no chip: it invites a click that
+ * empties the shop and makes the range look smaller than it is. Efamy sells
+ * mild and hot and has never sold extra hot, so "Extra hot" was a guaranteed
+ * dead end.
+ *
+ * Derived rather than deleted, so a strength or a claim the client starts
+ * stocking brings its chip back with no code change. Counted against the whole
+ * catalogue rather than the current selection, so chips never disappear out
+ * from under the customer mid-filter.
+ */
+export function availableOptions(products: Product[]) {
+  return {
+    heat: heatOptions.filter((option) =>
+      products.some((product) =>
+        product.variants.some((variant) => variant.heat === option.value),
+      ),
+    ),
+    dietary: dietaryOptions.filter((option) =>
+      products.some((product) => product.dietary?.includes(option.claim)),
+    ),
+    price: priceOptions.filter((option) =>
+      products.some((product) =>
+        product.variants.some(
+          (variant) =>
+            variant.price >= option.min && variant.price < option.max,
+        ),
+      ),
+    ),
+  };
+}
+
+export type AvailableOptions = ReturnType<typeof availableOptions>;
+
 export type ProductFilters = {
   category?: string;
   heat?: Heat;

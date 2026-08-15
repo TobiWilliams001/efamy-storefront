@@ -4,9 +4,7 @@ import { SlidersHorizontal } from "lucide-react";
 import { SortSelect } from "@/components/commerce/sort-select";
 import {
   buildQuery,
-  dietaryOptions,
-  heatOptions,
-  priceOptions,
+  type AvailableOptions,
   type ProductFilters,
 } from "@/lib/product-filters";
 import { cn } from "@/lib/utils";
@@ -42,6 +40,8 @@ type ShopFiltersProps = {
   filters: ProductFilters;
   /** Omitted on category pages, where the category is fixed by the route. */
   showCategories?: boolean;
+  /** Only the options the catalogue can actually satisfy. */
+  options: AvailableOptions;
   count: number;
 };
 
@@ -49,6 +49,7 @@ export function ShopFilters({
   categories,
   filters,
   showCategories = true,
+  options,
   count,
 }: ShopFiltersProps) {
   const activeCount = [filters.heat, filters.dietary, filters.price].filter(
@@ -105,9 +106,9 @@ export function ShopFilters({
           </summary>
 
           <div className="mt-4 space-y-4">
-            <HeatFilters filters={filters} />
-            <PriceFilters filters={filters} />
-            <DietFilters filters={filters} />
+            <HeatFilters filters={filters} options={options.heat} />
+            <PriceFilters filters={filters} options={options.price} />
+            <DietFilters filters={filters} options={options.dietary} />
           </div>
         </details>
 
@@ -135,9 +136,9 @@ export function ShopFilters({
         )}
       >
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-          <HeatFilters filters={filters} />
-          <PriceFilters filters={filters} />
-          <DietFilters filters={filters} />
+          <HeatFilters filters={filters} options={options.heat} />
+          <PriceFilters filters={filters} options={options.price} />
+          <DietFilters filters={filters} options={options.dietary} />
         </div>
 
         <div className="flex shrink-0 items-center gap-5">
@@ -160,7 +161,15 @@ export function ShopFilters({
  * customer nothing about which one they were about to press, and dropping the
  * captions buys back the width the row needs to stay on one line.
  */
-function PriceFilters({ filters }: { filters: ProductFilters }) {
+function PriceFilters({
+  filters,
+  options,
+}: {
+  filters: ProductFilters;
+  options: AvailableOptions["price"];
+}) {
+  if (options.length === 0) return null;
+
   return (
     <div
       role="group"
@@ -174,7 +183,7 @@ function PriceFilters({ filters }: { filters: ProductFilters }) {
       >
         All prices
       </FilterChip>
-      {priceOptions.map((option) => (
+      {options.map((option) => (
         <FilterChip
           key={option.value}
           size="sm"
@@ -188,7 +197,15 @@ function PriceFilters({ filters }: { filters: ProductFilters }) {
   );
 }
 
-function HeatFilters({ filters }: { filters: ProductFilters }) {
+function HeatFilters({
+  filters,
+  options,
+}: {
+  filters: ProductFilters;
+  options: AvailableOptions["heat"];
+}) {
+  if (options.length === 0) return null;
+
   return (
     <div
       role="group"
@@ -202,7 +219,7 @@ function HeatFilters({ filters }: { filters: ProductFilters }) {
       >
         All heats
       </FilterChip>
-      {heatOptions.map((option) => (
+      {options.map((option) => (
         <FilterChip
           key={option.value}
           size="sm"
@@ -216,7 +233,15 @@ function HeatFilters({ filters }: { filters: ProductFilters }) {
   );
 }
 
-function DietFilters({ filters }: { filters: ProductFilters }) {
+function DietFilters({
+  filters,
+  options,
+}: {
+  filters: ProductFilters;
+  options: AvailableOptions["dietary"];
+}) {
+  if (options.length === 0) return null;
+
   return (
     <div
       role="group"
@@ -230,7 +255,7 @@ function DietFilters({ filters }: { filters: ProductFilters }) {
       >
         All diets
       </FilterChip>
-      {dietaryOptions.map((option) => (
+      {options.map((option) => (
         <FilterChip
           key={option.value}
           size="sm"

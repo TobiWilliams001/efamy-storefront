@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { applyFilters, buildQuery, parseFilters } from "@/lib/product-filters";
+import {
+  applyFilters,
+  availableOptions,
+  buildQuery,
+  parseFilters,
+} from "@/lib/product-filters";
 import type { Heat, Product } from "@/types/product";
 
 function product(
@@ -38,6 +43,48 @@ const catalogue: Product[] = [
     category: { slug: "seasonings", name: "Seasonings" },
   }),
 ];
+
+describe("availableOptions", () => {
+  it("drops a strength nothing is sold in", () => {
+    const heat = availableOptions(catalogue).heat.map((o) => o.value);
+
+    expect(heat).toEqual(["mild", "hot"]);
+    expect(heat).not.toContain("extra-hot");
+  });
+
+  it("offers a strength as soon as one product carries it", () => {
+    const withExtraHot = [
+      ...catalogue,
+      product("fire", { prices: [400], heat: "extra-hot" }),
+    ];
+
+    expect(availableOptions(withExtraHot).heat.map((o) => o.value)).toContain(
+      "extra-hot",
+    );
+  });
+
+  it("keeps only the dietary claims actually printed on a label", () => {
+    expect(availableOptions(catalogue).dietary.map((o) => o.value)).toEqual([
+      "vegan",
+      "vegetarian",
+    ]);
+    expect(
+      availableOptions([catalogue[0]]).dietary.map((o) => o.value),
+    ).toEqual([]);
+  });
+
+  it("drops a price band no size falls into", () => {
+    const cheap = [product("small", { prices: [199] })];
+
+    expect(availableOptions(cheap).price.map((o) => o.value)).toEqual([
+      "under-5",
+    ]);
+  });
+
+  it("returns nothing at all for an empty catalogue", () => {
+    expect(availableOptions([])).toEqual({ heat: [], dietary: [], price: [] });
+  });
+});
 
 describe("parseFilters", () => {
   it("defaults to featured when nothing is set", () => {

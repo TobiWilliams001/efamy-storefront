@@ -9,7 +9,11 @@ import { PageHeader } from "@/components/layout/page-header";
 import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { getCategories, getProducts } from "@/lib/catalogue";
-import { applyFilters, parseFilters } from "@/lib/product-filters";
+import {
+  applyFilters,
+  availableOptions,
+  parseFilters,
+} from "@/lib/product-filters";
 import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
@@ -40,6 +44,7 @@ export default async function ShopPage({ searchParams }: PageProps<"/shop">) {
         <ShopFilters
           categories={categories}
           filters={filters}
+          options={availableOptions(products)}
           count={visible.length}
         />
 
