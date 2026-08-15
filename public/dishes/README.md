@@ -6,16 +6,21 @@ without an image here.
 
 Filenames must match the `image` paths in `src/lib/dishes.ts`.
 
-| Filename              | Dish            |
-| --------------------- | --------------- |
-| `spaghetti.jpg`       | Spaghetti       |
-| `kenkey-fish.jpg`     | Kenkey & Fish   |
-| `jollof-rice.jpg`     | Jollof Rice     |
-| `grilled-chicken.jpg` | Grilled Chicken |
-| `waakye.jpg`          | Waakye          |
-| `yam-plantain.jpg`    | Yam & Plantain  |
-| `kelewele.jpg`        | Kelewele        |
-| `rice-stew.jpg`       | Rice & Stew     |
+| Filename             | Dish          | Have it            |
+| -------------------- | ------------- | ------------------ |
+| `spaghetti.jpg`      | Spaghetti     | yes                |
+| `fried-chicken.jpg`  | Fried Chicken | yes, Efamy's own   |
+| `kelewele.jpg`       | Kelewele      | yes                |
+| `rice-stew.jpg`      | Rice & Stew   | yes                |
+| `kenkey-fish.jpg`    | Kenkey & Fish | no, renders a swatch |
+| `jollof-rice.jpg`    | Jollof Rice   | no, renders a swatch |
+| `waakye.jpg`         | Waakye        | no, renders a swatch |
+| `yam-plantain.jpg`   | Yam & Plantain | no, renders a swatch |
+
+A tile is named after the photograph, never the other way round. The row used to
+carry a "Grilled Chicken" tile with no photograph behind it; it is now Fried
+Chicken, because a photograph of Efamy's own fried chicken is what exists. Do
+not point a tile at a photograph of a different dish to fill the gap.
 
 ## Before adding
 

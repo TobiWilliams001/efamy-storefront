@@ -11,7 +11,10 @@ export type Recipe = {
   cookMinutes: number;
   ingredients: string[];
   method: string[];
-  /** Square photo in public/recipes. Falls back to a warm swatch. */
+  /**
+   * Square photo of the finished dish. Falls back to a warm swatch. Shares the
+   * file with the meal row where the same dish appears in both.
+   */
   image?: string;
 };
 
@@ -154,6 +157,7 @@ export const recipes: Recipe[] = [
     title: "Coat & Cook Chicken",
     summary: "A crisp coating with nothing more than a bowl and a pan.",
     productSlug: "coat-and-cook",
+    image: "/dishes/fried-chicken.jpg",
     serves: 4,
     prepMinutes: 10,
     cookMinutes: 20,

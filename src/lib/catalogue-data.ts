@@ -490,6 +490,14 @@ export const products: Product[] = [
       width: 900,
       height: 900,
     },
+    images: [
+      {
+        url: "/dishes/fried-chicken.jpg",
+        alt: "Chicken drumsticks and thighs fried in a Coat & Cook crust, draining on kitchen paper",
+        width: 866,
+        height: 866,
+      },
+    ],
     storage: "Store in a cool, dry place. Keep the container sealed after use.",
     servingSuggestions: ["Chicken", "Fish", "Meat", "Vegetables"],
     category: category.seasonings,
