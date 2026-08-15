@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Flame, Leaf, Utensils } from "lucide-react";
 
@@ -36,6 +37,34 @@ const milestones = [
     title: "Kelewele Seasoning",
     description:
       "In December we made our first Kelewele Seasoning: spices, negro pepper, chilli powder and crushed chilli peppers for spiced fried plantain.",
+  },
+];
+
+/*
+ * Efamy's own photographs of their own kitchen. Captions describe only what is
+ * in the frame — the photographs are here to be evidence, and a caption that
+ * claims more than the picture shows undoes the point of using them.
+ */
+const kitchen = [
+  {
+    src: "/photos/cooking-pots.jpg",
+    alt: "Four large stockpots on gas burners along a tiled kitchen wall, fed by a propane cylinder",
+    caption: "Batches are cooked in pots, on gas.",
+  },
+  {
+    src: "/photos/filling-jars.jpg",
+    alt: "A filling machine holding chilli sauce above a row of empty glass jars",
+    caption: "Filled by machine, a jar at a time.",
+  },
+  {
+    src: "/photos/finished-trays.jpg",
+    alt: "Stacked trays of finished Efamy jars, sorted into colours by flavour",
+    caption: "Trayed up by flavour once they are filled.",
+  },
+  {
+    src: "/photos/stockroom.jpg",
+    alt: "Stockroom shelves holding the Efamy range: chilli oils, sauces and seasonings",
+    caption: "The stockroom in Corby.",
   },
 ];
 
@@ -110,6 +139,36 @@ export default async function AboutPage() {
           Everything is still made to those recipes. We keep looking for ways to
           make them better, and none of them involve making them cheaper.
         </p>
+      </Section>
+
+      <Section surface="muted">
+        <SectionHeader
+          align="center"
+          eyebrow="In Corby"
+          title="Where it is made"
+          description="Our own kitchen, photographed on an ordinary working day."
+        />
+
+        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          {kitchen.map((shot) => (
+            <li key={shot.src}>
+              <figure>
+                <div className="relative aspect-4/3 overflow-hidden rounded-lg shadow-card">
+                  <Image
+                    src={shot.src}
+                    alt={shot.alt}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="mt-3 text-sm text-pretty text-muted-foreground">
+                  {shot.caption}
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
       </Section>
 
       <Section surface="muted">

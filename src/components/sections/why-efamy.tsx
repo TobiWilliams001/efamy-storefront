@@ -32,12 +32,13 @@ const reasons = [
 ];
 
 /*
- * A stand-in from the existing photography. The brief for the shot that belongs
- * here is in docs/photography-brief.md; swap the src when it arrives.
+ * Efamy's own kitchen rather than a styled shot: the sauce itself, in volume,
+ * going into the jars it is sold in. The claims beside it are about how the
+ * food is made, so the photograph should be of it being made.
  */
 const feature = {
-  src: "/dishes/rice-stew.jpg",
-  alt: "A bowl of rice and stew made with Efamy chilli sauce",
+  src: "/photos/filling-jars.jpg",
+  alt: "Chilli sauce in the hopper of a filling machine, with empty jars waiting alongside",
 };
 
 export function WhyEfamy() {

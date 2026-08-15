@@ -51,3 +51,4 @@ unlicensed-assets/
 # etc. once identified; the originals should not ship in every deploy.
 /public/ChatGPT Image*
 /public/WhatsApp Image*
+/public/photos-src/
