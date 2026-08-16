@@ -15,7 +15,7 @@ export type Dish = {
  */
 export const dishes: Dish[] = [
   { name: "Spaghetti", image: "/dishes/spaghetti.jpg" },
-  { name: "Kenkey & Fish" },
+  { name: "Kenkey & Fish", image: "/dishes/kenkey-fish.jpg" },
   { name: "Jollof Rice", image: "/dishes/jollof-rice.jpg" },
   { name: "Fried Chicken", image: "/dishes/fried-chicken.jpg" },
   { name: "Waakye", image: "/dishes/waakye.jpg" },
