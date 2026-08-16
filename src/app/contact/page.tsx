@@ -38,30 +38,32 @@ export default function ContactPage() {
          * a band above the content on narrow ones, so it never squeezes the
          * form into a column too tight to type in.
          */}
-        <div className="relative h-56 sm:h-72 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[38%]">
+        <div className="relative h-44 sm:h-56 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[30%]">
           <Image
             src="/dishes/jollof-rice.jpg"
             alt="A plate of jollof rice cooked with Efamy chilli sauce"
             fill
-            sizes="(min-width: 1024px) 38vw, 100vw"
+            sizes="(min-width: 1024px) 30vw, 100vw"
             className="object-cover"
           />
           {/*
            * Two layers, because the seam and the tint are different jobs.
+           * Fading the seam itself to burgundy drew the hard edge it was meant
+           * to remove: the home page can fade to maroon only because the panel
+           * beside it is maroon, and this one meets white page.
            *
-           * The photograph meets white page on the side nearest the form and
-           * runs off the screen on the other, so it feathers to the page colour
-           * at both ends. Fading to burgundy instead drew the hard edge it was
-           * meant to remove: the home page can fade to maroon only because the
-           * panel beside it is maroon.
+           * Burgundy enters from the outer edge, the one running off screen.
            */}
           <span
             aria-hidden="true"
-            className="absolute inset-0 z-10 bg-brand/15"
+            className="absolute inset-0 z-10 bg-linear-to-b from-brand/60 via-transparent to-transparent lg:bg-linear-to-l"
           />
+          {/* And the seam fades to page white: the bottom edge when the
+              photograph sits above the form, the left edge when it sits beside
+              it. One colour, direction flipped. */}
           <span
             aria-hidden="true"
-            className="absolute inset-0 z-10 bg-linear-to-b from-background via-transparent to-background lg:bg-linear-to-r"
+            className="absolute inset-0 z-10 bg-linear-to-t from-background via-transparent to-transparent lg:bg-linear-to-r"
           />
         </div>
 
