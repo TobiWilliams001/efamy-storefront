@@ -11,9 +11,14 @@ const sectionSpacing = {
   afterHeader: "pt-8 pb-18 sm:pt-10 sm:pb-24 lg:pt-12 lg:pb-30",
 } as const;
 
+/*
+ * White is the page. The alternating band is the lightest warm tone in the
+ * scale rather than the one above it, so a section reads as separated without
+ * the page turning cream — the bands still give cards something to sit on.
+ */
 const sectionSurfaces = {
   default: "bg-background",
-  muted: "bg-neutral-100",
+  muted: "bg-neutral-50",
   clay: "bg-clay/40",
 } as const;
 

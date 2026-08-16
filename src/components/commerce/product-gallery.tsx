@@ -21,7 +21,7 @@ export function ProductGallery({
 
   return (
     <div>
-      <div className="relative aspect-square overflow-hidden rounded-lg bg-linear-to-b from-white to-neutral-100 shadow-card">
+      <div className="relative aspect-square overflow-hidden rounded-lg bg-linear-to-b from-white to-neutral-50 shadow-card">
         <Image
           key={current.url}
           src={current.url}
@@ -42,7 +42,7 @@ export function ProductGallery({
                 onClick={() => setActive(index)}
                 aria-current={index === active}
                 className={cn(
-                  "relative size-20 overflow-hidden rounded-md bg-linear-to-b from-white to-neutral-100 ring-1 transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+                  "relative size-20 overflow-hidden rounded-md bg-linear-to-b from-white to-neutral-50 ring-1 transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
                   index === active
                     ? "ring-foreground"
                     : "ring-neutral-200 hover:ring-neutral-400",
