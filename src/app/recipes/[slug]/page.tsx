@@ -75,7 +75,7 @@ export default async function RecipePage({
       <Section>
         <div className="grid gap-12 lg:grid-cols-[1fr_20rem] lg:gap-16">
           <div className="max-w-2xl">
-            <div className="relative aspect-video overflow-hidden rounded-lg bg-neutral-100">
+            <div className="relative aspect-video overflow-hidden rounded-lg bg-neutral-50">
               {recipe.image ? (
                 <Image
                   src={recipe.image}

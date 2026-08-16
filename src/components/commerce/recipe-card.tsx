@@ -24,7 +24,7 @@ export function RecipeCard({
         className,
       )}
     >
-      <div className="relative aspect-4/3 overflow-hidden bg-neutral-100">
+      <div className="relative aspect-4/3 overflow-hidden bg-neutral-50">
         {recipe.image ? (
           <Image
             src={recipe.image}

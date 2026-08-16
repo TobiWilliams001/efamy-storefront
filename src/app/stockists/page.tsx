@@ -143,22 +143,6 @@ export default function StockistsPage() {
         </div>
       </Section>
 
-      {/* Centred and capped well under the container: the file is 1400x306 and
-          a full-width letterbox reads as a stripe rather than a photograph. */}
-      <Section spacing="sm">
-        <div className="mx-auto max-w-2xl">
-          <div className="relative aspect-1400/306 overflow-hidden rounded-lg shadow-card">
-            <Image
-              src="/photos/jars-lined-up.jpg"
-              alt="Rows of Efamy chilli sauce jars on a shelf, sorted by flavour"
-              fill
-              sizes="(min-width: 768px) 672px, 100vw"
-              className="object-cover"
-            />
-          </div>
-        </div>
-      </Section>
-
       <Section>
         <SectionHeader
           eyebrow="Wholesale"
