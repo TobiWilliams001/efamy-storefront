@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { Flame, Leaf, Utensils } from "lucide-react";
 
-import { CategoryCard } from "@/components/commerce/category-card";
 import { Hero } from "@/components/sections/hero";
 import { Rule } from "@/components/layout/rule";
 import { Section, SectionHeader } from "@/components/layout/section";
 import { CallToAction } from "@/components/sections/call-to-action";
 import { WhyEfamy } from "@/components/sections/why-efamy";
-import { Button } from "@/components/ui/button";
-import { getCategories } from "@/lib/catalogue";
 import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
@@ -93,9 +89,7 @@ const strengths = [
   },
 ];
 
-export default async function AboutPage() {
-  const categories = await getCategories();
-
+export default function AboutPage() {
   return (
     <>
       <Hero
@@ -259,29 +253,6 @@ export default async function AboutPage() {
             </li>
           ))}
         </ul>
-      </Section>
-
-      <Section>
-        <SectionHeader
-          align="center"
-          eyebrow="The range"
-          title="Two ways to cook with Efamy"
-        />
-        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8">
-          {categories.map((category) => (
-            <li key={category.id} className="flex">
-              <CategoryCard category={category} className="aspect-4/3 w-full" />
-            </li>
-          ))}
-        </ul>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <Button asChild size="xl" variant="accent">
-            <Link href={routes.shop}>Shop the range</Link>
-          </Button>
-          <Button asChild size="xl" variant="outline">
-            <Link href={routes.stockists}>Stockists &amp; wholesale</Link>
-          </Button>
-        </div>
       </Section>
 
       <WhyEfamy />
