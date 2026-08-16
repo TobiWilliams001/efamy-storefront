@@ -143,15 +143,16 @@ export default function StockistsPage() {
         </div>
       </Section>
 
-      {/* Efamy's own photograph, run full bleed because it is a letterbox crop
-          of a shelf and cropping it further would lose the row. */}
-      <Section spacing="sm" bleed>
-        <div className="relative aspect-1400/306 w-full">
+      {/* Held to the container rather than run full bleed: the file is 1400px
+          wide, so a viewport-width banner would upscale it on any large
+          display. Native 1400x306, so the ratio crops nothing. */}
+      <Section spacing="sm">
+        <div className="relative aspect-1400/306 overflow-hidden rounded-lg shadow-card">
           <Image
             src="/photos/jars-lined-up.jpg"
             alt="Rows of Efamy chilli sauce jars on a shelf, sorted by flavour"
             fill
-            sizes="100vw"
+            sizes="(min-width: 1280px) 1100px, 100vw"
             className="object-cover"
           />
         </div>
@@ -169,31 +170,35 @@ export default function StockistsPage() {
           }
         />
 
-        <div className="relative mb-10 aspect-16/7 overflow-hidden rounded-lg shadow-card">
-          <Image
-            src="/photos/bottling-chilli-oil.jpg"
-            alt="Bottles of Efamy chilli oil on a worktop, filled and capped"
-            fill
-            sizes="(min-width: 1024px) 1100px, 100vw"
-            className="object-cover"
-          />
-        </div>
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
+          {/* Native 16:9, kept at half the row on desktop so it renders well
+              inside the 1400px the file actually has. */}
+          <div className="relative aspect-video overflow-hidden rounded-lg shadow-card">
+            <Image
+              src="/photos/bottling-chilli-oil.jpg"
+              alt="Bottles of Efamy chilli oil on a worktop, filled and capped"
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
+          </div>
 
-        <ul className="grid gap-8 sm:grid-cols-3">
-          {wholesalePoints.map(({ icon: Icon, title, description }) => (
-            <li key={title}>
-              <Icon
-                aria-hidden="true"
-                className="size-5 text-gold-ink"
-                strokeWidth={1.75}
-              />
-              <h3 className="mt-4 font-heading text-lg">{title}</h3>
-              <p className="mt-2 text-sm text-pretty text-muted-foreground">
-                {description}
-              </p>
-            </li>
-          ))}
-        </ul>
+          <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
+            {wholesalePoints.map(({ icon: Icon, title, description }) => (
+              <li key={title}>
+                <Icon
+                  aria-hidden="true"
+                  className="size-5 text-gold-ink"
+                  strokeWidth={1.75}
+                />
+                <h3 className="mt-4 font-heading text-lg">{title}</h3>
+                <p className="mt-2 text-sm text-pretty text-muted-foreground">
+                  {description}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Section>
     </>
   );
