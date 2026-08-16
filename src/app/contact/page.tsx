@@ -46,11 +46,12 @@ export default function ContactPage() {
             sizes="(min-width: 1024px) 38vw, 100vw"
             className="object-cover"
           />
-          {/* Feathers the seam in brand burgundy rather than page white, so the
-              photograph reads as part of the brand rather than cut out of it. */}
+          {/* Same three stop fade as the home page statement: a straight
+              from/to leaves a visible band where the tint stops, via-transparent
+              does not. */}
           <span
             aria-hidden="true"
-            className="absolute inset-0 bg-linear-to-b from-brand/70 to-transparent lg:bg-linear-to-r"
+            className="absolute inset-0 z-10 bg-linear-to-b from-brand via-transparent to-transparent lg:bg-linear-to-r"
           />
         </div>
 
