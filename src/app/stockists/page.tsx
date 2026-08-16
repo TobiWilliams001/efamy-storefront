@@ -143,22 +143,23 @@ export default function StockistsPage() {
         </div>
       </Section>
 
-      {/* Held to the container rather than run full bleed: the file is 1400px
-          wide, so a viewport-width banner would upscale it on any large
-          display. Native 1400x306, so the ratio crops nothing. */}
+      {/* Centred and capped well under the container: the file is 1400x306 and
+          a full-width letterbox reads as a stripe rather than a photograph. */}
       <Section spacing="sm">
-        <div className="relative aspect-1400/306 overflow-hidden rounded-lg shadow-card">
-          <Image
-            src="/photos/jars-lined-up.jpg"
-            alt="Rows of Efamy chilli sauce jars on a shelf, sorted by flavour"
-            fill
-            sizes="(min-width: 1280px) 1100px, 100vw"
-            className="object-cover"
-          />
+        <div className="mx-auto max-w-2xl">
+          <div className="relative aspect-1400/306 overflow-hidden rounded-lg shadow-card">
+            <Image
+              src="/photos/jars-lined-up.jpg"
+              alt="Rows of Efamy chilli sauce jars on a shelf, sorted by flavour"
+              fill
+              sizes="(min-width: 768px) 672px, 100vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </Section>
 
-      <Section surface="muted">
+      <Section>
         <SectionHeader
           eyebrow="Wholesale"
           title="Stock Efamy in your shop"
@@ -171,9 +172,9 @@ export default function StockistsPage() {
         />
 
         <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
-          {/* Native 16:9, kept at half the row on desktop so it renders well
-              inside the 1400px the file actually has. */}
-          <div className="relative aspect-video overflow-hidden rounded-lg shadow-card">
+          {/* Photograph second in the source so it reads after the points on a
+              phone, and ordered right on desktop. */}
+          <div className="relative aspect-video overflow-hidden rounded-lg shadow-card lg:order-2">
             <Image
               src="/photos/bottling-chilli-oil.jpg"
               alt="Bottles of Efamy chilli oil on a worktop, filled and capped"
@@ -183,7 +184,7 @@ export default function StockistsPage() {
             />
           </div>
 
-          <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
+          <ul className="grid gap-8 sm:grid-cols-2 lg:order-1 lg:grid-cols-1">
             {wholesalePoints.map(({ icon: Icon, title, description }) => (
               <li key={title}>
                 <Icon

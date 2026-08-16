@@ -173,7 +173,7 @@ export default async function RecipePage({
       </Section>
 
       {others.length ? (
-        <Section surface="muted">
+        <Section>
           <h2 className="mb-8 font-heading text-2xl sm:text-3xl">
             More to cook
           </h2>
