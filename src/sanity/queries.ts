@@ -87,14 +87,3 @@ export const CATEGORIES_QUERY = defineQuery(
     "productCount": count(*[_type == "product" && references(^._id)])
   }`,
 );
-
-export const CATEGORY_BY_SLUG_QUERY = defineQuery(
-  `*[_type == "productCategory" && slug.current == $slug][0]{
-    "id": _id,
-    name,
-    "slug": slug.current,
-    description,
-    image{${IMAGE_FIELDS}},
-    "productCount": count(*[_type == "product" && references(^._id)])
-  }`,
-);

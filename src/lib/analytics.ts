@@ -24,14 +24,6 @@ export function track(event: string, params?: GtagParams) {
   }
 }
 
-export type TrackedItem = {
-  item_id: string;
-  item_name: string;
-  item_variant?: string;
-  price: number;
-  quantity?: number;
-};
-
 /** GA4 expects major units, and the catalogue stores pence. */
 export function toMajorUnits(pence: number): number {
   return Number((pence / 100).toFixed(2));

@@ -26,10 +26,6 @@ export type Testimonial = {
  */
 export const testimonials: Testimonial[] = [];
 
-export function testimonialsFor(productSlug: string): Testimonial[] {
-  return testimonials.filter((entry) => entry.productSlug === productSlug);
-}
-
 /**
  * Placeholder quotes, shown only while `testimonials` is empty and always
  * rendered with a visible "Example" tag.

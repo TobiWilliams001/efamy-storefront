@@ -11,7 +11,6 @@ import { mapRecipe } from "@/sanity/map-recipe";
 import {
   BEST_SELLERS_QUERY,
   CATEGORIES_QUERY,
-  CATEGORY_BY_SLUG_QUERY,
   FEATURED_PRODUCTS_QUERY,
   PRODUCT_BY_SLUG_QUERY,
   PRODUCTS_QUERY,
@@ -142,21 +141,6 @@ export async function getProductBySlug(
   return (
     mapped ??
     staticProducts.find((product) => product.slug === slug) ??
-    undefined
-  );
-}
-
-export async function getCategoryBySlug(
-  slug: string,
-): Promise<ProductCategory | undefined> {
-  const raw = await fetchFromSanity<Record<string, unknown> | null>(
-    CATEGORY_BY_SLUG_QUERY,
-    { slug },
-  );
-  const mapped = raw ? mapCategory(raw) : null;
-  return (
-    mapped ??
-    staticCategories.find((category) => category.slug === slug) ??
     undefined
   );
 }
