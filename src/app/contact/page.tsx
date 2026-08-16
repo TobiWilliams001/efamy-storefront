@@ -46,12 +46,22 @@ export default function ContactPage() {
             sizes="(min-width: 1024px) 38vw, 100vw"
             className="object-cover"
           />
-          {/* Same three stop fade as the home page statement: a straight
-              from/to leaves a visible band where the tint stops, via-transparent
-              does not. */}
+          {/*
+           * Two layers, because the seam and the tint are different jobs.
+           *
+           * The photograph meets white page on the side nearest the form and
+           * runs off the screen on the other, so it feathers to the page colour
+           * at both ends. Fading to burgundy instead drew the hard edge it was
+           * meant to remove: the home page can fade to maroon only because the
+           * panel beside it is maroon.
+           */}
           <span
             aria-hidden="true"
-            className="absolute inset-0 z-10 bg-linear-to-b from-brand via-transparent to-transparent lg:bg-linear-to-r"
+            className="absolute inset-0 z-10 bg-brand/15"
+          />
+          <span
+            aria-hidden="true"
+            className="absolute inset-0 z-10 bg-linear-to-b from-background via-transparent to-background lg:bg-linear-to-r"
           />
         </div>
 
