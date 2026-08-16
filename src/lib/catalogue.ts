@@ -93,7 +93,9 @@ async function curatedRow(
   slugs: readonly string[],
   limit: number,
 ): Promise<Product[]> {
-  const raw = await fetchFromSanity<Record<string, unknown>[]>(query, { limit });
+  const raw = await fetchFromSanity<Record<string, unknown>[]>(query, {
+    limit,
+  });
   const flagged = mapProducts(raw);
   if (flagged.length >= limit) return flagged.slice(0, limit);
 
