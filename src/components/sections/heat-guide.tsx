@@ -2,8 +2,7 @@ import Link from "next/link";
 
 import { Section, SectionHeader } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
-import { buildQuery } from "@/lib/product-filters";
-import { routes } from "@/lib/routes";
+import { shopHref } from "@/lib/product-filters";
 
 const levels = [
   {
@@ -45,9 +44,7 @@ export function HeatGuide() {
               Available in {level.examples}.
             </p>
             <Button asChild variant="outline" size="lg" className="mt-6 w-fit">
-              <Link
-                href={`${routes.shop}${buildQuery({}, { heat: level.heat })}`}
-              >
+              <Link href={shopHref({}, { heat: level.heat })}>
                 Shop {level.title.toLowerCase()}
               </Link>
             </Button>

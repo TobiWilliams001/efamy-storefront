@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   applyFilters,
   availableOptions,
-  buildQuery,
+  shopHref,
   parseFilters,
 } from "@/lib/product-filters";
 import type { Heat, Product } from "@/types/product";
@@ -175,24 +175,43 @@ describe("applyFilters", () => {
   });
 });
 
-describe("buildQuery", () => {
+describe("shopHref", () => {
   it("omits the default sort so clean URLs stay clean", () => {
-    expect(buildQuery({ sort: "featured" }, {})).toBe("");
+    expect(shopHref({ sort: "featured" }, {})).toBe("/shop");
   });
 
   it("keeps other filters when one changes", () => {
     expect(
-      buildQuery({ category: "seasonings", sort: "featured" }, { heat: "hot" }),
-    ).toBe("?category=seasonings&heat=hot");
+      shopHref({ category: "seasonings", sort: "featured" }, { heat: "hot" }),
+    ).toBe("/shop?category=seasonings&heat=hot");
   });
 
-  it("clears a filter when overridden with undefined", () => {
+  /*
+   * The bug this guards: returning "" for "no filters left" produced an empty
+   * href, which a browser resolves to the current URL, query string included.
+   * Clearing the last filter navigated back to the filtered page, so the
+   * customer could never get out of a category once they were in one.
+   */
+  it("returns the bare shop path when the last filter is cleared", () => {
     expect(
-      buildQuery(
+      shopHref(
         { category: "seasonings", sort: "featured" },
         { category: undefined },
       ),
-    ).toBe("");
+    ).toBe("/shop");
+  });
+
+  it("never returns a bare query string for any single filter", () => {
+    const cleared = [
+      shopHref({ heat: "mild", sort: "featured" }, { heat: undefined }),
+      shopHref({ price: "5-10", sort: "featured" }, { price: undefined }),
+      shopHref({ dietary: "vegan", sort: "featured" }, { dietary: undefined }),
+    ];
+
+    for (const href of cleared) {
+      expect(href).toBe("/shop");
+      expect(href.startsWith("?")).toBe(false);
+    }
   });
 });
 
@@ -239,8 +258,8 @@ describe("price bands", () => {
   });
 
   it("keeps the band in the query string", () => {
-    expect(buildQuery({ sort: "featured" }, { price: "5-10" })).toBe(
-      "?price=5-10",
+    expect(shopHref({ sort: "featured" }, { price: "5-10" })).toBe(
+      "/shop?price=5-10",
     );
   });
 });

@@ -1,3 +1,4 @@
+import { routes } from "@/lib/routes";
 import {
   inStock,
   isHeat,
@@ -179,7 +180,16 @@ export function applyFilters(
   }
 }
 
-export function buildQuery(
+/**
+ * A complete link to the shop with these filters applied.
+ *
+ * Returns a path, never a bare query string. `?a=b` and `""` are *relative*
+ * references: the empty one resolves to the current URL, query included, so a
+ * "clear this filter" link built that way navigates straight back to the page
+ * you are already on. That is how clearing the last remaining filter silently
+ * did nothing.
+ */
+export function shopHref(
   filters: Partial<ProductFilters>,
   overrides: Partial<ProductFilters>,
 ): string {
@@ -193,5 +203,5 @@ export function buildQuery(
   if (next.sort && next.sort !== "featured") params.set("sort", next.sort);
 
   const query = params.toString();
-  return query ? `?${query}` : "";
+  return query ? `${routes.shop}?${query}` : routes.shop;
 }

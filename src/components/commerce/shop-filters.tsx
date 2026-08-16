@@ -3,7 +3,7 @@ import { SlidersHorizontal } from "lucide-react";
 
 import { SortSelect } from "@/components/commerce/sort-select";
 import {
-  buildQuery,
+  shopHref,
   type AvailableOptions,
   type ProductFilters,
 } from "@/lib/product-filters";
@@ -61,7 +61,7 @@ export function ShopFilters({
       {showCategories ? (
         <div className="flex flex-wrap gap-3">
           <FilterChip
-            href={buildQuery(filters, { category: undefined })}
+            href={shopHref(filters, { category: undefined })}
             active={!filters.category}
           >
             All products
@@ -69,7 +69,7 @@ export function ShopFilters({
           {categories.map((category) => (
             <FilterChip
               key={category.slug}
-              href={buildQuery(filters, { category: category.slug })}
+              href={shopHref(filters, { category: category.slug })}
               active={filters.category === category.slug}
             >
               {category.name}
@@ -178,7 +178,7 @@ function PriceFilters({
     >
       <FilterChip
         size="sm"
-        href={buildQuery(filters, { price: undefined })}
+        href={shopHref(filters, { price: undefined })}
         active={!filters.price}
       >
         All prices
@@ -187,7 +187,7 @@ function PriceFilters({
         <FilterChip
           key={option.value}
           size="sm"
-          href={buildQuery(filters, { price: option.value })}
+          href={shopHref(filters, { price: option.value })}
           active={filters.price === option.value}
         >
           {option.label}
@@ -214,7 +214,7 @@ function HeatFilters({
     >
       <FilterChip
         size="sm"
-        href={buildQuery(filters, { heat: undefined })}
+        href={shopHref(filters, { heat: undefined })}
         active={!filters.heat}
       >
         All heats
@@ -223,7 +223,7 @@ function HeatFilters({
         <FilterChip
           key={option.value}
           size="sm"
-          href={buildQuery(filters, { heat: option.value })}
+          href={shopHref(filters, { heat: option.value })}
           active={filters.heat === option.value}
         >
           {option.label}
@@ -250,7 +250,7 @@ function DietFilters({
     >
       <FilterChip
         size="sm"
-        href={buildQuery(filters, { dietary: undefined })}
+        href={shopHref(filters, { dietary: undefined })}
         active={!filters.dietary}
       >
         All diets
@@ -259,7 +259,7 @@ function DietFilters({
         <FilterChip
           key={option.value}
           size="sm"
-          href={buildQuery(filters, { dietary: option.value })}
+          href={shopHref(filters, { dietary: option.value })}
           active={filters.dietary === option.value}
         >
           {option.label}
