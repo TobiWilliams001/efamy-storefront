@@ -1,6 +1,7 @@
 // Pushes the static catalogue into Sanity: images, categories, then products.
 //
-//   SANITY_API_WRITE_TOKEN=xxx node --experimental-strip-types scripts/seed-sanity.mjs
+//   pnpm seed          (reads SANITY_API_WRITE_TOKEN from .env.local)
+//   pnpm seed --dry    (prints what it would write, no token needed)
 //
 // Safe to run more than once. Documents are matched on slug, so a second run
 // updates what is already there rather than creating duplicates. Pass --dry to
@@ -17,8 +18,8 @@ const dry = process.argv.includes("--dry");
 if (!token && !dry) {
   console.error(
     "Missing SANITY_API_WRITE_TOKEN.\n" +
-      "Create one at https://sanity.io/manage with Editor permissions, then:\n" +
-      "  SANITY_API_WRITE_TOKEN=xxx node --experimental-strip-types scripts/seed-sanity.mjs",
+      "Create one at https://sanity.io/manage with Editor permissions, add it to\n" +
+      ".env.local, which is gitignored, and run: pnpm seed",
   );
   process.exit(1);
 }

@@ -11,7 +11,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "seed": "node --env-file=.env.local --experimental-strip-types scripts/seed-sanity.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",
