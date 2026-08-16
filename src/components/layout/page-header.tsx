@@ -25,11 +25,7 @@ export function PageHeader({
 
   return (
     <section
-      className={cn(
-        onInk
-          ? "bg-ink text-ink-foreground"
-          : "bg-linear-to-b from-clay/15 to-background",
-      )}
+      className={cn(onInk ? "bg-ink text-ink-foreground" : "bg-background")}
     >
       <Container className="pt-12 pb-9 sm:pt-16 sm:pb-11 lg:pt-20 lg:pb-12">
         <div
