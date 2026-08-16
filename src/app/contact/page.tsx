@@ -39,10 +39,9 @@ export default function ContactPage() {
          * form into a column too tight to type in.
          */}
         <div className="relative h-56 sm:h-72 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[38%]">
-          {/* Stand-in; see docs/photography-brief.md for the shot intended here. */}
           <Image
-            src="/products/hero/hero-hot-sauce-trio.jpg"
-            alt="Efamy pork, beef and chicken chilli sauces on a wooden board with fresh chillies and garlic"
+            src="/dishes/jollof-rice.jpg"
+            alt="A plate of jollof rice cooked with Efamy chilli sauce"
             fill
             sizes="(min-width: 1024px) 38vw, 100vw"
             className="object-cover"
