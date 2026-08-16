@@ -95,8 +95,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             __html: serialiseJsonLd(organisationSchema()),
           }}
         />
-        <CookieConsent />
-        <Analytics id={process.env.NEXT_PUBLIC_GA_ID} />
+        {process.env.NEXT_PUBLIC_GA_ID ? (
+          <>
+            <CookieConsent />
+            <Analytics id={process.env.NEXT_PUBLIC_GA_ID} />
+          </>
+        ) : null}
       </body>
     </html>
   );
