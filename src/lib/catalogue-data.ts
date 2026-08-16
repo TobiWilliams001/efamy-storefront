@@ -42,14 +42,20 @@ function sauceSizes(
   ];
 }
 
-/** A jar photographed for one strength, where mild and hot look different. */
-function jar(
-  file: string,
-  alt: string,
-  width = 700,
-  height = 900,
-): ProductImage {
-  return { url: `/products/cutout/${file}.png`, alt, width, height };
+/**
+ * A jar photographed for one strength, where mild and hot look different.
+ *
+ * Cutouts are square: each is framed so the jar fills the same share of the
+ * canvas, which is what makes the jars render at a matching size in the
+ * object-contain card frame. `side` is the canvas, not the jar.
+ */
+function jar(file: string, alt: string, side: number): ProductImage {
+  return {
+    url: `/products/cutout/${file}.png`,
+    alt,
+    width: side,
+    height: side,
+  };
 }
 
 const BEANS = (heat: Heat, image?: ProductImage) =>
@@ -71,8 +77,8 @@ export const categories: ProductCategory[] = [
     image: {
       url: "/products/cutout/chicken-chilli-sauce-hot.png",
       alt: "Jar of Efamy chicken chilli sauce, hot",
-      width: 631,
-      height: 900,
+      width: 906,
+      height: 906,
     },
     productCount: 7,
   },
@@ -85,8 +91,8 @@ export const categories: ProductCategory[] = [
     image: {
       url: "/products/cutout/all-purpose-seasoning-mix.png",
       alt: "Jar of Efamy all purpose seasoning mix",
-      width: 1086,
-      height: 1448,
+      width: 1093,
+      height: 1093,
     },
     productCount: 3,
   },
@@ -99,8 +105,8 @@ export const categories: ProductCategory[] = [
     image: {
       url: "/products/oils/beef-chilli-oil.png",
       alt: "Bottle of Efamy beef flavoured chilli oil",
-      width: 1086,
-      height: 1448,
+      width: 1403,
+      height: 1403,
     },
     productCount: 7,
   },
@@ -126,8 +132,8 @@ export const products: Product[] = [
     image: {
       url: "/products/cutout/beans-chilli-sauce-mild.png",
       alt: "Jar of Efamy beans chilli sauce with a dark green label",
-      width: 720,
-      height: 900,
+      width: 817,
+      height: 817,
     },
     storage: STORAGE_SAUCE,
     servingSuggestions: ["Rice and stew", "Jollof", "Grilled vegetables"],
@@ -143,7 +149,7 @@ export const products: Product[] = [
         jar(
           "beef-chilli-sauce-mild",
           "Jar of Efamy beef chilli sauce, mild",
-          675,
+          783,
         ),
       ),
       ...MEAT(
@@ -151,7 +157,7 @@ export const products: Product[] = [
         jar(
           "beef-chilli-sauce-hot",
           "Jar of Efamy beef chilli sauce, hot",
-          675,
+          703,
         ),
       ),
     ],
@@ -162,8 +168,8 @@ export const products: Product[] = [
     image: {
       url: "/products/cutout/beef-chilli-sauce-hot.png",
       alt: "Jar of Efamy beef chilli sauce with a burgundy label",
-      width: 700,
-      height: 900,
+      width: 703,
+      height: 703,
     },
     storage: STORAGE_SAUCE,
     servingSuggestions: ["Rice and stew", "Jollof", "Chips"],
@@ -181,8 +187,8 @@ export const products: Product[] = [
     image: {
       url: "/products/cutout/chicken-chilli-sauce-hot.png",
       alt: "Jar of Efamy chicken chilli sauce with an orange label",
-      width: 700,
-      height: 900,
+      width: 906,
+      height: 906,
     },
     storage: STORAGE_SAUCE,
     servingSuggestions: ["Rice", "Fried plantain", "Yam"],
@@ -198,7 +204,7 @@ export const products: Product[] = [
         jar(
           "fish-chilli-sauce-mild",
           "Jar of Efamy fish chilli sauce, mild",
-          675,
+          768,
         ),
       ),
       ...MEAT(
@@ -206,7 +212,7 @@ export const products: Product[] = [
         jar(
           "fish-chilli-sauce-hot",
           "Jar of Efamy fish chilli sauce, hot",
-          675,
+          686,
         ),
       ),
     ],
@@ -218,8 +224,8 @@ export const products: Product[] = [
     image: {
       url: "/products/cutout/fish-chilli-sauce-hot.png",
       alt: "Jar of Efamy fish chilli sauce with a green label",
-      width: 700,
-      height: 900,
+      width: 686,
+      height: 686,
     },
     storage: STORAGE_SAUCE,
     servingSuggestions: ["Kenkey", "Waakye", "Rice"],
@@ -246,8 +252,8 @@ export const products: Product[] = [
     image: {
       url: "/products/cutout/pork-chilli-sauce-hot.png",
       alt: "Jar of Efamy pork chilli sauce with a pink label",
-      width: 793,
-      height: 900,
+      width: 920,
+      height: 920,
     },
     storage: STORAGE_SAUCE,
     servingSuggestions: ["Rice", "Fried plantain", "Grilled pork"],
@@ -265,8 +271,8 @@ export const products: Product[] = [
     image: {
       url: "/products/cutout/goat-chilli-sauce.png",
       alt: "Jar of Efamy goat chilli sauce",
-      width: 1254,
-      height: 1254,
+      width: 1068,
+      height: 1068,
     },
     storage: STORAGE_SAUCE,
     servingSuggestions: ["Rice", "Yam", "Kenkey"],
@@ -284,8 +290,8 @@ export const products: Product[] = [
     image: {
       url: "/products/cutout/turkey-chilli-sauce.png",
       alt: "Jar of Efamy turkey chilli sauce",
-      width: 1254,
-      height: 1254,
+      width: 1000,
+      height: 1000,
     },
     storage: STORAGE_SAUCE,
     servingSuggestions: ["Rice", "Pasta", "Chips"],
@@ -303,8 +309,8 @@ export const products: Product[] = [
     image: {
       url: "/products/oils/beans-chilli-oil.png",
       alt: "Bottle of Efamy beans flavoured chilli oil",
-      width: 1086,
-      height: 1448,
+      width: 1376,
+      height: 1376,
     },
     storage: STORAGE_DRY,
     category: category.oils,
@@ -321,8 +327,8 @@ export const products: Product[] = [
     image: {
       url: "/products/oils/beef-chilli-oil.png",
       alt: "Bottle of Efamy beef flavoured chilli oil",
-      width: 1086,
-      height: 1448,
+      width: 1403,
+      height: 1403,
     },
     storage: STORAGE_DRY,
     category: category.oils,
@@ -339,8 +345,8 @@ export const products: Product[] = [
     image: {
       url: "/products/oils/chicken-chilli-oil.png",
       alt: "Bottle of Efamy chicken flavoured chilli oil",
-      width: 1086,
-      height: 1448,
+      width: 1222,
+      height: 1222,
     },
     storage: STORAGE_DRY,
     category: category.oils,
@@ -358,8 +364,8 @@ export const products: Product[] = [
     image: {
       url: "/products/oils/fish-chilli-oil.png",
       alt: "Bottle of Efamy fish flavoured chilli oil",
-      width: 1086,
-      height: 1448,
+      width: 1243,
+      height: 1243,
     },
     storage: STORAGE_DRY,
     category: category.oils,
@@ -376,8 +382,8 @@ export const products: Product[] = [
     image: {
       url: "/products/oils/goat-chilli-oil.png",
       alt: "Bottle of Efamy goat flavoured chilli oil",
-      width: 1086,
-      height: 1448,
+      width: 1362,
+      height: 1362,
     },
     storage: STORAGE_DRY,
     category: category.oils,
@@ -394,8 +400,8 @@ export const products: Product[] = [
     image: {
       url: "/products/oils/pork-chilli-oil.png",
       alt: "Bottle of Efamy pork flavoured chilli oil",
-      width: 1086,
-      height: 1448,
+      width: 1260,
+      height: 1260,
     },
     storage: STORAGE_DRY,
     category: category.oils,
@@ -412,8 +418,8 @@ export const products: Product[] = [
     image: {
       url: "/products/oils/turkey-chilli-oil.png",
       alt: "Bottle of Efamy turkey flavoured chilli oil",
-      width: 1086,
-      height: 1448,
+      width: 1231,
+      height: 1231,
     },
     storage: STORAGE_DRY,
     category: category.oils,
@@ -430,15 +436,15 @@ export const products: Product[] = [
     image: {
       url: "/products/cutout/all-purpose-seasoning-mix.png",
       alt: "Jar of Efamy all purpose seasoning mix, original",
-      width: 1086,
-      height: 1448,
+      width: 1093,
+      height: 1093,
     },
     images: [
       {
         url: "/products/cutout/all-purpose-seasoning-sample-pouch.png",
         alt: "Free sample pouch of Efamy all purpose seasoning mix",
-        width: 900,
-        height: 675,
+        width: 850,
+        height: 850,
       },
     ],
     storage: STORAGE_DRY,
@@ -456,8 +462,8 @@ export const products: Product[] = [
     image: {
       url: "/products/cutout/kelewele-seasoning-mix.png",
       alt: "Bottle of Efamy kelewele seasoning mix",
-      width: 1254,
-      height: 1254,
+      width: 1162,
+      height: 1162,
     },
     storage: STORAGE_DRY,
     servingSuggestions: ["Spiced fried plantain"],
@@ -487,8 +493,8 @@ export const products: Product[] = [
     image: {
       url: "/products/cutout/coat-and-cook.png",
       alt: "Jar of Efamy Coat & Cook seasoned coating mix, 250g",
-      width: 900,
-      height: 900,
+      width: 991,
+      height: 991,
     },
     images: [
       {
