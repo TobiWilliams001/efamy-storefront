@@ -38,7 +38,6 @@ export default async function HomePage() {
         title="What keeps selling out"
         products={bestSellers}
         action={{ label: "View all", href: routes.shop }}
-        surface="muted"
       />
       <CallToAction />
     </>

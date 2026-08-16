@@ -43,7 +43,7 @@ const feature = {
 
 export function WhyEfamy() {
   return (
-    <Section surface="muted">
+    <Section>
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
           <h2 className="display-title text-2xl text-brand sm:text-3xl lg:text-4xl">
