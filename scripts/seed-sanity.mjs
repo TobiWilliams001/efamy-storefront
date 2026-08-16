@@ -24,7 +24,7 @@ if (!token && !dry) {
 }
 
 const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "mxc2ll2l",
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "vlmwys9m",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
   apiVersion: "2026-05-15",
   token,

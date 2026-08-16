@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'Efamys',
 
-  projectId: 'mxc2ll2l',
+  projectId: 'vlmwys9m',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
