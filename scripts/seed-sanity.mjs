@@ -10,7 +10,13 @@ import { createClient } from "@sanity/client";
 import { readFileSync } from "node:fs";
 import { basename } from "node:path";
 
-import { categories, products } from "../src/lib/catalogue-data.ts";
+import {
+  bestSellerSlugs,
+  categories,
+  featuredSlugs,
+  products,
+} from "../src/lib/catalogue-data.ts";
+import { recipes } from "../src/lib/recipes.ts";
 
 const token = process.env.SANITY_API_WRITE_TOKEN;
 const dry = process.argv.includes("--dry");
@@ -59,10 +65,12 @@ async function findBySlug(type, slug) {
 
 async function run() {
   console.log(
-    `${dry ? "DRY RUN — " : ""}seeding ${categories.length} categories and ${products.length} products\n`,
+    `${dry ? "DRY RUN — " : ""}seeding ${categories.length} categories, ` +
+      `${products.length} products and ${recipes.length} recipes\n`,
   );
 
   const categoryIds = new Map();
+  const productIds = new Map();
 
   for (const category of categories) {
     console.log(`category: ${category.name}`);
@@ -123,15 +131,51 @@ async function run() {
         ? { servingSuggestions: product.servingSuggestions }
         : {}),
       isNew: product.isNew === true,
-      featured: ["chicken-chilli-sauce-hot", "beef-chilli-sauce-hot"].includes(
-        product.slug,
-      ),
-      bestSeller: ["all-purpose-seasoning-mix", "coat-and-cook"].includes(
-        product.slug,
-      ),
+      featured: featuredSlugs.includes(product.slug),
+      bestSeller: bestSellerSlugs.includes(product.slug),
     };
 
     const existing = await findBySlug("product", product.slug);
+    const saved = existing
+      ? await client.patch(existing).set(doc).commit()
+      : await client.create(doc);
+    productIds.set(product.slug, saved._id);
+  }
+
+  for (const recipe of recipes) {
+    console.log(`recipe: ${recipe.title}`);
+    if (dry) continue;
+
+    const productId = productIds.get(recipe.productSlug);
+    if (!productId) {
+      // The site renders no product panel when this misses, silently, so it is
+      // worth saying out loud rather than seeding a recipe that points nowhere.
+      console.warn(`   no product for "${recipe.productSlug}", skipping`);
+      continue;
+    }
+
+    const doc = {
+      _type: "recipe",
+      title: recipe.title,
+      slug: { _type: "slug", current: recipe.slug },
+      summary: recipe.summary,
+      product: { _type: "reference", _ref: productId },
+      serves: recipe.serves,
+      prepMinutes: recipe.prepMinutes,
+      cookMinutes: recipe.cookMinutes,
+      ingredients: recipe.ingredients,
+      method: recipe.method,
+      ...(recipe.image
+        ? {
+            image: await uploadImage({
+              url: recipe.image,
+              alt: `${recipe.title}, made with Efamy`,
+            }),
+          }
+        : {}),
+    };
+
+    const existing = await findBySlug("recipe", recipe.slug);
     if (existing) await client.patch(existing).set(doc).commit();
     else await client.create(doc);
   }
