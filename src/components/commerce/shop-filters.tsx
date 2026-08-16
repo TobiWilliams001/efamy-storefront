@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SlidersHorizontal } from "lucide-react";
+import { Check, ChevronDown, X } from "lucide-react";
 
 import { SortSelect } from "@/components/commerce/sort-select";
 import {
@@ -10,261 +10,265 @@ import {
 import { cn } from "@/lib/utils";
 import type { ProductCategory } from "@/types/product";
 
-type ChipProps = {
-  href: string;
-  active: boolean;
-  size?: "lg" | "sm";
-  children: React.ReactNode;
-};
+type Option = { value: string; label: string };
 
-function FilterChip({ href, active, size = "lg", children }: ChipProps) {
+/**
+ * Heat stays on the page while price and diet fold away.
+ *
+ * Not a stylistic split: heat is two options and the first thing anyone asks of
+ * a chilli brand, so a click to reach it is a click too many. Price and diet
+ * are the ones people filter by occasionally, and hiding them is what buys the
+ * row its quiet.
+ */
+function Segmented({
+  filters,
+  options,
+  active,
+  label,
+  param,
+}: {
+  filters: ProductFilters;
+  options: readonly Option[];
+  active: string | undefined;
+  label: string;
+  param: "heat";
+}) {
+  const all = [{ value: "", label: "All" }, ...options];
+
   return (
-    <Link
-      href={href}
-      aria-current={active ? "true" : undefined}
-      className={cn(
-        "inline-flex items-center rounded-full border font-medium transition-colors",
-        size === "lg" ? "h-11 px-6 text-sm" : "h-11 px-4 text-sm sm:h-9",
-        active
-          ? "border-brand bg-brand text-white"
-          : "border-neutral-300 bg-card text-muted-foreground hover:border-foreground/40 hover:text-foreground",
-      )}
+    <div
+      role="group"
+      aria-label={label}
+      className="inline-flex rounded-full border border-neutral-200 p-0.5"
     >
-      {children}
-    </Link>
+      {all.map((option) => {
+        const on = option.value ? active === option.value : !active;
+        const href = shopHref(filters, {
+          [param]: option.value || undefined,
+        } as Partial<ProductFilters>);
+
+        return (
+          <Link
+            key={option.value || "all"}
+            href={href}
+            aria-current={on ? "true" : undefined}
+            className={cn(
+              "inline-flex min-h-11 items-center rounded-full px-4 text-sm transition-colors sm:min-h-8 sm:px-3.5",
+              on
+                ? "bg-brand font-medium text-white"
+                : "text-muted-foreground hover:text-foreground",
+            )}
+          >
+            {option.label}
+          </Link>
+        );
+      })}
+    </div>
   );
 }
 
-type ShopFiltersProps = {
-  categories: ProductCategory[];
+/**
+ * A disclosure rather than a listbox, so the menu opens and the links inside
+ * navigate with no JavaScript at all. It does not close on an outside click,
+ * which is the price of that; picking an option navigates, which closes it.
+ */
+function Menu({
+  filters,
+  options,
+  active,
+  label,
+  param,
+}: {
   filters: ProductFilters;
-  /** Omitted on category pages, where the category is fixed by the route. */
-  showCategories?: boolean;
-  /** Only the options the catalogue can actually satisfy. */
-  options: AvailableOptions;
-  count: number;
-};
+  options: readonly Option[];
+  active: string | undefined;
+  label: string;
+  param: "price" | "dietary";
+}) {
+  const chosen = options.find((option) => option.value === active);
+
+  return (
+    <details className="relative">
+      <summary
+        className={cn(
+          "inline-flex min-h-11 cursor-pointer list-none items-center gap-1.5 rounded-full border px-4 text-sm transition-colors sm:min-h-9 sm:px-3.5",
+          chosen
+            ? "border-brand text-brand"
+            : "border-neutral-200 text-muted-foreground hover:text-foreground",
+        )}
+      >
+        {chosen ? chosen.label : label}
+        <ChevronDown aria-hidden="true" className="size-3.5" />
+      </summary>
+
+      <div className="absolute left-0 z-20 mt-2 max-w-[calc(100vw-2rem)] min-w-44 rounded-lg border border-neutral-200 bg-card p-1 shadow-card-hover">
+        {[{ value: "", label: `All ${label.toLowerCase()}` }, ...options].map(
+          (option) => {
+            const on = option.value ? active === option.value : !active;
+
+            return (
+              <Link
+                key={option.value || "all"}
+                href={shopHref(filters, {
+                  [param]: option.value || undefined,
+                } as Partial<ProductFilters>)}
+                className="flex min-h-11 items-center justify-between gap-3 rounded-md px-3 text-sm hover:bg-neutral-50 sm:min-h-9"
+              >
+                {option.label}
+                {on ? (
+                  <Check aria-hidden="true" className="size-3.5 text-brand" />
+                ) : null}
+              </Link>
+            );
+          },
+        )}
+      </div>
+    </details>
+  );
+}
 
 export function ShopFilters({
   categories,
   filters,
   showCategories = true,
   options,
-  count,
-}: ShopFiltersProps) {
-  const activeCount = [filters.heat, filters.dietary, filters.price].filter(
-    Boolean,
-  ).length;
+}: {
+  categories: ProductCategory[];
+  filters: ProductFilters;
+  showCategories?: boolean;
+  options: AvailableOptions;
+}) {
+  const applied: { label: string; href: string }[] = [];
+
+  const heatLabel = options.heat.find((o) => o.value === filters.heat)?.label;
+  if (heatLabel) {
+    applied.push({
+      label: heatLabel,
+      href: shopHref(filters, { heat: undefined }),
+    });
+  }
+
+  const priceLabel = options.price.find(
+    (o) => o.value === filters.price,
+  )?.label;
+  if (priceLabel) {
+    applied.push({
+      label: priceLabel,
+      href: shopHref(filters, { price: undefined }),
+    });
+  }
+
+  const dietLabel = options.dietary.find(
+    (o) => o.value === filters.dietary,
+  )?.label;
+  if (dietLabel) {
+    applied.push({
+      label: dietLabel,
+      href: shopHref(filters, { dietary: undefined }),
+    });
+  }
 
   return (
-    <div className="mb-12">
+    <div className="mb-10">
       {showCategories ? (
-        <div className="flex flex-wrap gap-3">
-          <FilterChip
-            href={shopHref(filters, { category: undefined })}
-            active={!filters.category}
-          >
-            All products
-          </FilterChip>
-          {categories.map((category) => (
-            <FilterChip
-              key={category.slug}
-              href={shopHref(filters, { category: category.slug })}
-              active={filters.category === category.slug}
-            >
-              {category.name}
-            </FilterChip>
-          ))}
-        </div>
+        <nav aria-label="Product categories" className="border-b">
+          <ul className="-mb-px flex gap-x-7 overflow-x-auto whitespace-nowrap">
+            {[{ slug: "", name: "All products" }, ...categories].map(
+              (entry) => {
+                const on = entry.slug
+                  ? filters.category === entry.slug
+                  : !filters.category;
+
+                return (
+                  <li key={entry.slug || "all"}>
+                    <Link
+                      href={shopHref(filters, {
+                        category: entry.slug || undefined,
+                      })}
+                      aria-current={on ? "page" : undefined}
+                      className={cn(
+                        "inline-block border-b-2 pb-3 text-sm transition-colors",
+                        on
+                          ? "border-brand font-medium text-brand"
+                          : "border-transparent text-muted-foreground hover:text-foreground",
+                      )}
+                    >
+                      {entry.name}
+                    </Link>
+                  </li>
+                );
+              },
+            )}
+          </ul>
+        </nav>
       ) : null}
 
-      {/*
-       * On a phone the heat and diet rows pushed every product below the fold,
-       * so they collapse behind a disclosure. `details` keeps this working with
-       * no JavaScript, and the desktop copy is a separate branch because only
-       * one of the two is ever displayed — `hidden` keeps the other out of the
-       * accessibility tree entirely.
-       */}
       <div
         className={cn(
-          "flex items-center justify-between gap-4 sm:hidden",
+          "flex flex-wrap items-center gap-x-3 gap-y-3",
           showCategories && "mt-6",
         )}
       >
-        <details className="group">
-          <summary className="inline-flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border border-neutral-300 bg-card px-5 text-sm font-medium">
-            <SlidersHorizontal aria-hidden="true" className="size-4" />
-            Filters
-            {activeCount > 0 ? (
-              <span
-                data-numeric
-                className="rounded-full bg-brand px-1.5 text-xs text-white"
-              >
-                {activeCount}
-              </span>
-            ) : null}
-          </summary>
+        {options.heat.length > 0 ? (
+          <Segmented
+            label="Heat"
+            param="heat"
+            filters={filters}
+            options={options.heat}
+            active={filters.heat}
+          />
+        ) : null}
 
-          <div className="mt-4 space-y-4">
-            <HeatFilters filters={filters} options={options.heat} />
-            <PriceFilters filters={filters} options={options.price} />
-            <DietFilters filters={filters} options={options.dietary} />
-          </div>
-        </details>
+        {options.price.length > 0 ? (
+          <Menu
+            label="Price"
+            param="price"
+            filters={filters}
+            options={options.price}
+            active={filters.price}
+          />
+        ) : null}
 
-        <div className="flex items-center gap-3">
-          <p data-numeric className="text-sm text-muted-foreground">
-            {count}
-            <span className="sr-only">
-              {" "}
-              {count === 1 ? "product" : "products"}
-            </span>
-          </p>
+        {options.dietary.length > 0 ? (
+          <Menu
+            label="Diet"
+            param="dietary"
+            filters={filters}
+            options={options.dietary}
+            active={filters.dietary}
+          />
+        ) : null}
+
+        <div className="flex w-full justify-end sm:ms-auto sm:w-auto">
           <SortSelect value={filters.sort} />
         </div>
       </div>
 
-      {/*
-       * The three groups wrap as whole groups rather than as loose chips: each
-       * is nowrap on desktop, so a narrow viewport drops "Diet" onto its own
-       * line instead of stranding "Extra hot" under "Heat".
-       */}
-      <div
-        className={cn(
-          "hidden items-start justify-between gap-6 sm:flex",
-          showCategories && "mt-8",
-        )}
-      >
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-          <HeatFilters filters={filters} options={options.heat} />
-          <PriceFilters filters={filters} options={options.price} />
-          <DietFilters filters={filters} options={options.dietary} />
-        </div>
-
-        <div className="flex shrink-0 items-center gap-5">
-          <p
-            data-numeric
-            className="text-sm whitespace-nowrap text-muted-foreground"
+      {applied.length > 0 ? (
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          {applied.map((entry) => (
+            <Link
+              key={entry.label}
+              href={entry.href}
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-neutral-50 pr-3 pl-4 text-sm text-muted-foreground transition-colors hover:text-foreground sm:min-h-8 sm:pr-2 sm:pl-3"
+            >
+              {entry.label}
+              <X aria-hidden="true" className="size-3.5" />
+              <span className="sr-only">Remove this filter</span>
+            </Link>
+          ))}
+          <Link
+            href={shopHref(filters, {
+              heat: undefined,
+              price: undefined,
+              dietary: undefined,
+            })}
+            className="ml-1 text-sm underline underline-offset-4 hover:text-foreground"
           >
-            {count} {count === 1 ? "product" : "products"}
-          </p>
-          <SortSelect value={filters.sort} />
+            Clear all
+          </Link>
         </div>
-      </div>
-    </div>
-  );
-}
-
-/*
- * The reset chip carries the group's name — "All prices" rather than a bare
- * "Any" under a grey "Price" caption. Three chips all reading "Any" told the
- * customer nothing about which one they were about to press, and dropping the
- * captions buys back the width the row needs to stay on one line.
- */
-function PriceFilters({
-  filters,
-  options,
-}: {
-  filters: ProductFilters;
-  options: AvailableOptions["price"];
-}) {
-  if (options.length === 0) return null;
-
-  return (
-    <div
-      role="group"
-      aria-label="Price"
-      className="flex flex-wrap items-center gap-2 sm:flex-nowrap"
-    >
-      <FilterChip
-        size="sm"
-        href={shopHref(filters, { price: undefined })}
-        active={!filters.price}
-      >
-        All prices
-      </FilterChip>
-      {options.map((option) => (
-        <FilterChip
-          key={option.value}
-          size="sm"
-          href={shopHref(filters, { price: option.value })}
-          active={filters.price === option.value}
-        >
-          {option.label}
-        </FilterChip>
-      ))}
-    </div>
-  );
-}
-
-function HeatFilters({
-  filters,
-  options,
-}: {
-  filters: ProductFilters;
-  options: AvailableOptions["heat"];
-}) {
-  if (options.length === 0) return null;
-
-  return (
-    <div
-      role="group"
-      aria-label="Heat"
-      className="flex flex-wrap items-center gap-2 sm:flex-nowrap"
-    >
-      <FilterChip
-        size="sm"
-        href={shopHref(filters, { heat: undefined })}
-        active={!filters.heat}
-      >
-        All heats
-      </FilterChip>
-      {options.map((option) => (
-        <FilterChip
-          key={option.value}
-          size="sm"
-          href={shopHref(filters, { heat: option.value })}
-          active={filters.heat === option.value}
-        >
-          {option.label}
-        </FilterChip>
-      ))}
-    </div>
-  );
-}
-
-function DietFilters({
-  filters,
-  options,
-}: {
-  filters: ProductFilters;
-  options: AvailableOptions["dietary"];
-}) {
-  if (options.length === 0) return null;
-
-  return (
-    <div
-      role="group"
-      aria-label="Diet"
-      className="flex flex-wrap items-center gap-2 sm:flex-nowrap"
-    >
-      <FilterChip
-        size="sm"
-        href={shopHref(filters, { dietary: undefined })}
-        active={!filters.dietary}
-      >
-        All diets
-      </FilterChip>
-      {options.map((option) => (
-        <FilterChip
-          key={option.value}
-          size="sm"
-          href={shopHref(filters, { dietary: option.value })}
-          active={filters.dietary === option.value}
-        >
-          {option.label}
-        </FilterChip>
-      ))}
+      ) : null}
     </div>
   );
 }

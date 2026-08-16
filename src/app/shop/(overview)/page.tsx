@@ -45,7 +45,6 @@ export default async function ShopPage({ searchParams }: PageProps<"/shop">) {
           categories={categories}
           filters={filters}
           options={availableOptions(products)}
-          count={visible.length}
         />
 
         <ProductGrid
