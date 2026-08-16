@@ -36,21 +36,40 @@ needs them.
 Originals and superseded files live in `assets/` at the repo root, outside
 `public/`, so they are kept without being deployed.
 
-## The unsorted drop in `public/` root
+## The source drop in `photos-src/`
 
-Twenty-four files sit unrenamed in `public/` root, gitignored by the
-`ChatGPT Image*` and `WhatsApp Image*` rules. They are not deployed, and a fresh
-clone will not have them. **Both sets are photographs of real Efamy jars.**
+Everything the client sent lives in `photos-src/`, named for what it shows. The
+whole folder is gitignored, so it is neither committed nor deployed and a fresh
+clone will not have it. **Every file in it is a photograph of something real.**
 
-- **`WhatsApp Image *.jpeg`** — the client's own photographs, sent over
-  WhatsApp. These are the source material.
-- **`ChatGPT Image *.png`** — the same real jars with the background removed.
-  The filename is misleading: the tool was used to cut out a photograph, not to
-  generate food. Nothing on this site is an invented product image, and nothing
-  should be.
+```
+photos-src/
+  client-photos/        Efamy's own photographs, readable copies
+  product-cutouts/      the same jars with the background removed
+  unreadable-originals/ see "Files macOS will not let you open" below
+```
 
-Files move into `products/cutout/` under their product slug once the label has
-been read and matched to a product.
+The `product-cutouts/` filenames used to read `ChatGPT Image ....png`, which was
+misleading: the tool was used to cut a background off a photograph, not to
+generate food. Nothing on this site is an invented product image, and nothing
+should be. All twelve are already filed under `products/`, and two of them
+(`turkey-chilli-sauce-duplicate.png`, `beef-chilli-oil-duplicate.png`) are
+byte-identical repeats of their pair.
+
+Files move into `products/cutout/`, `photos/` or `dishes/` under a real name
+once the label has been read and matched.
+
+### Files macOS will not let you open
+
+The original WhatsApp files carry a provenance attribute that denies read access
+to any process other than the app that wrote them. `cp`, `node`, `python3` and
+the dev server all get `EPERM` on them, while files beside them open normally.
+
+Copying them in Finder produces readable duplicates without the attribute, which
+is what `client-photos/` holds. The originals are kept in
+`unreadable-originals/` because they can still be moved and renamed — `mv` needs
+directory permission, not read permission — and Finder can still copy them
+again if a copy is ever lost.
 
 ### Reading the labels
 
@@ -60,12 +79,16 @@ identified by OCR, not by eye:
 
 ```bash
 python3 -m venv ocr && ocr/bin/pip install pyobjc-framework-Vision   # ~30s
-ocr/bin/python ocr.py "public/WhatsApp Image ....jpeg"               # macOS Vision
+ocr/bin/python ocr.py public/photos-src/product-cutouts/*.png        # macOS Vision
 ```
 
 Build it in a scratch directory, not in the repo. Any OCR that reads a
 photograph will do; the point is to read the label rather than guess from
 colour.
+
+Vision also returns a bounding box per line, which answers "how many jars are in
+this photograph" without opening it: the All Purpose packshot returns the same
+label eight times, in four columns across two rows.
 
 ### Three files nothing uses, on purpose
 

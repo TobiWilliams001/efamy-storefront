@@ -157,13 +157,35 @@ every one of them for the same reason: **no photograph**.
 
 - [ ] **Goat Chilli Sauce** — photo, and which strengths you make
 - [ ] **Turkey Chilli Sauce** — photo, and which strengths you make
-- [ ] **The seven chilli oils** — Beans, Beef, Chicken, Fish, Goat, Pork and
-      Turkey, 300ml. A whole product line the shop cannot sell. Needed: one
-      photograph of each bottle and the retail price. The trade list shows
-      £2.99, which looks like a per-bottle trade price rather than retail
+- [x] **The seven chilli oils** — photographed and now on the shop. Two
+      questions about them remain, below
 
 Send a photograph of any of these and it can be on the shop the same day —
 everything else about them is already known.
+
+### The chilli oil labels, read back to you
+
+Every bottle label was read by machine from your own photographs. **Please
+confirm or correct this table**, because the site does not show a strength for
+any oil until you do, and a wrong one is worse than none.
+
+| Oil     | Strength on the label | Price | Size  |
+| ------- | --------------------- | ----- | ----- |
+| Beans   | Mild                  | £1.99 | 200ml |
+| Beef    | Mild                  | £1.99 | 200ml |
+| Chicken | Extra hot             | £1.99 | 200ml |
+| Fish    | Mild                  | £1.99 | 200ml |
+| Goat    | none could be read    | £1.99 | 200ml |
+| Pork    | Hot                   | £1.99 | 200ml |
+| Turkey  | Mild                  | £1.99 | 200ml |
+
+Two things stand out and neither has been acted on:
+
+- [ ] **Goat has no strength we could read.** Is one printed on the bottle?
+- [ ] **The labels say £1.99 for 200ml; the trade price list says £2.99 for
+      300ml.** Which is current? The labels are photographs of stock you have,
+      so they are probably right, but a price list can be newer than the bottles
+      still on the shelf. The site currently shows £1.99 / 200ml.
 
 ---
 
