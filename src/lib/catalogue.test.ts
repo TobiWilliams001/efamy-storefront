@@ -7,6 +7,7 @@ vi.mock("@/sanity/client", () => ({ getSanityClient }));
 
 import {
   getCategories,
+  getFeaturedProducts,
   getProductBySlug,
   getProducts,
   getRecipe,
@@ -87,45 +88,79 @@ describe("catalogue falls back to static data", () => {
   });
 });
 
-describe("catalogue prefers Sanity when it answers", () => {
-  it("returns Sanity products over the static set", async () => {
-    fetch.mockResolvedValue([
-      {
-        id: "sanity-1",
-        slug: "sanity-sauce",
-        name: "Sanity Sauce",
-        summary: "From the CMS",
-        description: "From the CMS",
-        variants: [{ size: "175g", price: 300, inStock: true }],
-        category: { slug: "chilli-sauces", name: "Chilli Sauces" },
-        image: { url: "/x.png", alt: "", width: 1, height: 1 },
-      },
-    ]);
+function sanityProduct(slug: string, name: string) {
+  return {
+    id: `sanity-${slug}`,
+    slug,
+    name,
+    summary: "From the CMS",
+    description: "From the CMS",
+    variants: [{ size: "175g", price: 300, inStock: true }],
+    category: { slug: "chilli-sauces", name: "Chilli Sauces" },
+    image: { url: "/x.png", alt: "", width: 1, height: 1 },
+  };
+}
+
+/**
+ * Sanity augments the bundled catalogue. The dataset is filled one document at
+ * a time, and replacing would mean the first product created in the Studio
+ * takes the shop from seventeen products to one.
+ */
+describe("catalogue merges Sanity over the bundled set", () => {
+  it("keeps the bundled products when Sanity adds a new one", async () => {
+    fetch.mockResolvedValue([sanityProduct("sanity-sauce", "Sanity Sauce")]);
 
     const products = await getProducts();
 
-    expect(products).toHaveLength(1);
-    expect(products[0].slug).toBe("sanity-sauce");
+    expect(products).toHaveLength(staticProducts.length + 1);
+    expect(products.at(-1)?.slug).toBe("sanity-sauce");
+  });
+
+  it("lets a Sanity document override the bundled product of the same slug", async () => {
+    const slug = staticProducts[0].slug;
+    fetch.mockResolvedValue([sanityProduct(slug, "Renamed In Studio")]);
+
+    const products = await getProducts();
+
+    expect(products).toHaveLength(staticProducts.length);
+    expect(products[0].slug).toBe(slug);
+    expect(products[0].name).toBe("Renamed In Studio");
+  });
+
+  it("preserves the bundled order rather than shuffling as documents appear", async () => {
+    fetch.mockResolvedValue([sanityProduct(staticProducts[3].slug, "Edited")]);
+
+    const products = await getProducts();
+
+    expect(products.map((product) => product.slug)).toEqual(
+      staticProducts.map((product) => product.slug),
+    );
   });
 
   it("drops only the unmappable documents, keeping the good ones", async () => {
     fetch.mockResolvedValue([
       { broken: true },
-      {
-        id: "sanity-2",
-        slug: "good-one",
-        name: "Good One",
-        summary: "s",
-        description: "d",
-        variants: [{ size: "175g", price: 300, inStock: true }],
-        category: { slug: "chilli-sauces", name: "Chilli Sauces" },
-        image: { url: "/x.png", alt: "", width: 1, height: 1 },
-      },
+      sanityProduct("good-one", "Good One"),
     ]);
 
     const products = await getProducts();
 
-    expect(products).toHaveLength(1);
-    expect(products[0].slug).toBe("good-one");
+    expect(products).toHaveLength(staticProducts.length + 1);
+    expect(products.some((product) => product.slug === "good-one")).toBe(true);
+  });
+
+  it("tops a short featured row up from the bundled curation", async () => {
+    // Sanity flags one product as featured; the row still needs four.
+    fetch.mockImplementation((query: string) =>
+      query.includes("featured")
+        ? [sanityProduct("cms-featured", "CMS Featured")]
+        : [],
+    );
+
+    const featured = await getFeaturedProducts(4);
+
+    expect(featured).toHaveLength(4);
+    expect(featured[0].slug).toBe("cms-featured");
+    expect(new Set(featured.map((product) => product.slug)).size).toBe(4);
   });
 });

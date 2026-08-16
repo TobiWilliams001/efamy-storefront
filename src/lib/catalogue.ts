@@ -40,12 +40,35 @@ async function fetchFromSanity<T>(
   }
 }
 
-function mapProducts(raw: Record<string, unknown>[] | null): Product[] | null {
-  if (!raw) return null;
-  const mapped = raw
+function mapProducts(raw: Record<string, unknown>[] | null): Product[] {
+  return (raw ?? [])
     .map(mapProduct)
     .filter((entry): entry is Product => entry !== null);
-  return mapped.length > 0 ? mapped : null;
+}
+
+/**
+ * Sanity augments the bundled catalogue rather than replacing it.
+ *
+ * The dataset starts empty and gets filled one document at a time. Replacing
+ * would mean the first product created in the Studio takes the shop from
+ * seventeen products to one. Merging by slug lets the Studio be filled at any
+ * pace: a Sanity document wins wherever its slug matches, unseen slugs are
+ * appended, and anything not yet entered keeps its bundled entry.
+ *
+ * Bundled order is preserved so the curated shop order does not shuffle as
+ * documents appear.
+ */
+function mergeBySlug<T extends { slug: string }>(
+  base: readonly T[],
+  overrides: readonly T[],
+): T[] {
+  const bySlug = new Map(overrides.map((entry) => [entry.slug, entry]));
+  const baseSlugs = new Set(base.map((entry) => entry.slug));
+
+  return [
+    ...base.map((entry) => bySlug.get(entry.slug) ?? entry),
+    ...overrides.filter((entry) => !baseSlugs.has(entry.slug)),
+  ];
 }
 
 /** The static catalogue curates by slug; Sanity carries a flag per product. */
@@ -57,41 +80,53 @@ function markBestSellers(products: Product[]): Product[] {
   );
 }
 
-function bySlugs(slugs: readonly string[], limit: number): Product[] {
-  return slugs
-    .map((slug) => staticProducts.find((product) => product.slug === slug))
-    .filter((product): product is Product => product !== undefined)
-    .slice(0, limit);
+/**
+ * A curated row: whatever Sanity flags, topped up from the bundled curation
+ * until the row is full.
+ *
+ * The top-up is resolved through the merged catalogue rather than the static
+ * array, so a product the client has since edited in the Studio shows its
+ * current content even when the slug that selected it is a bundled one.
+ */
+async function curatedRow(
+  query: string,
+  slugs: readonly string[],
+  limit: number,
+): Promise<Product[]> {
+  const raw = await fetchFromSanity<Record<string, unknown>[]>(query, { limit });
+  const flagged = mapProducts(raw);
+  if (flagged.length >= limit) return flagged.slice(0, limit);
+
+  const chosen = new Set(flagged.map((product) => product.slug));
+  const all = await getProducts();
+  const topUp = slugs
+    .filter((slug) => !chosen.has(slug))
+    .map((slug) => all.find((product) => product.slug === slug))
+    .filter((product): product is Product => product !== undefined);
+
+  return [...flagged, ...topUp].slice(0, limit);
 }
 
 export async function getCategories(): Promise<ProductCategory[]> {
   const raw =
     await fetchFromSanity<Record<string, unknown>[]>(CATEGORIES_QUERY);
-  const mapped = raw
-    ?.map(mapCategory)
+  const mapped = (raw ?? [])
+    .map(mapCategory)
     .filter((entry): entry is ProductCategory => entry !== null);
-  return mapped?.length ? mapped : staticCategories;
+  return mergeBySlug(staticCategories, mapped);
 }
 
 export async function getProducts(): Promise<Product[]> {
   const raw = await fetchFromSanity<Record<string, unknown>[]>(PRODUCTS_QUERY);
-  return mapProducts(raw) ?? markBestSellers(staticProducts);
+  return mergeBySlug(markBestSellers(staticProducts), mapProducts(raw));
 }
 
 export async function getFeaturedProducts(limit = 4): Promise<Product[]> {
-  const raw = await fetchFromSanity<Record<string, unknown>[]>(
-    FEATURED_PRODUCTS_QUERY,
-    { limit },
-  );
-  return mapProducts(raw) ?? bySlugs(featuredSlugs, limit);
+  return curatedRow(FEATURED_PRODUCTS_QUERY, featuredSlugs, limit);
 }
 
 export async function getBestSellers(limit = 4): Promise<Product[]> {
-  const raw = await fetchFromSanity<Record<string, unknown>[]>(
-    BEST_SELLERS_QUERY,
-    { limit },
-  );
-  return mapProducts(raw) ?? bySlugs(bestSellerSlugs, limit);
+  return curatedRow(BEST_SELLERS_QUERY, bestSellerSlugs, limit);
 }
 
 export async function getProductBySlug(
