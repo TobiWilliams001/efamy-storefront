@@ -9,7 +9,13 @@ const ACCENTS: Record<string, string> = {
   fish: "#8DBF3C",
   goat: "#7A4A3E",
   pork: "#C34B6A",
-  turkey: "#D96A1E",
+  /*
+   * Sampled from the jar, where every dominant colour sits between hue 270 and
+   * 300. It was #D96A1E, the same orange as kelewele, which is what a
+   * copy-paste looks like when a product is added late. Worth checking against
+   * the brand guidelines, which is where the rest of these came from.
+   */
+  turkey: "#6D3181",
   seasoning: "#C89B3C",
   kelewele: "#D96A1E",
   coat: "#294D96",
