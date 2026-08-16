@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { MapPin, ShoppingBag, Store, Truck } from "lucide-react";
 
@@ -142,6 +143,20 @@ export default function StockistsPage() {
         </div>
       </Section>
 
+      {/* Efamy's own photograph, run full bleed because it is a letterbox crop
+          of a shelf and cropping it further would lose the row. */}
+      <Section spacing="sm" bleed>
+        <div className="relative aspect-1400/306 w-full">
+          <Image
+            src="/photos/jars-lined-up.jpg"
+            alt="Rows of Efamy chilli sauce jars on a shelf, sorted by flavour"
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+      </Section>
+
       <Section surface="muted">
         <SectionHeader
           eyebrow="Wholesale"
@@ -153,6 +168,17 @@ export default function StockistsPage() {
             </Button>
           }
         />
+
+        <div className="relative mb-10 aspect-16/7 overflow-hidden rounded-lg shadow-card">
+          <Image
+            src="/photos/bottling-chilli-oil.jpg"
+            alt="Bottles of Efamy chilli oil on a worktop, filled and capped"
+            fill
+            sizes="(min-width: 1024px) 1100px, 100vw"
+            className="object-cover"
+          />
+        </div>
+
         <ul className="grid gap-8 sm:grid-cols-3">
           {wholesalePoints.map(({ icon: Icon, title, description }) => (
             <li key={title}>

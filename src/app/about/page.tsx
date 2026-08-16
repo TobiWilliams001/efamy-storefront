@@ -52,6 +52,11 @@ const kitchen = [
     caption: "Batches are cooked in pots, on gas.",
   },
   {
+    src: "/photos/mixing.jpg",
+    alt: "A floor-standing planetary mixer with its bowl part full",
+    caption: "Blending, in a mixer that has earned its scratches.",
+  },
+  {
     src: "/photos/filling-jars.jpg",
     alt: "A filling machine holding chilli sauce above a row of empty glass jars",
     caption: "Filled by machine, a jar at a time.",
@@ -60,6 +65,11 @@ const kitchen = [
     src: "/photos/finished-trays.jpg",
     alt: "Stacked trays of finished Efamy jars, sorted into colours by flavour",
     caption: "Trayed up by flavour once they are filled.",
+  },
+  {
+    src: "/photos/production-room.jpg",
+    alt: "Trays of filled jars and bottles of chilli oil across a production room",
+    caption: "Jars and bottles, filled and waiting.",
   },
   {
     src: "/photos/stockroom.jpg",
@@ -141,7 +151,7 @@ export default async function AboutPage() {
         </p>
       </Section>
 
-      <Section surface="muted">
+      <Section>
         <SectionHeader
           align="center"
           eyebrow="In Corby"
@@ -149,7 +159,7 @@ export default async function AboutPage() {
           description="Our own kitchen, photographed on an ordinary working day."
         />
 
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {kitchen.map((shot) => (
             <li key={shot.src}>
               <figure>
@@ -158,7 +168,7 @@ export default async function AboutPage() {
                     src={shot.src}
                     alt={shot.alt}
                     fill
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className="object-cover"
                   />
                 </div>
@@ -251,7 +261,7 @@ export default async function AboutPage() {
         </ul>
       </Section>
 
-      <Section surface="muted">
+      <Section>
         <SectionHeader
           align="center"
           eyebrow="The range"
