@@ -6,6 +6,8 @@ export default defineCliConfig({
     dataset: 'production',
   },
   deployment: {
+    /** Fixed so a deploy cannot be pointed at a different studio by mistake. */
+    appId: 'xgi4fvskvtsy9cyul26yj8wk',
     /**
      * Enable auto-updates for studios.
      * Learn more at https://www.sanity.io/docs/studio/latest-version-of-sanity#k47faf43faf56
