@@ -9,11 +9,13 @@ import { EmptyState } from "@/components/common/empty-state";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ProductGridSkeleton } from "@/components/commerce/product-card-skeleton";
+import { delivery, deliveryCost } from "@/config/delivery";
 import { formatPrice } from "@/lib/format";
 import { routes } from "@/lib/routes";
 
 export function CartContents() {
   const { lines, subtotal, itemCount, ready, setQuantity, remove } = useCart();
+  const shipping = deliveryCost(subtotal);
 
   if (!ready) {
     return <ProductGridSkeleton count={2} />;
@@ -128,9 +130,16 @@ export function CartContents() {
             <dd className="font-medium">{formatPrice(subtotal)}</dd>
           </div>
           <div className="flex justify-between">
-            <dt className="text-muted-foreground">Delivery</dt>
-            <dd className="text-muted-foreground">Calculated at checkout</dd>
+            <dt className="text-muted-foreground">{delivery.label}</dt>
+            <dd className="font-medium">
+              {shipping === 0 ? "Free" : formatPrice(shipping)}
+            </dd>
           </div>
+        </dl>
+        <Separator className="my-4" />
+        <dl className="flex justify-between text-base">
+          <dt className="font-medium">Total</dt>
+          <dd className="font-medium">{formatPrice(subtotal + shipping)}</dd>
         </dl>
         <Separator className="my-4" />
         <Button asChild size="xl" className="w-full">
