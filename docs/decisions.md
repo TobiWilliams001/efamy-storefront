@@ -106,11 +106,45 @@ default and returns **400** for anything else.
 
 ## Product images render `object-contain` on white
 
-The packshots are JPEGs shot on white. On a tinted background the image's own
-white rectangle shows as a visible seam, and `cover` crops the jars.
+`cover` crops the jars, so the card frame is square and the cutout is contained
+inside it.
 
-If the packshots are ever background-removed, this can change and the cards can
-sit on warm gradients.
+That makes the jar's height as a share of its own image the thing the customer
+sees. The sources ranged from 67% to 97% and the jars looked like different
+sizes on one row, so every cutout is now pasted unscaled onto a square canvas
+sized to put the jar at 88% of it. Re-frame, never rescale: the pixels are
+untouched and nothing softens.
+
+All cutouts are transparent PNGs. The seasoning jars and the oil bottles
+arrived opaque on near-white with a soft grey contact shadow, and were keyed:
+a flood inward from the border over near-white only, so white on the labels
+survives, then a second permissive pass confined to the base of the silhouette,
+which takes the shadow without eating the white lids. The frame stays `bg-white`
+regardless — the cutouts are clean, but the card is not the only surface and
+white is the safe default.
+
+Shape is not uniform and cannot be made so in code: the range mixes round
+tapered jars with square ones. That needs a photograph, not a script.
+
+## Sanity merges over the bundled catalogue rather than replacing it
+
+The dataset is filled one document at a time. Replacing on the first non-empty
+response meant the first product created in the Studio would take the shop from
+seventeen products to one — and the trigger was *empty*, not *absent*, so it
+would have fired silently the moment anyone started entering content.
+
+`mergeBySlug` keeps the bundled entries as the base: a Sanity document wins
+wherever its slug matches, unseen slugs are appended, and bundled order is
+preserved so the shop does not shuffle as documents appear. Categories follow
+the same rule, because a merged product list referencing a category that
+replacement had dropped would break the filters.
+
+The featured and best seller rows top up from the bundled curation when Sanity
+flags too few, resolving the top-up through the merged list so an edited product
+shows its current content.
+
+Recipes still replace, deliberately: the bundled six are unapproved drafts and
+should stop being reachable the moment real ones exist.
 
 ## Comments are rare
 
@@ -131,4 +165,3 @@ type-checks. The root `tsconfig.json` excludes `studio`, which has its own.
 | Customer accounts | Guest checkout covers the need                                                                                          |
 | Reviews           | Cannot be faked, and there are none yet                                                                                 |
 | Wishlist          | Little value at this catalogue size                                                                                     |
-| A test suite      | Genuine gap, not a decision. Add coverage around cart maths and price formatting before payments go live                |
