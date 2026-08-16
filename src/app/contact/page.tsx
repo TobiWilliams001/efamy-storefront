@@ -46,10 +46,11 @@ export default function ContactPage() {
             sizes="(min-width: 1024px) 38vw, 100vw"
             className="object-cover"
           />
-          {/* Feathers the seam so the panel reads as part of the page. */}
+          {/* Feathers the seam in brand burgundy rather than page white, so the
+              photograph reads as part of the brand rather than cut out of it. */}
           <span
             aria-hidden="true"
-            className="absolute inset-0 bg-linear-to-b from-background to-transparent lg:bg-linear-to-r"
+            className="absolute inset-0 bg-linear-to-b from-brand/70 to-transparent lg:bg-linear-to-r"
           />
         </div>
 
