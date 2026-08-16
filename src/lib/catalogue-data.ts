@@ -297,11 +297,21 @@ export const products: Product[] = [
     servingSuggestions: ["Rice", "Pasta", "Chips"],
     category: category.sauces,
   },
+  /*
+   * The seven oils take their price from the client's price list, which the
+   * client has confirmed is current, and their size from the bottle labels.
+   *
+   * Those are two sources that disagree: the labels read £1.99 for 200ml, the
+   * list says £2.99 and gives no size at all. The price is theirs to set, so it
+   * is theirs; the size is printed on the bottle, so it stays. If the £2.99
+   * turns out to belong to a 300ml bottle, the size here is wrong and both need
+   * changing together. See docs/client-information-request.md.
+   */
   {
     id: "beans-chilli-oil",
     slug: "beans-chilli-oil",
     name: "Beans Chilli Oil",
-    variants: single("200ml", 199),
+    variants: single("200ml", 299),
     summary: "Beans flavoured, and suitable for vegetarians.",
     description:
       "Chilli oil with the flavour of our beans sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
@@ -319,7 +329,7 @@ export const products: Product[] = [
     id: "beef-chilli-oil",
     slug: "beef-chilli-oil",
     name: "Beef Chilli Oil",
-    variants: single("200ml", 199),
+    variants: single("200ml", 299),
     summary: "Beef flavoured, for anything off the grill.",
     description:
       "Chilli oil with the flavour of our beef sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
@@ -337,7 +347,7 @@ export const products: Product[] = [
     id: "chicken-chilli-oil",
     slug: "chicken-chilli-oil",
     name: "Chicken Chilli Oil",
-    variants: single("200ml", 199),
+    variants: single("200ml", 299),
     summary: "Chicken flavoured, for rice, chips and roast dinners.",
     description:
       "Chilli oil with the flavour of our chicken sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
@@ -355,7 +365,7 @@ export const products: Product[] = [
     id: "fish-chilli-oil",
     slug: "fish-chilli-oil",
     name: "Fish Chilli Oil",
-    variants: single("200ml", 199),
+    variants: single("200ml", 299),
     summary: "Fish flavoured, for kenkey, grilled fish and salads.",
     description:
       "Chilli oil with the flavour of our fish sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
@@ -374,7 +384,7 @@ export const products: Product[] = [
     id: "goat-chilli-oil",
     slug: "goat-chilli-oil",
     name: "Goat Chilli Oil",
-    variants: single("200ml", 199),
+    variants: single("200ml", 299),
     summary: "Goat flavoured, for yam, rice and stews.",
     description:
       "Chilli oil with the flavour of our goat sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
@@ -392,7 +402,7 @@ export const products: Product[] = [
     id: "pork-chilli-oil",
     slug: "pork-chilli-oil",
     name: "Pork Chilli Oil",
-    variants: single("200ml", 199),
+    variants: single("200ml", 299),
     summary: "Pork flavoured, for barbecues and fried plantain.",
     description:
       "Chilli oil with the flavour of our pork sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
@@ -410,7 +420,7 @@ export const products: Product[] = [
     id: "turkey-chilli-oil",
     slug: "turkey-chilli-oil",
     name: "Turkey Chilli Oil",
-    variants: single("200ml", 199),
+    variants: single("200ml", 299),
     summary: "Turkey flavoured, for pasta, rice and roast dinners.",
     description:
       "Chilli oil with the flavour of our turkey sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
