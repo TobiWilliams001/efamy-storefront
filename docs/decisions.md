@@ -130,7 +130,7 @@ tapered jars with square ones. That needs a photograph, not a script.
 
 The dataset is filled one document at a time. Replacing on the first non-empty
 response meant the first product created in the Studio would take the shop from
-seventeen products to one — and the trigger was *empty*, not *absent*, so it
+seventeen products to one — and the trigger was _empty_, not _absent_, so it
 would have fired silently the moment anyone started entering content.
 
 `mergeBySlug` keeps the bundled entries as the base: a Sanity document wins

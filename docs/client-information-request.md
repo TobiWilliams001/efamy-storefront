@@ -187,27 +187,24 @@ Every bottle label was read by machine from your own photographs. **Please
 confirm or correct this table**, because the site does not show a strength for
 any oil until you do, and a wrong one is worse than none.
 
-| Oil     | Strength on the label | Price | Size  |
-| ------- | --------------------- | ----- | ----- |
-| Beans   | Mild                  | £1.99 | 200ml |
-| Beef    | Mild                  | £1.99 | 200ml |
-| Chicken | Extra hot             | £1.99 | 200ml |
-| Fish    | Mild                  | £1.99 | 200ml |
-| Goat    | none could be read    | £1.99 | 200ml |
-| Pork    | Hot                   | £1.99 | 200ml |
-| Turkey  | Mild                  | £1.99 | 200ml |
+| Oil     | Strength on the label | Size on the label |
+| ------- | --------------------- | ----------------- |
+| Beans   | Mild                  | 200ml             |
+| Beef    | Mild                  | 200ml             |
+| Chicken | Extra hot             | 200ml             |
+| Fish    | Mild                  | 200ml             |
+| Goat    | none could be read    | 200ml             |
+| Pork    | Hot                   | 200ml             |
+| Turkey  | Mild                  | 200ml             |
 
-Two things stand out and neither has been acted on:
+Two things are still open:
 
 - [ ] **Goat has no strength we could read.** Is one printed on the bottle?
-- [ ] **The labels say £1.99 for 200ml; your price list says £2.99.** Which is
-      current? The labels are photographs of stock you have, so they are
-      probably right, but a price list can be newer than the bottles still on
-      the shelf. The site shows £1.99 / 200ml and will not change until you say.
-
-      The most recent list gives no size against the oils at all, so it does not
-          settle 200ml against 300ml either. **This is the only price on the whole
-          site that is in doubt**, so it is the one answer worth sending first.
+- [ ] **The size does not match the price.** You have confirmed £2.99 from your
+      price list and the site now charges it. But the labels read £1.99 for
+      **200ml**, and the list gives no size at all. If the £2.99 belongs to a
+      300ml bottle, the site is selling the right price against the wrong size.
+      Which size does £2.99 buy?
 
 ---
 
