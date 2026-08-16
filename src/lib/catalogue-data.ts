@@ -84,9 +84,9 @@ export const categories: ProductCategory[] = [
       "All Purpose Seasoning Mix, Kelewele Seasoning Mix and Coat & Cook for everyday cooking.",
     image: {
       url: "/products/cutout/all-purpose-seasoning-mix.png",
-      alt: "Jars of Efamy all purpose seasoning mix",
-      width: 775,
-      height: 900,
+      alt: "Jar of Efamy all purpose seasoning mix",
+      width: 1086,
+      height: 1448,
     },
     productCount: 3,
   },
@@ -429,9 +429,9 @@ export const products: Product[] = [
     dietary: ["No artificial preservatives"],
     image: {
       url: "/products/cutout/all-purpose-seasoning-mix.png",
-      alt: "Jars of Efamy all purpose seasoning mix, original",
-      width: 775,
-      height: 900,
+      alt: "Jar of Efamy all purpose seasoning mix, original",
+      width: 1086,
+      height: 1448,
     },
     images: [
       {
