@@ -28,6 +28,7 @@ export type Recipe = {
 export const recipes: Recipe[] = [
   {
     slug: "jollof-rice",
+    image: "/dishes/jollof-rice.jpg",
     title: "Jollof Rice",
     summary: "The Sunday staple, finished with a spoon of beef chilli sauce.",
     productSlug: "beef-chilli-sauce-hot",
@@ -58,6 +59,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "kelewele",
+    image: "/dishes/kelewele.jpg",
     title: "Kelewele",
     summary: "Spiced fried plantain, sweet and hot at once.",
     productSlug: "kelewele-seasoning-mix",
@@ -82,6 +84,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "grilled-chicken",
+    image: "/dishes/grilled-chicken.jpg",
     title: "Grilled Chicken",
     summary: "All Purpose Seasoning under the skin, chilli sauce over the top.",
     productSlug: "all-purpose-seasoning-mix",
@@ -106,6 +109,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "waakye",
+    image: "/dishes/waakye.jpg",
     title: "Waakye",
     summary: "Rice and beans, and the sauce that belongs with it.",
     productSlug: "beans-chilli-sauce-mild",
@@ -129,6 +133,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "fried-fish-and-yam",
+    image: "/dishes/fried-fish-yam.jpg",
     title: "Fried Fish & Yam",
     summary: "Crisp yam, fried fish, and fish chilli sauce to dip.",
     productSlug: "fish-chilli-sauce-hot",
