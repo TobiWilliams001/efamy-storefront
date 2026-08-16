@@ -15,7 +15,7 @@ export default function CartPage() {
       <PageHeader
         eyebrow="Basket"
         title="Your basket"
-        description="Everything you have chosen so far. Delivery is calculated at checkout."
+        description="Everything you have chosen so far."
       />
       <Section spacing="afterHeader">
         <CartContents />

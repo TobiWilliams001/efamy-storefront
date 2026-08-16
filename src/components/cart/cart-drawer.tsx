@@ -11,6 +11,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { delivery, deliveryCost } from "@/config/delivery";
 import { formatPrice } from "@/lib/format";
 import { routes } from "@/lib/routes";
 
@@ -66,7 +67,7 @@ export function CartDrawer() {
             </span>
           </div>
           <p className="mt-1 text-xs text-muted-foreground">
-            Delivery calculated at checkout.
+            {delivery.label} {formatPrice(deliveryCost(subtotal))}.
           </p>
 
           <Button asChild size="xl" variant="accent" className="mt-5 w-full">
