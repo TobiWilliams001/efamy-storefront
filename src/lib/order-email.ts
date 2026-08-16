@@ -24,9 +24,14 @@ function addressLines(session: Stripe.Checkout.Session): string {
  * wrongly, and is the thing someone reads while packing a box.
  *
  * Never throws. Stripe holds the authoritative record, so a failed notification
- * must not block or reverse a payment — the caller logs and acknowledges.
+ * must not block or reverse a payment.
+ *
+ * Returns whether the email actually left, because "we tried" and "Efamy knows"
+ * are different facts and only the caller can decide what to do about the gap.
  */
-export async function notifyOrder(session: Stripe.Checkout.Session) {
+export async function notifyOrder(
+  session: Stripe.Checkout.Session,
+): Promise<boolean> {
   const customer = session.customer_details;
 
   const items =
@@ -80,4 +85,6 @@ export async function notifyOrder(session: Stripe.Checkout.Session) {
     // Logged so the order is still recoverable from the server output.
     console.error("Order email not sent:", result.reason, "\n", body);
   }
+
+  return result.sent;
 }

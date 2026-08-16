@@ -66,6 +66,8 @@ function signed(payload: string) {
 
 beforeEach(() => {
   notifyOrder.mockReset();
+  // The email left, unless a test says otherwise.
+  notifyOrder.mockResolvedValue(true);
   update.mockReset();
   retrieve.mockReset();
   // By default the session comes back with no notification flag set.
@@ -145,12 +147,46 @@ describe("stripe webhook", () => {
     expect(notifyOrder).not.toHaveBeenCalled();
   });
 
-  it("still acknowledges when the notification throws, so Stripe stops retrying", async () => {
+  it("still acknowledges when the notification throws unexpectedly", async () => {
     notifyOrder.mockRejectedValueOnce(new Error("smtp down"));
 
-    const response = await POST(signed(event("evt_email_fails")));
+    const response = await POST(signed(event("evt_email_throws")));
 
+    // An exception here is a bug in our code, not a transient send failure.
+    // Retrying it forever would not help, and the payment already succeeded.
     expect(response.status).toBe(200);
+  });
+
+  /*
+   * The failure that loses an order. The email provider rejects the send, and
+   * anything that acknowledges here tells Stripe the order was handled: no
+   * retry, no second chance, one log line as the only record.
+   */
+  it("asks Stripe to retry when the email did not send", async () => {
+    notifyOrder.mockResolvedValueOnce(false);
+
+    const response = await POST(signed(event("evt_email_rejected")));
+
+    expect(response.status).toBe(500);
+  });
+
+  it("does not mark an order announced when nobody was told", async () => {
+    notifyOrder.mockResolvedValueOnce(false);
+
+    await POST(signed(event("evt_no_false_flag")));
+
+    expect(update).not.toHaveBeenCalled();
+  });
+
+  it("lets a retry through after a failed send", async () => {
+    notifyOrder.mockResolvedValueOnce(false);
+    await POST(signed(event("evt_retryable")));
+
+    // The same event id again: the in-memory guard must not swallow the retry.
+    const second = await POST(signed(event("evt_retryable")));
+
+    expect(second.status).toBe(200);
+    expect(notifyOrder).toHaveBeenCalledTimes(2);
   });
 
   it("does not email twice when Stripe has already recorded the notification", async () => {

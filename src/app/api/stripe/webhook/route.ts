@@ -86,7 +86,23 @@ export async function POST(request: Request) {
           return Response.json({ received: true, duplicate: true });
         }
 
-        await notifyOrder(full);
+        const sent = await notifyOrder(full);
+
+        /*
+         * An email that did not send is the one case worth failing on. Stripe
+         * retries a non-2xx with backoff for days, which is exactly the
+         * behaviour wanted when a provider is briefly down or a key has just
+         * been fixed — and a run of failures is visible in the Stripe
+         * dashboard, where a swallowed error is one log line nobody reads.
+         *
+         * The flag is deliberately not written here: marking an order announced
+         * when nobody was told is what turns a retryable problem into a lost
+         * order.
+         */
+        if (!sent) {
+          seen.delete(event.id);
+          return new Response("Order notification failed", { status: 500 });
+        }
 
         try {
           await getStripe().checkout.sessions.update(session.id, {
