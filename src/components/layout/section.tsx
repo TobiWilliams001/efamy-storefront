@@ -80,7 +80,7 @@ export function SectionHeader({
         "mb-10 flex flex-col gap-6 sm:mb-12",
         centred
           ? "items-center text-center"
-          : action && "sm:flex-row sm:items-end sm:justify-between",
+          : action && "sm:flex-row sm:items-start sm:justify-between sm:gap-10",
         className,
       )}
       {...props}

@@ -80,8 +80,12 @@ on every `h1`–`h4`, and a plain class loses that fight.
 Manrope loads as a variable font spanning 200–800, so weight 800 is a real cut
 rather than a synthesised one.
 
-Buttons are uppercase with `0.08em` tracking, set on the base variant so no
-call site has to remember.
+Buttons are sentence case at medium weight, set on the base variant so no call
+site has to remember. They used to be uppercase with `0.08em` tracking, which
+was the single thing that dated them most.
+
+The uppercase treatment stays where it earns its keep: the display headings and
+the eyebrows, which is what makes a page read as Efamy's.
 
 | Level   | Size                                    | Notes                     |
 | ------- | --------------------------------------- | ------------------------- |
@@ -124,6 +128,9 @@ never harsh — cards should feel lifted, not floating.
 Sizes run `xs` to `xl`. **`xl` is 44px** and is the minimum for any primary
 action — the shadcn registry tops out below the touch-target threshold, so `xl`
 was added.
+
+Every size is a pill. One radius across buttons, filter chips and badges reads
+as one system; a mix of radii is what makes a page look assembled from parts.
 
 States: hover darkens, `focus-visible` shows a 3px ring, disabled drops to 50%
 opacity and removes pointer events.
