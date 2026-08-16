@@ -145,5 +145,22 @@ async function run() {
 
 run().catch((error) => {
   console.error("\nSeeding failed:", error.message);
+
+  /*
+   * The failure worth explaining. A token authenticates but holds no role in
+   * the project, which is what a Deploy Studio token looks like when it is
+   * asked to write content. Sanity cannot change a token's role after it is
+   * made, so the fix is always a new one.
+   */
+  if (/projectUserNotFound|not found for user ID/.test(error.message)) {
+    console.error(
+      "\nThat token has no role on this project, so it cannot read or write\n" +
+        "content. A Deploy Studio token does this: it can push a Studio build\n" +
+        "and nothing else.\n\n" +
+        "At sanity.io/manage, open the project, then API, then Tokens, and add\n" +
+        "one with the Editor role. Put it in .env.local and run pnpm seed again.",
+    );
+  }
+
   process.exit(1);
 });
