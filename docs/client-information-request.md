@@ -163,6 +163,24 @@ every one of them for the same reason: **no photograph**.
 Send a photograph of any of these and it can be on the shop the same day —
 everything else about them is already known.
 
+### Prices, checked against your list
+
+Every single-jar price on the site was compared against the price list, and
+**nine of the ten products match to the penny**: Beans at 2.75 / 4.25 / 8.25 /
+11.50, all six meat and fish sauces at 3.25 / 4.75 / 8.75 / 12.50, All Purpose
+300g at 4.75 and Coat & Cook 250g at 3.50. Nothing needed changing.
+
+Two gaps in the list itself:
+
+- [ ] **Kelewele Seasoning Mix is not on it.** The site sells it at £3.25 for
+      150g, which is the only figure we have and nothing has confirmed it
+- [ ] **The oils are the one disagreement**, below
+
+The 6, 12 and 24 packs are not sold on the site, by decision: they are trade
+pricing and go through wholesale enquiries. Say the word if you would rather
+customers could buy a case direct, as that is a change worth making deliberately
+rather than by accident.
+
 ### The chilli oil labels, read back to you
 
 Every bottle label was read by machine from your own photographs. **Please
@@ -182,10 +200,14 @@ any oil until you do, and a wrong one is worse than none.
 Two things stand out and neither has been acted on:
 
 - [ ] **Goat has no strength we could read.** Is one printed on the bottle?
-- [ ] **The labels say £1.99 for 200ml; the trade price list says £2.99 for
-      300ml.** Which is current? The labels are photographs of stock you have,
-      so they are probably right, but a price list can be newer than the bottles
-      still on the shelf. The site currently shows £1.99 / 200ml.
+- [ ] **The labels say £1.99 for 200ml; your price list says £2.99.** Which is
+      current? The labels are photographs of stock you have, so they are
+      probably right, but a price list can be newer than the bottles still on
+      the shelf. The site shows £1.99 / 200ml and will not change until you say.
+
+      The most recent list gives no size against the oils at all, so it does not
+          settle 200ml against 300ml either. **This is the only price on the whole
+          site that is in doubt**, so it is the one answer worth sending first.
 
 ---
 
