@@ -13,6 +13,8 @@ type ProductShowcaseProps = {
   action?: { label: string; href: string };
   surface?: React.ComponentProps<typeof Section>["surface"];
   eagerCount?: number;
+  /** Rendered under the grid, inside the same band. */
+  children?: React.ReactNode;
 };
 
 export function ProductShowcase({
@@ -29,6 +31,7 @@ export function ProductShowcase({
    * are the first thing on screen.
    */
   eagerCount = 0,
+  children,
 }: ProductShowcaseProps) {
   if (products.length === 0) {
     return null;
@@ -49,6 +52,7 @@ export function ProductShowcase({
         }
       />
       <ProductGrid products={products} eagerCount={eagerCount} />
+      {children}
     </Section>
   );
 }
