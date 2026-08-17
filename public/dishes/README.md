@@ -6,16 +6,19 @@ without an image here.
 
 Filenames must match the `image` paths in `src/lib/dishes.ts`.
 
-| Filename             | Dish          | Have it            |
-| -------------------- | ------------- | ------------------ |
-| `spaghetti.jpg`      | Spaghetti     | yes                |
-| `fried-chicken.jpg`  | Fried Chicken | yes, Efamy's own   |
-| `kelewele.jpg`       | Kelewele      | yes                |
-| `rice-stew.jpg`      | Rice & Stew   | yes                |
-| `kenkey-fish.jpg`    | Kenkey & Fish | no, renders a swatch |
-| `jollof-rice.jpg`    | Jollof Rice   | no, renders a swatch |
-| `waakye.jpg`         | Waakye        | no, renders a swatch |
-| `yam-plantain.jpg`   | Yam & Plantain | no, renders a swatch |
+| Filename              | Dish             |
+| --------------------- | ---------------- |
+| `spaghetti.jpg`       | Spaghetti        |
+| `kenkey-fish.jpg`     | Kenkey & Fish    |
+| `jollof-rice.jpg`     | Jollof Rice      |
+| `fried-chicken.jpg`   | Fried Chicken    |
+| `waakye.jpg`          | Waakye           |
+| `fried-fish-yam.jpg`  | Fried Fish & Yam |
+| `kelewele.jpg`        | Kelewele         |
+| `rice-stew.jpg`       | Rice & Stew      |
+
+Every tile has a photograph, so the swatch fallback no longer fires. It stays
+in the code because a tile added without one should degrade rather than break.
 
 A tile is named after the photograph, never the other way round. The row used to
 carry a "Grilled Chicken" tile with no photograph behind it; it is now Fried

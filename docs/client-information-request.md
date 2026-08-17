@@ -20,14 +20,14 @@ The shop cannot take an order until these exist.
       details. This cannot be set up by anyone else — it needs the company
       details, a bank account and ID verification.
 
-### One photograph still missing
+### Photographs, now complete
 
-- [ ] **A single jar of All Purpose Seasoning Mix.** Every other product shows
-      one jar; All Purpose shows a tray of about eight, which is the only
-      photograph we have of it. Next to the sauces it looks like a different
-      kind of listing. The other image on file is a "Free Sample" pouch, which
-      is a different pack and would mislead. A phone photo of one jar on a plain
-      surface is enough.
+Every product shows a single jar, and every dish on the site has a photograph.
+Nothing on the shop falls back to a placeholder.
+
+- [x] **A single jar of All Purpose Seasoning Mix** — received and in use. It
+      previously showed a tray of about eight jars, which read as a different
+      kind of listing beside the sauces.
 
 ### Catering sizes
 
@@ -144,24 +144,18 @@ legal matter.
       with "all the quality and taste except chillies". Nothing on the site
       offers it, and it is the jar a family with young children buys.
 
-### Products we have prices for but cannot show
+### Everything on your price list is now on the shop
 
-These are on the price list with no photograph or details, so they are not on
-the site:
+Coat & Cook, All Purpose Seasoning and Kelewele Seasoning carry ingredients and
+allergens transcribed from the Coat & Cook jar. The rest are listed with the
+details we could read.
 
-**Coat & Cook, All Purpose Seasoning and Kelewele Seasoning are already on the
-site**, with ingredients and allergens transcribed from the Coat & Cook jar.
-
-Against the range on your own product sheet, nine items are still missing —
-every one of them for the same reason: **no photograph**.
-
-- [ ] **Goat Chilli Sauce** — photo, and which strengths you make
-- [ ] **Turkey Chilli Sauce** — photo, and which strengths you make
-- [x] **The seven chilli oils** — photographed and now on the shop. Two
-      questions about them remain, below
-
-Send a photograph of any of these and it can be on the shop the same day —
-everything else about them is already known.
+- [x] **Goat Chilli Sauce** — on the shop. Still needed: **which strengths you
+      make it in**. It is listed at one strength on the strength of the jar we
+      were sent
+- [x] **Turkey Chilli Sauce** — on the shop, same question about strengths
+- [x] **The seven chilli oils** — photographed and on the shop. Two questions
+      about them remain, below
 
 ### Prices, checked against your list
 

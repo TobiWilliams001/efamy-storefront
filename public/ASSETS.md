@@ -127,14 +127,13 @@ file without updating that file breaks the image.
 
 ## Still needed
 
-- **Dish photography** — four of the nine meal tiles still fall back to a warm
-  swatch: Kenkey & Fish, Jollof Rice, Waakye, and Yam & Plantain. Square,
-  cropped tight on the plate. Efamy's photographs covered their premises well
-  and their cooking barely at all, so this gap is unchanged by the drop.
-- **Recipe photography** — five of the six recipes still show a coloured
-  swatch. Only Coat & Cook Chicken has a photograph.
-- **A single jar of All Purpose Seasoning** — it currently shows a tray of
-  about eight jars, which sits oddly beside the single-jar sauces.
+- **Licensing for the dish photographs.** Every meal tile and every recipe now
+  carries a real photograph, and the swatch fallback no longer fires anywhere.
+  Several were sourced from Pinterest rather than shot for Efamy. Not
+  AI-generated is not the same as licensed to publish, and a food brand using
+  another photographer's work is an easy complaint to receive. **Confirm where
+  each came from, or replace them with photographs Efamy owns.** The same rule
+  that keeps `unlicensed-assets/` out of the build applies here.
 - **Logo files** (`logos/`) — the wordmark is set in type today, not an asset.
 - **Open Graph share image** — nothing is set, so links shared to WhatsApp or
   social currently preview without an image.
