@@ -4,9 +4,14 @@ import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 
-export function CallToAction() {
+export function CallToAction({
+  surface = "clay",
+}: {
+  /** The pages that want an unbroken white run pass "default". */
+  surface?: React.ComponentProps<typeof Section>["surface"];
+}) {
   return (
-    <Section surface="clay" spacing="sm" width="narrow">
+    <Section surface={surface} spacing="sm" width="narrow">
       <div className="text-center">
         <h2 className="text-3xl text-balance sm:text-4xl">
           Cook something worth sharing

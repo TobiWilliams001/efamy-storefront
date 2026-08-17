@@ -174,7 +174,7 @@ export default function AboutPage() {
         </ul>
       </Section>
 
-      <Section surface="muted">
+      <Section>
         <SectionHeader align="center" title="What goes in the jar" />
 
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
@@ -255,7 +255,7 @@ export default function AboutPage() {
       </Section>
 
       <WhyEfamy />
-      <CallToAction />
+      <CallToAction surface="default" />
     </>
   );
 }
