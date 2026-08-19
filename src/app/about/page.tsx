@@ -101,7 +101,7 @@ export default function AboutPage() {
             <span className="text-gold">one batch, in 2008.</span>
           </>
         }
-        description="Ghanaian chilli sauces and seasonings, made in Corby ever since. The same recipes, the same short ingredient lists, and no shortcuts we would not take at home."
+        description="The taste of Ghana, made in Corby. Authentic recipes. Simple ingredients. No shortcuts, just the way we would make it at home."
       />
 
       <Section>
