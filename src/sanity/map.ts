@@ -41,6 +41,8 @@ export function mapProduct(raw: Record<string, unknown>): Product | null {
         .map((entry) => ({
           size: String(entry.size ?? ""),
           heat: isHeat(entry.heat) ? entry.heat : undefined,
+          // Only where mild and hot look different; the card image otherwise.
+          image: mapImage(entry.image as RawImage) ?? undefined,
           price: Number(entry.price ?? 0),
           compareAtPrice:
             typeof entry.compareAtPrice === "number"

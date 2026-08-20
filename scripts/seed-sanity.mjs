@@ -109,13 +109,23 @@ async function run() {
       slug: { _type: "slug", current: product.slug },
       summary: product.summary,
       description: product.description,
-      variants: product.variants.map((variant) => ({
-        _type: "variant",
-        _key: variant.size,
-        size: variant.size,
-        price: variant.price,
-        inStock: variant.inStock,
-      })),
+      /*
+       * Strength and the per-strength photograph both belong on the variant.
+       * Dropping them cost the shop its heat filter and left Beef listing
+       * 175g twice, because the key was the size and a sauce sold mild and
+       * hot repeats every size.
+       */
+      variants: await Promise.all(
+        product.variants.map(async (variant) => ({
+          _type: "variant",
+          _key: [variant.heat, variant.size].filter(Boolean).join("-"),
+          heat: variant.heat,
+          size: variant.size,
+          price: variant.price,
+          inStock: variant.inStock,
+          image: variant.image ? await uploadImage(variant.image) : undefined,
+        })),
+      ),
       category: {
         _type: "reference",
         _ref: categoryIds.get(product.category.slug),

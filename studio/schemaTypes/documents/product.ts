@@ -92,6 +92,21 @@ export const product = defineType({
               type: 'boolean',
               initialValue: true,
             }),
+            defineField({
+              name: 'image',
+              title: 'Photograph for this strength',
+              type: 'image',
+              options: {hotspot: true},
+              description:
+                'Only where mild and hot look different on the shelf. Left empty, the product photograph is used.',
+              fields: [
+                defineField({
+                  name: 'alt',
+                  type: 'string',
+                  title: 'Alternative text',
+                }),
+              ],
+            }),
           ],
           preview: {
             select: {title: 'size', price: 'price', inStock: 'inStock'},
