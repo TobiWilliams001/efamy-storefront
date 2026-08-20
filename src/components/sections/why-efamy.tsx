@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Flame, Leaf, MapPin, Utensils } from "lucide-react";
 
 import { Rule } from "@/components/layout/rule";
@@ -31,20 +30,10 @@ const reasons = [
   },
 ];
 
-/*
- * Efamy's own kitchen rather than a styled shot: the sauce itself, in volume,
- * going into the jars it is sold in. The claims beside it are about how the
- * food is made, so the photograph should be of it being made.
- */
-const feature = {
-  src: "/photos/filling-jars.jpg",
-  alt: "Chilli sauce in the hopper of a filling machine, with empty jars waiting alongside",
-};
-
 export function WhyEfamy() {
   return (
     <Section>
-      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="max-w-3xl">
         <div>
           <h2 className="display-title text-2xl text-brand sm:text-3xl lg:text-4xl">
             Why choose Efamy?
@@ -70,16 +59,6 @@ export function WhyEfamy() {
               </li>
             ))}
           </ul>
-        </div>
-
-        <div className="relative aspect-4/3 overflow-hidden rounded-lg shadow-card">
-          <Image
-            src={feature.src}
-            alt={feature.alt}
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
-          />
         </div>
       </div>
     </Section>
