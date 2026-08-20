@@ -166,10 +166,10 @@ export const products: Product[] = [
       "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the same recipe carries both strengths. Mild simply has less chilli.\n\nSpoon it over rice and stew, stir it through jollof, or take a jar to a barbecue.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     dietary: ["No artificial preservatives"],
     image: {
-      url: "/products/cutout/beef-chilli-sauce-hot-250g.png",
-      alt: "Jar of Efamy beef chilli sauce with a burgundy label",
-      width: 940,
-      height: 940,
+      url: "/products/cutout/beef-chilli-sauce-mild-with-ingredients.png",
+      alt: "Jar of Efamy beef chilli sauce, mild, with the fresh ingredients it is made from",
+      width: 900,
+      height: 1200,
     },
     images: [
       {
