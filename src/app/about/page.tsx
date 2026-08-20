@@ -43,21 +43,6 @@ const milestones = [
  */
 const kitchen = [
   {
-    src: "/photos/cooking-pots.jpg",
-    alt: "Four large stockpots on gas burners along a tiled kitchen wall, fed by a propane cylinder",
-    caption: "Batches are cooked in pots, on gas.",
-  },
-  {
-    src: "/photos/mixing.jpg",
-    alt: "A floor-standing planetary mixer with its bowl part full",
-    caption: "Blending, in a mixer that has earned its scratches.",
-  },
-  {
-    src: "/photos/filling-jars.jpg",
-    alt: "A filling machine holding chilli sauce above a row of empty glass jars",
-    caption: "Filled by machine, a jar at a time.",
-  },
-  {
     src: "/photos/finished-trays.jpg",
     alt: "Stacked trays of finished Efamy jars, sorted into colours by flavour",
     caption: "Trayed up by flavour once they are filled.",
@@ -217,6 +202,18 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
+
+        <figure className="mt-12">
+          <div className="relative aspect-5/4 overflow-hidden rounded-lg shadow-card">
+            <Image
+              src="/products/collections/range-group-shot.jpg"
+              alt="The Efamy range together: chilli sauces, chilli oils and seasonings"
+              fill
+              sizes="(min-width: 1024px) 900px, 100vw"
+              className="object-cover"
+            />
+          </div>
+        </figure>
 
         <p className="mt-8 text-center text-lg font-medium text-brand">
           No colours, additives or preservatives added.
