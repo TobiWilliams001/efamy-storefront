@@ -203,13 +203,13 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <figure className="mt-12">
+        <figure className="mx-auto mt-12 max-w-xl">
           <div className="relative aspect-5/4 overflow-hidden rounded-lg shadow-card">
             <Image
               src="/products/collections/range-group-shot.jpg"
               alt="The Efamy range together: chilli sauces, chilli oils and seasonings"
               fill
-              sizes="(min-width: 1024px) 900px, 100vw"
+              sizes="(min-width: 640px) 576px, 100vw"
               className="object-cover"
             />
           </div>
