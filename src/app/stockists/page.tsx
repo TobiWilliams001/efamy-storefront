@@ -16,6 +16,29 @@ export const metadata: Metadata = {
   alternates: { canonical: routes.stockists },
 };
 
+/*
+ * Sold to caterers by enquiry, never priced on the site: trade buyers want an
+ * invoice and a delivery arrangement, and no retail price for a bucket has been
+ * agreed. Nothing here states a weight the client has not confirmed.
+ */
+const cateringSizes = [
+  {
+    src: "/products/catering/all-purpose-seasoning-3kg.jpg",
+    name: "All Purpose Seasoning Mix",
+    alt: "A 3kg catering bucket of Efamy All Purpose Seasoning Mix, Original",
+  },
+  {
+    src: "/products/catering/kelewele-seasoning-3kg.jpg",
+    name: "Kelewele Seasoning Mix",
+    alt: "A 3kg catering bucket of Efamy Kelewele Seasoning Mix",
+  },
+  {
+    src: "/products/catering/coat-and-cook-3kg.jpg",
+    name: "Coat & Cook",
+    alt: "A 3kg catering bucket of Efamy Coat & Cook",
+  },
+];
+
 const wholesalePoints = [
   {
     icon: Store,
@@ -140,6 +163,40 @@ export default function StockistsPage() {
               </div>
             )}
           </div>
+        </div>
+      </Section>
+
+      <Section surface="muted">
+        <SectionHeader
+          eyebrow="For caterers"
+          title="Seasonings in 3kg buckets"
+          description="Restaurants and caterers buy the seasonings in 3kg buckets. They are not sold through the shop; tell us what you need and we will quote you."
+        />
+
+        <ul className="grid gap-8 sm:grid-cols-3">
+          {cateringSizes.map((bucket) => (
+            <li key={bucket.src}>
+              <div className="relative aspect-square overflow-hidden rounded-lg bg-background">
+                <Image
+                  src={bucket.src}
+                  alt={bucket.alt}
+                  fill
+                  sizes="(min-width: 640px) 33vw, 100vw"
+                  className="object-contain p-4"
+                />
+              </div>
+              <h3 className="mt-4 font-heading text-lg">{bucket.name}</h3>
+              <p data-numeric className="mt-1 text-sm text-muted-foreground">
+                3kg bucket
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-10">
+          <Button asChild size="xl" variant="accent">
+            <Link href={routes.contact}>Enquire about catering sizes</Link>
+          </Button>
         </div>
       </Section>
 

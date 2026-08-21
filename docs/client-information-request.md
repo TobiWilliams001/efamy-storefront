@@ -35,10 +35,15 @@ Efamy supplies restaurants in **3kg buckets** of Kelewele Seasoning, All Purpose
 Seasoning and Coat & Cook. These are not on the shop, because trade pricing does
 not belong on a retail site.
 
-- [ ] **Should catering buckets be buyable online, or an enquiry?** An enquiry
-      is the safer default: trade buyers usually want an invoice and a delivery
-      arrangement rather than a card checkout.
-- [ ] **If buyable, what is the retail price of each 3kg bucket?**
+- [x] **Should catering buckets be buyable online, or an enquiry?** Enquiry.
+      They are shown on the stockists page with no price and a link to the
+      enquiry form, so no retail price is needed.
+- [ ] **Are the bucket labels final?** The photographs supplied show a Ghanaian
+      manufacturing address, a Ghanaian phone number and `efamyfoods.com`,
+      while every page of the site says made in Corby and the domain is
+      `efamy.co.uk`. The Coat & Cook bucket is also stickered 250g when the
+      bucket is 3kg. They are shown small enough that none of this is legible,
+      but the labels should be confirmed before they are used any larger.
 
 ### Delivery
 
