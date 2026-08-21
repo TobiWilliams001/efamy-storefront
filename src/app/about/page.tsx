@@ -203,18 +203,6 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <figure className="mx-auto mt-12 max-w-xl">
-          <div className="relative aspect-5/4 overflow-hidden rounded-lg shadow-card">
-            <Image
-              src="/products/collections/range-group-shot.jpg"
-              alt="The Efamy range together: chilli sauces, chilli oils and seasonings"
-              fill
-              sizes="(min-width: 640px) 576px, 100vw"
-              className="object-cover"
-            />
-          </div>
-        </figure>
-
         <p className="mt-8 text-center text-lg font-medium text-brand">
           No colours, additives or preservatives added.
         </p>

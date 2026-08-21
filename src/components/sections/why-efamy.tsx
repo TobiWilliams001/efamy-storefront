@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Flame, Leaf, MapPin, Utensils } from "lucide-react";
 
 import { Rule } from "@/components/layout/rule";
@@ -33,7 +34,7 @@ const reasons = [
 export function WhyEfamy() {
   return (
     <Section>
-      <div className="max-w-3xl">
+      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
           <h2 className="display-title text-2xl text-brand sm:text-3xl lg:text-4xl">
             Why choose Efamy?
@@ -59,6 +60,16 @@ export function WhyEfamy() {
               </li>
             ))}
           </ul>
+        </div>
+
+        <div className="relative aspect-5/4 overflow-hidden rounded-lg shadow-card">
+          <Image
+            src="/products/collections/range-group-shot.jpg"
+            alt="The Efamy range together: chilli sauces, chilli oils and seasonings"
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
         </div>
       </div>
     </Section>
