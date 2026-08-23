@@ -40,8 +40,8 @@ export default function ContactPage() {
          */}
         <div className="relative h-44 sm:h-56 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[30%]">
           <Image
-            src="/dishes/jollof-rice.jpg"
-            alt="A plate of jollof rice cooked with Efamy chilli sauce"
+            src="/products/collections/range-lineup.jpg"
+            alt="The Efamy range: chilli sauces, chilli oils and seasonings"
             fill
             sizes="(min-width: 1024px) 30vw, 100vw"
             className="object-cover"
