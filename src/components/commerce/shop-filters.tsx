@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Check, ChevronDown, X } from "lucide-react";
 
+import { DismissMenus } from "@/components/commerce/dismiss-menus";
 import { SortSelect } from "@/components/commerce/sort-select";
 import {
   shopHref,
@@ -69,8 +70,9 @@ function Segmented({
 
 /**
  * A disclosure rather than a listbox, so the menu opens and the links inside
- * navigate with no JavaScript at all. It does not close on an outside click,
- * which is the price of that; picking an option navigates, which closes it.
+ * navigate with no JavaScript at all. `DismissMenus` adds the outside click
+ * and Escape handling a native select gives you for free; without it the menu
+ * still closes when an option is chosen.
  */
 function Menu({
   filters,
@@ -88,7 +90,7 @@ function Menu({
   const chosen = options.find((option) => option.value === active);
 
   return (
-    <details className="relative">
+    <details data-filter-menu className="relative">
       <summary
         className={cn(
           "inline-flex min-h-11 cursor-pointer list-none items-center gap-1.5 rounded-full border px-4 text-sm transition-colors sm:min-h-9 sm:px-3.5",
@@ -170,6 +172,8 @@ export function ShopFilters({
 
   return (
     <div className="mb-10">
+      <DismissMenus />
+
       {showCategories ? (
         <nav aria-label="Product categories" className="border-b">
           <ul className="-mb-px flex gap-x-7 overflow-x-auto whitespace-nowrap">
