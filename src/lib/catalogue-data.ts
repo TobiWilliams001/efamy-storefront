@@ -205,19 +205,11 @@ export const products: Product[] = [
       "Real chicken in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions.\n\nSpoon it over rice, stir it through pasta, or serve it with fried plantain and yam.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     dietary: ["No artificial preservatives"],
     image: {
-      url: "/products/cutout/chicken-chilli-sauce-hot-250g.png",
-      alt: "Jar of Efamy chicken chilli sauce with an orange label",
-      width: 941,
-      height: 941,
+      url: "/products/cutout/chicken-chilli-sauce-hot.png",
+      alt: "Jar of Efamy chicken chilli sauce, hot",
+      width: 1303,
+      height: 1303,
     },
-    images: [
-      {
-        url: "/products/cutout/chicken-chilli-sauce-hot.png",
-        alt: "Jar of Efamy chicken chilli sauce, hot",
-        width: 1303,
-        height: 1303,
-      },
-    ],
     storage: STORAGE_SAUCE,
     servingSuggestions: ["Rice", "Fried plantain", "Yam"],
     category: category.sauces,
