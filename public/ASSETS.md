@@ -22,19 +22,21 @@ logos/            The wordmark, light and dark.
 | `products/hero/hero-hot-sauce-trio.jpg` | Homepage hero, social card |
 | `products/collections/range-lineup.jpg` | About page                 |
 | `dishes/*.jpg`                          | Meal pairings row          |
-| `photos/filling-jars.jpg`               | "Why choose Efamy" panel   |
-| `photos/cooking-pots.jpg`               | About, "Where it is made"  |
 | `photos/finished-trays.jpg`             | About, "Where it is made"  |
+| `photos/production-room.jpg`            | About, "Where it is made"  |
 | `photos/stockroom.jpg`                  | About, "Where it is made"  |
+| `photos/bottling-chilli-oil.jpg`        | Stockists, wholesale       |
 | `logos/*.png`                           | Header and footer          |
 
-`photos/bottling-chilli-oil.jpg`, `photos/jars-lined-up.jpg`,
-`photos/mixing.jpg` and `photos/production-room.jpg` are filed and unused —
-kept because they are real and cost nothing to hold, ready for a page that
-needs them.
+Nothing in `public/` is unreferenced. The client cut three kitchen photographs
+from About and the shelf photograph from Stockists; those are in
+`assets/source/premises/`, in git and out of the build.
 
 Originals and superseded files live in `assets/` at the repo root, outside
-`public/`, so they are kept without being deployed.
+`public/`, so they are kept without being deployed. A photograph that comes
+off a page goes there rather than into the bin: `assets/source/premises/`
+holds Efamy's own kitchen photographs, and `assets/source/superseded-cutouts/`
+the jars that have been replaced. Both are in git; neither ships.
 
 ## The source drop in `photos-src/`
 
