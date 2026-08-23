@@ -172,8 +172,16 @@ export const products: Product[] = [
           703,
         ),
       ),
+      ...MEAT(
+        "extra-hot",
+        jar(
+          "beef-chilli-sauce-extra-hot",
+          "Jar of Efamy beef chilli sauce, extra hot",
+          1093,
+        ),
+      ),
     ],
-    summary: "Chunks of real beef, in mild or hot.",
+    summary: "Chunks of real beef, in mild, hot or extra hot.",
     description:
       "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the same recipe carries both strengths. Mild simply has less chilli.\n\nSpoon it over rice and stew, stir it through jollof, or take a jar to a barbecue.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     dietary: ["No artificial preservatives"],
@@ -184,6 +192,12 @@ export const products: Product[] = [
       height: 1200,
     },
     images: [
+      {
+        url: "/products/cutout/beef-chilli-sauce-extra-hot-label.png",
+        alt: "Efamy beef chilli sauce, extra hot, showing the ingredients on the label",
+        width: 1254,
+        height: 1254,
+      },
       {
         url: "/products/cutout/beef-chilli-sauce-hot.png",
         alt: "Jar of Efamy beef chilli sauce, hot",
@@ -199,7 +213,24 @@ export const products: Product[] = [
     id: "chicken-chilli-sauce",
     slug: "chicken-chilli-sauce",
     name: "Chicken Chilli Sauce",
-    variants: MEAT("hot"),
+    variants: [
+      ...MEAT(
+        "hot",
+        jar(
+          "chicken-chilli-sauce-hot",
+          "Jar of Efamy chicken chilli sauce, hot",
+          1303,
+        ),
+      ),
+      ...MEAT(
+        "extra-hot",
+        jar(
+          "chicken-chilli-sauce-extra-hot",
+          "Jar of Efamy chicken chilli sauce, extra hot",
+          1137,
+        ),
+      ),
+    ],
     summary: "Chunks of real chicken in a chilli sauce with a proper kick.",
     description:
       "Real chicken in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions.\n\nSpoon it over rice, stir it through pasta, or serve it with fried plantain and yam.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
@@ -210,6 +241,14 @@ export const products: Product[] = [
       width: 1303,
       height: 1303,
     },
+    images: [
+      {
+        url: "/products/cutout/chicken-chilli-sauce-extra-hot-label.png",
+        alt: "Efamy chicken chilli sauce, extra hot, showing the ingredients on the label",
+        width: 1432,
+        height: 1432,
+      },
+    ],
     storage: STORAGE_SAUCE,
     servingSuggestions: ["Rice", "Fried plantain", "Yam"],
     category: category.sauces,
@@ -235,6 +274,14 @@ export const products: Product[] = [
           686,
         ),
       ),
+      ...MEAT(
+        "extra-hot",
+        jar(
+          "fish-chilli-sauce-extra-hot",
+          "Jar of Efamy fish chilli sauce, extra hot",
+          1151,
+        ),
+      ),
     ],
     summary: "Chunks of real fish, in mild or hot.",
     description:
@@ -248,6 +295,12 @@ export const products: Product[] = [
       height: 701,
     },
     images: [
+      {
+        url: "/products/cutout/fish-chilli-sauce-extra-hot-label.png",
+        alt: "Efamy fish chilli sauce, extra hot, showing the ingredients on the label",
+        width: 1105,
+        height: 1105,
+      },
       {
         url: "/products/cutout/fish-chilli-sauce-hot.png",
         alt: "Jar of Efamy fish chilli sauce, hot",
