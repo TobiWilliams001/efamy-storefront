@@ -67,6 +67,18 @@ function single(size: string, price: number): ProductVariant[] {
   return [{ size, price, inStock: true }];
 }
 
+/**
+ * One bottle, at the strength printed on its label.
+ *
+ * Read off the photographs the client supplied in August 2026: Beans, Beef,
+ * Fish and Turkey read Mild, Goat and Pork read Hot, Chicken reads Extra hot.
+ * Those labels also read 300ml and carry no price, which settles the older
+ * 200ml at £1.99 reading against the £2.99 on the price list.
+ */
+function bottle(heat: Heat): ProductVariant[] {
+  return [{ size: "300ml", heat, price: 299, inStock: true }];
+}
+
 export const categories: ProductCategory[] = [
   {
     id: "cat-chilli-sauces",
@@ -77,8 +89,8 @@ export const categories: ProductCategory[] = [
     image: {
       url: "/products/cutout/chicken-chilli-sauce-hot.png",
       alt: "Jar of Efamy chicken chilli sauce, hot",
-      width: 906,
-      height: 906,
+      width: 1303,
+      height: 1303,
     },
     productCount: 7,
   },
@@ -105,8 +117,8 @@ export const categories: ProductCategory[] = [
     image: {
       url: "/products/oils/beef-chilli-oil.png",
       alt: "Bottle of Efamy beef flavoured chilli oil",
-      width: 1403,
-      height: 1403,
+      width: 1498,
+      height: 1498,
     },
     productCount: 7,
   },
@@ -202,8 +214,8 @@ export const products: Product[] = [
       {
         url: "/products/cutout/chicken-chilli-sauce-hot.png",
         alt: "Jar of Efamy chicken chilli sauce, hot",
-        width: 906,
-        height: 906,
+        width: 1303,
+        height: 1303,
       },
     ],
     storage: STORAGE_SAUCE,
@@ -335,7 +347,7 @@ export const products: Product[] = [
     id: "beans-chilli-oil",
     slug: "beans-chilli-oil",
     name: "Beans Chilli Oil",
-    variants: single("200ml", 299),
+    variants: bottle("mild"),
     summary: "Beans flavoured, and suitable for vegetarians.",
     description:
       "Chilli oil with the flavour of our beans sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
@@ -343,8 +355,8 @@ export const products: Product[] = [
     image: {
       url: "/products/oils/beans-chilli-oil.png",
       alt: "Bottle of Efamy beans flavoured chilli oil",
-      width: 1376,
-      height: 1376,
+      width: 1326,
+      height: 1326,
     },
     storage: STORAGE_DRY,
     category: category.oils,
@@ -353,7 +365,7 @@ export const products: Product[] = [
     id: "beef-chilli-oil",
     slug: "beef-chilli-oil",
     name: "Beef Chilli Oil",
-    variants: single("200ml", 299),
+    variants: bottle("mild"),
     summary: "Beef flavoured, for anything off the grill.",
     description:
       "Chilli oil with the flavour of our beef sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
@@ -361,8 +373,8 @@ export const products: Product[] = [
     image: {
       url: "/products/oils/beef-chilli-oil.png",
       alt: "Bottle of Efamy beef flavoured chilli oil",
-      width: 1403,
-      height: 1403,
+      width: 1498,
+      height: 1498,
     },
     storage: STORAGE_DRY,
     category: category.oils,
@@ -371,7 +383,7 @@ export const products: Product[] = [
     id: "chicken-chilli-oil",
     slug: "chicken-chilli-oil",
     name: "Chicken Chilli Oil",
-    variants: single("200ml", 299),
+    variants: bottle("extra-hot"),
     summary: "Chicken flavoured, for rice, chips and roast dinners.",
     description:
       "Chilli oil with the flavour of our chicken sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
@@ -379,8 +391,8 @@ export const products: Product[] = [
     image: {
       url: "/products/oils/chicken-chilli-oil.png",
       alt: "Bottle of Efamy chicken flavoured chilli oil",
-      width: 1222,
-      height: 1222,
+      width: 1326,
+      height: 1326,
     },
     storage: STORAGE_DRY,
     category: category.oils,
@@ -389,7 +401,7 @@ export const products: Product[] = [
     id: "fish-chilli-oil",
     slug: "fish-chilli-oil",
     name: "Fish Chilli Oil",
-    variants: single("200ml", 299),
+    variants: bottle("mild"),
     summary: "Fish flavoured, for kenkey, grilled fish and salads.",
     description:
       "Chilli oil with the flavour of our fish sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
@@ -398,8 +410,8 @@ export const products: Product[] = [
     image: {
       url: "/products/oils/fish-chilli-oil.png",
       alt: "Bottle of Efamy fish flavoured chilli oil",
-      width: 1243,
-      height: 1243,
+      width: 1317,
+      height: 1317,
     },
     storage: STORAGE_DRY,
     category: category.oils,
@@ -408,7 +420,7 @@ export const products: Product[] = [
     id: "goat-chilli-oil",
     slug: "goat-chilli-oil",
     name: "Goat Chilli Oil",
-    variants: single("200ml", 299),
+    variants: bottle("hot"),
     summary: "Goat flavoured, for yam, rice and stews.",
     description:
       "Chilli oil with the flavour of our goat sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
@@ -416,8 +428,8 @@ export const products: Product[] = [
     image: {
       url: "/products/oils/goat-chilli-oil.png",
       alt: "Bottle of Efamy goat flavoured chilli oil",
-      width: 1362,
-      height: 1362,
+      width: 1330,
+      height: 1330,
     },
     storage: STORAGE_DRY,
     category: category.oils,
@@ -426,7 +438,7 @@ export const products: Product[] = [
     id: "pork-chilli-oil",
     slug: "pork-chilli-oil",
     name: "Pork Chilli Oil",
-    variants: single("200ml", 299),
+    variants: bottle("hot"),
     summary: "Pork flavoured, for barbecues and fried plantain.",
     description:
       "Chilli oil with the flavour of our pork sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
@@ -434,8 +446,8 @@ export const products: Product[] = [
     image: {
       url: "/products/oils/pork-chilli-oil.png",
       alt: "Bottle of Efamy pork flavoured chilli oil",
-      width: 1260,
-      height: 1260,
+      width: 1315,
+      height: 1315,
     },
     storage: STORAGE_DRY,
     category: category.oils,
@@ -444,7 +456,7 @@ export const products: Product[] = [
     id: "turkey-chilli-oil",
     slug: "turkey-chilli-oil",
     name: "Turkey Chilli Oil",
-    variants: single("200ml", 299),
+    variants: bottle("mild"),
     summary: "Turkey flavoured, for pasta, rice and roast dinners.",
     description:
       "Chilli oil with the flavour of our turkey sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
@@ -452,8 +464,8 @@ export const products: Product[] = [
     image: {
       url: "/products/oils/turkey-chilli-oil.png",
       alt: "Bottle of Efamy turkey flavoured chilli oil",
-      width: 1231,
-      height: 1231,
+      width: 1307,
+      height: 1307,
     },
     storage: STORAGE_DRY,
     category: category.oils,
@@ -527,8 +539,8 @@ export const products: Product[] = [
     image: {
       url: "/products/cutout/coat-and-cook.png",
       alt: "Jar of Efamy Coat & Cook seasoned coating mix, 250g",
-      width: 991,
-      height: 991,
+      width: 1224,
+      height: 1224,
     },
     images: [
       {
