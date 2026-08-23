@@ -2,9 +2,9 @@ import Link from "next/link";
 import { Check, ChevronDown, X } from "lucide-react";
 
 import { DismissMenus } from "@/components/commerce/dismiss-menus";
-import { SortSelect } from "@/components/commerce/sort-select";
 import {
   shopHref,
+  sortOptions,
   type AvailableOptions,
   type ProductFilters,
 } from "@/lib/product-filters";
@@ -80,12 +80,14 @@ function Menu({
   active,
   label,
   param,
+  align = "start",
 }: {
   filters: ProductFilters;
   options: readonly Option[];
   active: string | undefined;
   label: string;
-  param: "price" | "dietary";
+  param: "price" | "dietary" | "sort";
+  align?: "start" | "end";
 }) {
   const chosen = options.find((option) => option.value === active);
 
@@ -103,7 +105,24 @@ function Menu({
         <ChevronDown aria-hidden="true" className="size-3.5" />
       </summary>
 
-      <div className="absolute left-0 z-20 mt-2 max-w-[calc(100vw-2rem)] min-w-44 rounded-lg border border-neutral-200 bg-card p-1 shadow-card-hover">
+      {/* Tapping the scrim closes the sheet; DismissMenus watches for it. */}
+      <span
+        data-menu-scrim
+        aria-hidden="true"
+        className="fixed inset-0 z-20 bg-ink/20 sm:hidden"
+      />
+
+      <div
+        className={cn(
+          "z-30 border-neutral-200 bg-card shadow-card-hover",
+          "animate-in duration-150 fade-in-0",
+          // A bottom sheet on a phone, a popover from the button on desktop.
+          "fixed inset-x-0 bottom-0 rounded-t-2xl border-t p-2 slide-in-from-bottom-4",
+          "sm:absolute sm:inset-x-auto sm:bottom-auto sm:mt-2 sm:max-w-[calc(100vw-2rem)]",
+          "sm:min-w-44 sm:rounded-lg sm:border sm:p-1 sm:zoom-in-95 sm:slide-in-from-top-1",
+          align === "end" ? "sm:right-0" : "sm:left-0",
+        )}
+      >
         {[{ value: "", label: `All ${label.toLowerCase()}` }, ...options].map(
           (option) => {
             const on = option.value ? active === option.value : !active;
@@ -244,7 +263,14 @@ export function ShopFilters({
         ) : null}
 
         <div className="flex w-full justify-end sm:ms-auto sm:w-auto">
-          <SortSelect value={filters.sort} />
+          <Menu
+            label="Sort"
+            param="sort"
+            align="end"
+            filters={filters}
+            options={sortOptions}
+            active={filters.sort === "featured" ? undefined : filters.sort}
+          />
         </div>
       </div>
 
