@@ -59,7 +59,7 @@ export const siteConfig: SiteConfig = {
     light: { src: "/logos/efamy-logo-light.png", width: 742, height: 336 },
   },
   contact: {
-    email: "info@efamys.co.uk",
+    email: "info@efamy.co.uk",
     phone: "+44 (0)7904 214 552",
     whatsapp: "447904214552",
     hours: "Monday to Friday, 9am to 5pm",
