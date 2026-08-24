@@ -2,7 +2,8 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import Stripe from "stripe";
 
 const notifyOrder = vi.hoisted(() => vi.fn());
-vi.mock("@/lib/order-email", () => ({ notifyOrder }));
+const confirmOrderToCustomer = vi.hoisted(() => vi.fn());
+vi.mock("@/lib/order-email", () => ({ notifyOrder, confirmOrderToCustomer }));
 
 /*
  * The route retrieves and updates the session, so the Stripe client is stubbed
@@ -66,8 +67,10 @@ function signed(payload: string) {
 
 beforeEach(() => {
   notifyOrder.mockReset();
-  // The email left, unless a test says otherwise.
+  confirmOrderToCustomer.mockReset();
+  // Both emails left, unless a test says otherwise.
   notifyOrder.mockResolvedValue(true);
+  confirmOrderToCustomer.mockResolvedValue(true);
   update.mockReset();
   retrieve.mockReset();
   // By default the session comes back with no notification flag set.
@@ -175,7 +178,29 @@ describe("stripe webhook", () => {
 
     await POST(signed(event("evt_no_false_flag")));
 
-    expect(update).not.toHaveBeenCalled();
+    // The customer's receipt did leave, so the session is still written to.
+    // What must never appear is the flag saying Efamy knows, because that is
+    // what stops the retry that would tell them.
+    for (const [, payload] of update.mock.calls) {
+      expect(payload.metadata).not.toHaveProperty("efamy_notified");
+    }
+  });
+
+  it("on a retry, only sends the email that failed the first time", async () => {
+    // Efamy has been told, the customer has not: the flag on the session says
+    // so, and a retry must not email Efamy about the same order again.
+    retrieve.mockResolvedValueOnce({
+      id: "cs_test_123",
+      status: "complete",
+      payment_status: "paid",
+      metadata: { efamy_notified: "1" },
+    });
+
+    const response = await POST(signed(event("evt_half_done")));
+
+    expect(response.status).toBe(200);
+    expect(notifyOrder).not.toHaveBeenCalled();
+    expect(confirmOrderToCustomer).toHaveBeenCalledTimes(1);
   });
 
   it("lets a retry through after a failed send", async () => {
@@ -196,7 +221,7 @@ describe("stripe webhook", () => {
       id: "cs_test_123",
       status: "complete",
       payment_status: "paid",
-      metadata: { efamy_notified: "1" },
+      metadata: { efamy_notified: "1", efamy_customer_confirmed: "1" },
     });
 
     const response = await POST(signed(event("evt_cold_instance")));

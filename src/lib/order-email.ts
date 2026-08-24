@@ -2,6 +2,7 @@ import "server-only";
 
 import type Stripe from "stripe";
 
+import { siteConfig } from "@/config/site";
 import { orderInbox, sendEmail } from "@/lib/email";
 
 function money(amount: number | null | undefined): string {
@@ -84,6 +85,77 @@ export async function notifyOrder(
   if (!result.sent) {
     // Logged so the order is still recoverable from the server output.
     console.error("Order email not sent:", result.reason, "\n", body);
+  }
+
+  return result.sent;
+}
+
+/**
+ * Tells the customer their order went through.
+ *
+ * Sent from the automated subdomain, never the address a person reads. The
+ * body says so, and Reply-To still points at the human inbox: telling someone
+ * not to reply does not stop them, and a reply that bounces is worse than one
+ * that arrives somewhere useful.
+ *
+ * Never throws, for the same reason as the notification above. The customer has
+ * already seen the confirmation page and Stripe has the money; a failed receipt
+ * is a thing to fix, not a reason to fail the request that carried it.
+ */
+export async function confirmOrderToCustomer(
+  session: Stripe.Checkout.Session,
+): Promise<boolean> {
+  const to = session.customer_details?.email;
+
+  if (!to) {
+    console.error("No customer email on session", session.id);
+    return false;
+  }
+
+  const items =
+    session.line_items?.data
+      .map(
+        (line) =>
+          `  ${line.quantity} x ${line.description}  ${money(line.amount_total)}`,
+      )
+      .join("\n") ?? "  (your order is on its way)";
+
+  const body = [
+    `Thank you for your order.`,
+    "",
+    "WHAT YOU ORDERED",
+    items,
+    "",
+    `Delivery: ${money(session.shipping_cost?.amount_total)}`,
+    `Total paid: ${money(session.amount_total)}`,
+    "",
+    "DELIVERING TO",
+    addressLines(session)
+      .split("\n")
+      .map((line) => `  ${line}`)
+      .join("\n"),
+    "",
+    `Order reference: ${session.id}`,
+    "",
+    "Please do not reply to this email. For any questions about your order,",
+    `contact ${siteConfig.contact.email}.`,
+    "",
+    siteConfig.legalName,
+  ].join("\n");
+
+  const result = await sendEmail({
+    to,
+    subject: "Your Efamy order",
+    text: body,
+    replyTo: siteConfig.contact.email,
+  });
+
+  if (!result.sent) {
+    console.error(
+      "Order confirmation to customer failed",
+      session.id,
+      result.reason,
+    );
   }
 
   return result.sent;

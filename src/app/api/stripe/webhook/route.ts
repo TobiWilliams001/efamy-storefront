@@ -1,7 +1,7 @@
 import type { Stripe } from "stripe";
 
 import { getStripe } from "@/lib/stripe";
-import { notifyOrder } from "@/lib/order-email";
+import { confirmOrderToCustomer, notifyOrder } from "@/lib/order-email";
 
 /*
  * The only place an order becomes paid. The success redirect proves nothing —
@@ -16,8 +16,9 @@ import { notifyOrder } from "@/lib/order-email";
  */
 const seen = new Set<string>();
 
-/** Stripe session metadata key marking that Efamy has been told about an order. */
+/** Stripe session metadata keys marking which of the two emails have gone. */
 const NOTIFIED = "efamy_notified";
+const CONFIRMED = "efamy_customer_confirmed";
 
 export async function POST(request: Request) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -82,11 +83,42 @@ export async function POST(request: Request) {
          * written after the send: a duplicate email is a far smaller failure
          * than an order nobody hears about.
          */
-        if (full.metadata?.[NOTIFIED] === "1") {
+        const toldEfamy = full.metadata?.[NOTIFIED] === "1";
+        const toldCustomer = full.metadata?.[CONFIRMED] === "1";
+
+        if (toldEfamy && toldCustomer) {
           return Response.json({ received: true, duplicate: true });
         }
 
-        const sent = await notifyOrder(full);
+        /*
+         * Two emails, tracked separately, because a retry must not resend the
+         * one that already worked. Efamy hearing about the same order twice is
+         * confusing; the customer being emailed their receipt twice looks like
+         * they were charged twice.
+         */
+        const sentToEfamy = toldEfamy || (await notifyOrder(full));
+        const sentToCustomer =
+          toldCustomer || (await confirmOrderToCustomer(full));
+
+        const metadata = { ...(full.metadata ?? {}) };
+        if (sentToEfamy) metadata[NOTIFIED] = "1";
+        if (sentToCustomer) metadata[CONFIRMED] = "1";
+
+        // Only write when something actually changed, so a send that failed
+        // outright never touches the session.
+        if (sentToEfamy !== toldEfamy || sentToCustomer !== toldCustomer) {
+          try {
+            await getStripe().checkout.sessions.update(session.id, {
+              metadata,
+            });
+          } catch (error) {
+            console.error(
+              "Could not mark order emails sent",
+              session.id,
+              error,
+            );
+          }
+        }
 
         /*
          * An email that did not send is the one case worth failing on. Stripe
@@ -95,21 +127,11 @@ export async function POST(request: Request) {
          * been fixed — and a run of failures is visible in the Stripe
          * dashboard, where a swallowed error is one log line nobody reads.
          *
-         * The flag is deliberately not written here: marking an order announced
-         * when nobody was told is what turns a retryable problem into a lost
-         * order.
+         * The flags are written first, so the retry only sends what is missing.
          */
-        if (!sent) {
+        if (!sentToEfamy || !sentToCustomer) {
           seen.delete(event.id);
-          return new Response("Order notification failed", { status: 500 });
-        }
-
-        try {
-          await getStripe().checkout.sessions.update(session.id, {
-            metadata: { ...(full.metadata ?? {}), [NOTIFIED]: "1" },
-          });
-        } catch (error) {
-          console.error("Could not mark order notified", session.id, error);
+          return new Response("Order email failed", { status: 500 });
         }
       } catch (error) {
         /*
