@@ -34,11 +34,12 @@ export default function ContactPage() {
 
       <section className="relative overflow-hidden bg-background">
         {/*
-         * The photograph bleeds off the right edge on wide screens and drops to
-         * a band above the content on narrow ones, so it never squeezes the
-         * form into a column too tight to type in.
+         * The photograph bleeds off the right edge on wide screens and becomes
+         * a band above the content on tablets. On a phone it is gone: the form
+         * is what someone came for, and a band above it only pushes the first
+         * field further down the screen.
          */}
-        <div className="relative h-44 sm:h-56 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[30%]">
+        <div className="relative hidden sm:block sm:h-56 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[30%]">
           <Image
             src="/products/collections/range-lineup.jpg"
             alt="The Efamy range: chilli sauces, chilli oils and seasonings"
