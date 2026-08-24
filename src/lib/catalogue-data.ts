@@ -75,6 +75,32 @@ function single(size: string, price: number): ProductVariant[] {
  * Those labels also read 300ml and carry no price, which settles the older
  * 200ml at £1.99 reading against the £2.99 on the price list.
  */
+/**
+ * The catering bucket, sold beside the jar rather than as its own listing.
+ *
+ * Same product, bigger pack: price belongs on the variant, so a caterer picks
+ * the size on the product page like anyone else. Coat & Cook is 2.5kg; the
+ * other two are 3kg, whatever the sticker on the photograph says.
+ */
+function bucket(
+  size: string,
+  price: number,
+  file: string,
+  alt: string,
+): ProductVariant {
+  return {
+    size,
+    price,
+    inStock: true,
+    image: {
+      url: `/products/catering/${file}.jpg`,
+      alt,
+      width: 800,
+      height: 800,
+    },
+  };
+}
+
 function bottle(heat: Heat): ProductVariant[] {
   return [{ size: "300ml", heat, price: 299, inStock: true }];
 }
@@ -519,7 +545,15 @@ export const products: Product[] = [
     id: "all-purpose-seasoning-mix",
     slug: "all-purpose-seasoning-mix",
     name: "All Purpose Seasoning Mix, Original",
-    variants: single("300g", 475),
+    variants: [
+      ...single("300g", 475),
+      bucket(
+        "3kg",
+        4500,
+        "all-purpose-seasoning-3kg",
+        "A 3kg catering bucket of Efamy All Purpose Seasoning Mix, Original",
+      ),
+    ],
     summary: "One mix for meat, fish and chicken. Enhances natural flavour.",
     description:
       "An all purpose seasoning mix for beef, fish, chicken and more. No artificial preservatives.",
@@ -546,7 +580,15 @@ export const products: Product[] = [
     id: "kelewele-seasoning-mix",
     slug: "kelewele-seasoning-mix",
     name: "Kelewele Seasoning Mix",
-    variants: single("150g", 325),
+    variants: [
+      ...single("150g", 325),
+      bucket(
+        "3kg",
+        6000,
+        "kelewele-seasoning-3kg",
+        "A 3kg catering bucket of Efamy Kelewele Seasoning Mix",
+      ),
+    ],
     summary: "The spice blend for kelewele, and for barbecues and kebabs.",
     description:
       "Spices, negro pepper, chilli powder and crushed chilli peppers, the blend we first made in December 2015.\n\nIts home is kelewele, spiced fried plantain, but it earns its place at a barbecue and on kebabs just as easily.\n\nMade in Corby. No colours, additives or preservatives.",
@@ -564,7 +606,15 @@ export const products: Product[] = [
     id: "coat-and-cook",
     slug: "coat-and-cook",
     name: "Coat & Cook",
-    variants: single("250g", 350),
+    variants: [
+      ...single("250g", 350),
+      bucket(
+        "2.5kg",
+        3250,
+        "coat-and-cook-2-5kg",
+        "A 2.5kg catering bucket of Efamy Coat & Cook",
+      ),
+    ],
     summary: "A crisp coating for grilling chicken, beef and salmon.",
     description:
       "Coat the meat or fish and cook it. That is the whole method. Made for grilling chicken, beef and salmon, and just as good frying or thickening a sauce.\n\nWheat flour, maize starch, garlic, onion, spices and herbs. No artificial preservatives.\n\nMade in Corby to the recipe we started with in 2008.",
