@@ -8,36 +8,13 @@ import { Section, SectionHeader } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import { routes } from "@/lib/routes";
-import { stockists, stockistsByCounty } from "@/lib/stockists";
+import { stockists, stockistsByRegion } from "@/lib/stockists";
 
 export const metadata: Metadata = {
   title: "Stockists & Wholesale",
   description: `Buy ${siteConfig.name} chilli sauces and seasonings online, or enquire about stocking us in your shop.`,
   alternates: { canonical: routes.stockists },
 };
-
-/*
- * Sold to caterers by enquiry, never priced on the site: trade buyers want an
- * invoice and a delivery arrangement, and no retail price for a bucket has been
- * agreed. Nothing here states a weight the client has not confirmed.
- */
-const cateringSizes = [
-  {
-    src: "/products/catering/all-purpose-seasoning-3kg.jpg",
-    name: "All Purpose Seasoning Mix",
-    alt: "A 3kg catering bucket of Efamy All Purpose Seasoning Mix, Original",
-  },
-  {
-    src: "/products/catering/kelewele-seasoning-3kg.jpg",
-    name: "Kelewele Seasoning Mix",
-    alt: "A 3kg catering bucket of Efamy Kelewele Seasoning Mix",
-  },
-  {
-    src: "/products/catering/coat-and-cook-3kg.jpg",
-    name: "Coat & Cook",
-    alt: "A 3kg catering bucket of Efamy Coat & Cook",
-  },
-];
 
 const wholesalePoints = [
   {
@@ -70,40 +47,6 @@ export default function StockistsPage() {
         description="Order the full range direct, or pick up a jar from one of the independent grocers who have carried Efamy for years."
       />
       <Section spacing="afterHeader">
-        <SectionHeader
-          eyebrow="For caterers"
-          title="Seasonings in 3kg buckets"
-          description="Restaurants and caterers buy the seasonings in 3kg buckets. They are not sold through the shop; tell us what you need and we will quote you."
-        />
-
-        <ul className="grid gap-8 sm:grid-cols-3">
-          {cateringSizes.map((bucket) => (
-            <li key={bucket.src}>
-              <div className="relative aspect-square overflow-hidden rounded-lg bg-background">
-                <Image
-                  src={bucket.src}
-                  alt={bucket.alt}
-                  fill
-                  sizes="(min-width: 640px) 33vw, 100vw"
-                  className="object-contain p-4"
-                />
-              </div>
-              <h3 className="mt-4 font-heading text-lg">{bucket.name}</h3>
-              <p data-numeric className="mt-1 text-sm text-muted-foreground">
-                3kg bucket
-              </p>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-10">
-          <Button asChild size="xl" variant="accent">
-            <Link href={routes.contact}>Enquire about catering sizes</Link>
-          </Button>
-        </div>
-      </Section>
-
-      <Section>
         <div className="grid gap-6 lg:grid-cols-[1fr_1.5fr] lg:items-start lg:gap-8">
           <div className="rounded-lg bg-card p-8 shadow-card sm:p-10">
             <ShoppingBag
@@ -152,10 +95,10 @@ export default function StockistsPage() {
               </>
             ) : (
               <div className="mt-6 space-y-8">
-                {stockistsByCounty().map(({ county, shops }) => (
-                  <div key={county}>
+                {stockistsByRegion().map(({ region, shops }) => (
+                  <div key={region}>
                     <h3 className="text-xs font-medium tracking-[0.18em] text-gold-ink uppercase">
-                      {county}
+                      {region}
                     </h3>
                     <ul className="mt-3 grid gap-4 sm:grid-cols-2">
                       {shops.map((shop) => (
