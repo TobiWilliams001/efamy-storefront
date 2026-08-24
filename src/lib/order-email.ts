@@ -94,9 +94,10 @@ export async function notifyOrder(
  * Tells the customer their order went through.
  *
  * Sent from the automated subdomain, never the address a person reads. The
- * body says so, and Reply-To still points at the human inbox: telling someone
- * not to reply does not stop them, and a reply that bounces is worse than one
- * that arrives somewhere useful.
+ * body says the mail is automatic and points at the inbox a human watches,
+ * rather than ordering the customer not to reply. Reply-To points there too,
+ * because some people reply regardless and a bounce is a worse answer than a
+ * message that lands somewhere useful.
  *
  * Never throws, for the same reason as the notification above. The customer has
  * already seen the confirmation page and Stripe has the money; a failed receipt
@@ -137,8 +138,8 @@ export async function confirmOrderToCustomer(
     "",
     `Order reference: ${session.id}`,
     "",
-    "Please do not reply to this email. For any questions about your order,",
-    `contact ${siteConfig.contact.email}.`,
+    "This email was sent automatically. For anything at all about your order,",
+    `write to ${siteConfig.contact.email} and a person will answer.`,
     "",
     siteConfig.legalName,
   ].join("\n");
