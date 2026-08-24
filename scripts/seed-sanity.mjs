@@ -38,22 +38,37 @@ const client = createClient({
   useCdn: false,
 });
 
+/*
+ * Caches the upload promise, not its result. The variants of one strength are
+ * uploaded concurrently and share a photograph, so caching the result let all
+ * four start before the first finished: the same file went up four times and
+ * left duplicate assets behind.
+ */
 const uploaded = new Map();
 
-async function uploadImage(image) {
-  if (uploaded.has(image.url)) return uploaded.get(image.url);
+function uploadImage(image) {
+  const existing = uploaded.get(image.url);
+  if (existing) return existing;
+
   const file = `public${image.url}`;
-  const asset = await client.assets.upload("image", readFileSync(file), {
-    filename: basename(file),
-  });
-  const ref = {
+  const pending = client.assets
+    .upload("image", readFileSync(file), { filename: basename(file) })
+    .then((asset) => {
+      console.log(`   uploaded ${basename(file)}`);
+      return asset._id;
+    });
+
+  uploaded.set(image.url, pending);
+  return pending;
+}
+
+/** The asset is shared; the alt text belongs to whoever is using it. */
+async function imageRef(image) {
+  return {
     _type: "image",
-    asset: { _type: "reference", _ref: asset._id },
+    asset: { _type: "reference", _ref: await uploadImage(image) },
     alt: image.alt,
   };
-  uploaded.set(image.url, ref);
-  console.log(`   uploaded ${basename(file)}`);
-  return ref;
 }
 
 async function findBySlug(type, slug) {
@@ -78,7 +93,7 @@ async function run() {
       categoryIds.set(category.slug, "dry");
       continue;
     }
-    const image = await uploadImage(category.image);
+    const image = await imageRef(category.image);
     const doc = {
       _type: "productCategory",
       name: category.name,
@@ -97,10 +112,10 @@ async function run() {
     console.log(`product: ${product.name}`);
     if (dry) continue;
 
-    const image = await uploadImage(product.image);
+    const image = await imageRef(product.image);
     const extra = [];
     for (const entry of product.images ?? []) {
-      extra.push({ ...(await uploadImage(entry)), _key: basename(entry.url) });
+      extra.push({ ...(await imageRef(entry)), _key: basename(entry.url) });
     }
 
     const doc = {
@@ -123,7 +138,7 @@ async function run() {
           size: variant.size,
           price: variant.price,
           inStock: variant.inStock,
-          image: variant.image ? await uploadImage(variant.image) : undefined,
+          image: variant.image ? await imageRef(variant.image) : undefined,
         })),
       ),
       category: {
@@ -177,7 +192,7 @@ async function run() {
       method: recipe.method,
       ...(recipe.image
         ? {
-            image: await uploadImage({
+            image: await imageRef({
               url: recipe.image,
               alt: `${recipe.title}, made with Efamy`,
             }),
