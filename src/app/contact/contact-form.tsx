@@ -5,7 +5,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle2, TriangleAlert } from "lucide-react";
 
+import Link from "next/link";
+
 import { submitContact } from "@/app/contact/actions";
+import { Rule } from "@/components/layout/rule";
+import { routes } from "@/lib/routes";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -46,19 +50,45 @@ export function ContactForm() {
 
   if (sent) {
     return (
+      /*
+       * The form is replaced rather than topped with a banner, so the state is
+       * unambiguous: there is nothing left to fill in and nothing to press
+       * twice. Both ways forward are offered, because someone who has just
+       * written to a shop either wants to keep shopping or has a second thing
+       * to say.
+       */
       <div
         role="status"
-        className="flex gap-3 rounded-lg border bg-card p-6 shadow-card"
+        className="rounded-lg border border-gold/40 bg-card p-8 text-center shadow-card sm:p-10"
       >
-        <CheckCircle2
-          aria-hidden="true"
-          className="mt-0.5 size-5 shrink-0 text-success"
-        />
-        <div>
-          <p className="font-medium">Thanks, your message is on its way.</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            We read every message and will come back to you.
-          </p>
+        <span className="mx-auto flex size-14 items-center justify-center rounded-full bg-success/10">
+          <CheckCircle2
+            aria-hidden="true"
+            className="size-7 text-success"
+            strokeWidth={1.5}
+          />
+        </span>
+
+        <h3 className="mt-6 font-heading text-2xl">Message sent</h3>
+        <Rule className="mt-4" />
+
+        <p className="mx-auto mt-5 max-w-sm text-pretty text-muted-foreground">
+          It has gone to {siteConfig.contact.email}, where a person reads it.
+          You will get a reply to the address you gave us.
+        </p>
+
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Button asChild size="lg" variant="accent">
+            <Link href={routes.shop}>Back to the shop</Link>
+          </Button>
+          <Button
+            type="button"
+            size="lg"
+            variant="outline"
+            onClick={() => setSent(false)}
+          >
+            Send another message
+          </Button>
         </div>
       </div>
     );
