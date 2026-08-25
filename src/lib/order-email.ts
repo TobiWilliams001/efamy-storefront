@@ -4,6 +4,13 @@ import type Stripe from "stripe";
 
 import { siteConfig } from "@/config/site";
 import { orderInbox, sendEmail } from "@/lib/email";
+import {
+  escapeHtml,
+  itemRows,
+  layout,
+  panel,
+  totalRows,
+} from "@/lib/email-template";
 
 function money(amount: number | null | undefined): string {
   return amount == null ? "not given" : `£${(amount / 100).toFixed(2)}`;
@@ -30,6 +37,18 @@ function addressLines(session: Stripe.Checkout.Session): string {
  * Returns whether the email actually left, because "we tried" and "Efamy knows"
  * are different facts and only the caller can decide what to do about the gap.
  */
+
+/** The ordered items, in a shape both the text and the HTML can render. */
+function lineItems(session: Stripe.Checkout.Session) {
+  return (
+    session.line_items?.data.map((line) => ({
+      quantity: line.quantity ?? 1,
+      description: line.description ?? "Item",
+      amount: money(line.amount_total),
+    })) ?? []
+  );
+}
+
 export async function notifyOrder(
   session: Stripe.Checkout.Session,
 ): Promise<boolean> {
@@ -74,10 +93,64 @@ export async function notifyOrder(
     }`,
   ].join("\n");
 
+  const customerLine = [
+    customer?.name,
+    customer?.email,
+    customer?.phone,
+  ].filter(Boolean) as string[];
+
+  /*
+   * Built for someone standing at a bench with a box. The items come first and
+   * largest, the address is a block that can be read at arm's length, and the
+   * Stripe references sit at the bottom where they are needed only if a refund
+   * or a dispute comes up.
+   */
+  const html = layout({
+    heading: `New order, ${money(session.amount_total)}`,
+    preheader: `${session.line_items?.data.length ?? 0} lines to pack for ${customer?.name ?? "a customer"}.`,
+    content: `
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0 0;">
+        ${itemRows(lineItems(session))}
+      </table>
+
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:14px 0 0;">
+        ${totalRows([
+          {
+            label: "Delivery",
+            value: money(session.shipping_cost?.amount_total),
+          },
+          {
+            label: "Total paid",
+            value: money(session.amount_total),
+            strong: true,
+          },
+        ])}
+      </table>
+
+      ${panel("Deliver to", escapeHtml(addressLines(session)).split("\n").join("<br>"))}
+      ${panel("Customer", customerLine.map((entry) => escapeHtml(entry)).join("<br>") || "No details given")}
+      ${panel(
+        "References",
+        `<span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;">
+          Checkout ${escapeHtml(session.id)}<br>
+          Payment ${escapeHtml(
+            typeof session.payment_intent === "string"
+              ? session.payment_intent
+              : (session.payment_intent?.id ?? "not available"),
+          )}
+        </span>`,
+      )}
+    `,
+    footnote: customer?.email
+      ? `Replying to this email goes straight to ${escapeHtml(customer.email)}.`
+      : undefined,
+  });
+
   const result = await sendEmail({
     to: orderInbox(),
     subject: `New Efamy order, ${money(session.amount_total)}`,
     text: body,
+    html,
     // Replying goes straight to the customer.
     replyTo: customer?.email ?? undefined,
   });
@@ -144,10 +217,42 @@ export async function confirmOrderToCustomer(
     siteConfig.legalName,
   ].join("\n");
 
+  const rows = lineItems(session);
+
+  const html = layout({
+    heading: "Thank you for your order",
+    preheader: `Order confirmed, ${money(session.amount_total)}. We will let you know when it leaves us.`,
+    intro: `We have it, and we are getting it ready. Here is what is on its way.`,
+    content: `
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0 0;">
+        ${itemRows(rows)}
+      </table>
+
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:14px 0 0;">
+        ${totalRows([
+          {
+            label: "Delivery",
+            value: money(session.shipping_cost?.amount_total),
+          },
+          {
+            label: "Total paid",
+            value: money(session.amount_total),
+            strong: true,
+          },
+        ])}
+      </table>
+
+      ${panel("Delivering to", escapeHtml(addressLines(session)).split("\n").join("<br>"))}
+      ${panel("Order reference", `<span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;">${escapeHtml(session.id)}</span>`)}
+    `,
+    footnote: `This email was sent automatically. For anything at all about your order, write to <a href="mailto:${siteConfig.contact.email}" style="color:#8b2d2d;">${siteConfig.contact.email}</a> and a person will answer.`,
+  });
+
   const result = await sendEmail({
     to,
     subject: "Your Efamy order",
     text: body,
+    html,
     replyTo: siteConfig.contact.email,
   });
 

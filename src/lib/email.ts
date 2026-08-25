@@ -51,11 +51,18 @@ export async function sendEmail({
   to,
   subject,
   text,
+  html,
   replyTo,
 }: {
   to?: string;
   subject: string;
+  /**
+   * Always required, even when html is given. It is what a text-only client
+   * shows, what a screen reader reads cleanly, and what stops a spam filter
+   * marking an HTML-only message down.
+   */
   text: string;
+  html?: string;
   replyTo?: string;
 }): Promise<SendResult> {
   const resend = getResend();
@@ -68,6 +75,7 @@ export async function sendEmail({
       to: [to ?? siteConfig.contact.email],
       subject,
       text,
+      ...(html ? { html } : {}),
       replyTo,
     });
 
