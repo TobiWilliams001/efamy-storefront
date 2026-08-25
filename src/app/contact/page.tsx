@@ -49,6 +49,17 @@ const reasons = [
   },
 ];
 
+/**
+ * A number a phone can actually dial.
+ *
+ * "+44 (0)7904 214 552" carries the trunk prefix in brackets for print, and
+ * some dialers take the (0) literally and misdial. With a country code present
+ * the 0 is redundant, so it goes, along with anything that is not a digit.
+ */
+function dialable(phone: string): string {
+  return phone.replace(/\(0\)/, "").replace(/[^\d+]/g, "");
+}
+
 export const metadata: Metadata = {
   title: "Contact",
   description: `Get in touch with ${siteConfig.legalName} about orders, stockists or wholesale.`,
@@ -115,30 +126,30 @@ export default function ContactPage() {
             <div className="mt-10 grid gap-10 md:grid-cols-[minmax(0,15rem)_1fr] md:gap-12">
               <div>
                 <ul className="space-y-5 text-sm">
-                  {phone ? (
-                    <li>
+                  {/*
+                   * Icons alone, with the address as the accessible name: a
+                   * screen reader still hears "Call Efamy on ...", and the
+                   * number and address stay in the page for anyone who wants
+                   * to copy them rather than tap.
+                   */}
+                  <li className="flex items-center gap-3">
+                    {phone ? (
                       <a
-                        href={`tel:${phone.replace(/\s/g, "")}`}
-                        className="flex min-h-11 items-center gap-3 underline-offset-4 hover:underline sm:min-h-0 sm:items-start"
+                        href={`tel:${dialable(phone)}`}
+                        aria-label={`Call Efamy on ${phone}`}
+                        title={phone}
+                        className="flex size-11 items-center justify-center rounded-full border border-gold/60 text-gold-ink transition-colors hover:border-brand hover:text-brand"
                       >
-                        <Phone
-                          aria-hidden="true"
-                          className="mt-0.5 size-4 shrink-0 text-gold-ink"
-                        />
-                        {phone}
+                        <Phone aria-hidden="true" className="size-4" />
                       </a>
-                    </li>
-                  ) : null}
-                  <li>
+                    ) : null}
                     <a
                       href={`mailto:${email}`}
-                      className="flex min-h-11 items-center gap-3 underline-offset-4 hover:underline sm:min-h-0 sm:items-start"
+                      aria-label={`Email Efamy at ${email}`}
+                      title={email}
+                      className="flex size-11 items-center justify-center rounded-full border border-gold/60 text-gold-ink transition-colors hover:border-brand hover:text-brand"
                     >
-                      <Mail
-                        aria-hidden="true"
-                        className="mt-0.5 size-4 shrink-0 text-gold-ink"
-                      />
-                      {email}
+                      <Mail aria-hidden="true" className="size-4" />
                     </a>
                   </li>
                   <li className="flex items-start gap-3">
@@ -207,75 +218,67 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <Section spacing="sm">
-        <SectionHeader align="center" title="Find us" />
+      <Section>
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <h2 className="display-title text-2xl text-brand sm:text-3xl">
+              Find us
+            </h2>
+            <Rule className="mt-5 justify-start" />
 
-        <div className="mx-auto max-w-3xl">
-          {/*
-           * OpenStreetMap rather than Google: it needs no API key and sets no
-           * cookies, so the map is not a tracker the consent banner has to ask
-           * about before the page can draw itself. Coordinates are the geocoded
-           * postcode, not a guess.
-           */}
-          <div className="overflow-hidden rounded-lg border border-neutral-200">
-            <iframe
-              title={`Map showing ${siteConfig.legalName} in ${address.town}`}
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-0.6837,52.4896,-0.6637,52.4996&layer=mapnik&marker=52.4946,-0.6737"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="h-72 w-full border-0 sm:h-96"
-            />
-          </div>
-
-          <div className="mt-6 flex flex-wrap items-start justify-between gap-4">
-            <address className="text-sm text-muted-foreground not-italic">
-              <span className="font-medium text-foreground">
-                {siteConfig.legalName}
-              </span>
-              <br />
-              {address.line1}
-              {address.line2 ? (
-                <>
-                  <br />
-                  {address.line2}
-                </>
-              ) : null}
-              <br />
-              {address.town} {address.postcode}
-            </address>
+            {/*
+             * OpenStreetMap rather than Google: it needs no API key and sets no
+             * cookies, so the map is not a tracker the consent banner has to
+             * ask about before the page can draw itself. Coordinates are the
+             * geocoded postcode, not a guess.
+             */}
+            <div className="mt-8 overflow-hidden rounded-lg border border-neutral-200">
+              <iframe
+                title={`Map showing ${siteConfig.legalName} in ${address.town}`}
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-0.6837,52.4896,-0.6637,52.4996&layer=mapnik&marker=52.4946,-0.6737"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-72 w-full border-0 sm:h-80"
+              />
+            </div>
 
             <a
-              href={`https://www.openstreetmap.org/?mlat=52.4946&mlon=-0.6737#map=16/52.4946/-0.6737`}
+              href="https://www.openstreetmap.org/?mlat=52.4946&mlon=-0.6737#map=16/52.4946/-0.6737"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex min-h-11 items-center text-sm underline underline-offset-4 sm:min-h-0"
+              className="mt-4 inline-flex min-h-11 items-center text-sm underline underline-offset-4 sm:min-h-0"
             >
               Open in maps
             </a>
           </div>
+
+          <div>
+            <h2 className="display-title text-2xl text-brand sm:text-3xl">
+              We are here to help
+            </h2>
+            <Rule className="mt-5 justify-start" />
+
+            <ul className="mt-8 space-y-8">
+              {reasons.map(({ icon: Icon, title, description }) => (
+                <li key={title} className="flex gap-5">
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-gold/60">
+                    <Icon
+                      aria-hidden="true"
+                      className="size-5 text-gold-ink"
+                      strokeWidth={1.5}
+                    />
+                  </span>
+                  <div>
+                    <h3 className="font-heading text-lg">{title}</h3>
+                    <p className="mt-1.5 text-sm text-pretty text-muted-foreground">
+                      {description}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </Section>
-
-      <Section>
-        <SectionHeader align="center" title="We are here to help" />
-
-        <ul className="grid gap-8 sm:grid-cols-3">
-          {reasons.map(({ icon: Icon, title, description }) => (
-            <li key={title}>
-              <span className="flex size-11 items-center justify-center rounded-full border border-gold/60">
-                <Icon
-                  aria-hidden="true"
-                  className="size-5 text-gold-ink"
-                  strokeWidth={1.5}
-                />
-              </span>
-              <h3 className="mt-4 font-heading text-lg">{title}</h3>
-              <p className="mt-2 text-sm text-pretty text-muted-foreground">
-                {description}
-              </p>
-            </li>
-          ))}
-        </ul>
       </Section>
 
       <Section surface="muted" spacing="sm">
