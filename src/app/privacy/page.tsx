@@ -12,7 +12,14 @@ export const metadata: Metadata = {
   alternates: { canonical: routes.privacy },
 };
 
+/*
+ * A description of what this site actually does with data, taken from the code
+ * rather than from a template. Every processor named here is one the site
+ * genuinely calls; nothing claims a retention period nobody has set.
+ */
 export default function PrivacyPage() {
+  const { address, legalName, companyNumber, contact } = siteConfig;
+
   return (
     <>
       <PageHeader eyebrow="Legal" title="Privacy Policy" />
@@ -20,72 +27,80 @@ export default function PrivacyPage() {
         <Prose>
           <h2>Who we are</h2>
           <p>
-            {siteConfig.legalName} is the data controller for personal data
-            collected through this website. Add the registered company name,
-            company number, registered address and ICO registration number here.
+            {legalName}, company number {companyNumber}, of {address.line1},{" "}
+            {address.line2}, {address.town} {address.postcode}. For anything on
+            this page, write to{" "}
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>.
           </p>
 
-          <h2>What we collect</h2>
+          <h2>What we collect, and when</h2>
+          <p>
+            <strong>When you write to us.</strong> The contact form asks for
+            your name, your email address and your message. We use them to
+            answer you, and nothing else.
+          </p>
+          <p>
+            <strong>When you order.</strong> Checkout collects your name, email
+            address, delivery address and phone number, because we cannot post a
+            parcel without them. Your card details are entered on Stripe&rsquo;s
+            payment page and never reach us.
+          </p>
+          <p>
+            <strong>When you browse.</strong> Your basket is stored in your own
+            browser, not on our servers, so it is still there when you come
+            back. Clearing your browser data clears it.
+          </p>
+
+          <h2>Who else handles it</h2>
+          <p>We use a small number of companies to run the shop:</p>
           <ul>
             <li>
-              Details you give us: name, email address, delivery address and
-              phone number when you order or contact us.
+              <strong>Stripe</strong> takes payments and holds the order record.
             </li>
             <li>
-              Order information: what you bought, when, and the amount paid.
-              Card details are handled by our payment provider and never reach
-              our servers.
+              <strong>Resend</strong> delivers the emails we send you, such as
+              your order confirmation.
             </li>
             <li>
-              Usage data: pages visited and interactions, collected through
-              analytics. Confirm the cookie consent approach before enabling.
+              <strong>Zoho Mail</strong> hosts the inbox your messages arrive
+              in.
+            </li>
+            <li>
+              <strong>Vercel</strong> hosts this website.
+            </li>
+            <li>
+              <strong>Sanity</strong> stores the product descriptions and
+              photographs you see.
             </li>
           </ul>
-
-          <h2>Why we use it, and our lawful basis</h2>
           <p>
-            Each purpose needs a stated lawful basis under UK GDPR: performing
-            the contract to fulfil orders, legitimate interests for fraud
-            prevention and service improvement, consent for marketing email and
-            non-essential cookies, and legal obligation for tax records.
-          </p>
-
-          <h2>Who we share it with</h2>
-          <p>
-            List every processor, including payment provider, email provider,
-            hosting and analytics, and note any transfers outside the UK
-            together with the safeguard relied on.
-          </p>
-
-          <h2>How long we keep it</h2>
-          <p>
-            State a retention period for each category. Order and tax records
-            are generally kept six years; marketing consent should be reviewed
-            regularly.
-          </p>
-
-          <h2>Your rights</h2>
-          <p>
-            Cover the right of access, rectification, erasure, restriction,
-            portability, and objection, including objecting to direct marketing.
-            Give the contact route for exercising them and the right to complain
-            to the Information Commissioner&apos;s Office.
+            We do not sell your data, and we do not share it with anyone for
+            advertising.
           </p>
 
           <h2>Cookies</h2>
           <p>
-            Analytics and marketing cookies require consent before they are set.
-            If Google Analytics or a Meta Pixel is enabled, a consent mechanism
-            is needed and this section must describe it.
+            The site sets what it needs to work: your basket, and your answer to
+            the cookie banner so it stops asking. Analytics only runs if you
+            accept it, and you can decline without losing anything.
           </p>
 
-          <h2>Contact</h2>
+          <h2>Your data is yours</h2>
           <p>
-            Questions about this policy can be sent to{" "}
-            <a href={`mailto:${siteConfig.contact.email}`}>
-              {siteConfig.contact.email}
+            You can ask us what we hold about you, ask us to correct it, or ask
+            us to delete it. Write to{" "}
+            <a href={`mailto:${contact.email}`}>{contact.email}</a> and we will
+            deal with it. If you are unhappy with how we have handled a request,
+            you can raise it with the Information Commissioner&rsquo;s Office at{" "}
+            <a href="https://ico.org.uk" target="_blank" rel="noreferrer">
+              ico.org.uk
             </a>
             .
+          </p>
+          <p>
+            We keep order records for as long as the law requires us to keep
+            business accounts, and we do not keep anything else longer than we
+            need it.
           </p>
         </Prose>
       </Section>

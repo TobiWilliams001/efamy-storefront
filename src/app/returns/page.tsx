@@ -26,33 +26,30 @@ export default function ReturnsPage() {
             because statutory rights cannot be signed away.
           </p>
 
-          <h2>Changing your mind</h2>
+          <h2>If you change your mind</h2>
           <p>
-            Under the Consumer Contracts Regulations, online orders normally
-            carry a 14-day right to cancel. Food that can spoil quickly, and
-            sealed goods that are not suitable for return once opened on health
-            grounds, are exempt. Which of our products fall under each exemption
-            needs confirming before this section can be written.
+            Tell us as soon as you can. If your order has not left us we will
+            cancel it and refund you in full.
           </p>
-
-          <h2>How to start a return</h2>
           <p>
-            Set out the contact route, the timeframe, whether the customer or we
-            pay return postage, and the return address.
+            Once it has been sent, get in touch before returning anything. We
+            sell food, so what we can accept back depends on the item and
+            whether it is still sealed, and we would rather sort that out with
+            you than have a parcel arrive we cannot do anything with.
           </p>
 
           <h2>Refunds</h2>
           <p>
-            Refunds go back to the original payment method. State the processing
-            time. The regulations require refunds within 14 days of receiving
-            the goods back or proof of return.
+            Refunds go back to the card you paid with. Once we have processed
+            it, how quickly it appears is down to your bank, and it is usually a
+            few working days.
           </p>
 
-          <h2>Delivery problems</h2>
+          <h2>If your parcel has not arrived</h2>
           <p>
-            Explain what happens if a parcel is delayed, lost, or shows as
-            delivered but has not arrived, and how long customers should wait
-            before contacting us.
+            Email us with your order number and we will look into it. Please do
+            not wait: the sooner you tell us, the sooner we can chase it or send
+            a replacement.
           </p>
 
           <h2>Contact</h2>
