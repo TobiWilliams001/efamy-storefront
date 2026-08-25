@@ -211,13 +211,25 @@ export const products: Product[] = [
     description:
       "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the same recipe carries both strengths. Mild simply has less chilli.\n\nSpoon it over rice and stew, stir it through jollof, or take a jar to a barbecue.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     dietary: ["No artificial preservatives"],
+    /*
+     * The plain cutout on the card, so Beef sits at the same scale as every
+     * other jar in the grid. The shot with the ingredients around it is taller
+     * and framed differently, which made this one card read as a different
+     * kind of listing; it keeps its place in the gallery.
+     */
     image: {
-      url: "/products/cutout/beef-chilli-sauce-mild-with-ingredients.png",
-      alt: "Jar of Efamy beef chilli sauce, mild, with the fresh ingredients it is made from",
-      width: 900,
-      height: 1200,
+      url: "/products/cutout/beef-chilli-sauce-mild.png",
+      alt: "Jar of Efamy beef chilli sauce, mild",
+      width: 783,
+      height: 783,
     },
     images: [
+      {
+        url: "/products/cutout/beef-chilli-sauce-mild-with-ingredients.png",
+        alt: "Jar of Efamy beef chilli sauce, mild, with the fresh ingredients it is made from",
+        width: 900,
+        height: 1200,
+      },
       {
         url: "/products/cutout/beef-chilli-sauce-extra-hot-label.png",
         alt: "Efamy beef chilli sauce, extra hot, showing the ingredients on the label",
@@ -572,14 +584,6 @@ export const products: Product[] = [
       width: 1093,
       height: 1093,
     },
-    images: [
-      {
-        url: "/products/cutout/all-purpose-seasoning-sample-pouch.png",
-        alt: "Free sample pouch of Efamy all purpose seasoning mix",
-        width: 850,
-        height: 850,
-      },
-    ],
     storage: STORAGE_DRY,
     servingSuggestions: ["Beef", "Fish", "Chicken"],
     category: category.seasonings,

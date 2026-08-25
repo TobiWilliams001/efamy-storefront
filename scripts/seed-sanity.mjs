@@ -146,7 +146,13 @@ async function run() {
         _ref: categoryIds.get(product.category.slug),
       },
       image,
-      ...(extra.length ? { images: extra } : {}),
+      /*
+       * Written even when empty. Omitting a field leaves whatever Sanity
+       * already holds, so a photograph removed from the catalogue survived in
+       * the Studio and kept rendering from the CDN long after its file was
+       * deleted. The seed is the source of truth, so absence has to be stated.
+       */
+      images: extra,
       ...(product.heat ? { heat: product.heat } : {}),
       ...(product.ingredients ? { ingredients: product.ingredients } : {}),
       ...(product.allergens ? { allergens: product.allergens } : {}),
