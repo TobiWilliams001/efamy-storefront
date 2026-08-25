@@ -68,14 +68,6 @@ function single(size: string, price: number): ProductVariant[] {
 }
 
 /**
- * One bottle, at the strength printed on its label.
- *
- * Read off the photographs the client supplied in August 2026: Beans, Beef,
- * Fish and Turkey read Mild, Goat and Pork read Hot, Chicken reads Extra hot.
- * Those labels also read 300ml and carry no price, which settles the older
- * 200ml at £1.99 reading against the £2.99 on the price list.
- */
-/**
  * The catering bucket, sold beside the jar rather than as its own listing.
  *
  * Same product, bigger pack: price belongs on the variant, so a caterer picks
@@ -101,6 +93,14 @@ function bucket(
   };
 }
 
+/**
+ * One bottle, at the strength printed on its label.
+ *
+ * Read off the photographs the client supplied in August 2026: Beans, Beef,
+ * Fish and Turkey read Mild, Goat and Pork read Hot, Chicken reads Extra hot.
+ * Those labels also read 300ml and carry no price, which settles the older
+ * 200ml at £1.99 reading against the £2.99 on the price list.
+ */
 function bottle(heat: Heat): ProductVariant[] {
   return [{ size: "300ml", heat, price: 299, inStock: true }];
 }
@@ -370,14 +370,22 @@ export const products: Product[] = [
     id: "goat-chilli-sauce",
     slug: "goat-chilli-sauce",
     name: "Goat Chilli Sauce",
-    variants: MEAT("hot"),
-    summary: "Chunks of real goat in a chilli sauce with a proper kick.",
+    /*
+     * Mild, because the only photograph of this jar reads Mild on the label
+     * and no evidence says otherwise. It was listed as hot, which put a jar
+     * marked Mild in front of anyone filtering for heat: a customer would have
+     * bought hot and been sent mild. Efamy has not yet returned the strengths
+     * table in docs/client-information-request.md; the label is the only fact
+     * available, so the label wins.
+     */
+    variants: MEAT("mild"),
+    summary: "Chunks of real goat in a chilli sauce, gentle enough for anyone.",
     description:
       "Real goat in pieces you can see, cooked into a sauce built on fresh ginger, garlic and onions.\n\nThe one to reach for with rice, with yam, or alongside a plate of kenkey.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     dietary: ["No artificial preservatives"],
     image: {
       url: "/products/cutout/goat-chilli-sauce.png",
-      alt: "Jar of Efamy goat chilli sauce",
+      alt: "Jar of Efamy goat chilli sauce, mild",
       width: 1068,
       height: 1068,
     },
