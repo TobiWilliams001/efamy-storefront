@@ -263,3 +263,45 @@ describe("price bands", () => {
     );
   });
 });
+
+describe("the card photograph follows the heat filter", () => {
+  const base = { sort: "featured" as const };
+  const mildJar = { url: "/mild.png", alt: "mild", width: 1, height: 1 };
+  const hotJar = { url: "/hot.png", alt: "hot", width: 1, height: 1 };
+
+  const twoStrengths: Product = {
+    ...product("beef", { prices: [325] }),
+    image: { url: "/default.png", alt: "default", width: 1, height: 1 },
+    variants: [
+      { size: "250g", heat: "mild", price: 475, inStock: true, image: mildJar },
+      { size: "250g", heat: "hot", price: 475, inStock: true, image: hotJar },
+    ],
+  };
+
+  it("shows the jar of the strength that was filtered for", () => {
+    const [hot] = applyFilters([twoStrengths], { ...base, heat: "hot" });
+    expect(hot.image.url).toBe("/hot.png");
+
+    const [mild] = applyFilters([twoStrengths], { ...base, heat: "mild" });
+    expect(mild.image.url).toBe("/mild.png");
+  });
+
+  it("leaves the product photograph alone when nothing is filtered", () => {
+    const [all] = applyFilters([twoStrengths], base);
+    expect(all.image.url).toBe("/default.png");
+  });
+
+  it("keeps the product photograph when that strength has none of its own", () => {
+    const noPhoto: Product = {
+      ...twoStrengths,
+      variants: [{ size: "250g", heat: "hot", price: 475, inStock: true }],
+    };
+    const [hot] = applyFilters([noPhoto], { ...base, heat: "hot" });
+    expect(hot.image.url).toBe("/default.png");
+  });
+
+  it("does not mutate the catalogue it was given", () => {
+    applyFilters([twoStrengths], { ...base, heat: "hot" });
+    expect(twoStrengths.image.url).toBe("/default.png");
+  });
+});

@@ -131,6 +131,25 @@ export function parseFilters(searchParams: SearchParams): ProductFilters {
   };
 }
 
+/**
+ * Shows the jar the customer asked for.
+ *
+ * A card renders the product's own photograph, which is one strength of
+ * several. Filtering to Hot and being shown the mild jar reads as the wrong
+ * product, and mild and hot differ by the word on the label, so nothing on the
+ * card corrects the impression.
+ *
+ * Only swaps where a photograph of that strength exists; otherwise the product
+ * image stands, which is honest about what we have rather than showing nothing.
+ */
+function withHeatImage(product: Product, heat: Heat): Product {
+  const match = product.variants.find(
+    (variant) => variant.heat === heat && variant.image,
+  );
+
+  return match?.image ? { ...product, image: match.image } : product;
+}
+
 export function applyFilters(
   products: Product[],
   filters: ProductFilters,
@@ -164,19 +183,20 @@ export function applyFilters(
     return true;
   });
 
+  const heat = filters.heat;
+  const shown = heat
+    ? filtered.map((product) => withHeatImage(product, heat))
+    : filtered;
+
   switch (filters.sort) {
     case "price-asc":
-      return [...filtered].sort((a, b) => lowestPrice(a) - lowestPrice(b));
+      return [...shown].sort((a, b) => lowestPrice(a) - lowestPrice(b));
     case "price-desc":
-      return [...filtered].sort((a, b) => lowestPrice(b) - lowestPrice(a));
+      return [...shown].sort((a, b) => lowestPrice(b) - lowestPrice(a));
     case "name":
-      return [...filtered].sort((a, b) =>
-        a.name.localeCompare(b.name, "en-GB"),
-      );
+      return [...shown].sort((a, b) => a.name.localeCompare(b.name, "en-GB"));
     default:
-      return [...filtered].sort(
-        (a, b) => Number(inStock(b)) - Number(inStock(a)),
-      );
+      return [...shown].sort((a, b) => Number(inStock(b)) - Number(inStock(a)));
   }
 }
 
