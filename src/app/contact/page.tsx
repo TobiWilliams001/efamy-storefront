@@ -1,6 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Clock, Mail, MapPin, MessageCircle, Phone, Store } from "lucide-react";
+import {
+  Clock,
+  Handshake,
+  Headset,
+  Mail,
+  MapPin,
+  MessageCircle,
+  MessageSquareHeart,
+  Phone,
+  Store,
+} from "lucide-react";
 
 import { Rule } from "@/components/layout/rule";
 import { ContactForm } from "@/app/contact/contact-form";
@@ -13,6 +23,32 @@ import { siteConfig } from "@/config/site";
 import { contactFaqs } from "@/lib/faqs";
 import { routes } from "@/lib/routes";
 
+/*
+ * Three reasons people write, so someone scanning the page can see their own
+ * situation before they start typing. Wording stays inside what Efamy has
+ * actually agreed: no reply-time promise, because none has been confirmed.
+ */
+const reasons = [
+  {
+    icon: Headset,
+    title: "Customer support",
+    description:
+      "A question about an order, a jar, or what is in it. Tell us what you need and we will sort it.",
+  },
+  {
+    icon: Handshake,
+    title: "Partnerships",
+    description:
+      "Shops, caterers and anyone who wants to carry the range. We will send trade pricing and case quantities.",
+  },
+  {
+    icon: MessageSquareHeart,
+    title: "Feedback",
+    description:
+      "What you cooked, what worked, what did not. Fifteen years of recipes came from people telling us.",
+  },
+];
+
 export const metadata: Metadata = {
   title: "Contact",
   description: `Get in touch with ${siteConfig.legalName} about orders, stockists or wholesale.`,
@@ -21,6 +57,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   const { email, phone, whatsapp, hours } = siteConfig.contact;
+  const address = siteConfig.address;
   const { line1, line2, town, postcode } = siteConfig.address;
 
   return (
@@ -169,6 +206,77 @@ export default function ContactPage() {
           </div>
         </Container>
       </section>
+
+      <Section spacing="sm">
+        <SectionHeader align="center" title="Find us" />
+
+        <div className="mx-auto max-w-3xl">
+          {/*
+           * OpenStreetMap rather than Google: it needs no API key and sets no
+           * cookies, so the map is not a tracker the consent banner has to ask
+           * about before the page can draw itself. Coordinates are the geocoded
+           * postcode, not a guess.
+           */}
+          <div className="overflow-hidden rounded-lg border border-neutral-200">
+            <iframe
+              title={`Map showing ${siteConfig.legalName} in ${address.town}`}
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-0.6837,52.4896,-0.6637,52.4996&layer=mapnik&marker=52.4946,-0.6737"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="h-72 w-full border-0 sm:h-96"
+            />
+          </div>
+
+          <div className="mt-6 flex flex-wrap items-start justify-between gap-4">
+            <address className="text-sm text-muted-foreground not-italic">
+              <span className="font-medium text-foreground">
+                {siteConfig.legalName}
+              </span>
+              <br />
+              {address.line1}
+              {address.line2 ? (
+                <>
+                  <br />
+                  {address.line2}
+                </>
+              ) : null}
+              <br />
+              {address.town} {address.postcode}
+            </address>
+
+            <a
+              href={`https://www.openstreetmap.org/?mlat=52.4946&mlon=-0.6737#map=16/52.4946/-0.6737`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-11 items-center text-sm underline underline-offset-4 sm:min-h-0"
+            >
+              Open in maps
+            </a>
+          </div>
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeader align="center" title="We are here to help" />
+
+        <ul className="grid gap-8 sm:grid-cols-3">
+          {reasons.map(({ icon: Icon, title, description }) => (
+            <li key={title}>
+              <span className="flex size-11 items-center justify-center rounded-full border border-gold/60">
+                <Icon
+                  aria-hidden="true"
+                  className="size-5 text-gold-ink"
+                  strokeWidth={1.5}
+                />
+              </span>
+              <h3 className="mt-4 font-heading text-lg">{title}</h3>
+              <p className="mt-2 text-sm text-pretty text-muted-foreground">
+                {description}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </Section>
 
       <Section surface="muted" spacing="sm">
         <SectionHeader
