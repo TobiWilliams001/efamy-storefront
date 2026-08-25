@@ -2,7 +2,6 @@ import { siteConfig } from "@/config/site";
 import { absoluteUrl } from "@/lib/format";
 import { routes } from "@/lib/routes";
 import type { Faq } from "@/lib/faqs";
-import { isoDuration } from "@/lib/recipes";
 import { inStock, type Product } from "@/types/product";
 
 /**
@@ -42,8 +41,6 @@ export function recipeSchema(recipe: {
   summary: string;
   slug: string;
   serves: number;
-  prepMinutes: number;
-  cookMinutes: number;
   ingredients: string[];
   method: string[];
   image?: string;
@@ -56,9 +53,6 @@ export function recipeSchema(recipe: {
     url: absoluteUrl(routes.recipe(recipe.slug)),
     ...(recipe.image ? { image: absoluteUrl(recipe.image) } : {}),
     recipeYield: `${recipe.serves} servings`,
-    prepTime: isoDuration(recipe.prepMinutes),
-    cookTime: isoDuration(recipe.cookMinutes),
-    totalTime: isoDuration(recipe.prepMinutes + recipe.cookMinutes),
     recipeCuisine: "Ghanaian",
     recipeIngredient: recipe.ingredients,
     recipeInstructions: recipe.method.map((step, index) => ({

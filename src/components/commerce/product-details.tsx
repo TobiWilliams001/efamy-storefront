@@ -57,12 +57,6 @@ export async function ProductDetails({ product }: { product: Product }) {
                   <span className="text-sm font-medium underline-offset-4 group-hover:underline">
                     {recipe.title}
                   </span>
-                  <span
-                    data-numeric
-                    className="shrink-0 text-xs text-muted-foreground"
-                  >
-                    {recipe.prepMinutes + recipe.cookMinutes} min
-                  </span>
                 </Link>
                 <p className="mt-1 text-sm text-muted-foreground">
                   {recipe.summary}

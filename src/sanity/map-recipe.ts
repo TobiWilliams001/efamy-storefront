@@ -36,8 +36,6 @@ export function mapRecipe(raw: Record<string, unknown>): Recipe | null {
     summary: typeof raw.summary === "string" ? raw.summary : "",
     productSlug: typeof raw.productSlug === "string" ? raw.productSlug : "",
     serves: positiveInt(raw.serves, 4),
-    prepMinutes: positiveInt(raw.prepMinutes, 0),
-    cookMinutes: positiveInt(raw.cookMinutes, 0),
     ingredients,
     method,
     image: typeof image?.url === "string" ? image.url : undefined,

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, Users } from "lucide-react";
+import { Users } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 import { productAccent } from "@/lib/product-accent";
@@ -15,8 +15,6 @@ export function RecipeCard({
   recipe: Recipe;
   className?: string;
 }) {
-  const total = recipe.prepMinutes + recipe.cookMinutes;
-
   return (
     <Card
       className={cn(
@@ -57,10 +55,6 @@ export function RecipeCard({
         </p>
 
         <div className="mt-5 flex items-center gap-4 border-t pt-4 text-xs text-muted-foreground">
-          <span className="inline-flex items-center gap-1.5">
-            <Clock aria-hidden="true" className="size-3.5" />
-            <span data-numeric>{total} min</span>
-          </span>
           <span className="inline-flex items-center gap-1.5">
             <Users aria-hidden="true" className="size-3.5" />
             <span data-numeric>Serves {recipe.serves}</span>

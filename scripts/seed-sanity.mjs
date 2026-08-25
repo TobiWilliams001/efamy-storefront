@@ -192,8 +192,6 @@ async function run() {
       summary: recipe.summary,
       product: { _type: "reference", _ref: productId },
       serves: recipe.serves,
-      prepMinutes: recipe.prepMinutes,
-      cookMinutes: recipe.cookMinutes,
       ingredients: recipe.ingredients,
       method: recipe.method,
       ...(recipe.image

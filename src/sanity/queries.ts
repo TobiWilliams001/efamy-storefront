@@ -41,8 +41,6 @@ const RECIPE_FIELDS = `
   "slug": slug.current,
   summary,
   serves,
-  prepMinutes,
-  cookMinutes,
   ingredients,
   method,
   "productSlug": product->slug.current,

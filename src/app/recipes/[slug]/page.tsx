@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Clock, Users } from "lucide-react";
+import { Users } from "lucide-react";
 
 import { ProductCard } from "@/components/commerce/product-card";
 import { RecipeCard } from "@/components/commerce/recipe-card";
@@ -55,7 +55,6 @@ export default async function RecipePage({
   const others = (await getRecipes())
     .filter((entry) => entry.slug !== recipe.slug)
     .slice(0, 3);
-  const total = recipe.prepMinutes + recipe.cookMinutes;
 
   return (
     <>
@@ -96,29 +95,10 @@ export default async function RecipePage({
 
             <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-y py-4 text-sm">
               <div className="flex items-center gap-2">
-                <Clock aria-hidden="true" className="size-4 text-gold-ink" />
-                <dt className="text-muted-foreground">Total</dt>
-                <dd data-numeric className="font-medium">
-                  {total} min
-                </dd>
-              </div>
-              <div className="flex items-center gap-2">
                 <Users aria-hidden="true" className="size-4 text-gold-ink" />
                 <dt className="text-muted-foreground">Serves</dt>
                 <dd data-numeric className="font-medium">
                   {recipe.serves}
-                </dd>
-              </div>
-              <div className="flex items-center gap-2">
-                <dt className="text-muted-foreground">Prep</dt>
-                <dd data-numeric className="font-medium">
-                  {recipe.prepMinutes} min
-                </dd>
-              </div>
-              <div className="flex items-center gap-2">
-                <dt className="text-muted-foreground">Cook</dt>
-                <dd data-numeric className="font-medium">
-                  {recipe.cookMinutes} min
                 </dd>
               </div>
             </dl>

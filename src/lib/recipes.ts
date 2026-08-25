@@ -6,9 +6,6 @@ export type Recipe = {
   /** Slug of the Efamy product this dish is built around. */
   productSlug: string;
   serves: number;
-  /** Minutes. Rendered as ISO 8601 durations for structured data. */
-  prepMinutes: number;
-  cookMinutes: number;
   ingredients: string[];
   method: string[];
   /**
@@ -33,8 +30,6 @@ export const recipes: Recipe[] = [
     summary: "The Sunday staple, finished with a spoon of beef chilli sauce.",
     productSlug: "beef-chilli-sauce",
     serves: 4,
-    prepMinutes: 15,
-    cookMinutes: 45,
     ingredients: [
       "400g long grain rice, rinsed until the water runs clear",
       "2 tbsp Efamy Beef Chilli Sauce, plus more to serve",
@@ -64,8 +59,6 @@ export const recipes: Recipe[] = [
     summary: "Spiced fried plantain, sweet and hot at once.",
     productSlug: "kelewele-seasoning-mix",
     serves: 4,
-    prepMinutes: 10,
-    cookMinutes: 15,
     ingredients: [
       "4 ripe plantains, skins well spotted",
       "2 tbsp Efamy Kelewele Seasoning Mix",
@@ -89,8 +82,6 @@ export const recipes: Recipe[] = [
     summary: "All Purpose Seasoning under the skin, chilli sauce over the top.",
     productSlug: "all-purpose-seasoning-mix",
     serves: 4,
-    prepMinutes: 15,
-    cookMinutes: 35,
     ingredients: [
       "8 chicken thighs, bone in and skin on",
       "2 tbsp Efamy All Purpose Seasoning Mix",
@@ -114,8 +105,6 @@ export const recipes: Recipe[] = [
     summary: "Rice and beans, and the sauce that belongs with it.",
     productSlug: "beans-chilli-sauce",
     serves: 6,
-    prepMinutes: 20,
-    cookMinutes: 60,
     ingredients: [
       "300g black eyed beans, soaked overnight",
       "400g long grain rice, rinsed",
@@ -138,8 +127,6 @@ export const recipes: Recipe[] = [
     summary: "Crisp yam, fried fish, and fish chilli sauce to dip.",
     productSlug: "fish-chilli-sauce",
     serves: 4,
-    prepMinutes: 20,
-    cookMinutes: 25,
     ingredients: [
       "1 medium yam, peeled and cut into thick chips",
       "4 whole tilapia or sea bream, cleaned and scored",
@@ -164,8 +151,6 @@ export const recipes: Recipe[] = [
     productSlug: "coat-and-cook",
     image: "/dishes/fried-chicken.jpg",
     serves: 4,
-    prepMinutes: 10,
-    cookMinutes: 20,
     ingredients: [
       "8 chicken drumsticks or thighs",
       "150g Efamy Coat & Cook",
@@ -186,9 +171,4 @@ export const recipes: Recipe[] = [
 
 export function getRecipe(slug: string): Recipe | undefined {
   return recipes.find((recipe) => recipe.slug === slug);
-}
-
-/** Minutes to the ISO 8601 duration schema.org expects. */
-export function isoDuration(minutes: number): string {
-  return `PT${minutes}M`;
 }
