@@ -39,8 +39,8 @@ export function Hero({
   return (
     <section className="relative isolate -mt-16 overflow-hidden bg-ink lg:-mt-20">
       <Image
-        src="/products/hero/hero-hot-sauce-trio.jpg"
-        alt="Efamy pork, beef and chicken chilli sauces on a wooden board with fresh chillies and garlic"
+        src="/products/hero/hero-home.jpg"
+        alt="The Efamy range"
         fill
         sizes="100vw"
         preload
