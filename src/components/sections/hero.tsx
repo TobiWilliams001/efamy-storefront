@@ -48,14 +48,15 @@ export function Hero({
       />
 
       {/*
-       * Two scrims, not one. The horizontal wash keeps the headline legible on
-       * the left; the flat overlay darkens the photograph as a whole so the
-       * jars read as lit rather than washed out.
+       * Two scrims, not one. The flat one takes the whole photograph down a
+       * touch; the horizontal wash does the real work behind the headline and
+       * clears away to nothing on the right, so the photograph is left alone
+       * where there is no text over it.
        */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-ink/45" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-ink/15" />
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-linear-to-r from-ink via-ink/80 to-ink/10 sm:via-ink/65 lg:to-transparent"
+        className="absolute inset-0 -z-10 bg-linear-to-r from-ink/75 via-ink/35 to-transparent sm:via-ink/25"
       />
 
       <Container>

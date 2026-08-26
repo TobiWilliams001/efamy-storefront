@@ -89,27 +89,15 @@ export default function ContactPage() {
          */}
         <div className="relative hidden sm:block sm:h-56 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[30%]">
           <Image
-            src="/products/collections/range-lineup.jpg"
-            alt="The Efamy range: chilli sauces, chilli oils and seasonings"
+            src="/products/hero/hero-home.jpg"
+            alt="The Efamy range"
             fill
             sizes="(min-width: 1024px) 30vw, 100vw"
             className="object-cover"
           />
-          {/*
-           * Two layers, because the seam and the tint are different jobs.
-           * Fading the seam itself to burgundy drew the hard edge it was meant
-           * to remove: the home page can fade to maroon only because the panel
-           * beside it is maroon, and this one meets white page.
-           *
-           * Burgundy enters from the outer edge, the one running off screen.
-           */}
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 z-10 bg-linear-to-b from-brand/60 via-transparent to-transparent lg:bg-linear-to-l"
-          />
-          {/* And the seam fades to page white: the bottom edge when the
-              photograph sits above the form, the left edge when it sits beside
-              it. One colour, direction flipped. */}
+          {/* Only the seam. The photograph fades to page white where it meets
+              the form, the bottom edge when it sits above and the left edge
+              when it sits beside. Nothing tints the picture itself. */}
           <span
             aria-hidden="true"
             className="absolute inset-0 z-10 bg-linear-to-t from-background via-transparent to-transparent lg:bg-linear-to-r"
