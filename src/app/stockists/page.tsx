@@ -158,10 +158,12 @@ export default function StockistsPage() {
         <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
           {/* Photograph second in the source so it reads after the points on a
               phone, and ordered right on desktop. */}
-          <div className="relative aspect-video overflow-hidden rounded-lg shadow-card lg:order-2">
+          {/* 4:3 rather than 16:9: the shot is 5:4, and a widescreen frame
+              cropped the tops and bottoms off the bottles. */}
+          <div className="relative aspect-4/3 overflow-hidden rounded-lg shadow-card lg:order-2">
             <Image
-              src="/photos/bottling-chilli-oil.jpg"
-              alt="Bottles of Efamy chilli oil on a worktop, filled and capped"
+              src="/products/collections/oils-group.jpg"
+              alt="The range of Efamy chilli oils"
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"
