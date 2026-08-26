@@ -15,7 +15,6 @@ import {
 import { Rule } from "@/components/layout/rule";
 import { ContactForm } from "@/app/contact/contact-form";
 import { FaqList } from "@/components/common/faq-list";
-import { Container } from "@/components/layout/container";
 import { Hero } from "@/components/sections/hero";
 import { Section, SectionHeader } from "@/components/layout/section";
 import { siteConfig } from "@/config/site";
@@ -78,94 +77,102 @@ export default function ContactPage() {
         description="Questions about an order, our products, or stocking Efamy? Send us a message and a real person will come back to you."
       />
 
-      <section>
-        <Container>
-          <div className="py-14 lg:w-[58%] lg:py-20 lg:pr-10">
+      {/*
+       * The form leads and takes two thirds of the row, because writing is what
+       * someone came here to do. The details sit beside it as a sidebar rather
+       * than above it, so nobody scrolls past an address to reach the thing
+       * they wanted. It all stacks on a phone, form first.
+       */}
+      <Section spacing="afterHeader">
+        <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr] lg:gap-16">
+          <div>
             <h2 className="display-title text-2xl text-brand sm:text-3xl">
-              Our details
+              Send us a message
             </h2>
             <Rule className="mt-5 justify-start" />
+            <div className="mt-8">
+              <ContactForm />
+            </div>
+          </div>
 
-            <div className="mt-10 grid gap-10 md:grid-cols-[minmax(0,15rem)_1fr] md:gap-12">
-              <div>
-                <ul className="space-y-5 text-sm">
-                  {/*
-                   * Icons alone, with the address as the accessible name: a
-                   * screen reader still hears "Call Efamy on ...", and the
-                   * number and address stay in the page for anyone who wants
-                   * to copy them rather than tap.
-                   */}
-                  <li className="flex items-center gap-3">
-                    {phone ? (
-                      <a
-                        href={`tel:${dialable(phone)}`}
-                        aria-label={`Call Efamy on ${phone}`}
-                        title={phone}
-                        className="flex size-11 items-center justify-center rounded-full border border-gold/60 text-gold-ink transition-colors hover:border-brand hover:text-brand"
-                      >
-                        <Phone aria-hidden="true" className="size-4" />
-                      </a>
-                    ) : null}
-                    <a
-                      href={`mailto:${email}`}
-                      aria-label={`Email Efamy at ${email}`}
-                      title={email}
-                      className="flex size-11 items-center justify-center rounded-full border border-gold/60 text-gold-ink transition-colors hover:border-brand hover:text-brand"
-                    >
-                      <Mail aria-hidden="true" className="size-4" />
-                    </a>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <MapPin
-                      aria-hidden="true"
-                      className="mt-0.5 size-4 shrink-0 text-gold-ink"
-                    />
-                    <address className="not-italic">
-                      {siteConfig.legalName}
-                      <br />
-                      {line1}
-                      <br />
-                      {line2 ? (
-                        <>
-                          {line2}
-                          <br />
-                        </>
-                      ) : null}
-                      {town} {postcode}
-                    </address>
-                  </li>
-                  <li className="flex items-start gap-3 text-muted-foreground">
-                    <Clock
-                      aria-hidden="true"
-                      className="mt-0.5 size-4 shrink-0 text-gold-ink"
-                    />
-                    {hours}
-                  </li>
-                </ul>
+          <aside className="lg:pt-2">
+            <h2 className="font-heading text-lg">Our details</h2>
 
+            <ul className="mt-6 space-y-5 text-sm">
+              {/*
+               * Icons alone, with the address as the accessible name: a screen
+               * reader still hears "Call Efamy on ...", and the number stays in
+               * the page for anyone who wants to copy it rather than tap.
+               */}
+              <li className="flex items-center gap-3">
+                {phone ? (
+                  <a
+                    href={`tel:${dialable(phone)}`}
+                    aria-label={`Call Efamy on ${phone}`}
+                    title={phone}
+                    className="flex size-11 items-center justify-center rounded-full border border-gold/60 text-gold-ink transition-colors hover:border-brand hover:text-brand"
+                  >
+                    <Phone aria-hidden="true" className="size-4" />
+                  </a>
+                ) : null}
+                <a
+                  href={`mailto:${email}`}
+                  aria-label={`Email Efamy at ${email}`}
+                  title={email}
+                  className="flex size-11 items-center justify-center rounded-full border border-gold/60 text-gold-ink transition-colors hover:border-brand hover:text-brand"
+                >
+                  <Mail aria-hidden="true" className="size-4" />
+                </a>
                 {whatsapp ? (
                   <a
                     href={`https://wa.me/${whatsapp}`}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="mt-7 inline-flex size-11 items-center justify-center rounded-full bg-brand text-white transition-colors hover:bg-brand-hover"
+                    aria-label="Message Efamy on WhatsApp"
+                    title="WhatsApp"
+                    className="flex size-11 items-center justify-center rounded-full bg-brand text-white transition-colors hover:bg-brand-hover"
                   >
-                    <MessageCircle aria-hidden="true" className="size-5" />
-                    <span className="sr-only">Message us on WhatsApp</span>
+                    <MessageCircle aria-hidden="true" className="size-4" />
                   </a>
                 ) : null}
-              </div>
+              </li>
 
-              <ContactForm />
-            </div>
+              <li className="flex items-start gap-3">
+                <MapPin
+                  aria-hidden="true"
+                  className="mt-0.5 size-4 shrink-0 text-gold-ink"
+                />
+                <address className="not-italic">
+                  {siteConfig.legalName}
+                  <br />
+                  {line1}
+                  <br />
+                  {line2 ? (
+                    <>
+                      {line2}
+                      <br />
+                    </>
+                  ) : null}
+                  {town} {postcode}
+                </address>
+              </li>
 
-            <div className="mt-12 rounded-lg border border-neutral-200 p-6">
+              <li className="flex items-start gap-3 text-muted-foreground">
+                <Clock
+                  aria-hidden="true"
+                  className="mt-0.5 size-4 shrink-0 text-gold-ink"
+                />
+                {hours}
+              </li>
+            </ul>
+
+            <div className="mt-8 rounded-lg border border-neutral-200 p-6">
               <Store
                 aria-hidden="true"
                 className="size-5 text-gold-ink"
                 strokeWidth={1.75}
               />
-              <h2 className="mt-4 font-heading text-lg">Stock Efamy</h2>
+              <h3 className="mt-4 font-heading text-lg">Stock Efamy</h3>
               <p className="mt-2 text-sm text-pretty text-muted-foreground">
                 We supply independent retailers and grocers across the UK. Ask
                 us for trade pricing and case quantities.
@@ -177,9 +184,9 @@ export default function ContactPage() {
                 Stockists &amp; wholesale
               </Link>
             </div>
-          </div>
-        </Container>
-      </section>
+          </aside>
+        </div>
+      </Section>
 
       <Section>
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
