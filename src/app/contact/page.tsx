@@ -16,9 +16,8 @@ import { Rule } from "@/components/layout/rule";
 import { ContactForm } from "@/app/contact/contact-form";
 import { FaqList } from "@/components/common/faq-list";
 import { Container } from "@/components/layout/container";
-import { PageHeader } from "@/components/layout/page-header";
+import { Hero } from "@/components/sections/hero";
 import { Section, SectionHeader } from "@/components/layout/section";
-import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { contactFaqs } from "@/lib/faqs";
 import { routes } from "@/lib/routes";
@@ -73,37 +72,13 @@ export default function ContactPage() {
 
   return (
     <>
-      <PageHeader
-        tone="ink"
-        eyebrow="Contact"
+      <Hero
+        size="compact"
         title="Get in touch"
         description="Questions about an order, our products, or stocking Efamy? Send us a message and a real person will come back to you."
       />
 
-      <section className="relative overflow-hidden bg-background">
-        {/*
-         * The photograph bleeds off the right edge on wide screens and becomes
-         * a band above the content on tablets. On a phone it is gone: the form
-         * is what someone came for, and a band above it only pushes the first
-         * field further down the screen.
-         */}
-        <div className="relative hidden sm:block sm:h-56 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[30%]">
-          <Image
-            src="/products/hero/hero-home.jpg"
-            alt="The Efamy range"
-            fill
-            sizes="(min-width: 1024px) 30vw, 100vw"
-            className="object-cover"
-          />
-          {/* Only the seam. The photograph fades to page white where it meets
-              the form, the bottom edge when it sits above and the left edge
-              when it sits beside. Nothing tints the picture itself. */}
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 z-10 bg-linear-to-t from-background via-transparent to-transparent lg:bg-linear-to-r"
-          />
-        </div>
-
+      <section>
         <Container>
           <div className="py-14 lg:w-[58%] lg:py-20 lg:pr-10">
             <h2 className="display-title text-2xl text-brand sm:text-3xl">
