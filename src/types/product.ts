@@ -56,6 +56,19 @@ export function heatLevels(product: { variants: ProductVariant[] }): Heat[] {
 }
 
 /** The sizes available at a given strength, smallest first. */
+/**
+ * How many different jars this is sold in.
+ *
+ * Not the number of variants: a sauce made mild, hot and extra hot in four
+ * sizes has twelve variants and four sizes. Counting variants told a customer
+ * Beef came in "12 sizes", which is not a thing anybody sells.
+ */
+export function distinctSizes(product: {
+  variants: ProductVariant[];
+}): string[] {
+  return [...new Set(product.variants.map((variant) => variant.size))];
+}
+
 export function sizesFor(
   product: { variants: ProductVariant[] },
   heat: Heat | undefined,

@@ -19,7 +19,7 @@ import {
   getRelatedProducts,
 } from "@/lib/catalogue";
 import { formatPrice } from "@/lib/format";
-import { heatLevels, lowestPrice } from "@/types/product";
+import { heatLevels, lowestPrice, distinctSizes } from "@/types/product";
 import {
   breadcrumbSchema,
   productSchema,
@@ -110,7 +110,7 @@ export default async function ProductPage({
                 </p>
                 <p className="text-sm text-muted-foreground">
                   {product.variants.length > 1
-                    ? `${product.variants.length} sizes available`
+                    ? `${distinctSizes(product).length} sizes available`
                     : product.variants[0].size}
                 </p>
               </div>

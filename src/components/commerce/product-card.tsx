@@ -13,6 +13,7 @@ import {
   heatLevels,
   inStock as anyInStock,
   lowestPrice,
+  distinctSizes,
   type ProductSummary,
 } from "@/types/product";
 
@@ -38,7 +39,8 @@ export function ProductCard({
   const cheapest = variants.find((variant) => variant.price === price);
   const isDiscounted =
     cheapest?.compareAtPrice !== undefined && cheapest.compareAtPrice > price;
-  const hasSizeChoice = variants.length > 1;
+  const sizeCount = distinctSizes(product).length;
+  const hasSizeChoice = sizeCount > 1;
 
   /* One card per flavour, so the card says which strengths it comes in. */
   const strengths = heatLevels(product);
@@ -135,7 +137,7 @@ export function ProductCard({
             </span>
           ) : null}
           <span data-numeric className="ml-auto text-xs text-muted-foreground">
-            {hasSizeChoice ? `${variants.length} sizes` : variants[0].size}
+            {hasSizeChoice ? `${sizeCount} sizes` : variants[0].size}
           </span>
         </div>
 
