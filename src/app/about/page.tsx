@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Flame, Leaf, Utensils } from "lucide-react";
 
 import { Hero } from "@/components/sections/hero";
@@ -33,29 +32,6 @@ const milestones = [
     title: "Kelewele Seasoning",
     description:
       "In December we made our first Kelewele Seasoning: spices, negro pepper, chilli powder and crushed chilli peppers for spiced fried plantain.",
-  },
-];
-
-/*
- * Efamy's own photographs of their own kitchen. Captions describe only what is
- * in the frame — the photographs are here to be evidence, and a caption that
- * claims more than the picture shows undoes the point of using them.
- */
-const kitchen = [
-  {
-    src: "/photos/finished-trays.jpg",
-    alt: "Stacked trays of finished Efamy jars, sorted into colours by flavour",
-    caption: "Trayed up by flavour once they are filled.",
-  },
-  {
-    src: "/photos/production-room.jpg",
-    alt: "Trays of filled jars and bottles of chilli oil across a production room",
-    caption: "Jars and bottles, filled and waiting.",
-  },
-  {
-    src: "/photos/stockroom.jpg",
-    alt: "Stockroom shelves holding the Efamy range: chilli oils, sauces and seasonings",
-    caption: "The stockroom in Corby.",
   },
 ];
 
@@ -131,35 +107,6 @@ export default function AboutPage() {
       </Section>
 
       <Section>
-        <SectionHeader
-          align="center"
-          eyebrow="In Corby"
-          title="Where it is made"
-        />
-
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {kitchen.map((shot) => (
-            <li key={shot.src}>
-              <figure>
-                <div className="relative aspect-4/3 overflow-hidden rounded-lg shadow-card">
-                  <Image
-                    src={shot.src}
-                    alt={shot.alt}
-                    fill
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-                <figcaption className="mt-3 text-sm text-pretty text-muted-foreground">
-                  {shot.caption}
-                </figcaption>
-              </figure>
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      <Section>
         <SectionHeader align="center" title="What goes in the jar" />
 
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
@@ -174,8 +121,8 @@ export default function AboutPage() {
             <p className="mt-6 text-pretty text-muted-foreground">
               Seven flavours made from real meat, poultry, beans and fish, and
               you can see it. Our sauces carry chunks rather than a smooth
-              paste. Fresh ginger, garlic and onions are the main ingredients,
-              and the oils are vegetable oil and extra virgin olive oil.
+              paste, and fresh ginger, garlic and onions are the main
+              ingredients.
             </p>
             <p className="mt-4 text-pretty text-muted-foreground">
               Spoon them over rice, chips, pasta or couscous, stir them through

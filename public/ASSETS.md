@@ -10,7 +10,6 @@ products/
   hero/           Wide crops for page headers.
   collections/    Group and range shots.
 dishes/           Square photos for the meal pairings row.
-photos/           Efamy's own kitchen and stockroom. Evidence, not styling.
 logos/            The wordmark, light and dark.
 ```
 
@@ -22,15 +21,12 @@ logos/            The wordmark, light and dark.
 | `products/hero/hero-hot-sauce-trio.jpg` | Homepage hero, social card |
 | `products/collections/range-lineup.jpg` | About page                 |
 | `dishes/*.jpg`                          | Meal pairings row          |
-| `photos/finished-trays.jpg`             | About, "Where it is made"  |
-| `photos/production-room.jpg`            | About, "Where it is made"  |
-| `photos/stockroom.jpg`                  | About, "Where it is made"  |
-| `photos/bottling-chilli-oil.jpg`        | Stockists, wholesale       |
 | `logos/*.png`                           | Header and footer          |
 
-Nothing in `public/` is unreferenced. The client cut three kitchen photographs
-from About and the shelf photograph from Stockists; those are in
-`assets/source/premises/`, in git and out of the build.
+Nothing in `public/` is unreferenced. The client cut the whole "Where it is
+made" strip from About and the shelf photograph from Stockists; all eight
+kitchen and stockroom photographs are in `assets/source/premises/`, in git and
+out of the build.
 
 Originals and superseded files live in `assets/` at the repo root, outside
 `public/`, so they are kept without being deployed. A photograph that comes
@@ -58,7 +54,7 @@ should be. All twelve are already filed under `products/`, and two of them
 (`turkey-chilli-sauce-duplicate.png`, `beef-chilli-oil-duplicate.png`) are
 byte-identical repeats of their pair.
 
-Files move into `products/cutout/`, `photos/` or `dishes/` under a real name
+Files move into `products/cutout/` or `dishes/` under a real name
 once the label has been read and matched.
 
 ### Files macOS will not let you open
@@ -110,7 +106,7 @@ They are not filed and nothing points at them, for three reasons:
 - Raw meat is not appetising on a storefront. The site is selling dinner.
 
 **Ask the client where these came from before anything uses them.** If they were
-bought or shot for Efamy, they can move into `photos/`; if they came off the
+bought or shot for Efamy, they can be filed under `products/`; if they came off the
 internet, they belong in `unlicensed-assets/`.
 
 ### When OCR fails, look
@@ -137,8 +133,8 @@ file without updating that file breaks the image.
   each came from, or replace them with photographs Efamy owns.** The same rule
   that keeps `unlicensed-assets/` out of the build applies here.
 - **Logo files** (`logos/`) — the wordmark is set in type today, not an asset.
-- **Open Graph share image** — nothing is set, so links shared to WhatsApp or
-  social currently preview without an image.
+- **Open Graph share image** — the homepage hero stands in for one. A shot
+  framed for a 1200x630 share card would read better in a WhatsApp preview.
 
 ## Conventions
 
