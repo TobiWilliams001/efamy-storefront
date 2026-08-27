@@ -58,14 +58,15 @@ export type SortOption = (typeof sortOptions)[number]["value"];
  * The options worth offering, given what is actually in the catalogue.
  *
  * A chip that matches nothing is worse than no chip: it invites a click that
- * empties the shop and makes the range look smaller than it is. Efamy sells
- * mild and hot and has never sold extra hot, so "Extra hot" was a guaranteed
- * dead end.
+ * empties the shop and makes the range look smaller than it is.
  *
- * Derived rather than deleted, so a strength or a claim the client starts
- * stocking brings its chip back with no code change. Counted against the whole
- * catalogue rather than the current selection, so chips never disappear out
- * from under the customer mid-filter.
+ * Derived rather than hard-coded, so a strength or a claim the client starts
+ * stocking brings its chip back with no code change, and one they drop takes
+ * its chip with it. Extra hot has been on both sides of that: absent while no
+ * product carried it, back the moment three did.
+ *
+ * Counted against the whole catalogue rather than the current selection, so
+ * chips never disappear out from under the customer mid-filter.
  */
 export function availableOptions(products: Product[]) {
   return {

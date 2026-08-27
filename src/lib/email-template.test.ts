@@ -16,7 +16,11 @@ describe("email templates", () => {
 
   it("escapes a hostile item description rather than rendering it", () => {
     const html = itemRows([
-      { quantity: 1, description: '<img src=x onerror="steal()">', amount: "£4.75" },
+      {
+        quantity: 1,
+        description: '<img src=x onerror="steal()">',
+        amount: "£4.75",
+      },
     ]);
 
     expect(html).not.toContain("<img");
