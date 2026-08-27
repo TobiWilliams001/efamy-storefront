@@ -27,17 +27,17 @@ export const faqs: Faq[] = [
   {
     question: "Are any of your products suitable for vegetarians or vegans?",
     answer:
-      "Our Beans Chilli Sauce is labelled suitable for vegetarians and vegans. The beef, chicken, fish and pork sauces are not. Always check the label on the jar you receive.",
+      "Beans Chilli Sauce, Beans Chilli Oil, All Purpose Seasoning Mix, Kelewele Seasoning Mix and Coat & Cook are labelled suitable for vegetarians and vegans. The beef, chicken, fish, goat, pork and turkey sauces are not. Always check the label on the jar you receive.",
   },
   {
     question: "How do I store a jar once it is opened?",
     answer:
-      "Store unopened jars in a cool, dry place. Once opened, refrigerate and use within four weeks. The exact guidance is printed on each jar, so follow the label on the product you have.",
+      "Store unopened jars in a cool, dry place. Once opened, refrigerate and use within three weeks. The exact guidance is printed on each jar, so follow the label on the product you have.",
   },
   {
     question: "Do your products contain allergens?",
     answer:
-      "Our fish sauces contain fish, and Coat & Cook contains wheat (gluten). Ingredients and allergens are listed on every product page, but always check the label on the jar you receive before eating.",
+      "Our fish sauces contain fish, and Coat & Cook contains wheat (gluten). Where we hold the full ingredient list for a product it is shown on its page, and the label on the jar is always the definitive answer, so check it before eating.",
   },
   {
     question: "What can I use the seasoning mixes for?",

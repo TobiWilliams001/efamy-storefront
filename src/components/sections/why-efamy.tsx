@@ -8,8 +8,7 @@ const reasons = [
   {
     icon: Leaf,
     title: "Premium ingredients",
-    description:
-      "Fresh ginger, garlic and onions, with vegetable and extra virgin olive oil. Nothing artificial.",
+    description: "Fresh ginger, garlic and onions. Nothing artificial.",
   },
   {
     icon: Utensils,
