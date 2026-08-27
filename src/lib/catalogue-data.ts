@@ -16,7 +16,7 @@ import type {
  */
 
 const STORAGE_SAUCE =
-  "Store in a cool, dry place. Refrigerate after opening and use within 4 weeks.";
+  "Store in a cool, dry place. Refrigerate after opening and use within 3 weeks.";
 const STORAGE_DRY =
   "Store in a cool, dry place. Keep the container sealed after use.";
 
@@ -68,28 +68,55 @@ function single(size: string, price: number): ProductVariant[] {
 }
 
 /**
- * The catering bucket, sold beside the jar rather than as its own listing.
+ * A catering bucket, listed in its own right.
  *
- * Same product, bigger pack: price belongs on the variant, so a caterer picks
- * the size on the product page like anyone else. Coat & Cook is 2.5kg; the
- * other two are 3kg, whatever the sticker on the photograph says.
+ * Separate products rather than a size on the jar: a caterer buying 3kg and a
+ * household buying 150g are shopping for different things, and burying the
+ * bucket in a size dropdown hid it from the people it is for. It also keeps
+ * the jar's "from" price honest, which a £60 size sitting beside it did not.
  */
-function bucket(
-  size: string,
-  price: number,
-  file: string,
-  alt: string,
-): ProductVariant {
+function cateringBucket({
+  slug,
+  name,
+  size,
+  price,
+  file,
+  side,
+  ingredients,
+  summary,
+  description,
+  dietary,
+}: {
+  slug: string;
+  name: string;
+  size: string;
+  price: number;
+  file: string;
+  /** Square canvas of the cutout, framed like every other product photograph. */
+  side: number;
+  /** Transcribed from the bucket label, where it is legible. */
+  ingredients?: string[];
+  summary: string;
+  description: string;
+  dietary?: string[];
+}): Product {
   return {
-    size,
-    price,
-    inStock: true,
+    id: slug,
+    slug,
+    name,
+    variants: [{ size, price, inStock: true }],
+    summary,
+    description,
+    ...(dietary ? { dietary } : {}),
+    ...(ingredients ? { ingredients } : {}),
     image: {
-      url: `/products/catering/${file}.jpg`,
-      alt,
-      width: 800,
-      height: 800,
+      url: `/products/catering/${file}.png`,
+      alt: `A ${size} catering bucket of Efamy ${name.replace(/, .*$/, "")}`,
+      width: side,
+      height: side,
     },
+    storage: STORAGE_DRY,
+    category: category.seasonings,
   };
 }
 
@@ -132,7 +159,7 @@ export const categories: ProductCategory[] = [
       width: 1093,
       height: 1093,
     },
-    productCount: 3,
+    productCount: 6,
   },
   {
     id: "cat-chilli-oils",
@@ -209,7 +236,7 @@ export const products: Product[] = [
     ],
     summary: "Chunks of real beef, in mild, hot or extra hot.",
     description:
-      "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the same recipe carries both strengths. Mild simply has less chilli.\n\nSpoon it over rice and stew, stir it through jollof, or take a jar to a barbecue.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
+      "Real beef in pieces you can see, not a smooth paste. Fresh ginger, garlic and onions are the base, and the same recipe carries every strength. Mild simply has less chilli.\n\nSpoon it over rice and stew, stir it through jollof, or take a jar to a barbecue.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     dietary: ["No artificial preservatives"],
     /*
      * The plain cutout on the card, so Beef sits at the same scale as every
@@ -323,7 +350,7 @@ export const products: Product[] = [
     ],
     summary: "Chunks of real fish, in mild or hot.",
     description:
-      "Made mainly with barracuda, in pieces you can see rather than a smooth paste. Fresh ginger, garlic and onions carry it, and the same recipe carries both strengths.\n\nThe jar for kenkey and fish, for waakye, or for rice that needs waking up.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
+      "Made mainly with barracuda, in pieces you can see rather than a smooth paste. Fresh ginger, garlic and onions carry it, and the same recipe carries every strength.\n\nThe jar for kenkey and fish, for waakye, or for rice that needs waking up.\n\nMade in Corby to the recipe we started with in 2008. No colours, additives or preservatives.",
     allergens: ["Fish"],
     dietary: ["No artificial preservatives"],
     image: {
@@ -425,14 +452,11 @@ export const products: Product[] = [
     category: category.sauces,
   },
   /*
-   * The seven oils take their price from the client's price list, which the
-   * client has confirmed is current, and their size from the bottle labels.
+   * The seven oils are 300ml at £2.99: the size read off the current bottle
+   * labels, the price from the client's price list, which they confirmed.
    *
-   * Those are two sources that disagree: the labels read £1.99 for 200ml, the
-   * list says £2.99 and gives no size at all. The price is theirs to set, so it
-   * is theirs; the size is printed on the bottle, so it stays. If the £2.99
-   * turns out to belong to a 300ml bottle, the size here is wrong and both need
-   * changing together. See docs/client-information-request.md.
+   * An older set of photographs showed 200ml bottles printed with £1.99. Those
+   * are superseded, not a conflict. See docs/client-information-request.md.
    */
   {
     id: "beans-chilli-oil",
@@ -442,7 +466,11 @@ export const products: Product[] = [
     summary: "Beans flavoured, and suitable for vegetarians.",
     description:
       "Chilli oil with the flavour of our beans sauce, in a bottle you can pour.\\n\\nA spoonful over anything already cooked: rice, chips, eggs, noodles, a bowl of soup. No chopping, no cooking, no waiting.\\n\\nMade in Corby. No colours, additives or preservatives.",
-    dietary: ["Suitable for vegetarians", "No artificial preservatives"],
+    dietary: [
+      "Suitable for vegetarians",
+      "Suitable for vegans",
+      "No artificial preservatives",
+    ],
     image: {
       url: "/products/oils/beans-chilli-oil.png",
       alt: "Bottle of Efamy beans flavoured chilli oil",
@@ -565,19 +593,15 @@ export const products: Product[] = [
     id: "all-purpose-seasoning-mix",
     slug: "all-purpose-seasoning-mix",
     name: "All Purpose Seasoning Mix, Original",
-    variants: [
-      ...single("300g", 475),
-      bucket(
-        "3kg",
-        4500,
-        "all-purpose-seasoning-3kg",
-        "A 3kg catering bucket of Efamy All Purpose Seasoning Mix, Original",
-      ),
-    ],
+    variants: single("300g", 475),
     summary: "One mix for meat, fish and chicken. Enhances natural flavour.",
     description:
       "An all purpose seasoning mix for beef, fish, chicken and more. No artificial preservatives.",
-    dietary: ["No artificial preservatives"],
+    dietary: [
+      "Suitable for vegetarians",
+      "Suitable for vegans",
+      "No artificial preservatives",
+    ],
     image: {
       url: "/products/cutout/all-purpose-seasoning-mix.png",
       alt: "Jar of Efamy all purpose seasoning mix, original",
@@ -592,18 +616,15 @@ export const products: Product[] = [
     id: "kelewele-seasoning-mix",
     slug: "kelewele-seasoning-mix",
     name: "Kelewele Seasoning Mix",
-    variants: [
-      ...single("150g", 325),
-      bucket(
-        "3kg",
-        6000,
-        "kelewele-seasoning-3kg",
-        "A 3kg catering bucket of Efamy Kelewele Seasoning Mix",
-      ),
-    ],
+    variants: single("150g", 325),
     summary: "The spice blend for kelewele, and for barbecues and kebabs.",
     description:
       "Spices, negro pepper, chilli powder and crushed chilli peppers, the blend we first made in December 2015.\n\nIts home is kelewele, spiced fried plantain, but it earns its place at a barbecue and on kebabs just as easily.\n\nMade in Corby. No colours, additives or preservatives.",
+    dietary: [
+      "Suitable for vegetarians",
+      "Suitable for vegans",
+      "No artificial preservatives",
+    ],
     image: {
       url: "/products/cutout/kelewele-seasoning-mix.png",
       alt: "Bottle of Efamy kelewele seasoning mix",
@@ -618,15 +639,7 @@ export const products: Product[] = [
     id: "coat-and-cook",
     slug: "coat-and-cook",
     name: "Coat & Cook",
-    variants: [
-      ...single("250g", 350),
-      bucket(
-        "2.5kg",
-        3250,
-        "coat-and-cook-2-5kg",
-        "A 2.5kg catering bucket of Efamy Coat & Cook",
-      ),
-    ],
+    variants: single("250g", 350),
     summary: "A crisp coating for grilling chicken, beef and salmon.",
     description:
       "Coat the meat or fish and cook it. That is the whole method. Made for grilling chicken, beef and salmon, and just as good frying or thickening a sauce.\n\nWheat flour, maize starch, garlic, onion, spices and herbs. No artificial preservatives.\n\nMade in Corby to the recipe we started with in 2008.",
@@ -642,7 +655,11 @@ export const products: Product[] = [
       "Herbs",
     ],
     allergens: ["Wheat (gluten)"],
-    dietary: ["No artificial preservatives"],
+    dietary: [
+      "Suitable for vegetarians",
+      "Suitable for vegans",
+      "No artificial preservatives",
+    ],
     image: {
       url: "/products/cutout/coat-and-cook.png",
       alt: "Jar of Efamy Coat & Cook seasoned coating mix, 250g",
@@ -661,6 +678,60 @@ export const products: Product[] = [
     servingSuggestions: ["Chicken", "Fish", "Meat", "Vegetables"],
     category: category.seasonings,
   },
+  cateringBucket({
+    slug: "all-purpose-seasoning-mix-3kg",
+    name: "All Purpose Seasoning Mix, 3kg",
+    size: "3kg",
+    price: 4500,
+    file: "all-purpose-seasoning-3kg",
+    side: 1161,
+    summary: "The catering bucket. One mix for meat, fish and chicken.",
+    description:
+      "The same All Purpose Seasoning Mix as the jar, in a 3kg bucket for kitchens that go through it.\n\nSprinkle over diced or sliced ingredients, leave it to marinate for ten minutes or overnight, then cook.\n\nSuitable for vegetarians and vegans. Store in a cool, dry place.",
+    ingredients: [
+      "Ginger",
+      "Garlic",
+      "Chillies",
+      "Negro pepper",
+      "Cloves",
+      "Black pepper",
+      "Salt",
+    ],
+    dietary: ["Suitable for vegetarians", "Suitable for vegans"],
+  }),
+  cateringBucket({
+    slug: "kelewele-seasoning-mix-3kg",
+    name: "Kelewele Seasoning Mix, 3kg",
+    size: "3kg",
+    price: 6000,
+    file: "kelewele-seasoning-3kg",
+    side: 1170,
+    summary: "The catering bucket. The spice blend for kelewele.",
+    description:
+      "The same Kelewele Seasoning Mix as the jar, in a 3kg bucket for kitchens serving it by the plateful.\n\nToss it through diced ripe plantain, leave it to sit, then fry in small batches until golden and crisp.\n\nSuitable for vegetarians and vegans. Store in a cool, dry place.",
+    ingredients: [
+      "Ginger",
+      "Garlic",
+      "Chillies",
+      "Negro pepper",
+      "Cloves",
+      "Black pepper",
+      "Salt",
+    ],
+    dietary: ["Suitable for vegetarians", "Suitable for vegans"],
+  }),
+  cateringBucket({
+    slug: "coat-and-cook-2-5kg",
+    name: "Coat & Cook, 2.5kg",
+    size: "2.5kg",
+    price: 3250,
+    file: "coat-and-cook-2-5kg",
+    side: 1104,
+    summary: "The catering bucket. A crisp coating, by the kilo.",
+    dietary: ["Suitable for vegetarians", "Suitable for vegans"],
+    description:
+      "The same Coat & Cook as the tub, in a 2.5kg bucket.\n\nCoat chicken, meat, fish or vegetables and cook them. No extra salt or seasoning needed.\n\nStore in a cool, dry place and reseal after use.",
+  }),
 ];
 
 export const featuredSlugs = [
