@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Serif_Display, Manrope, Parisienne } from "next/font/google";
+import { DM_Serif_Display, Manrope } from "next/font/google";
 
 import { Analytics } from "@/components/analytics";
 import { CookieConsent } from "@/components/cookie-consent";
@@ -29,18 +29,6 @@ const dmSerifDisplay = DM_Serif_Display({
   subsets: ["latin"],
   weight: "400",
   style: ["normal", "italic"],
-  display: "swap",
-});
-
-/*
- * One decorative face, for one line. A script is unreadable at body sizes and
- * cheapens fast if it spreads, so it stays on the hero signature and nothing
- * else. Single weight, because a script has no business being bold.
- */
-const parisienne = Parisienne({
-  variable: "--font-script",
-  subsets: ["latin"],
-  weight: "400",
   display: "swap",
 });
 
@@ -88,7 +76,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en-GB"
-      className={`${manrope.variable} ${dmSerifDisplay.variable} ${parisienne.variable} h-full antialiased`}
+      className={`${manrope.variable} ${dmSerifDisplay.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <a

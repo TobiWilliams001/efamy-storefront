@@ -119,9 +119,10 @@ export function HomeHero() {
       title={
         <>
           Bold flavour, made with care.
-          {/* A signature under the headline, not a second headline. The script
-              face carries it, so it can sit small without disappearing. */}
-          <span className="mt-2 block font-script text-2xl leading-tight tracking-normal text-gold sm:mt-3 sm:text-3xl">
+          {/* A signature under the headline, not a second headline. Set in the
+              body face, small and letterspaced: at this size a script turns
+              into decoration you have to decipher. */}
+          <span className="mt-5 block font-sans text-xs tracking-[0.22em] text-gold uppercase sm:mt-6 sm:text-sm">
             From our kitchen to yours.
           </span>
         </>
