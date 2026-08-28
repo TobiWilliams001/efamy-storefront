@@ -21,6 +21,9 @@ type HeroProps = {
   size?: "full" | "compact";
   showSignals?: boolean;
   children?: React.ReactNode;
+  /** Defaults to the home page photograph; pass one to give a page its own. */
+  image?: string;
+  imageAlt?: string;
 };
 
 /**
@@ -34,13 +37,15 @@ export function Hero({
   description,
   size = "full",
   showSignals = false,
+  image = "/products/hero/hero-home.jpg",
+  imageAlt = "The Efamy range",
   children,
 }: HeroProps) {
   return (
     <section className="relative isolate -mt-16 overflow-hidden bg-ink lg:-mt-20">
       <Image
-        src="/products/hero/hero-home.jpg"
-        alt="The Efamy range"
+        src={image}
+        alt={imageAlt}
         fill
         sizes="100vw"
         preload
@@ -113,9 +118,9 @@ export function HomeHero() {
       showSignals
       title={
         <>
-          Bold flavour.
+          Bold flavour, made with care.
           <br />
-          <span className="text-gold">Made with love.</span>
+          <span className="text-gold">From our kitchen to yours.</span>
         </>
       }
       description="Ghanaian chilli sauces and seasonings, made in Corby since 2008. Real meat, poultry, beans and fish, never a smooth paste."
