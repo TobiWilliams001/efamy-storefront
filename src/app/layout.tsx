@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Serif_Display, Manrope } from "next/font/google";
+import { DM_Serif_Display, Manrope, Parisienne } from "next/font/google";
 
 import { Analytics } from "@/components/analytics";
 import { CookieConsent } from "@/components/cookie-consent";
@@ -19,8 +19,26 @@ const manrope = Manrope({
   display: "swap",
 });
 
+/*
+ * Italic is loaded as a real face rather than left to the browser. A synthesised
+ * italic is the upright shape sheared over, which on a display serif shows in
+ * the curves and reads as a mistake at large sizes.
+ */
 const dmSerifDisplay = DM_Serif_Display({
   variable: "--font-heading",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+/*
+ * One decorative face, for one line. A script is unreadable at body sizes and
+ * cheapens fast if it spreads, so it stays on the hero signature and nothing
+ * else. Single weight, because a script has no business being bold.
+ */
+const parisienne = Parisienne({
+  variable: "--font-script",
   subsets: ["latin"],
   weight: "400",
   display: "swap",
@@ -70,7 +88,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en-GB"
-      className={`${manrope.variable} ${dmSerifDisplay.variable} h-full antialiased`}
+      className={`${manrope.variable} ${dmSerifDisplay.variable} ${parisienne.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <a

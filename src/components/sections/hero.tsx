@@ -119,8 +119,11 @@ export function HomeHero() {
       title={
         <>
           Bold flavour, made with care.
-          <br />
-          <span className="text-gold">From our kitchen to yours.</span>
+          {/* A signature under the headline, not a second headline. The script
+              face carries it, so it can sit small without disappearing. */}
+          <span className="mt-2 block font-script text-2xl leading-tight tracking-normal text-gold sm:mt-3 sm:text-3xl">
+            From our kitchen to yours.
+          </span>
         </>
       }
       description="Ghanaian chilli sauces and seasonings, made in Corby since 2008. Real meat, poultry, beans and fish, never a smooth paste."
