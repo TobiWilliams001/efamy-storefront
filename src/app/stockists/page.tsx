@@ -160,7 +160,7 @@ export default function StockistsPage() {
               phone, and ordered right on desktop. */}
           {/* 4:3 rather than 16:9: the shot is 5:4, and a widescreen frame
               cropped the tops and bottoms off the bottles. */}
-          <div className="relative aspect-3/4 overflow-hidden rounded-lg shadow-card lg:order-2">
+          <div className="relative mx-auto aspect-3/4 w-full max-w-xs overflow-hidden rounded-lg shadow-card lg:order-2 lg:max-w-sm">
             <Image
               src="/products/collections/range-all.jpg"
               alt="The Efamy range: chilli sauces, chilli oils and seasonings"
