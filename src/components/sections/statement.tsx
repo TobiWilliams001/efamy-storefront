@@ -5,9 +5,13 @@ import { Rule } from "@/components/layout/rule";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 
+/*
+ * A portrait shot, because this panel is a tall half of a two-column band. The
+ * wide hero crop that was here lost most of itself to object-cover.
+ */
 const feature = {
-  src: "/products/hero/hero-hot-sauce-trio.jpg",
-  alt: "Efamy pork, beef and chicken chilli sauces on a wooden board with fresh chillies and garlic",
+  src: "/products/collections/range-all.jpg",
+  alt: "The Efamy range of chilli sauces, chilli oils and seasonings",
 };
 
 export function Statement() {

@@ -55,6 +55,8 @@ export default function AboutPage() {
     <>
       <Hero
         size="compact"
+        image="/products/hero/hero-about.jpg"
+        imageAlt="Efamy chilli sauces and seasonings"
         title={
           <>
             It began with

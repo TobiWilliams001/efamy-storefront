@@ -63,8 +63,8 @@ export function WhyEfamy() {
 
         <div className="relative aspect-5/4 overflow-hidden rounded-lg shadow-card">
           <Image
-            src="/products/collections/range-group-shot.jpg"
-            alt="The Efamy range together: chilli sauces, chilli oils and seasonings"
+            src="/products/collections/oils-group.jpg"
+            alt="The range of Efamy chilli oils"
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover"
