@@ -73,6 +73,8 @@ export default function ContactPage() {
     <>
       <Hero
         size="compact"
+        image="/products/hero/hero-contact.jpg"
+        imageAlt="The Efamy range"
         title="Get in touch"
         description="Questions about an order, our products, or stocking Efamy? Send us a message and a real person will come back to you."
       />
