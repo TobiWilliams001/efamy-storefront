@@ -255,7 +255,7 @@ See `photography-brief.md` for the full shot list. In short:
       garlic, onions and tomatoes around an open bowl for the About band
 - [ ] **Six dish photographs** — Kenkey & Fish, Jollof Rice, Grilled Chicken,
       Waakye, Yam & Plantain and Fried Eggs. Three of the nine exist
-- [ ] **Recipe photographs** — none of the six recipes has one
+- [x] **Recipe photographs** — all six have one
 - [ ] **Food in context** for each product — the jar beside the meal it belongs
       to
 - [ ] **Close-ups** of the sauce itself, showing the meat and fish chunks
@@ -266,8 +266,9 @@ See `photography-brief.md` for the full shot list. In short:
 
 ## 5. Content
 
-- [ ] **The real recipes.** The six on the site are ordinary versions of
-      well-known dishes, marked as drafts. Efamy's own would be far better.
+- [x] **The recipes** — read and approved by Efamy in August 2026, so the site
+      publishes them as its own. Efamy's own versions would still be better if
+      they ever want to replace them.
 - [x] **The founder's story** — taken from the old website. The About page now
       opens with the first production on 30 December 2008.
 - [ ] **Customer reviews.** The slots are built and on the site — one band on

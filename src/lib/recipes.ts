@@ -16,11 +16,9 @@ export type Recipe = {
 };
 
 /**
- * DRAFT CONTENT. These are ordinary versions of well-known dishes, written so
- * the pages and structured data can be built and reviewed. They are not the
- * client's recipes and must be replaced or approved before launch — a food
- * brand publishing recipes it did not write is a credibility problem, not just
- * an editorial one.
+ * Approved by Efamy in August 2026. Written here as ordinary versions of
+ * well-known dishes, then read and signed off by them, so the site publishes
+ * them as its own.
  */
 export const recipes: Recipe[] = [
   {
