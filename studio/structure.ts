@@ -22,8 +22,14 @@ export const structure: StructureResolver = (S) =>
     .items([
       S.listItem()
         .id('products')
-        .title('Products')
+        .title('All products')
         .icon(PackageIcon)
+        .child(S.documentTypeList('product').title('All products')),
+
+      S.listItem()
+        .id('by-category')
+        .title('By category')
+        .icon(TagIcon)
         .child(
           S.documentTypeList('productCategory')
             .title('Products by category')
@@ -35,12 +41,6 @@ export const structure: StructureResolver = (S) =>
                 .apiVersion('2026-05-15'),
             ),
         ),
-
-      S.listItem()
-        .id('all-products')
-        .title('All products')
-        .icon(PackageIcon)
-        .child(S.documentTypeList('product').title('All products')),
 
       S.divider(),
 
@@ -86,12 +86,6 @@ export const structure: StructureResolver = (S) =>
                     )
                     .apiVersion('2026-05-15'),
                 ),
-              S.divider(),
-              S.listItem()
-                .id('every-product')
-                .title('Every product')
-                .icon(PackageIcon)
-                .child(S.documentTypeList('product').title('Every product')),
             ]),
         ),
 
@@ -103,12 +97,5 @@ export const structure: StructureResolver = (S) =>
         .icon(BookIcon)
         .child(S.documentTypeList('recipe').title('Recipes')),
 
-      S.divider(),
-
-      // Rarely touched: three categories that map to the shop's filters.
-      S.listItem()
-        .id('categories')
-        .title('Categories')
-        .icon(TagIcon)
-        .child(S.documentTypeList('productCategory').title('Categories')),
+      S.divider()
     ])

@@ -2,6 +2,8 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {BasketIcon} from '@sanity/icons/Basket'
 import {StockTool} from './tools/StockTool'
+import {Logo} from './components/Logo'
+import {theme} from './theme'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {structure} from './structure'
@@ -37,6 +39,23 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+  },
+
+  theme,
+
+  studio: {
+    components: {logo: Logo},
+  },
+
+  document: {
+    /*
+     * The blue "create" button offered every type, including categories, of
+     * which there are three and always will be. Only the two things Efamy
+     * actually adds are offered; categories are still editable from their own
+     * list.
+     */
+    newDocumentOptions: (prev) =>
+      prev.filter((item) => item.templateId !== 'productCategory'),
   },
 
   /* Releases stage content for publishing on a date. Efamy edits a price and
