@@ -125,8 +125,8 @@ export default async function OrderConfirmedPage({
       <Section spacing="afterHeader" width="narrow">
         <div className="rounded-lg bg-card p-8 shadow-card sm:p-10">
           <p className="text-lg text-pretty">
-            We have your order and will start getting it ready. Everything you
-            need is on its way to your inbox.
+            Thank you for your order. We have received it and will start getting
+            it ready.
           </p>
 
           <div className="mt-8 flex items-start gap-3 rounded-lg bg-clay/30 p-5">
@@ -144,7 +144,7 @@ export default async function OrderConfirmedPage({
             <div className="min-w-0">
               <h2 className="font-heading text-lg">Check your email</h2>
               <p className="mt-1 text-sm text-pretty text-muted-foreground">
-                A confirmation is on its way
+                Your order confirmation and payment receipt have been sent
                 {payment.email ? (
                   <>
                     {" "}
@@ -154,18 +154,16 @@ export default async function OrderConfirmedPage({
                     </span>
                   </>
                 ) : null}
-                , along with a payment receipt from Stripe. Two emails is
-                normal: one lists what you ordered, the other is your proof of
-                payment. They usually arrive within a few minutes, so check your
-                spam folder before writing to us.
+                . They should arrive within a few minutes, so please check your
+                spam or junk folder if you do not see them.
               </p>
               {payment.transactionId ? (
-                <p className="mt-3 text-sm text-muted-foreground">
-                  Order reference{" "}
-                  <span className="font-mono text-xs break-all text-foreground">
+                <div className="mt-4">
+                  <p className="text-sm font-medium">Order reference</p>
+                  <p className="mt-1 font-mono text-xs break-all text-muted-foreground">
                     {payment.transactionId}
-                  </span>
-                </p>
+                  </p>
+                </div>
               ) : null}
             </div>
           </div>
