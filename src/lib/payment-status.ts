@@ -17,6 +17,12 @@ export type ConfirmedPayment = {
   value?: number;
   currency?: string;
   shipping?: number;
+  /**
+   * The address Stripe collected. Shown back on the confirmation page so a
+   * customer who mistyped it finds out immediately, rather than deciding we
+   * never wrote to them.
+   */
+  email?: string;
 };
 
 /**
@@ -50,6 +56,7 @@ export async function confirmPayment(
         value: (session.amount_total ?? 0) / 100,
         currency: (session.currency ?? "gbp").toUpperCase(),
         shipping: (session.shipping_cost?.amount_total ?? 0) / 100,
+        email: session.customer_details?.email ?? undefined,
       };
     }
 

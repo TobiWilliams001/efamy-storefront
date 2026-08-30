@@ -134,11 +134,37 @@ export default async function OrderConfirmedPage({
               aria-hidden="true"
               className="mt-0.5 size-5 shrink-0 text-gold-ink"
             />
-            <div>
-              <h2 className="font-heading text-lg">Order confirmation</h2>
+            {/*
+             * The address is shown back rather than described, because the
+             * commonest reason a confirmation "never arrives" is a typo in it,
+             * and only the customer can spot that. Worded as on its way: this
+             * redirect often beats Stripe's webhook, so at this moment the
+             * email may genuinely not have been sent yet.
+             */}
+            <div className="min-w-0">
+              <h2 className="font-heading text-lg">Check your email</h2>
               <p className="mt-1 text-sm text-pretty text-muted-foreground">
-                A confirmation and receipt have been sent to your email.
+                A confirmation is on its way
+                {payment.email ? (
+                  <>
+                    {" "}
+                    to{" "}
+                    <span className="font-medium break-words text-foreground">
+                      {payment.email}
+                    </span>
+                  </>
+                ) : null}
+                . It usually arrives within a few minutes. If you cannot see it,
+                check your spam folder before writing to us.
               </p>
+              {payment.transactionId ? (
+                <p className="mt-3 text-sm text-muted-foreground">
+                  Order reference{" "}
+                  <span className="font-mono text-xs break-all text-foreground">
+                    {payment.transactionId}
+                  </span>
+                </p>
+              ) : null}
             </div>
           </div>
 
