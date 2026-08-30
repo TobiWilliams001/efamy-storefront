@@ -1,5 +1,7 @@
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
+import {BasketIcon} from '@sanity/icons/Basket'
+import {StockTool} from './tools/StockTool'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {structure} from './structure'
@@ -19,6 +21,13 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [structureTool({structure}), ...(isDev ? [visionTool()] : [])],
+
+  /* Every size and its number on one page, rather than buried inside each
+     product. A stock take is one pass down a list, not twenty documents. */
+  tools: (prev) => [
+    {name: 'stock', title: 'Stock', icon: BasketIcon, component: StockTool},
+    ...prev,
+  ],
 
   schema: {
     types: schemaTypes,
