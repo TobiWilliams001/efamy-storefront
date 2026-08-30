@@ -2,6 +2,7 @@ import type { Stripe } from "stripe";
 
 import { getStripe } from "@/lib/stripe";
 import { confirmOrderToCustomer, notifyOrder } from "@/lib/order-email";
+import { decrementStock, reportSoldOut } from "@/lib/stock";
 
 /*
  * The only place an order becomes paid. The success redirect proves nothing —
@@ -18,6 +19,8 @@ const seen = new Set<string>();
 
 /** Stripe session metadata keys marking which of the two emails have gone. */
 const NOTIFIED = "efamy_notified";
+/** Stops a redelivered event counting the same order down twice. */
+const COUNTED = "efamy_stock_counted";
 const CONFIRMED = "efamy_customer_confirmed";
 
 export async function POST(request: Request) {
@@ -100,7 +103,22 @@ export async function POST(request: Request) {
         const sentToCustomer =
           toldCustomer || (await confirmOrderToCustomer(full));
 
+        /*
+         * Counted before the emails and flagged separately, so a retry after a
+         * mail failure does not take the stock down again. A failure here is
+         * logged and swallowed: an uncounted jar is a smaller problem than an
+         * order Stripe keeps retrying.
+         */
+        if (full.metadata?.[COUNTED] !== "1") {
+          try {
+            await reportSoldOut(await decrementStock(full));
+          } catch (error) {
+            console.error("Stock count failed for", session.id, error);
+          }
+        }
+
         const metadata = { ...(full.metadata ?? {}) };
+        metadata[COUNTED] = "1";
         if (sentToEfamy) metadata[NOTIFIED] = "1";
         if (sentToCustomer) metadata[CONFIRMED] = "1";
 

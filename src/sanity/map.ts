@@ -49,6 +49,10 @@ export function mapProduct(raw: Record<string, unknown>): Product | null {
               ? entry.compareAtPrice
               : undefined,
           inStock: entry.inStock !== false,
+          stock:
+            typeof entry.stock === "number" && Number.isFinite(entry.stock)
+              ? entry.stock
+              : undefined,
         }))
         .filter((entry) => entry.size && entry.price > 0)
     : [];

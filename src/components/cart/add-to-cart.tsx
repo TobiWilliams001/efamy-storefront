@@ -10,7 +10,13 @@ import { useCart } from "@/components/cart/cart-provider";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import { heatLevels, sizesFor, type Product } from "@/types/product";
+import {
+  heatLevels,
+  isLowStock,
+  sizesFor,
+  variantAvailable,
+  type Product,
+} from "@/types/product";
 
 export function AddToCart({ product }: { product: Product }) {
   const { add } = useCart();
@@ -78,7 +84,7 @@ export function AddToCart({ product }: { product: Product }) {
                   entry.size === variant.size
                     ? "border-foreground bg-foreground text-background"
                     : "border-neutral-300 hover:border-foreground/40",
-                  !entry.inStock && "cursor-not-allowed opacity-40",
+                  !variantAvailable(entry) && "cursor-not-allowed opacity-40",
                 )}
               >
                 <input
@@ -86,7 +92,7 @@ export function AddToCart({ product }: { product: Product }) {
                   name="size"
                   value={entry.size}
                   checked={entry.size === variant.size}
-                  disabled={!entry.inStock}
+                  disabled={!variantAvailable(entry)}
                   onChange={() => setSize(entry.size)}
                   className="sr-only"
                 />
@@ -135,7 +141,7 @@ export function AddToCart({ product }: { product: Product }) {
         <Button
           size="xl"
           variant="accent"
-          disabled={!variant.inStock}
+          disabled={!variantAvailable(variant)}
           onClick={() => {
             add(product, variant, quantity);
             added(product.name);
@@ -143,11 +149,17 @@ export function AddToCart({ product }: { product: Product }) {
           }}
           className="w-full sm:w-auto"
         >
-          {variant.inStock
+          {variantAvailable(variant)
             ? `Add to basket · ${formatPrice(variant.price)}`
             : "Out of stock"}
         </Button>
       </div>
+
+      {isLowStock(variant) ? (
+        <p role="status" className="mt-3 text-sm font-medium text-brand">
+          Only {variant.stock} left
+        </p>
+      ) : null}
     </div>
   );
 }

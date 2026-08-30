@@ -1,4 +1,5 @@
 import { getProductBySlug } from "@/lib/catalogue";
+import { variantAvailable } from "@/types/product";
 
 /**
  * What the browser is allowed to tell us: what they want and how many. Never
@@ -27,6 +28,12 @@ export type PricingFailure =
   | { reason: "unknown-product"; slug: string }
   | { reason: "unknown-size"; slug: string; size: string }
   | { reason: "out-of-stock"; slug: string; size: string }
+  | {
+      reason: "not-enough-stock";
+      slug: string;
+      size: string;
+      available: number;
+    }
   | { reason: "bad-quantity"; slug: string; size: string }
   | { reason: "empty" };
 
@@ -92,10 +99,28 @@ export async function priceBasket(
       };
     }
 
-    if (!variant.inStock) {
+    if (!variantAvailable(variant)) {
       return {
         ok: false,
         failure: { reason: "out-of-stock", slug: line.slug, size: line.size },
+      };
+    }
+
+    /*
+     * Checked against the count as it stands now, not as it stood when the
+     * basket was filled. It does not make overselling impossible, because
+     * nothing is reserved while someone is on Stripe's payment page, but it
+     * stops the obvious case of ordering six when two are left.
+     */
+    if (variant.stock !== undefined && line.quantity > variant.stock) {
+      return {
+        ok: false,
+        failure: {
+          reason: "not-enough-stock",
+          slug: line.slug,
+          size: line.size,
+          available: variant.stock,
+        },
       };
     }
 

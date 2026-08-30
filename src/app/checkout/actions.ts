@@ -33,6 +33,8 @@ const FAILURE_MESSAGES: Record<string, string> = {
   "unknown-product": "One of the items is no longer available.",
   "unknown-size": "One of the sizes is no longer available.",
   "out-of-stock": "One of the items has gone out of stock.",
+  "not-enough-stock":
+    "There are fewer of one of those left than you asked for. Change the quantity in your basket and try again.",
   "bad-quantity": "One of the quantities is not valid.",
 };
 
@@ -122,6 +124,18 @@ export async function startCheckout(input: unknown): Promise<CheckoutResult> {
         },
       ],
       phone_number_collection: { enabled: true },
+      /*
+       * What was bought, in a form the webhook can act on. Stripe line items
+       * carry only a description, which is not enough to find the variant
+       * again. Capped at Stripe's 500 characters: past that the stock count is
+       * skipped rather than the order failing.
+       */
+      metadata: {
+        efamy_lines: priced.lines
+          .map((line) => `${line.slug}|${line.size}|${line.quantity}`)
+          .join(";")
+          .slice(0, 500),
+      },
       success_url: `${siteConfig.url}/order/confirmed?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteConfig.url}/cart`,
     });

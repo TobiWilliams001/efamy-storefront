@@ -14,7 +14,7 @@ const PRODUCT_FIELDS = `
   "slug": slug.current,
   summary,
   description,
-  variants[]{size, heat, price, compareAtPrice, "inStock": coalesce(inStock, true), image{${IMAGE_FIELDS}}},
+  variants[]{size, heat, price, compareAtPrice, stock, "inStock": coalesce(inStock, true), image{${IMAGE_FIELDS}}},
   heat,
   ingredients,
   allergens,

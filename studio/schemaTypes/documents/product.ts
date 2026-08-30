@@ -89,8 +89,19 @@ export const product = defineType({
             }),
             defineField({
               name: 'inStock',
+              title: 'Available to buy',
               type: 'boolean',
+              description:
+                'Turn off to take this size off the shop by hand. Leave on and let the number below do it for you.',
               initialValue: true,
+            }),
+            defineField({
+              name: 'stock',
+              title: 'Number in stock',
+              type: 'number',
+              description:
+                'How many of this size you have. It counts down as orders come in, and the size comes off the shop by itself at zero. Leave empty if you would rather not count this one.',
+              validation: (rule) => rule.integer().min(0),
             }),
             defineField({
               name: 'image',

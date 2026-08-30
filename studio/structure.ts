@@ -2,6 +2,8 @@ import type {StructureResolver} from 'sanity/structure'
 import {PackageIcon} from '@sanity/icons/Package'
 import {BookIcon} from '@sanity/icons/Book'
 import {TagIcon} from '@sanity/icons/Tag'
+import {BasketIcon} from '@sanity/icons/Basket'
+import {WarningOutlineIcon} from '@sanity/icons/WarningOutline'
 
 /**
  * What Efamy sees when they sign in.
@@ -37,6 +39,55 @@ export const structure: StructureResolver = (S) =>
         .title('All products')
         .icon(PackageIcon)
         .child(S.documentTypeList('product').title('All products')),
+
+      S.divider(),
+
+      /*
+       * Stock, as three questions rather than one list: what has run out, what
+       * is nearly out, and everything. The first two are what someone opens the
+       * Studio to check, so they do not have to hunt through the range to find
+       * them.
+       *
+       * A product appears in "Sold out" only when every size is at zero, and in
+       * "Running low" when any size is down to five or fewer. Sizes with no
+       * number are not counted and never appear.
+       */
+      S.listItem()
+        .title('Stock')
+        .icon(BasketIcon)
+        .child(
+          S.list()
+            .title('Stock')
+            .items([
+              S.listItem()
+                .title('Sold out')
+                .icon(WarningOutlineIcon)
+                .child(
+                  S.documentList()
+                    .title('Sold out')
+                    .filter(
+                      '_type == "product" && count(variants[defined(stock)]) > 0 && count(variants[defined(stock) && stock > 0]) == 0',
+                    )
+                    .apiVersion('2026-05-15'),
+                ),
+              S.listItem()
+                .title('Running low')
+                .icon(WarningOutlineIcon)
+                .child(
+                  S.documentList()
+                    .title('Running low, five or fewer')
+                    .filter(
+                      '_type == "product" && count(variants[defined(stock) && stock > 0 && stock <= 5]) > 0',
+                    )
+                    .apiVersion('2026-05-15'),
+                ),
+              S.divider(),
+              S.listItem()
+                .title('Every product')
+                .icon(PackageIcon)
+                .child(S.documentTypeList('product').title('Every product')),
+            ]),
+        ),
 
       S.divider(),
 

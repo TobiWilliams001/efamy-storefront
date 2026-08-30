@@ -22,3 +22,23 @@ export function getSanityClient(): SanityClient | null {
   });
   return cached;
 }
+
+/**
+ * A client that can write, for the one job that needs it: counting stock down
+ * after a payment. Null without a token, so a deployment that has not been
+ * given one degrades to not counting rather than failing an order.
+ */
+let writer: SanityClient | null = null;
+
+export function getSanityWriteClient(): SanityClient | null {
+  const token = process.env.SANITY_API_WRITE_TOKEN;
+  if (!isSanityConfigured || !token) return null;
+  writer ??= createClient({
+    projectId,
+    dataset,
+    apiVersion: "2026-05-15",
+    useCdn: false,
+    token,
+  });
+  return writer;
+}

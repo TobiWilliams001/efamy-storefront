@@ -25,7 +25,7 @@ const ToastContext = createContext<((toast: Omit<Toast, "id">) => void) | null>(
   null,
 );
 
-export function useToast() {
+function useToast() {
   const show = useContext(ToastContext);
   if (!show) throw new Error("useToast must be used within a ToastProvider");
   return show;

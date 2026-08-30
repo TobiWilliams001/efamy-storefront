@@ -44,6 +44,12 @@ export type ProductVariant = {
   price: number;
   compareAtPrice?: number;
   inStock: boolean;
+  /**
+   * How many are left, when Efamy is counting this size. Undefined means they
+   * are not: availability then rests on `inStock` alone, which is the manual
+   * toggle. Zero is a real answer and means sold out.
+   */
+  stock?: number;
 };
 
 /** The strengths a product is actually sold in, in label order. */
@@ -125,6 +131,29 @@ export function lowestPrice(product: Pick<Product, "variants">): number {
   return Math.min(...product.variants.map((variant) => variant.price));
 }
 
+/**
+ * Whether a single size can be bought.
+ *
+ * The count wins where there is one, because it is the fact; the toggle is the
+ * override for sizes nobody is counting. A size can therefore be switched off
+ * by hand while still holding stock, but never sold while at zero.
+ */
+export function variantAvailable(variant: ProductVariant): boolean {
+  if (!variant.inStock) return false;
+  return variant.stock === undefined || variant.stock > 0;
+}
+
 export function inStock(product: Pick<Product, "variants">): boolean {
-  return product.variants.some((variant) => variant.inStock);
+  return product.variants.some(variantAvailable);
+}
+
+/** Low enough to be worth telling the customer, and only when it is real. */
+export const LOW_STOCK_AT = 5;
+
+export function isLowStock(variant: ProductVariant): boolean {
+  return (
+    variantAvailable(variant) &&
+    variant.stock !== undefined &&
+    variant.stock <= LOW_STOCK_AT
+  );
 }
