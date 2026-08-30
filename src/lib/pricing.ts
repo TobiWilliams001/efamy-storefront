@@ -25,16 +25,17 @@ export type PricedLine = {
 };
 
 export type PricingFailure =
-  | { reason: "unknown-product"; slug: string }
-  | { reason: "unknown-size"; slug: string; size: string }
-  | { reason: "out-of-stock"; slug: string; size: string }
+  | { reason: "unknown-product"; slug: string; name: string }
+  | { reason: "unknown-size"; slug: string; size: string; name: string }
+  | { reason: "out-of-stock"; slug: string; size: string; name: string }
   | {
       reason: "not-enough-stock";
       slug: string;
       size: string;
+      name: string;
       available: number;
     }
-  | { reason: "bad-quantity"; slug: string; size: string }
+  | { reason: "bad-quantity"; slug: string; size: string; name: string }
   | { reason: "empty" };
 
 export type PricingResult =
@@ -51,6 +52,14 @@ export const MAX_LINE_QUANTITY = 99;
  * price change. A basket that fails here is never partially charged: the whole
  * checkout is refused so the customer sees an accurate basket before paying.
  */
+/** A slug is not a product name, but it is better than "one of the items". */
+function readable(slug: string): string {
+  return slug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 export async function priceBasket(
   requested: RequestedLine[],
 ): Promise<PricingResult> {
@@ -72,6 +81,7 @@ export async function priceBasket(
           reason: "bad-quantity",
           slug: line.slug,
           size: line.size,
+          name: readable(line.slug),
         },
       };
     }
@@ -81,7 +91,11 @@ export async function priceBasket(
     if (!product) {
       return {
         ok: false,
-        failure: { reason: "unknown-product", slug: line.slug },
+        failure: {
+          reason: "unknown-product",
+          slug: line.slug,
+          name: readable(line.slug),
+        },
       };
     }
 
@@ -95,14 +109,24 @@ export async function priceBasket(
     if (!variant) {
       return {
         ok: false,
-        failure: { reason: "unknown-size", slug: line.slug, size: line.size },
+        failure: {
+          reason: "unknown-size",
+          slug: line.slug,
+          size: line.size,
+          name: product.name,
+        },
       };
     }
 
     if (!variantAvailable(variant)) {
       return {
         ok: false,
-        failure: { reason: "out-of-stock", slug: line.slug, size: line.size },
+        failure: {
+          reason: "out-of-stock",
+          slug: line.slug,
+          size: line.size,
+          name: product.name,
+        },
       };
     }
 
@@ -119,6 +143,7 @@ export async function priceBasket(
           reason: "not-enough-stock",
           slug: line.slug,
           size: line.size,
+          name: product.name,
           available: variant.stock,
         },
       };

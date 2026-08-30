@@ -8,7 +8,11 @@ import {
   delivery,
   deliveryCost,
 } from "@/config/delivery";
-import { MAX_LINE_QUANTITY, priceBasket } from "@/lib/pricing";
+import {
+  MAX_LINE_QUANTITY,
+  priceBasket,
+  type PricingFailure,
+} from "@/lib/pricing";
 import { getStripe, isLiveMode, paymentsEnabled } from "@/lib/stripe";
 
 const schema = z.object({
@@ -28,18 +32,27 @@ const schema = z.object({
 export type CheckoutResult =
   { status: "redirect"; url: string } | { status: "error"; message: string };
 
-const FAILURE_MESSAGES: Record<string, string> = {
-  empty: "Your basket is empty.",
-  "unknown-product":
-    "One of the items in your basket is no longer available. Please remove it to continue.",
-  "unknown-size":
-    "One of the sizes in your basket is no longer available. Please choose another to continue.",
-  "out-of-stock":
-    "One of the items in your basket has sold out. Please remove it to continue.",
-  "not-enough-stock":
-    "We do not have enough of one of your items left. Please lower the quantity in your basket to continue.",
-  "bad-quantity": "Please check the quantities in your basket and try again.",
-};
+/** Named, so the customer knows which line to fix rather than guessing. */
+function failureMessage(failure: PricingFailure, contact: string): string {
+  switch (failure.reason) {
+    case "empty":
+      return "Your basket is empty.";
+    case "unknown-product":
+      return `${failure.name} is no longer available. Please remove it from your basket to continue.`;
+    case "unknown-size":
+      return `${failure.name} is no longer available in ${failure.size}. Please choose another size to continue.`;
+    case "out-of-stock":
+      return `${failure.name}, ${failure.size}, has sold out. Please remove it from your basket to continue.`;
+    case "not-enough-stock":
+      return failure.available === 1
+        ? `We only have 1 of ${failure.name}, ${failure.size}, left. Please lower the quantity in your basket to continue.`
+        : `We only have ${failure.available} of ${failure.name}, ${failure.size}, left. Please lower the quantity in your basket to continue.`;
+    case "bad-quantity":
+      return `Please check the quantity of ${failure.name} in your basket and try again.`;
+    default:
+      return `Please check your basket before paying, or email us at ${contact}.`;
+  }
+}
 
 export async function startCheckout(input: unknown): Promise<CheckoutResult> {
   const parsed = schema.safeParse(input);
@@ -57,9 +70,7 @@ export async function startCheckout(input: unknown): Promise<CheckoutResult> {
   if (!priced.ok) {
     return {
       status: "error",
-      message:
-        FAILURE_MESSAGES[priced.failure.reason] ??
-        "Please check your basket before paying.",
+      message: failureMessage(priced.failure, siteConfig.contact.email),
     };
   }
 
