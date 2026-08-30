@@ -63,11 +63,11 @@ export default async function OrderConfirmedPage({
                   strokeWidth={1.5}
                 />
                 <p className="mt-5 text-lg text-pretty">
-                  Your payment is still being confirmed.
+                  We are confirming your payment.
                 </p>
                 <p className="mt-4 text-pretty text-muted-foreground">
-                  This usually takes a moment. Refresh this page shortly. If you
-                  have been charged, your order is safe. Nothing is lost.
+                  This only takes a moment. Refresh this page shortly to see
+                  your order. If you have been charged, your order is safe.
                 </p>
               </>
             ) : (
@@ -78,11 +78,11 @@ export default async function OrderConfirmedPage({
                   strokeWidth={1.5}
                 />
                 <p className="mt-5 text-lg text-pretty">
-                  We could not find an order for this page.
+                  We could not find your order.
                 </p>
                 <p className="mt-4 text-pretty text-muted-foreground">
-                  If you were part-way through paying, your basket is still
-                  here. If you think you have been charged, email us at{" "}
+                  If you did not finish paying, your basket is still here. If
+                  you think you have been charged, email us at{" "}
                   <a
                     href={`mailto:${siteConfig.contact.email}`}
                     className="underline underline-offset-4"

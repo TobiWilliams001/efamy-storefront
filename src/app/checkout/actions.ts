@@ -30,19 +30,25 @@ export type CheckoutResult =
 
 const FAILURE_MESSAGES: Record<string, string> = {
   empty: "Your basket is empty.",
-  "unknown-product": "One of the items is no longer available.",
-  "unknown-size": "One of the sizes is no longer available.",
-  "out-of-stock": "One of the items has gone out of stock.",
+  "unknown-product":
+    "One of the items in your basket is no longer available. Please remove it to continue.",
+  "unknown-size":
+    "One of the sizes in your basket is no longer available. Please choose another to continue.",
+  "out-of-stock":
+    "One of the items in your basket has sold out. Please remove it to continue.",
   "not-enough-stock":
-    "There are fewer of one of those left than you asked for. Change the quantity in your basket and try again.",
-  "bad-quantity": "One of the quantities is not valid.",
+    "We do not have enough of one of your items left. Please lower the quantity in your basket to continue.",
+  "bad-quantity": "Please check the quantities in your basket and try again.",
 };
 
 export async function startCheckout(input: unknown): Promise<CheckoutResult> {
   const parsed = schema.safeParse(input);
 
   if (!parsed.success) {
-    return { status: "error", message: "That basket could not be read." };
+    return {
+      status: "error",
+      message: "Please check your basket and try again.",
+    };
   }
 
   // Prices come from the catalogue, never from the browser.
@@ -53,14 +59,14 @@ export async function startCheckout(input: unknown): Promise<CheckoutResult> {
       status: "error",
       message:
         FAILURE_MESSAGES[priced.failure.reason] ??
-        "Your basket needs checking before you can pay.",
+        "Please check your basket before paying.",
     };
   }
 
   if (!paymentsEnabled()) {
     return {
       status: "error",
-      message: `Card payment is not switched on yet. Email ${siteConfig.contact.email} and we will take your order.`,
+      message: `We cannot take card payments at the moment. Please email us at ${siteConfig.contact.email} and we will take your order.`,
     };
   }
 
@@ -143,7 +149,7 @@ export async function startCheckout(input: unknown): Promise<CheckoutResult> {
     if (!session.url) {
       return {
         status: "error",
-        message: "Stripe did not return a payment page. Please try again.",
+        message: "We could not open the payment page. Please try again.",
       };
     }
 
@@ -154,7 +160,7 @@ export async function startCheckout(input: unknown): Promise<CheckoutResult> {
 
     return {
       status: "error",
-      message: `We could not start payment just now. Please try again, or email ${siteConfig.contact.email}.`,
+      message: `We could not start payment just now. Please try again, or email us at ${siteConfig.contact.email}.`,
     };
   }
 }

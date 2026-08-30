@@ -17,7 +17,7 @@ export async function submitContact(
   if (!parsed.success) {
     return {
       status: "error",
-      message: "Some details were not valid. Please check the form and retry.",
+      message: "Please check the details you entered and try again.",
     };
   }
 

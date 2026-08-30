@@ -60,7 +60,7 @@ export default function GlobalError({
               fontWeight: 400,
             }}
           >
-            Something went wrong at our end
+            Something went wrong
           </h1>
 
           <p
@@ -71,9 +71,8 @@ export default function GlobalError({
               lineHeight: 1.6,
             }}
           >
-            This is our fault, not yours. Nothing you were doing has been lost:
-            if you were part-way through paying, no payment was taken, and your
-            basket is still on this device.
+            This is on us, not you. If you were paying, no payment was taken,
+            and your basket is still here.
           </p>
 
           <div
@@ -126,19 +125,10 @@ export default function GlobalError({
           </div>
 
           <p style={{ margin: "24px 0 0", color: "#676159", fontSize: "14px" }}>
-            Still stuck? Write to{" "}
+            Still stuck? Email us at{" "}
             <a href="mailto:info@efamy.co.uk" style={{ color: "#8b2d2d" }}>
               info@efamy.co.uk
             </a>
-            {error.digest ? (
-              <>
-                {" "}
-                and quote{" "}
-                <span style={{ fontFamily: "ui-monospace, monospace" }}>
-                  {error.digest}
-                </span>
-              </>
-            ) : null}
             .
           </p>
         </main>
