@@ -149,7 +149,7 @@ export async function startCheckout(input: unknown): Promise<CheckoutResult> {
     if (!session.url) {
       return {
         status: "error",
-        message: "We could not open the payment page. Please try again.",
+        message: `We could not start your payment. Please try again, or email us at ${siteConfig.contact.email} and we will take your order.`,
       };
     }
 
@@ -160,7 +160,7 @@ export async function startCheckout(input: unknown): Promise<CheckoutResult> {
 
     return {
       status: "error",
-      message: `We could not start payment just now. Please try again, or email us at ${siteConfig.contact.email}.`,
+      message: `We could not start your payment. Please try again, or email us at ${siteConfig.contact.email} and we will take your order.`,
     };
   }
 }

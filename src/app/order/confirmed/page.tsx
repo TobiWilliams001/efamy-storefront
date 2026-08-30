@@ -66,8 +66,10 @@ export default async function OrderConfirmedPage({
                   We are confirming your payment.
                 </p>
                 <p className="mt-4 text-pretty text-muted-foreground">
-                  This only takes a moment. Refresh this page shortly to see
-                  your order. If you have been charged, your order is safe.
+                  This usually only takes a moment. Please refresh this page
+                  shortly to check your order status. If you have been charged
+                  but still do not see your order confirmed, please contact us
+                  at {siteConfig.contact.email}.
                 </p>
               </>
             ) : (
@@ -144,7 +146,7 @@ export default async function OrderConfirmedPage({
             <div className="min-w-0">
               <h2 className="font-heading text-lg">Check your email</h2>
               <p className="mt-1 text-sm text-pretty text-muted-foreground">
-                Your order confirmation and payment receipt have been sent
+                We have sent your order confirmation and payment receipt
                 {payment.email ? (
                   <>
                     {" "}
@@ -154,8 +156,8 @@ export default async function OrderConfirmedPage({
                     </span>
                   </>
                 ) : null}
-                . They should arrive within a few minutes, so please check your
-                spam or junk folder if you do not see them.
+                . They should arrive within a few minutes. If you do not see
+                them, please check your spam or junk folder.
               </p>
               {payment.transactionId ? (
                 <div className="mt-4">
