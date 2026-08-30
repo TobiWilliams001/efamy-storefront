@@ -1,8 +1,13 @@
 import type { Stripe } from "stripe";
 
 import { getStripe } from "@/lib/stripe";
-import { confirmOrderToCustomer, notifyOrder } from "@/lib/order-email";
-import { decrementStock, reportSoldOut } from "@/lib/stock";
+import {
+  confirmOrderToCustomer,
+  notifyDispute,
+  notifyOrder,
+  notifyRefund,
+} from "@/lib/order-email";
+import { decrementStock, reportSoldOut, restoreStock } from "@/lib/stock";
 
 /*
  * The only place an order becomes paid. The success redirect proves nothing —
@@ -159,6 +164,64 @@ export async function POST(request: Request) {
          */
         console.error("Order notification failed", session.id, error);
       }
+    }
+  }
+
+  /*
+   * A refund and a dispute both mean money leaving, and neither is visible
+   * from the shop. The order is found from the payment so the email can name
+   * the customer rather than an id.
+   */
+  if (
+    event.type === "charge.refunded" ||
+    event.type === "charge.dispute.created"
+  ) {
+    const charge =
+      event.type === "charge.refunded"
+        ? event.data.object
+        : ((event.data.object as Stripe.Dispute).charge as string);
+
+    const paymentIntent =
+      typeof charge === "string"
+        ? undefined
+        : ((charge.payment_intent as string | null) ?? undefined);
+
+    let session: Stripe.Checkout.Session | null = null;
+
+    try {
+      const id =
+        paymentIntent ??
+        (typeof charge === "string"
+          ? (((await getStripe().charges.retrieve(charge)).payment_intent as
+              string | null) ?? undefined)
+          : undefined);
+
+      if (id) {
+        const found = await getStripe().checkout.sessions.list({
+          payment_intent: id,
+          limit: 1,
+        });
+        session = found.data[0] ?? null;
+      }
+    } catch (error) {
+      console.error("Could not match the order for", event.id, error);
+    }
+
+    try {
+      if (event.type === "charge.refunded") {
+        if (session) {
+          await restoreStock(session);
+          await notifyRefund(
+            session,
+            (event.data.object as Stripe.Charge).amount_refunded,
+          );
+        }
+      } else {
+        await notifyDispute(session, event.data.object as Stripe.Dispute);
+      }
+    } catch (error) {
+      console.error("Refund or dispute handling failed", event.id, error);
+      return new Response("Handling failed", { status: 500 });
     }
   }
 

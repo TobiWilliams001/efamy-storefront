@@ -81,6 +81,40 @@ export async function decrementStock(
   return emptied;
 }
 
+/**
+ * Puts stock back after a refund.
+ *
+ * A refunded jar is a jar Efamy still has, so the count should reflect it.
+ * Only sizes being counted move; the rest are left alone.
+ */
+export async function restoreStock(
+  session: Stripe.Checkout.Session,
+): Promise<void> {
+  const client = getSanityWriteClient();
+  const lines = soldLines(session);
+  if (!client || lines.length === 0) return;
+
+  for (const line of lines) {
+    const product = await client.fetch<{
+      _id: string;
+      variants?: { _key: string; size: string; stock?: number }[];
+    } | null>(
+      `*[_type == "product" && slug.current == $slug][0]{_id, variants[]{_key, size, stock}}`,
+      { slug: line.slug },
+    );
+
+    const variant = product?.variants?.find(
+      (entry) => entry.size === line.size,
+    );
+    if (!product || !variant || typeof variant.stock !== "number") continue;
+
+    await client
+      .patch(product._id)
+      .inc({ [`variants[_key=="${variant._key}"].stock`]: line.quantity })
+      .commit();
+  }
+}
+
 /** Tells Efamy what has just run out, so they can make more or take it off. */
 export async function reportSoldOut(emptied: Emptied[]): Promise<void> {
   if (emptied.length === 0) return;

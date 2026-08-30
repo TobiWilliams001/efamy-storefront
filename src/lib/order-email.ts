@@ -266,3 +266,84 @@ export async function confirmOrderToCustomer(
 
   return result.sent;
 }
+
+/** Tells Efamy money has gone back, and what to take off the packing bench. */
+export async function notifyRefund(
+  session: Stripe.Checkout.Session,
+  amount: number,
+): Promise<void> {
+  const customer = session.customer_details;
+
+  await sendEmail({
+    to: orderInbox(),
+    subject: `Refunded ${money(amount)} to ${customer?.name ?? "a customer"}`,
+    text: [
+      `${money(amount)} has been refunded.`,
+      "",
+      "CUSTOMER",
+      `  ${customer?.name ?? "No name given"}`,
+      `  ${customer?.email ?? "No email"}`,
+      "",
+      "ORDER",
+      `  ${money(session.amount_total)} originally`,
+      `  Checkout session ${session.id}`,
+      "",
+      "Stripe has emailed them about the refund. Anything counted has been put",
+      "back into stock, so do not adjust it by hand.",
+      "",
+      "If the parcel has already gone out, it is worth deciding whether to ask",
+      "for it back before restocking those jars.",
+    ].join("\n"),
+    replyTo: customer?.email ?? undefined,
+  });
+}
+
+/**
+ * A dispute is a deadline, so this email leads with it.
+ *
+ * Stripe pulls the money immediately and Efamy has a fixed window to answer.
+ * The evidence that wins a food delivery dispute is proof it arrived, which
+ * only Efamy holds.
+ */
+export async function notifyDispute(
+  session: Stripe.Checkout.Session | null,
+  dispute: Stripe.Dispute,
+): Promise<void> {
+  const by = dispute.evidence_details?.due_by;
+  const deadline = by
+    ? new Date(by * 1000).toLocaleDateString("en-GB", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+      })
+    : "the date shown in Stripe";
+
+  await sendEmail({
+    to: orderInbox(),
+    subject: `Action needed: ${money(dispute.amount)} disputed, reply by ${deadline}`,
+    text: [
+      `A customer has disputed a payment of ${money(dispute.amount)}.`,
+      `Stripe has already taken the money back. You have until ${deadline} to respond.`,
+      "",
+      `Reason given: ${dispute.reason.replace(/_/g, " ")}`,
+      "",
+      session
+        ? [
+            "ORDER",
+            `  ${session.customer_details?.name ?? "No name"}`,
+            `  ${session.customer_details?.email ?? "No email"}`,
+            `  ${money(session.amount_total)}`,
+            `  Checkout session ${session.id}`,
+          ].join("\n")
+        : "  The original order could not be matched automatically.",
+      "",
+      "WHAT WINS THIS",
+      "  Proof it was delivered: the courier receipt, tracking number, and any",
+      "  signature. Anything the customer wrote to you. The delivery address as",
+      "  they gave it.",
+      "",
+      "Upload that to Stripe under Payments, then Disputes. Doing nothing means",
+      "the money stays with the customer.",
+    ].join("\n"),
+  });
+}
