@@ -6,6 +6,7 @@ import {
   shopHref,
   parseFilters,
 } from "@/lib/product-filters";
+import { inStock, variantAvailable } from "@/types/product";
 import type { Heat, Product } from "@/types/product";
 
 function product(
@@ -303,5 +304,46 @@ describe("the card photograph follows the heat filter", () => {
   it("does not mutate the catalogue it was given", () => {
     applyFilters([twoStrengths], { ...base, heat: "hot" });
     expect(twoStrengths.image.url).toBe("/default.png");
+  });
+});
+
+/*
+ * The client's rule: something that has sold out stays on the page, marked, so
+ * a customer can see it exists and come back. Removing it makes the range look
+ * smaller than it is and loses the sale twice.
+ */
+describe("a sold out size", () => {
+  const soldOut: Product = {
+    ...product("sold-out-sauce", { prices: [475] }),
+    variants: [
+      { size: "250g", heat: "hot", price: 475, inStock: true, stock: 0 },
+      { size: "800g", heat: "hot", price: 1250, inStock: true, stock: 4 },
+    ],
+  };
+
+  it("stays on the shop", () => {
+    expect(
+      applyFilters([soldOut], { sort: "featured" }).map((p) => p.slug),
+    ).toEqual(["sold-out-sauce"]);
+  });
+
+  it("stays in its heat filter", () => {
+    expect(
+      applyFilters([soldOut], { sort: "featured", heat: "hot" }),
+    ).toHaveLength(1);
+  });
+
+  it("cannot be bought, while the size beside it still can", () => {
+    expect(variantAvailable(soldOut.variants[0])).toBe(false);
+    expect(variantAvailable(soldOut.variants[1])).toBe(true);
+  });
+
+  it("keeps a product listed even when every size is gone", () => {
+    const gone: Product = {
+      ...soldOut,
+      variants: soldOut.variants.map((v) => ({ ...v, stock: 0 })),
+    };
+    expect(applyFilters([gone], { sort: "featured" })).toHaveLength(1);
+    expect(inStock(gone)).toBe(false);
   });
 });
