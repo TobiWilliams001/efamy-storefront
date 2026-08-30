@@ -125,8 +125,11 @@ export function layout({
               <p style="margin:0;color:#ffffff;font-family:Georgia,'Times New Roman',serif;font-size:26px;letter-spacing:0.02em;">
                 efamy
               </p>
-              <p style="margin:4px 0 0;color:${GOLD};font-size:12px;letter-spacing:0.14em;text-transform:uppercase;">
-                ${escapeHtml(siteConfig.tagline)}
+              <p style="margin:6px 0 0;color:#ffffff;font-family:Georgia,'Times New Roman',serif;font-size:15px;">
+                Bold flavour, made with care.
+              </p>
+              <p style="margin:2px 0 0;color:${GOLD};font-family:Georgia,'Times New Roman',serif;font-size:15px;font-style:italic;">
+                From our kitchen to yours.
               </p>
             </td>
           </tr>

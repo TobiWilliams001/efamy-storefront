@@ -45,7 +45,12 @@ export type SiteConfig = {
 // check, which breaks every conditional that renders them.
 export const siteConfig: SiteConfig = {
   name: "Efamy",
-  legalName: "Efamy Food Products",
+  /*
+   * The registered company, confirmed against the Stripe account. It appears in
+   * the footer, the legal pages, the order emails and the structured data, and
+   * it has to match the entity taking the payment.
+   */
+  legalName: "Efamy Company Limited",
   companyNumber: "05456159",
   vatNumber: "GB 868 6926 53",
   tagline: "Authentic Ghanaian flavours, crafted in the UK",
