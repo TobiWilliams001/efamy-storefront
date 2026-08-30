@@ -20,7 +20,13 @@ export default defineConfig({
   projectId: 'vlmwys9m',
   dataset: 'production',
 
-  plugins: [structureTool({structure}), ...(isDev ? [visionTool()] : [])],
+  plugins: [
+    /* "Structure" is what Sanity calls its own machinery. The person using this
+       is looking for products, so the tab says Products and the address does
+       too. */
+    structureTool({structure, name: 'products', title: 'Products'}),
+    ...(isDev ? [visionTool()] : []),
+  ],
 
   /* Every size and its number on one page, rather than buried inside each
      product. A stock take is one pass down a list, not twenty documents. */
@@ -31,5 +37,11 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+  },
+
+  /* Releases stage content for publishing on a date. Efamy edits a price and
+     wants it live, so the tab is only something to explain away. */
+  releases: {
+    enabled: false,
   },
 })
