@@ -49,7 +49,7 @@ export function Hero({
         fill
         sizes="100vw"
         preload
-        className="-z-10 object-cover object-right"
+        className="-z-10 object-cover object-center sm:object-right"
       />
 
       {/*
@@ -68,9 +68,14 @@ export function Hero({
         <div
           className={cn(
             "flex flex-col justify-center pt-28 pb-14 sm:pt-32 sm:pb-20 lg:pt-44",
+            /*
+             * Shorter on a phone. The photograph is landscape, so a tall box
+             * makes object-cover scale it up and throw most of the width away;
+             * bringing the height down keeps more of the picture in frame.
+             */
             size === "full"
-              ? "min-h-[30rem] sm:min-h-140 lg:min-h-165"
-              : "min-h-[22rem] sm:min-h-100 lg:min-h-120",
+              ? "min-h-[26rem] sm:min-h-140 lg:min-h-165"
+              : "min-h-[19rem] sm:min-h-100 lg:min-h-120",
           )}
         >
           <div className="max-w-xl">
