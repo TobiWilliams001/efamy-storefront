@@ -2,10 +2,12 @@ import {useCallback, useEffect, useState} from 'react'
 import {useClient} from 'sanity'
 
 type Variant = {_key: string; size?: string; heat?: string; stock?: number}
-type Row = {_id: string; name: string; variants?: Variant[]}
+type Row = {_id: string; name: string; image?: string; variants?: Variant[]}
 
+/* The jar, small: at a glance it is faster to recognise than a name. */
 const QUERY = `*[_type == "product"]|order(name asc){
-  _id, name, variants[]{_key, size, heat, stock}
+  _id, name, "image": image.asset->url + "?w=96&h=96&fit=crop&auto=format",
+  variants[]{_key, size, heat, stock}
 }`
 
 /**
@@ -74,9 +76,32 @@ export function StockTool() {
             marginBottom: 12,
           }}
         >
-          <p style={{margin: '0 0 12px', fontWeight: 600, fontSize: 15}}>
-            {row.name}
-          </p>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+              marginBottom: 12,
+            }}
+          >
+            {row.image ? (
+              <img
+                src={row.image}
+                alt=""
+                width={48}
+                height={48}
+                style={{
+                  width: 48,
+                  height: 48,
+                  objectFit: 'contain',
+                  borderRadius: 4,
+                  background: '#f6f6f8',
+                  flexShrink: 0,
+                }}
+              />
+            ) : null}
+            <p style={{margin: 0, fontWeight: 600, fontSize: 15}}>{row.name}</p>
+          </div>
 
           {(row.variants ?? []).map((variant) => {
             const label =

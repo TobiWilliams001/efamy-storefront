@@ -21,6 +21,7 @@ export const structure: StructureResolver = (S) =>
     .title('Efamy')
     .items([
       S.listItem()
+        .id('products')
         .title('Products')
         .icon(PackageIcon)
         .child(
@@ -36,6 +37,7 @@ export const structure: StructureResolver = (S) =>
         ),
 
       S.listItem()
+        .id('all-products')
         .title('All products')
         .icon(PackageIcon)
         .child(S.documentTypeList('product').title('All products')),
@@ -53,6 +55,7 @@ export const structure: StructureResolver = (S) =>
        * number are not counted and never appear.
        */
       S.listItem()
+        .id('stock')
         .title('Stock')
         .icon(BasketIcon)
         .child(
@@ -60,6 +63,7 @@ export const structure: StructureResolver = (S) =>
             .title('Stock')
             .items([
               S.listItem()
+                .id('sold-out')
                 .title('Sold out')
                 .icon(WarningOutlineIcon)
                 .child(
@@ -71,6 +75,7 @@ export const structure: StructureResolver = (S) =>
                     .apiVersion('2026-05-15'),
                 ),
               S.listItem()
+                .id('running-low')
                 .title('Running low')
                 .icon(WarningOutlineIcon)
                 .child(
@@ -83,6 +88,7 @@ export const structure: StructureResolver = (S) =>
                 ),
               S.divider(),
               S.listItem()
+                .id('every-product')
                 .title('Every product')
                 .icon(PackageIcon)
                 .child(S.documentTypeList('product').title('Every product')),
@@ -92,6 +98,7 @@ export const structure: StructureResolver = (S) =>
       S.divider(),
 
       S.listItem()
+        .id('recipes')
         .title('Recipes')
         .icon(BookIcon)
         .child(S.documentTypeList('recipe').title('Recipes')),
@@ -100,6 +107,7 @@ export const structure: StructureResolver = (S) =>
 
       // Rarely touched: three categories that map to the shop's filters.
       S.listItem()
+        .id('categories')
         .title('Categories')
         .icon(TagIcon)
         .child(S.documentTypeList('productCategory').title('Categories')),
