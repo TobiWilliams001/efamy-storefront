@@ -120,13 +120,13 @@ export default async function OrderConfirmedPage({
         />
       ) : null}
 
-      <PageHeader eyebrow="Thank you" title="Your order is in." />
+      <PageHeader eyebrow="Thank you" title="Order confirmed." />
 
       <Section spacing="afterHeader" width="narrow">
         <div className="rounded-lg bg-card p-8 shadow-card sm:p-10">
           <p className="text-lg text-pretty">
-            Thank you for ordering from Efamy. We have received your order and
-            will start preparing it for delivery.
+            We have your order and will start getting it ready. Everything you
+            need is on its way to your inbox.
           </p>
 
           <div className="mt-8 flex items-start gap-3 rounded-lg bg-clay/30 p-5">
@@ -154,8 +154,10 @@ export default async function OrderConfirmedPage({
                     </span>
                   </>
                 ) : null}
-                . It usually arrives within a few minutes. If you cannot see it,
-                check your spam folder before writing to us.
+                , along with a payment receipt from Stripe. Two emails is
+                normal: one lists what you ordered, the other is your proof of
+                payment. They usually arrive within a few minutes, so check your
+                spam folder before writing to us.
               </p>
               {payment.transactionId ? (
                 <p className="mt-3 text-sm text-muted-foreground">
