@@ -96,6 +96,4 @@ export const structure: StructureResolver = (S) =>
         .title('Recipes')
         .icon(BookIcon)
         .child(S.documentTypeList('recipe').title('Recipes')),
-
-      S.divider()
     ])
