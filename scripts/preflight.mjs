@@ -9,7 +9,10 @@ const SITE = process.argv[2] ?? "https://www.efamy.co.uk";
 const EXPECTED_URL = SITE.replace(/\/$/, "");
 
 const pass = (m) => console.log(`  \x1b[32mok\x1b[0m    ${m}`);
-const fail = (m) => { console.log(`  \x1b[31mFAIL\x1b[0m  ${m}`); failures++; };
+const fail = (m) => {
+  console.log(`  \x1b[31mFAIL\x1b[0m  ${m}`);
+  failures++;
+};
 const warn = (m) => console.log(`  \x1b[33mwarn\x1b[0m  ${m}`);
 let failures = 0;
 
@@ -42,15 +45,25 @@ og === EXPECTED_URL
 // 3. Stripe can only deliver an order if this answers, and rejects forgeries.
 const hook = await text("/api/stripe/webhook", {
   method: "POST",
-  headers: { "stripe-signature": "t=1,v1=deadbeef", "content-type": "application/json" },
+  headers: {
+    "stripe-signature": "t=1,v1=deadbeef",
+    "content-type": "application/json",
+  },
   body: "{}",
 });
 if (hook.body.includes("not configured")) fail("webhook has no signing secret");
-else if (hook.status === 400) pass("webhook is configured and rejects forged signatures");
+else if (hook.status === 400)
+  pass("webhook is configured and rejects forged signatures");
 else warn(`webhook answered ${hook.status}: ${hook.body.slice(0, 40)}`);
 
 // 4. The pages a customer must be able to reach.
-for (const path of ["/shop", "/cart", "/checkout", "/contact", "/order/confirmed"]) {
+for (const path of [
+  "/shop",
+  "/cart",
+  "/checkout",
+  "/contact",
+  "/order/confirmed",
+]) {
   const res = await fetch(`${SITE}${path}`);
   res.ok ? pass(`${path} responds`) : fail(`${path} responds ${res.status}`);
 }
@@ -58,7 +71,9 @@ for (const path of ["/shop", "/cart", "/checkout", "/contact", "/order/confirmed
 // 5. Nothing to sell means nothing else matters.
 const shop = await text("/shop");
 const count = new Set(shop.body.match(/\/products\/[a-z0-9-]+/g) ?? []).size;
-count > 0 ? pass(`${count} products on the shop`) : fail("no products on the shop");
+count > 0
+  ? pass(`${count} products on the shop`)
+  : fail("no products on the shop");
 
 // 6. Sitemap should name the same host the pages do.
 const map = await text("/sitemap.xml");
