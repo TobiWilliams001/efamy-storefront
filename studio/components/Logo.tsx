@@ -13,9 +13,7 @@ export function Logo() {
       }}
     >
       efamy
-      <span style={{fontSize: 11, letterSpacing: '0.14em', color: '#cb9954'}}>
-        SHOP
-      </span>
+      <span style={{fontSize: 11, letterSpacing: '0.14em', color: '#cb9954'}}>SHOP</span>
     </span>
   )
 }

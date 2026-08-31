@@ -54,8 +54,7 @@ export default defineConfig({
      * actually adds are offered; categories are still editable from their own
      * list.
      */
-    newDocumentOptions: (prev) =>
-      prev.filter((item) => item.templateId !== 'productCategory'),
+    newDocumentOptions: (prev) => prev.filter((item) => item.templateId !== 'productCategory'),
   },
 
   /* Releases stage content for publishing on a date. Efamy edits a price and
