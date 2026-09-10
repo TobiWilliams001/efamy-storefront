@@ -109,6 +109,28 @@ They are not filed and nothing points at them, for three reasons:
 bought or shot for Efamy, they can be filed under `products/`; if they came off the
 internet, they belong in `unlicensed-assets/`.
 
+### The Turkey sauce Mild and X Hot jars are AI-generated
+
+`turkey-chilli-sauce-mild` and `turkey-chilli-sauce-extra-hot` in Sanity were
+made in ChatGPT, not photographed. The client's own label drop covered Turkey
+Chilli Sauce in **Hot only**; the other two strengths were generated from it by
+swapping the strength word.
+
+They are published on the client's explicit instruction, recorded here because
+the fact is invisible once the file is a Sanity asset. Two things follow from
+it:
+
+- The label art is a synthesis, not a photograph of a jar that was produced.
+  If the real Mild and X Hot labels differ in any way, these are wrong and the
+  customer is looking at something that does not exist on the shelf.
+- The same rule stated below for the dish photographs applies with more force
+  here, because these depict the product being bought rather than a serving
+  suggestion. **Replace them with photographs of the real jars as soon as the
+  client can supply them.**
+
+No other product image in the catalogue is generated. Everything else came from
+the client.
+
 ### When OCR fails, look
 
 `products/cutout/turkey-chilli-sauce.png` was matched on lid and label colour
@@ -125,6 +147,13 @@ file without updating that file breaks the image.
 
 ## Still needed
 
+- **Five strength photographs that do not exist yet.** Every sauce and oil now
+  sells in Mild, Hot and Extra hot, but the client's drop did not cover all of
+  them. These variants fall back to the product's main photo, so the customer
+  sees a jar whose printed strength does not match the one they picked:
+  Turkey **chilli oil** Extra hot; Beans **chilli sauce** in all three (that
+  product has never had per-strength photographs); Chicken **chilli sauce**
+  Mild. Ask the client for these seven shots.
 - **Licensing for the dish photographs.** Every meal tile and every recipe now
   carries a real photograph, and the swatch fallback no longer fires anywhere.
   Several were sourced from Pinterest rather than shot for Efamy. Not
