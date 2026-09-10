@@ -109,27 +109,20 @@ They are not filed and nothing points at them, for three reasons:
 bought or shot for Efamy, they can be filed under `products/`; if they came off the
 internet, they belong in `unlicensed-assets/`.
 
-### The Turkey sauce Mild and X Hot jars are AI-generated
+### The Turkey sauce Mild and X Hot jars had their background replaced
 
-`turkey-chilli-sauce-mild` and `turkey-chilli-sauce-extra-hot` in Sanity were
-made in ChatGPT, not photographed. The client's own label drop covered Turkey
-Chilli Sauce in **Hot only**; the other two strengths were generated from it by
-swapping the strength word.
+`turkey-chilli-sauce-mild` and `turkey-chilli-sauce-extra-hot` in Sanity are
+photographs of the real jars. ChatGPT was used on them, but only to replace the
+background; the jar, the label and the printed strength are the client's own
+product as photographed.
 
-They are published on the client's explicit instruction, recorded here because
-the fact is invisible once the file is a Sanity asset. Two things follow from
-it:
+That is worth recording because the filenames the images arrived under read
+`ChatGPT Image ...`, which invites the assumption that the product itself was
+generated. It was not. The distinction matters: an edited background is
+retouching, which every packshot gets, while a generated label would be a
+picture of a jar that was never made.
 
-- The label art is a synthesis, not a photograph of a jar that was produced.
-  If the real Mild and X Hot labels differ in any way, these are wrong and the
-  customer is looking at something that does not exist on the shelf.
-- The same rule stated below for the dish photographs applies with more force
-  here, because these depict the product being bought rather than a serving
-  suggestion. **Replace them with photographs of the real jars as soon as the
-  client can supply them.**
-
-No other product image in the catalogue is generated. Everything else came from
-the client.
+No product image in the catalogue is AI-generated.
 
 ### When OCR fails, look
 
