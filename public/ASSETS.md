@@ -124,6 +124,24 @@ picture of a jar that was never made.
 
 No product image in the catalogue is AI-generated.
 
+### Every strength now has its own photograph
+
+All 105 sauce and oil variants carry a photograph of that exact strength, so
+nothing falls back to the product's main image and no customer is shown a jar
+printed with a strength they did not choose.
+
+Two conventions hold the range together, and both matter if a photograph is
+ever replaced:
+
+- **Jars are framed to 88% of a square canvas, bottles to 97%.** The card is a
+  square frame using `object-contain`, so the object's height as a share of its
+  own canvas is what lands on screen. Bottles get the higher figure because a
+  tall narrow shape reads much smaller than a wide jar at the same height; 97%
+  is close to the ceiling, since 100% would touch the frame edge and clip the
+  drop shadow.
+- **Re-frame, never rescale.** Crop to the object and pad the canvas out. The
+  pixels stay untouched and nothing softens.
+
 ### When OCR fails, look
 
 `products/cutout/turkey-chilli-sauce.png` was matched on lid and label colour
@@ -140,13 +158,6 @@ file without updating that file breaks the image.
 
 ## Still needed
 
-- **Five strength photographs that do not exist yet.** Every sauce and oil now
-  sells in Mild, Hot and Extra hot, but the client's drop did not cover all of
-  them. These variants fall back to the product's main photo, so the customer
-  sees a jar whose printed strength does not match the one they picked:
-  Turkey **chilli oil** Extra hot; Beans **chilli sauce** in all three (that
-  product has never had per-strength photographs); Chicken **chilli sauce**
-  Mild. Ask the client for these seven shots.
 - **Licensing for the dish photographs.** Every meal tile and every recipe now
   carries a real photograph, and the swatch fallback no longer fires anywhere.
   Several were sourced from Pinterest rather than shot for Efamy. Not
