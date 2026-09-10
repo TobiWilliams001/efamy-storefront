@@ -16,10 +16,10 @@ type Option = { value: string; label: string };
 /**
  * Heat stays on the page while price and diet fold away.
  *
- * Not a stylistic split: heat is two options and the first thing anyone asks of
- * a chilli brand, so a click to reach it is a click too many. Price and diet
- * are the ones people filter by occasionally, and hiding them is what buys the
- * row its quiet.
+ * Not a stylistic split: heat is the first thing anyone asks of a chilli brand,
+ * so a click to reach it is a click too many. Price and diet are the ones
+ * people filter by occasionally, and hiding them is what buys the row its
+ * quiet.
  */
 function Segmented({
   filters,
