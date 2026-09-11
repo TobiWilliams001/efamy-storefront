@@ -49,6 +49,15 @@ unlicensed-assets/
 
 # Unsorted image drops. Files are renamed into public/products, public/dishes
 # etc. once identified; the originals should not ship in every deploy.
-/public/ChatGPT Image*
-/public/WhatsApp Image*
+#
+# Matched by location rather than by name. The earlier rules keyed off the
+# "WhatsApp Image" and "ChatGPT Image" prefixes, which missed every drop saved
+# under its own name and would have published 7MB of source photographs at
+# URLs like /Beans%20hot.png. Nothing but ASSETS.md belongs at this root;
+# every real asset lives in a subdirectory.
+/public/*.png
+/public/*.jpg
+/public/*.jpeg
+/public/*.webp
+/public/*.avif
 /public/photos-src/
