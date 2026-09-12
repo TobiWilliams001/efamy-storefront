@@ -37,6 +37,9 @@ export type SiteConfig = {
     instagram: string;
     facebook: string;
     tiktok: string;
+    x: string;
+    pinterest: string;
+    snapchat: string;
   };
 };
 
@@ -76,9 +79,19 @@ export const siteConfig: SiteConfig = {
     postcode: "NN17 5ZB",
     country: "United Kingdom",
   },
+  /*
+   * Canonical profile URLs, not the shorthand the client sent over WhatsApp.
+   * Two of those did not resolve as written: Snapchat needs the /add/ path and
+   * 404s without it, and a TikTok profile is /@handle. Pinterest is the only
+   * one a bot can confirm outright, and it returns "Efamy Food Products
+   * (tasteefamy)". No Facebook link has been supplied.
+   */
   social: {
-    instagram: "",
+    instagram: "https://www.instagram.com/tasteefamy",
     facebook: "",
-    tiktok: "",
+    tiktok: "https://www.tiktok.com/@tasteefamy",
+    x: "https://x.com/TasteEfamy",
+    pinterest: "https://uk.pinterest.com/tasteefamy",
+    snapchat: "https://www.snapchat.com/add/tasteefamy",
   },
 };

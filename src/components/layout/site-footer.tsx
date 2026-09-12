@@ -9,8 +9,11 @@ import { siteConfig } from "@/config/site";
 // Lucide v1 removed brand icons, so these are text links.
 const socialLinks = [
   { key: "instagram", label: "Instagram" },
-  { key: "facebook", label: "Facebook" },
   { key: "tiktok", label: "TikTok" },
+  { key: "x", label: "X" },
+  { key: "pinterest", label: "Pinterest" },
+  { key: "snapchat", label: "Snapchat" },
+  { key: "facebook", label: "Facebook" },
 ] as const;
 
 export function SiteFooter() {
