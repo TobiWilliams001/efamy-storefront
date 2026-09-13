@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Users } from "lucide-react";
 
 import { ProductCard } from "@/components/commerce/product-card";
 import { RecipeCard } from "@/components/commerce/recipe-card";
@@ -92,16 +91,6 @@ export default async function RecipePage({
                 />
               )}
             </div>
-
-            <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-y py-4 text-sm">
-              <div className="flex items-center gap-2">
-                <Users aria-hidden="true" className="size-4 text-gold-ink" />
-                <dt className="text-muted-foreground">Serves</dt>
-                <dd data-numeric className="font-medium">
-                  {recipe.serves}
-                </dd>
-              </div>
-            </dl>
 
             <h2 className="mt-12 font-heading text-2xl">Ingredients</h2>
             <ul className="mt-5 space-y-3">
