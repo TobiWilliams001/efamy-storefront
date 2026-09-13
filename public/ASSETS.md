@@ -165,6 +165,22 @@ file without updating that file breaks the image.
   another photographer's work is an easy complaint to receive. **Confirm where
   each came from, or replace them with photographs Efamy owns.** The same rule
   that keeps `unlicensed-assets/` out of the build applies here.
+
+  A second batch of 24 arrived on 12 September and three of them are now used
+  (`kenkey-fish`, `jollof-rice`, `spaghetti`), published on the client's
+  explicit instruction. They carry the same problem and it is worth stating the
+  evidence rather than the suspicion: 18 of the 24 are exactly **736px wide**,
+  which is Pinterest's fixed column width, and the control is that the client's
+  product labels came through the same WhatsApp channel at 1024 to 1254px, so
+  nothing in that pipeline caps an image at 736. None of the 24 carries camera
+  EXIF, though WhatsApp strips that anyway, so it corroborates rather than
+  proves. One of the batch still has another account's Instagram overlay
+  visible in the image and is deliberately unused.
+
+  **Efamy's own fried chicken photograph was nearly lost to this.** It was
+  briefly overwritten before the rule in `dishes/README.md` was re-read, and
+  restored from git. Check that file before replacing any tile: a photograph
+  the client actually owns outranks a better-looking one that they do not.
 - **Logo files** (`logos/`) — the wordmark is set in type today, not an asset.
 - **Open Graph share image** — the homepage hero stands in for one. A shot
   framed for a 1200x630 share card would read better in a WhatsApp preview.
