@@ -84,11 +84,13 @@ export const siteConfig: SiteConfig = {
    * Two of those did not resolve as written: Snapchat needs the /add/ path and
    * 404s without it, and a TikTok profile is /@handle. Pinterest is the only
    * one a bot can confirm outright, and it returns "Efamy Food Products
-   * (tasteefamy)". No Facebook link has been supplied.
+   * (tasteefamy)". Facebook cannot be checked at all: it answers 400 to every
+   * non-browser request, including its own official page, so this one is
+   * trusted as supplied rather than verified.
    */
   social: {
     instagram: "https://www.instagram.com/tasteefamy",
-    facebook: "",
+    facebook: "https://www.facebook.com/tasteefamy",
     tiktok: "https://www.tiktok.com/@tasteefamy",
     x: "https://x.com/TasteEfamy",
     pinterest: "https://uk.pinterest.com/tasteefamy",
