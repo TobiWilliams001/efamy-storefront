@@ -122,6 +122,49 @@ describe("strength is part of the identity", () => {
     if (result.ok) expect(result.lines[0].name).toBe("beef, mild, 175g");
   });
 
+  /*
+   * The client caught this on the live shop: the Stripe page showed the Mild
+   * jar to someone buying Extra hot, because the line carried the product's
+   * default photograph rather than the one belonging to the strength.
+   */
+  it("carries the strength's own photograph, not the product's default", async () => {
+    getProductBySlug.mockResolvedValue(
+      product("beef", {
+        image: { url: "/mild.png", alt: "mild", width: 1, height: 1 },
+        variants: [
+          {
+            size: "175g",
+            price: 325,
+            inStock: true,
+            heat: "extra-hot",
+            image: { url: "/extra-hot.png", alt: "extra hot", width: 1, height: 1 },
+          },
+        ],
+      }),
+    );
+
+    const result = await priceBasket([
+      { slug: "beef", size: "175g", heat: "extra-hot", quantity: 1 },
+    ]);
+
+    if (result.ok) expect(result.lines[0].imageUrl).toBe("/extra-hot.png");
+  });
+
+  it("falls back to the product photograph when a strength has none", async () => {
+    getProductBySlug.mockResolvedValue(
+      product("beef", {
+        image: { url: "/default.png", alt: "default", width: 1, height: 1 },
+        variants: [{ size: "175g", price: 325, inStock: true }],
+      }),
+    );
+
+    const result = await priceBasket([
+      { slug: "beef", size: "175g", quantity: 1 },
+    ]);
+
+    if (result.ok) expect(result.lines[0].imageUrl).toBe("/default.png");
+  });
+
   it("refuses a strength the jar is not sold in", async () => {
     getProductBySlug.mockResolvedValue(twoStrengths);
 

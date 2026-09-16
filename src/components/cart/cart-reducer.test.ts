@@ -49,6 +49,34 @@ describe("cart reducer", () => {
     });
   });
 
+  /*
+   * The basket and the Stripe page must show the jar that was actually chosen.
+   * The client found Extra hot being sold under the Mild label's photograph.
+   */
+  it("carries the strength's own photograph when the variant has one", () => {
+    const extraHot: ProductVariant = {
+      size: "175g",
+      price: 325,
+      inStock: true,
+      heat: "extra-hot",
+      image: { url: "/beef-extra-hot.png", alt: "Beef, extra hot", width: 1, height: 1 },
+    };
+
+    const state = add(empty, beef, extraHot);
+    expect(state.lines[0]).toMatchObject({
+      imageUrl: "/beef-extra-hot.png",
+      imageAlt: "Beef, extra hot",
+    });
+  });
+
+  it("falls back to the product photograph when the variant has none", () => {
+    const state = add(empty, beef, small);
+    expect(state.lines[0]).toMatchObject({
+      imageUrl: "/beef.jpg",
+      imageAlt: "Beef",
+    });
+  });
+
   it("merges quantity when the same product and size is added again", () => {
     const state = add(add(empty, beef, small), beef, small, 2);
     expect(state.lines).toHaveLength(1);

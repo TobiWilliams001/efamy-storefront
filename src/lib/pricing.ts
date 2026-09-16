@@ -159,7 +159,10 @@ export async function priceBasket(
         .join(", "),
       unitPrice: variant.price,
       lineTotal: variant.price * line.quantity,
-      imageUrl: product.image?.url,
+      // The strength's own jar, not the product's default one. Stripe shows
+      // this beside the line, and a customer buying Extra hot should not be
+      // looking at the Mild label while they pay.
+      imageUrl: variant.image?.url ?? product.image?.url,
     });
   }
 
