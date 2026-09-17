@@ -61,7 +61,12 @@ export function WhyEfamy() {
           </ul>
         </div>
 
-        <div className="relative aspect-5/4 overflow-hidden rounded-lg shadow-card">
+        {/*
+         * 16:9 because the photograph is, and it is a range shot: cropping it
+         * to a squarer frame cuts the outer two bottles in half, which loses
+         * the one thing the picture is there to show.
+         */}
+        <div className="relative aspect-video overflow-hidden rounded-lg shadow-card">
           <Image
             src="/products/collections/oils-group.jpg"
             alt="The range of Efamy chilli oils"
