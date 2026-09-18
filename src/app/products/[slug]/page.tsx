@@ -189,6 +189,7 @@ export default async function ProductPage({
       <Testimonials
         title="What people say"
         description="Reviews from customers who have cooked with this jar."
+        productSlug={product.slug}
       />
 
       <ProductShowcase

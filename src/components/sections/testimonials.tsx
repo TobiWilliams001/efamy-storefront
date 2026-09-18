@@ -16,17 +16,31 @@ import {
 export function Testimonials({
   title = "What people say",
   description = "Fifteen years of customers, in their own words.",
+  productSlug,
+  limit = 6,
 }: {
   title?: string;
   description?: string;
+  /**
+   * Narrows to quotes about this product. A product page claims its reviews
+   * are about that jar, so a quote about the seasoning must not appear there.
+   * With nothing to show, the section renders nothing rather than a general
+   * quote under a heading that says otherwise.
+   */
+  productSlug?: string;
+  limit?: number;
 }) {
-  const real = testimonials.slice(0, 3);
+  const pool = productSlug
+    ? testimonials.filter((entry) => entry.productSlug === productSlug)
+    : testimonials;
+
+  const real = pool.slice(0, limit);
   const showing =
     real.length > 0
       ? real
-      : showExampleTestimonials()
-        ? exampleTestimonials.slice(0, 3)
-        : [];
+      : productSlug || !showExampleTestimonials()
+        ? []
+        : exampleTestimonials.slice(0, limit);
 
   if (showing.length === 0) return null;
 

@@ -11,20 +11,65 @@ export type Testimonial = {
 /**
  * Real customer quotes only.
  *
- * Empty on purpose. Efamy has traded since 2008 and has never collected a
- * review, so there is nothing true to show yet. Until this array has entries,
- * every review slot on the site renders a visible placeholder rather than
- * anything a visitor could mistake for social proof.
+ * Supplied by Efamy on 18 September 2026. Kept as the customers wrote them:
+ * the grammar is theirs, and smoothing it into marketing copy is what would
+ * make them stop reading as real. Two plain typing slips were corrected and
+ * nothing else — "Tranformed" and a missing space in "haveever".
  *
- * When these arrive they need: the words, a first name, and ideally a town.
- * Nothing invented, nothing tidied into marketing copy — the plain phrasing is
- * what makes a quote read as real.
+ * No towns were supplied, so `location` is absent rather than guessed.
  *
- * Only once this is populated should Review or AggregateRating structured data
- * be added. Rating markup without real ratings behind it is exactly the kind of
- * thing Google issues manual penalties for.
+ * Under the DMCC Act 2024 these must be genuine and the business must be able
+ * to evidence that. They are published on Efamy's word that they are real.
+ *
+ * Still no Review or AggregateRating structured data: none of these carries a
+ * star rating, and rating markup without real ratings behind it is what Google
+ * issues manual penalties for.
  */
-export const testimonials: Testimonial[] = [];
+export const testimonials: Testimonial[] = [
+  {
+    quote:
+      "I love Efamy Kelewele seasoning mix. I use it for my khebabs and bbq. Great and unique product I have ever tried.",
+    name: "Arnold Smith",
+    productSlug: "kelewele-seasoning-mix",
+  },
+  {
+    quote:
+      "A remarkable product. Efamy All purpose has transformed my cooking. Unique taste and great flavour.",
+    name: "Margaret Mckeon",
+    productSlug: "all-purpose-seasoning-mix",
+  },
+  {
+    quote:
+      "I travel all the way to London to buy the wide variety of Efamy products especially the chilli sauces and oil. Transformed my cooking.",
+    name: "Phillip Adjei",
+  },
+  {
+    quote:
+      "Since I discovered Efamy products, my family is now addicted to the full range of their products. Their chilli oils are superb.",
+    name: "Anita Benson",
+  },
+  {
+    quote:
+      "It's always Efamy Beans chilli sauce until I tried their chilli oils. Changed my eating habit as their products are ready use, I spend less time cooking.",
+    name: "Kelly Mensah",
+    productSlug: "beans-chilli-sauce",
+  },
+  {
+    quote:
+      "As a student and vegetarian, I don't worry much with cooking as Efamy chilli sauces has made life easy by way of cooking. I simply add a spoonful or two to my noodles, rice or chips. Well done Efamy for transforming and adding new flavours to my food.",
+    name: "Edward Kisenger",
+  },
+  {
+    quote:
+      "I always send a pack of six each of Efamy products to my mum in Scotland. Their online shopping have made it easier for my friends and family to easily buy them. Well done Efamy.",
+    name: "Matilda Kinsley",
+  },
+  {
+    quote:
+      "Efamy products are simply the best. I have been using them since 2023. Great and tasty products.",
+    name: "Alexander Pedro",
+  },
+];
 
 /**
  * Placeholder quotes, shown only while `testimonials` is empty and always
