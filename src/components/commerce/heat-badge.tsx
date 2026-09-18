@@ -1,13 +1,9 @@
 import { Flame } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import type { Heat } from "@/types/product";
+import { heatLabels, type Heat } from "@/types/product";
 
-export const heatLabels: Record<Heat, string> = {
-  mild: "Mild",
-  hot: "Hot",
-  "extra-hot": "Extra hot",
-};
+export { heatLabels };
 
 const flames: Record<Heat, number> = { mild: 1, hot: 2, "extra-hot": 3 };
 

@@ -119,7 +119,27 @@ describe("strength is part of the identity", () => {
       { slug: "beef", size: "175g", heat: "mild", quantity: 1 },
     ]);
 
-    if (result.ok) expect(result.lines[0].name).toBe("beef, mild, 175g");
+    if (result.ok) expect(result.lines[0].name).toBe("beef, Mild, 175g");
+  });
+
+  /*
+   * "extra-hot" is the stored value. It was reaching the Stripe payment page
+   * and the order emails verbatim, hyphen and all.
+   */
+  it("writes the strength the way a customer reads it", async () => {
+    getProductBySlug.mockResolvedValue(
+      product("beef", {
+        variants: [
+          { size: "175g", price: 325, inStock: true, heat: "extra-hot" },
+        ],
+      }),
+    );
+
+    const result = await priceBasket([
+      { slug: "beef", size: "175g", heat: "extra-hot", quantity: 1 },
+    ]);
+
+    if (result.ok) expect(result.lines[0].name).toBe("beef, Extra hot, 175g");
   });
 
   /*

@@ -1,5 +1,5 @@
 import { getProductBySlug } from "@/lib/catalogue";
-import { variantAvailable } from "@/types/product";
+import { heatLabels, variantAvailable } from "@/types/product";
 
 /**
  * What the browser is allowed to tell us: what they want and how many. Never
@@ -154,7 +154,11 @@ export async function priceBasket(
       size: variant.size,
       heat: variant.heat,
       quantity: line.quantity,
-      name: [product.name, variant.heat, variant.size]
+      name: [
+        product.name,
+        variant.heat ? heatLabels[variant.heat] : undefined,
+        variant.size,
+      ]
         .filter(Boolean)
         .join(", "),
       unitPrice: variant.price,

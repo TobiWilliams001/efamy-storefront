@@ -9,6 +9,17 @@ export type ProductImage = {
 /** Matches the packaging, which is labelled Mild or Hot and nothing finer. */
 export type Heat = "mild" | "hot" | "extra-hot";
 
+/**
+ * How a strength is written for a customer. "extra-hot" is the stored value,
+ * never the printed one: it reached the Stripe payment page and the order
+ * emails as "Beef Chilli Sauce, extra-hot, 250g".
+ */
+export const heatLabels: Record<Heat, string> = {
+  mild: "Mild",
+  hot: "Hot",
+  "extra-hot": "Extra hot",
+};
+
 export function isHeat(value: unknown): value is Heat {
   return value === "mild" || value === "hot" || value === "extra-hot";
 }
