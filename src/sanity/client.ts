@@ -1,3 +1,9 @@
+// This module reads SANITY_API_WRITE_TOKEN, which grants write access to the
+// live dataset. The guard is what stops it being bundled into the browser if
+// something here is ever imported from a client component by mistake, the same
+// boundary stripe.ts, email.ts and stock.ts already hold.
+import "server-only";
+
 import { createClient, type SanityClient } from "next-sanity";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "";
