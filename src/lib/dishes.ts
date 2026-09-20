@@ -19,7 +19,7 @@ export const dishes: Dish[] = [
   { name: "Jollof Rice", image: "/dishes/jollof-rice.jpg" },
   { name: "Fried Chicken", image: "/dishes/fried-chicken.jpg" },
   { name: "Waakye", image: "/dishes/waakye.jpg" },
-  { name: "Fried Fish & Yam", image: "/dishes/fried-fish-yam.jpg" },
+  { name: "Fried Yam", image: "/dishes/fried-fish-yam.jpg" },
   { name: "Kelewele", image: "/dishes/kelewele.jpg" },
   { name: "Rice & Stew", image: "/dishes/rice-stew.jpg" },
 ];

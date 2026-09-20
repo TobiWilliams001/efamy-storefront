@@ -121,13 +121,12 @@ export const recipes: Recipe[] = [
   {
     slug: "fried-fish-and-yam",
     image: "/dishes/fried-fish-yam.jpg",
-    title: "Fried Fish & Yam",
-    summary: "Crisp yam, fried fish, and fish chilli sauce to dip.",
+    title: "Fried Yam",
+    summary: "Crisp fried yam, with chilli sauce to dip.",
     productSlug: "fish-chilli-sauce",
     serves: 4,
     ingredients: [
       "1 medium yam, peeled and cut into thick chips",
-      "4 whole tilapia or sea bream, cleaned and scored",
       "2 tbsp Efamy All Purpose Seasoning Mix",
       "Efamy Fish Chilli Sauce, to serve",
       "Vegetable oil for frying",
@@ -135,11 +134,11 @@ export const recipes: Recipe[] = [
     ],
     method: [
       "Boil the yam in salted water for 8 minutes, then drain and steam dry.",
-      "Rub the seasoning into the fish, working it into the scores.",
-      "Heat oil in a deep pan to a medium-high heat.",
-      "Fry the fish for 5 to 6 minutes a side until the skin is crisp and it lifts cleanly from the pan.",
-      "Fry the yam in the same oil until golden at the edges.",
-      "Serve together with the chilli sauce for dipping.",
+      "Toss the yam in the seasoning until every piece is coated.",
+      "Heat oil in a deep pan to a medium high heat.",
+      "Fry the yam until golden at the edges and crisp all over.",
+      "Drain on kitchen paper and salt while still hot.",
+      "Serve with the chilli sauce for dipping.",
     ],
   },
   {
