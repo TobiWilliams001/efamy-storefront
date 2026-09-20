@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { MapPin, ShoppingBag, Store, Truck } from "lucide-react";
 
@@ -155,37 +154,23 @@ export default function StockistsPage() {
           }
         />
 
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
-          {/* Photograph second in the source so it reads after the points on a
-              phone, and ordered right on desktop. */}
-          {/* 4:3 rather than 16:9: the shot is 5:4, and a widescreen frame
-              cropped the tops and bottoms off the bottles. */}
-          <div className="relative mx-auto aspect-3/4 w-full max-w-xs overflow-hidden rounded-lg shadow-card lg:order-2 lg:max-w-sm">
-            <Image
-              src="/products/collections/range-all.jpg"
-              alt="The Efamy range: chilli sauces, chilli oils and seasonings"
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
-            />
-          </div>
-
-          <ul className="grid gap-8 sm:grid-cols-2 lg:order-1 lg:grid-cols-1">
-            {wholesalePoints.map(({ icon: Icon, title, description }) => (
-              <li key={title}>
-                <Icon
-                  aria-hidden="true"
-                  className="size-5 text-gold-ink"
-                  strokeWidth={1.75}
-                />
-                <h3 className="mt-4 font-heading text-lg">{title}</h3>
-                <p className="mt-2 text-sm text-pretty text-muted-foreground">
-                  {description}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {/* Three across on a wide screen now the photograph beside them has
+            gone, rather than one narrow column with empty space to its right. */}
+        <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+          {wholesalePoints.map(({ icon: Icon, title, description }) => (
+            <li key={title}>
+              <Icon
+                aria-hidden="true"
+                className="size-5 text-gold-ink"
+                strokeWidth={1.75}
+              />
+              <h3 className="mt-4 font-heading text-lg">{title}</h3>
+              <p className="mt-2 text-sm text-pretty text-muted-foreground">
+                {description}
+              </p>
+            </li>
+          ))}
+        </ul>
       </Section>
     </>
   );
