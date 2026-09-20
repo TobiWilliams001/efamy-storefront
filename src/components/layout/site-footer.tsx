@@ -23,8 +23,10 @@ export function SiteFooter() {
   return (
     <footer className="mt-auto bg-ink text-ink-foreground">
       <Container className="py-14 lg:py-16">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_2fr]">
-          <div className="max-w-sm">
+        {/* min-w-0: grid children default to min-width auto, so anything wide
+            inside them widens the column rather than wrapping. */}
+        <div className="grid min-w-0 gap-10 lg:grid-cols-[1.2fr_2fr]">
+          <div className="min-w-0 max-w-sm">
             <Logo
               variant="light"
               className="text-ink-foreground"
@@ -40,8 +42,14 @@ export function SiteFooter() {
               <Mail className="size-4 text-gold" aria-hidden="true" />
               {siteConfig.contact.email}
             </a>
+            {/*
+             * The list wraps because there are six of these. A single row of
+             * six names is wider than a phone, and a grid child does not
+             * shrink below its content, so the row pushed the whole footer
+             * column past the viewport and the page slid sideways.
+             */}
             {social.length > 0 ? (
-              <ul className="mt-4 flex items-center gap-5">
+              <ul className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
                 {social.map(({ key, label }) => (
                   <li key={key}>
                     <a
