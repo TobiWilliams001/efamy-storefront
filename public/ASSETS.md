@@ -19,7 +19,7 @@ logos/            The wordmark, light and dark.
 | --------------------------------------- | -------------------------- |
 | `products/cutout/*.png`                 | Product cards and detail   |
 | `products/hero/hero-hot-sauce-trio.jpg` | Homepage hero, social card |
-| `products/collections/range-lineup.jpg` | About page                 |
+| `products/collections/oils-group.jpg`   | About page, Why choose     |
 | `dishes/*.jpg`                          | Meal pairings row          |
 | `logos/*.png`                           | Header and footer          |
 
