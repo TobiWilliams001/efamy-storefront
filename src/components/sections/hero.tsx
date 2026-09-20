@@ -63,6 +63,17 @@ export function Hero({
         aria-hidden="true"
         className="absolute inset-0 -z-10 bg-linear-to-r from-ink/75 via-ink/35 to-transparent sm:via-ink/25"
       />
+      {/*
+       * A third, vertical wash. The range shot is busy from edge to edge,
+       * where the photograph this replaced had room to breathe on one side, so
+       * the horizontal scrim alone left the headline and the badge row sitting
+       * on jars. This darkens the top and the bottom and leaves the middle of
+       * the picture alone.
+       */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-linear-to-b from-ink/70 via-ink/30 to-ink/75 sm:from-ink/35 sm:via-transparent sm:to-ink/60"
+      />
 
       <Container>
         <div
