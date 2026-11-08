@@ -45,7 +45,7 @@ export function SiteHeader() {
               aria-label="Main"
               className="absolute left-1/2 hidden -translate-x-1/2 md:block"
             >
-              <ul className="flex items-center gap-8 lg:gap-10">
+              <ul className="flex items-center gap-5 lg:gap-10">
                 {mainNav.map((item) => (
                   <li key={item.href}>
                     <NavLink
