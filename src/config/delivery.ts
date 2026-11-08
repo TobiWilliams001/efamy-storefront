@@ -11,7 +11,7 @@ export const delivery = {
   provisional: false,
 
   /** Pence. Efamy's rate, held flat while the shop finds its feet. */
-  standardRate: 399,
+  standardRate: 699,
   /**
    * Pence. Basket total at or above which delivery is free. Null because no
    * threshold has been agreed — inventing one commits the business to it.
